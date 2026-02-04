@@ -14,7 +14,7 @@
   // SWIPE INDICATOR SYSTEM
   // ═══════════════════════════════════════════
   function initSwipeIndicators(){
-    const swipeContainers = document.querySelectorAll('.pillar-grid, .pricing-grid, .protocol-detail, .compound-grid, .source-grid, .stat-grid');
+    const swipeContainers = document.querySelectorAll('.pillar-grid, .pricing-grid, .protocol-detail, .compound-grid, .source-grid, .stat-grid, .pillar-carousel');
 
     swipeContainers.forEach(container => {
       // Skip if already initialized
@@ -69,7 +69,10 @@
           const index = parseInt(dot.dataset.index);
           const item = items[index];
           if(item){
-            const scrollLeft = item.offsetLeft - 24;
+            // Calculate scroll position to center the item
+            const containerWidth = container.offsetWidth;
+            const itemWidth = item.offsetWidth;
+            const scrollLeft = item.offsetLeft - (containerWidth - itemWidth) / 2;
             container.scrollTo({ left: scrollLeft, behavior: 'smooth' });
           }
         });
@@ -82,21 +85,20 @@
     const dots = indicatorWrapper.querySelectorAll('.swipe-dot');
     const scrollLeft = container.scrollLeft;
     const containerWidth = container.offsetWidth;
+    const isFullWidth = container.classList.contains('pillar-carousel');
 
-    // Find the most visible item
+    // Find the most visible/centered item
     let activeIndex = 0;
-    let maxVisibility = 0;
+    let minDistance = Infinity;
+
+    const containerCenter = scrollLeft + containerWidth / 2;
 
     Array.from(items).forEach((item, index) => {
-      const itemLeft = item.offsetLeft - 24;
-      const itemRight = itemLeft + item.offsetWidth;
-      const visibleLeft = Math.max(itemLeft, scrollLeft);
-      const visibleRight = Math.min(itemRight, scrollLeft + containerWidth);
-      const visibleWidth = visibleRight - visibleLeft;
-      const visibility = visibleWidth / item.offsetWidth;
+      const itemCenter = item.offsetLeft + item.offsetWidth / 2;
+      const distance = Math.abs(containerCenter - itemCenter);
 
-      if(visibility > maxVisibility){
-        maxVisibility = visibility;
+      if(distance < minDistance){
+        minDistance = distance;
         activeIndex = index;
       }
     });
@@ -170,7 +172,7 @@
   // TOUCH RIPPLE EFFECT
   // ═══════════════════════════════════════════
   function initTouchFeedback(){
-    const cards = document.querySelectorAll('.card, .pricing-card, .pillar-card, .compound-card, .stat-card');
+    const cards = document.querySelectorAll('.card, .pricing-card, .pillar-card, .compound-card, .stat-card, .pillar-slide');
 
     cards.forEach(card => {
       card.addEventListener('touchstart', (e) => {
@@ -216,7 +218,7 @@
   function preventOverscroll(){
     document.body.addEventListener('touchmove', (e) => {
       // Allow scrolling in swipe containers
-      const swipeContainer = e.target.closest('.pillar-grid, .pricing-grid, .protocol-detail, .compound-grid, .source-grid, .mobile-nav');
+      const swipeContainer = e.target.closest('.pillar-grid, .pricing-grid, .protocol-detail, .compound-grid, .source-grid, .pillar-carousel, .mobile-nav');
       if(swipeContainer) return;
     }, { passive: true });
   }

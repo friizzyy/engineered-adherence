@@ -35,7 +35,7 @@
 
   .mobile-swipe-item{
     flex:0 0 85%;
-    scroll-snap-align:start;
+    scroll-snap-align:center;
     scroll-snap-stop:always;
   }
 
@@ -106,6 +106,13 @@
   .swipe-hint.touched{
     opacity:0;
     transition:opacity .3s ease;
+  }
+
+  /* ═══════════════════════════════════════════
+     HIDE DESKTOP THEME TOGGLE ON MOBILE
+     ═══════════════════════════════════════════ */
+  #themeToggle{
+    display:none !important;
   }
 
   /* ═══════════════════════════════════════════
@@ -267,7 +274,7 @@
 
   .stat-card{
     flex:0 0 180px;
-    scroll-snap-align:start;
+    scroll-snap-align:center;
     scroll-snap-stop:always;
     padding:28px 24px;
   }
@@ -306,7 +313,7 @@
 
   .pillar-card{
     flex:0 0 200px;
-    scroll-snap-align:start;
+    scroll-snap-align:center;
     scroll-snap-stop:always;
     padding:32px 20px 28px;
   }
@@ -364,7 +371,7 @@
 
   .pricing-card{
     flex:0 0 260px;
-    scroll-snap-align:start;
+    scroll-snap-align:center;
     scroll-snap-stop:always;
     padding:32px 24px;
   }
@@ -412,7 +419,7 @@
 
   .protocol-detail .card{
     flex:0 0 calc(100vw - 72px);
-    scroll-snap-align:start;
+    scroll-snap-align:center;
     scroll-snap-stop:always;
     padding:32px 24px;
   }
@@ -476,7 +483,7 @@
 
   .compound-card{
     flex:0 0 calc(100vw - 72px);
-    scroll-snap-align:start;
+    scroll-snap-align:center;
     scroll-snap-stop:always;
     padding:28px 24px;
   }
@@ -559,8 +566,96 @@
   }
 
   /* ═══════════════════════════════════════════
-     MOBILE PILLAR SECTION (pillars.html)
+     MOBILE PILLAR CAROUSEL (pillars.html)
      ═══════════════════════════════════════════ */
+  .pillar-carousel-section{
+    padding:0 !important;
+  }
+
+  .pillar-carousel{
+    display:flex !important;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:0;
+  }
+
+  .pillar-carousel::-webkit-scrollbar{
+    display:none;
+  }
+
+  .pillar-slide{
+    flex:0 0 100vw;
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+    padding:48px 24px;
+    box-sizing:border-box;
+  }
+
+  .pillar-slide .pillar-roman{
+    font-size:72px;
+    margin-bottom:8px;
+    color:var(--pillar-num);
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    line-height:1;
+    letter-spacing:-0.03em;
+    transition:color .5s;
+  }
+
+  .pillar-slide .section-label{
+    margin-bottom:12px;
+  }
+
+  .pillar-slide .section-title{
+    font-size:24px !important;
+    margin-bottom:16px;
+  }
+
+  .pillar-slide .section-body{
+    font-size:13px;
+    line-height:1.75;
+    margin-bottom:24px;
+  }
+
+  .pillar-slide-cards{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .pillar-slide .card{
+    padding:24px 20px;
+  }
+
+  .pillar-slide .card h3{
+    font-size:14px;
+    margin-bottom:12px;
+  }
+
+  .pillar-slide .card p{
+    font-size:12px;
+    line-height:1.7;
+  }
+
+  .pillar-slide .compound-list li{
+    font-size:12px;
+    padding:8px 0;
+    gap:10px;
+  }
+
+  .pillar-slide .compound-list .name{
+    font-size:12px;
+  }
+
+  .pillar-slide .compound-list .role{
+    font-size:8px;
+    letter-spacing:1px;
+  }
+
+  /* Legacy pillar-section styles (for any remaining uses) */
   .pillar-section{
     gap:36px !important;
   }
@@ -610,7 +705,7 @@
 
   .source-grid .card{
     flex:0 0 280px;
-    scroll-snap-align:start;
+    scroll-snap-align:center;
     scroll-snap-stop:always;
   }
 
