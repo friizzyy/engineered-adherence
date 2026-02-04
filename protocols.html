@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Protocols — Engineered Adherence</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .protocol-detail{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:56px}
+  .protocol-detail .card{padding:44px 36px}
+  .protocol-meta{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+  .protocol-meta .card-tag{margin-bottom:0}
+  .protocol-includes{list-style:none;padding:0;margin-top:20px}
+  .protocol-includes li{
+    font-size:13px;color:var(--muted);line-height:1.8;font-weight:300;
+    padding:7px 0;padding-left:18px;position:relative;transition:color .5s;
+  }
+  .protocol-includes li::before{
+    content:'';position:absolute;left:0;top:14px;
+    width:8px;height:1px;background:var(--faint);
+  }
+  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .pricing-card{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:40px 28px;transition:all .5s cubic-bezier(0.4,0,0.2,1);text-align:center;
+    min-width:0;
+  }
+  .pricing-card:hover{
+    border-color:var(--line-strong);background:var(--bg-card-hover);
+    box-shadow:var(--shadow-card-subtle);
+  }
+  .pricing-tier{
+    font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--faint);margin-bottom:16px;transition:color .5s;
+    white-space:nowrap;
+  }
+  .pricing-range{
+    font-family:'Playfair Display',serif;
+    font-size:32px;font-weight:500;
+    color:var(--stat-num);margin-bottom:10px;
+    transition:color .5s;letter-spacing:-0.02em;
+    white-space:nowrap;
+  }
+  .pricing-unit{font-size:12px;color:var(--muted);margin-bottom:24px;transition:color .5s}
+  .pricing-desc{font-size:13px;color:var(--muted);line-height:1.7;font-weight:300;transition:color .5s}
+  @media(max-width:1024px){.pricing-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:768px){.protocol-detail{grid-template-columns:1fr}.pricing-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Engineered Adherence</a>
+  <ul class="nav-center">
+    <li><a href="about.html">About</a></li>
+    <li><a href="pillars.html">Pillars</a></li>
+    <li><a href="protocols.html" class="active">Protocols</a></li>
+    <li><a href="science.html">Science</a></li>
+    <li><a href="market.html">Market</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+    <a href="contact.html" class="nav-cta">Book Consultation</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <p class="section-label">Protocol-as-Product</p>
+  <h1 class="section-title">Curated systems,<br>not individual compounds</h1>
+  <p class="section-body">Individual peptides are not the primary offering. The core product is the protocol itself: a curated combination of compounds, timing, dosing, nutrition guidance, and training alignment designed to achieve a specific outcome within a defined timeframe.</p>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section reveal">
+  <div class="two-col">
+    <div>
+      <p class="section-label">The Model</p>
+      <h2 class="section-title">A health system,<br>not a product catalog</h2>
+      <p class="section-body">Protocols are priced as packages, not itemized compounds. This model increases client engagement, deepens the relationship, and positions the brand as a health system rather than a product supplier.</p>
+    </div>
+    <div>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="val">2–4x</div><div class="label">Revenue vs. individual compounds</div></div>
+        <div class="stat-card"><div class="val">8–12</div><div class="label">Week minimum engagement</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section reveal">
+  <p class="section-label">Core Protocols</p>
+  <h2 class="section-title">Four entry points,<br>one standard of care</h2>
+
+  <div class="protocol-detail stagger-children">
+    <div class="card stagger-item">
+      <div class="protocol-meta"><span class="card-tag">New Clients</span><span class="card-tag">12 Weeks</span></div>
+      <h3>Foundation Reset</h3>
+      <p>For new clients beginning a structured training program. This protocol addresses the three systems that fail first: metabolism, recovery, and sleep.</p>
+      <ul class="protocol-includes">
+        <li>Metabolic peptide stack for early body composition changes</li>
+        <li>Recovery compounds to reduce DOMS and training soreness</li>
+        <li>Sleep architecture support through GH secretagogues</li>
+        <li>Dosing calendar synced to training schedule</li>
+        <li>Nutrition protocol and supplement guidance</li>
+        <li>Bi-weekly biomarker check-ins</li>
+      </ul>
+    </div>
+
+    <div class="card stagger-item">
+      <div class="protocol-meta"><span class="card-tag">Active Clients</span><span class="card-tag">8 Weeks</span></div>
+      <h3>Performance Edge</h3>
+      <p>For active individuals seeking measurable progression. This protocol targets growth hormone output, cognitive sharpness, and accelerated recovery between sessions.</p>
+      <ul class="protocol-includes">
+        <li>CJC-1295/Ipamorelin GH secretagogue stack</li>
+        <li>Cognitive compounds for focus and training intensity</li>
+        <li>Recovery peptides for inter-session repair</li>
+        <li>Training periodization alignment</li>
+        <li>Body composition tracking at weeks 0, 4, and 8</li>
+        <li>Performance metric benchmarks</li>
+      </ul>
+    </div>
+
+    <div class="card stagger-item">
+      <div class="protocol-meta"><span class="card-tag">Established Clients</span><span class="card-tag">Ongoing</span></div>
+      <h3>Longevity Maintenance</h3>
+      <p>For established clients sustaining long-term health. This protocol focuses on cellular repair, neuroprotection, and systemic maintenance that prevents age-related decline.</p>
+      <ul class="protocol-includes">
+        <li>GHK-Cu for collagen and tissue remodeling</li>
+        <li>Epithalon for telomere maintenance cycles</li>
+        <li>Semax/Selank for cognitive preservation</li>
+        <li>Quarterly bloodwork and biomarker panels</li>
+        <li>Annual protocol review and adjustment</li>
+        <li>Priority access to new compound additions</li>
+      </ul>
+    </div>
+
+    <div class="card stagger-item">
+      <div class="protocol-meta"><span class="card-tag">Injury</span><span class="card-tag">6–8 Weeks</span></div>
+      <h3>Injury Return</h3>
+      <p>For individuals returning to training after injury or surgery. This protocol accelerates tissue repair and structural rebuilding to reduce time away from the gym.</p>
+      <ul class="protocol-includes">
+        <li>BPC-157 for tissue and ligament repair</li>
+        <li>TB-500 for inflammation and cell migration</li>
+        <li>Joint support compounds as needed</li>
+        <li>Graduated return-to-training schedule</li>
+        <li>Weekly pain and mobility assessments</li>
+        <li>Coordination with physiotherapy where applicable</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section reveal">
+  <p class="section-label">Every Protocol Includes</p>
+  <h2 class="section-title">The complete<br>adherence architecture</h2>
+  <div class="three-col stagger-children" style="margin-top:56px">
+    <div class="card stagger-item"><h3>Dosing Calendar</h3><p>Precise timing, dosages, and injection schedules synced to your training days and sleep cycle.</p></div>
+    <div class="card stagger-item"><h3>Nutrition Protocol</h3><p>Macronutrient targets, meal timing, and supplement integration designed around your protocol compounds.</p></div>
+    <div class="card stagger-item"><h3>Training Alignment</h3><p>Protocol timing matched to training periodization for maximum compound effectiveness.</p></div>
+    <div class="card stagger-item"><h3>Biomarker Tracking</h3><p>Regular bloodwork and health markers to measure protocol impact and adjust dosing.</p></div>
+    <div class="card stagger-item"><h3>Clinical Oversight</h3><p>Licensed physician review of all protocols with ongoing monitoring throughout the program.</p></div>
+    <div class="card stagger-item"><h3>QR Transparency</h3><p>Every product carries a QR code linking to its Certificate of Analysis, batch number, and sourcing origin.</p></div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section reveal">
+  <div class="two-col">
+    <div>
+      <p class="section-label">Pricing</p>
+      <h2 class="section-title">Structured investment,<br>sustained outcomes</h2>
+      <p class="section-body">Protocols are priced as complete systems: compounds, clinical oversight, nutrition guidance, and ongoing support bundled into time-bound programs. This structure ensures continuity, accountability, and the conditions required for lasting change.</p>
+    </div>
+    <div>
+      <div class="pricing-grid">
+        <div class="pricing-card">
+          <div class="pricing-tier">Foundation</div>
+          <div class="pricing-range">$2–4K</div>
+          <div class="pricing-unit">per 12-week protocol</div>
+          <div class="pricing-desc">Entry-level clients beginning structured training programs</div>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-tier">Performance</div>
+          <div class="pricing-range">$3–5K</div>
+          <div class="pricing-unit">per 8-week protocol</div>
+          <div class="pricing-desc">Active clients seeking measurable performance progression</div>
+        </div>
+        <div class="pricing-card">
+          <div class="pricing-tier">Longevity</div>
+          <div class="pricing-range">$1–2K</div>
+          <div class="pricing-unit">per month ongoing</div>
+          <div class="pricing-desc">Established clients on sustained maintenance protocols</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="cta-band reveal">
+  <p class="section-label">Get Started</p>
+  <h2 class="section-title">Begin your protocol</h2>
+  <p class="section-body">Schedule a private consultation to discuss your goals, review biomarkers, and receive a tailored peptide protocol.</p>
+  <a href="contact.html" class="btn btn-lg">Book Consultation</a>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><a href="index.html" class="logo">Engineered Adherence</a><p>Peptide therapeutics integrated into structured wellness programs. Designed for adherence, built for results.</p></div>
+    <div class="footer-links">
+      <div class="footer-col"><h4>Platform</h4><a href="pillars.html">Five Pillars</a><a href="protocols.html">Protocols</a><a href="science.html">Science</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="market.html">Market</a><a href="contact.html">Contact</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>2026 Engineered Adherence</span><span>Doha, Qatar</span></div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

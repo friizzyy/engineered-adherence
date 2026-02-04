@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineered Adherence — Bio-Longevity Platform</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  nav{opacity:0;animation:fadeDown .8s ease 2.6s forwards}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fi{from{opacity:0}to{opacity:1}}
+  @keyframes ce{from{opacity:0;transform:translate(-50%,-50%) scale(.5)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+  @keyframes vf{0%{opacity:0;transform:translateY(50px) rotate(-1deg)}100%{opacity:1;transform:translateY(0) rotate(0)}}
+  @keyframes lp{0%,100%{opacity:var(--liq-opacity)}50%{opacity:calc(var(--liq-opacity) + 0.08)}}
+
+  .hero{
+    height:100vh;min-height:800px;
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    position:relative;z-index:1;
+  }
+
+  .circle{
+    position:absolute;border-radius:50%;
+    border:1px solid var(--circle-border);
+    transition:border-color .5s;
+  }
+  .circle-1{width:500px;height:500px;top:50%;left:50%;transform:translate(-50%,-50%);animation:ce 1.6s cubic-bezier(.16,1,.3,1) .2s both}
+  .circle-2{width:720px;height:720px;top:50%;left:50%;transform:translate(-50%,-50%);animation:ce 1.6s cubic-bezier(.16,1,.3,1) .4s both}
+  .circle-3{width:940px;height:940px;top:50%;left:50%;transform:translate(-50%,-50%);animation:ce 1.6s cubic-bezier(.16,1,.3,1) .6s both}
+
+  .vials-stage{
+    display:flex;gap:64px;align-items:flex-end;
+    position:relative;z-index:10;margin-bottom:56px;
+  }
+  .vial-wrapper{
+    display:flex;flex-direction:column;align-items:center;
+    opacity:0;transform:translateY(50px);
+  }
+  .vial-wrapper:nth-child(1){animation:vf 1.4s cubic-bezier(.16,1,.3,1) .5s forwards}
+  .vial-wrapper:nth-child(2){animation:vf 1.4s cubic-bezier(.16,1,.3,1) .7s forwards}
+  .vial-wrapper:nth-child(3){animation:vf 1.4s cubic-bezier(.16,1,.3,1) .9s forwards}
+
+  .vial-svg{
+    width:78px;height:200px;
+    filter:var(--shadow-vial);
+    transition:transform .6s cubic-bezier(.16,1,.3,1),filter .6s;
+  }
+  .vial-wrapper:hover .vial-svg{
+    transform:translateY(-12px);
+    filter:var(--shadow-vial-hover);
+  }
+
+  .liq-1{animation:lp 6s ease-in-out infinite}
+  .liq-2{animation:lp 6s ease-in-out 2s infinite}
+  .liq-3{animation:lp 6s ease-in-out 4s infinite}
+
+  .vial-reflect{
+    width:66px;height:52px;
+    transform:scaleY(-1);opacity:var(--reflect-opacity);
+    filter:blur(4px);
+    mask-image:linear-gradient(to bottom,rgba(0,0,0,.3),transparent);
+    -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.3),transparent);
+    transition:opacity .5s;
+  }
+  .vial-name{
+    margin-top:18px;
+    font-family:'Playfair Display',serif;
+    font-size:14px;font-weight:500;letter-spacing:.5px;
+    color:var(--text-heading);
+    opacity:0;animation:fi .6s ease 2.2s forwards;
+    transition:color .5s;
+  }
+  .vial-detail{
+    font-size:9px;color:var(--faint);font-weight:400;
+    letter-spacing:3px;text-transform:uppercase;
+    margin-top:6px;
+    opacity:0;animation:fi .6s ease 2.4s forwards;
+    transition:color .5s;
+  }
+
+  .hero-text{text-align:center;position:relative;z-index:10}
+  .hero-eyebrow{
+    font-size:10px;letter-spacing:6px;text-transform:uppercase;
+    color:var(--faint);font-weight:400;
+    opacity:0;animation:fu .8s ease 1.4s forwards;
+    transition:color .5s;
+    display:flex;align-items:center;justify-content:center;gap:16px;
+  }
+  .hero-eyebrow::before,.hero-eyebrow::after{
+    content:'';width:32px;height:1px;
+    background:var(--faint);opacity:.4;
+  }
+  .hero-title{
+    font-family:'Playfair Display',serif;
+    font-size:60px;font-weight:500;line-height:1.1;
+    margin-top:20px;letter-spacing:-0.02em;
+    opacity:0;animation:fu .8s ease 1.6s forwards;
+    color:var(--text-heading);transition:color .5s;
+  }
+  .hero-title em{
+    font-style:italic;font-weight:400;
+    color:var(--muted);transition:color .5s;
+  }
+  .hero-sub{
+    font-size:15px;color:var(--muted);font-weight:300;
+    margin-top:24px;max-width:460px;line-height:1.9;
+    margin-left:auto;margin-right:auto;
+    opacity:0;animation:fu .8s ease 1.9s forwards;
+    transition:color .5s;
+  }
+  .hero-btn{
+    display:inline-block;margin-top:40px;
+    padding:16px 52px;
+    background:var(--btn-bg);border:1px solid var(--btn-border);
+    color:var(--btn-text);text-decoration:none;
+    font-size:10px;letter-spacing:2.5px;text-transform:uppercase;font-weight:400;
+    opacity:0;animation:fu .8s ease 2.1s forwards;
+    transition:all .4s cubic-bezier(0.4,0,0.2,1);
+  }
+  .hero-btn:hover{
+    background:var(--btn-hover-bg);
+    border-color:var(--btn-hover-border);
+    transform:translateY(-2px);
+  }
+
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:100px;align-items:start}
+
+  .pillars-header{text-align:center;max-width:640px;margin:0 auto 64px}
+  .pillars-header .section-label{justify-content:center}
+  .pillars-header .section-label::before{display:none}
+
+  .pillar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+  .pillar-card{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:40px 20px 36px;text-align:center;
+    transition:all .5s cubic-bezier(0.4,0,0.2,1);
+    position:relative;overflow:hidden;
+  }
+  .pillar-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
+    transform:scaleX(0);transition:transform .5s cubic-bezier(0.4,0,0.2,1);
+    opacity:0.6;
+  }
+  .pillar-card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow-card);
+    border-color:var(--line-strong);
+    background:var(--bg-card-hover);
+  }
+  .pillar-card:hover::before{transform:scaleX(1)}
+  .pillar-num{
+    font-family:'Playfair Display',serif;
+    font-size:60px;font-weight:600;
+    color:var(--pillar-num);line-height:1;
+    margin-bottom:16px;transition:color .5s;
+  }
+  .pillar-card h3{
+    font-family:'Playfair Display',serif;
+    font-size:17px;font-weight:500;
+    margin-bottom:12px;color:var(--text-heading);
+    transition:color .5s;
+  }
+  .pillar-card p{
+    font-size:12px;color:var(--muted);
+    line-height:1.7;font-weight:300;transition:color .5s;
+  }
+
+  @media(max-width:1200px){
+    .pillar-grid{grid-template-columns:repeat(3,1fr)}
+  }
+  @media(max-width:1024px){
+    .pillar-grid{grid-template-columns:repeat(3,1fr)}
+    .hero-title{font-size:48px}
+  }
+  @media(max-width:768px){
+    .about-grid{grid-template-columns:1fr;gap:48px}
+    .pillar-grid{grid-template-columns:1fr 1fr}
+    .hero-title{font-size:38px}
+    .vials-stage{gap:36px}
+    .vial-svg{width:60px;height:160px}
+  }
+  @media(max-width:480px){
+    .pillar-grid{grid-template-columns:1fr}
+    .hero-title{font-size:30px}
+    .vials-stage{gap:28px}
+    .vial-svg{width:52px;height:140px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Engineered Adherence</a>
+  <ul class="nav-center">
+    <li><a href="about.html">About</a></li>
+    <li><a href="pillars.html">Pillars</a></li>
+    <li><a href="protocols.html">Protocols</a></li>
+    <li><a href="science.html">Science</a></li>
+    <li><a href="market.html">Market</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+    <a href="contact.html" class="nav-cta">Book Consultation</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="circle circle-1"></div>
+  <div class="circle circle-2"></div>
+  <div class="circle circle-3"></div>
+
+  <div class="vials-stage">
+    <div class="vial-wrapper">
+      <svg class="vial-svg" viewBox="0 0 74 196" fill="none">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="74" y2="196" gradientUnits="userSpaceOnUse"><stop offset="0%" class="gs-top"/><stop offset="50%" class="gs-mid"/><stop offset="100%" class="gs-bot"/></linearGradient>
+          <linearGradient id="l1" x1="16" y1="80" x2="58" y2="172" gradientUnits="userSpaceOnUse"><stop offset="0%" class="ls1-top"/><stop offset="100%" class="ls1-bot"/></linearGradient>
+        </defs>
+        <rect x="22" y="2" width="30" height="20" rx="3" class="cap-body"/><rect x="22" y="2" width="30" height="10" rx="3" class="cap-top-fill"/>
+        <rect x="28" y="22" width="18" height="14" rx="2" class="neck-fill"/>
+        <rect x="11" y="36" width="52" height="144" rx="7" fill="url(#g1)" class="glass-stroke"/>
+        <rect x="15" y="78" width="44" height="98" rx="5" fill="url(#l1)" class="liq-1" style="opacity:var(--liq-opacity)"/>
+        <rect x="11" y="36" width="52" height="144" rx="7" class="glass-sheen-fill"/>
+        <line x1="16" y1="44" x2="16" y2="174" class="glass-hl" stroke-width="1"/>
+        <ellipse cx="37" cy="78" rx="20" ry="2" class="meniscus-1"/>
+        <rect x="18" y="100" width="38" height="42" rx="3" class="label-rect"/>
+        <text x="37" y="116" text-anchor="middle" font-family="DM Sans" font-size="5.5" class="label-title" font-weight="500" letter-spacing="1">BPC-157</text>
+        <text x="37" y="128" text-anchor="middle" font-family="DM Sans" font-size="4" class="label-sub-text" letter-spacing="0.8">5mg/mL</text>
+      </svg>
+      <svg class="vial-reflect" viewBox="0 0 74 196" fill="none"><rect x="11" y="36" width="52" height="144" rx="7" class="reflect-fill"/></svg>
+      <div class="vial-name">Recovery</div>
+      <div class="vial-detail">Pillar II</div>
+    </div>
+
+    <div class="vial-wrapper" style="margin-bottom:16px">
+      <svg class="vial-svg" viewBox="0 0 74 216" style="height:220px" fill="none">
+        <defs>
+          <linearGradient id="g2" x1="0" y1="0" x2="74" y2="216" gradientUnits="userSpaceOnUse"><stop offset="0%" class="gs-top"/><stop offset="50%" class="gs-mid"/><stop offset="100%" class="gs-bot"/></linearGradient>
+          <linearGradient id="l2" x1="16" y1="86" x2="58" y2="196" gradientUnits="userSpaceOnUse"><stop offset="0%" class="ls2-top"/><stop offset="100%" class="ls2-bot"/></linearGradient>
+        </defs>
+        <rect x="22" y="2" width="30" height="20" rx="3" class="cap-body"/><rect x="22" y="2" width="30" height="10" rx="3" class="cap-top-fill"/>
+        <rect x="28" y="22" width="18" height="14" rx="2" class="neck-fill"/>
+        <rect x="11" y="36" width="52" height="166" rx="7" fill="url(#g2)" class="glass-stroke"/>
+        <rect x="15" y="84" width="44" height="114" rx="5" fill="url(#l2)" class="liq-2" style="opacity:var(--liq-opacity)"/>
+        <rect x="11" y="36" width="52" height="166" rx="7" class="glass-sheen-fill"/>
+        <line x1="16" y1="44" x2="16" y2="196" class="glass-hl" stroke-width="1"/>
+        <ellipse cx="37" cy="84" rx="20" ry="2" class="meniscus-2"/>
+        <rect x="18" y="110" width="38" height="42" rx="3" class="label-rect"/>
+        <text x="37" y="126" text-anchor="middle" font-family="DM Sans" font-size="5.5" class="label-title" font-weight="500" letter-spacing="1">GHK-Cu</text>
+        <text x="37" y="138" text-anchor="middle" font-family="DM Sans" font-size="4" class="label-sub-text" letter-spacing="0.8">10mg/mL</text>
+      </svg>
+      <svg class="vial-reflect" viewBox="0 0 74 216" style="height:52px" fill="none"><rect x="11" y="36" width="52" height="166" rx="7" class="reflect-fill"/></svg>
+      <div class="vial-name">Longevity</div>
+      <div class="vial-detail">Pillar I</div>
+    </div>
+
+    <div class="vial-wrapper">
+      <svg class="vial-svg" viewBox="0 0 74 196" fill="none">
+        <defs>
+          <linearGradient id="g3" x1="0" y1="0" x2="74" y2="196" gradientUnits="userSpaceOnUse"><stop offset="0%" class="gs-top"/><stop offset="50%" class="gs-mid"/><stop offset="100%" class="gs-bot"/></linearGradient>
+          <linearGradient id="l3" x1="16" y1="80" x2="58" y2="172" gradientUnits="userSpaceOnUse"><stop offset="0%" class="ls3-top"/><stop offset="100%" class="ls3-bot"/></linearGradient>
+        </defs>
+        <rect x="22" y="2" width="30" height="20" rx="3" class="cap-body"/><rect x="22" y="2" width="30" height="10" rx="3" class="cap-top-fill"/>
+        <rect x="28" y="22" width="18" height="14" rx="2" class="neck-fill"/>
+        <rect x="11" y="36" width="52" height="144" rx="7" fill="url(#g3)" class="glass-stroke"/>
+        <rect x="15" y="78" width="44" height="98" rx="5" fill="url(#l3)" class="liq-3" style="opacity:var(--liq-opacity)"/>
+        <rect x="11" y="36" width="52" height="144" rx="7" class="glass-sheen-fill"/>
+        <line x1="16" y1="44" x2="16" y2="174" class="glass-hl" stroke-width="1"/>
+        <ellipse cx="37" cy="78" rx="20" ry="2" class="meniscus-3"/>
+        <rect x="18" y="100" width="38" height="42" rx="3" class="label-rect"/>
+        <text x="37" y="116" text-anchor="middle" font-family="DM Sans" font-size="5.5" class="label-title" font-weight="500" letter-spacing="1">TB-500</text>
+        <text x="37" y="128" text-anchor="middle" font-family="DM Sans" font-size="4" class="label-sub-text" letter-spacing="0.8">5mg/mL</text>
+      </svg>
+      <svg class="vial-reflect" viewBox="0 0 74 196" fill="none"><rect x="11" y="36" width="52" height="144" rx="7" class="reflect-fill"/></svg>
+      <div class="vial-name">Performance</div>
+      <div class="vial-detail">Pillar V</div>
+    </div>
+  </div>
+
+  <div class="hero-text">
+    <p class="hero-eyebrow">Bio-Longevity Platform</p>
+    <h1 class="hero-title">The science of<br><em>sustained change</em></h1>
+    <p class="hero-sub">Peptide therapeutics integrated into structured wellness programs. Designed to close the gap between intention and lasting change.</p>
+    <a href="protocols.html" class="hero-btn">Explore Protocols</a>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section reveal">
+  <div class="about-grid">
+    <div>
+      <p class="section-label">The Philosophy</p>
+      <h2 class="section-title">Adherence is the<br>missing variable</h2>
+      <p class="section-body">The most effective therapeutic intervention fails without compliance. Engineered Adherence reframes peptide therapeutics as structured programs, not products, where the delivery system is designed around human behavior, not just biochemistry.</p>
+      <div style="margin-top:36px"><a href="about.html" class="btn btn-ghost">Learn More</a></div>
+    </div>
+    <div>
+      <div class="stat-row">
+        <div class="stat"><div class="stat-num">87%</div><div class="stat-label">Protocol completion</div></div>
+        <div class="stat"><div class="stat-num">5</div><div class="stat-label">Therapeutic pillars</div></div>
+        <div class="stat"><div class="stat-num">12</div><div class="stat-label">Week core program</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section reveal stagger-children">
+  <div class="pillars-header">
+    <p class="section-label">The Framework</p>
+    <h2 class="section-title">Five Pillars of<br>therapeutic adherence</h2>
+  </div>
+  <div class="pillar-grid">
+    <div class="pillar-card stagger-item"><div class="pillar-num">I</div><h3>Longevity</h3><p>Cellular repair, telomere maintenance, and systemic anti-aging</p></div>
+    <div class="pillar-card stagger-item"><div class="pillar-num">II</div><h3>Recovery</h3><p>Tissue regeneration, gut healing, and injury rehabilitation</p></div>
+    <div class="pillar-card stagger-item"><div class="pillar-num">III</div><h3>Cognitive</h3><p>Neuroprotection, focus enhancement, and mental clarity</p></div>
+    <div class="pillar-card stagger-item"><div class="pillar-num">IV</div><h3>Metabolic</h3><p>Body composition optimization and metabolic rate recovery</p></div>
+    <div class="pillar-card stagger-item"><div class="pillar-num">V</div><h3>Performance</h3><p>Strength output, endurance capacity, and training recovery</p></div>
+  </div>
+  <div style="text-align:center;margin-top:56px"><a href="pillars.html" class="btn btn-ghost">Explore All Pillars</a></div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="cta-band reveal">
+  <p class="section-label">Get Started</p>
+  <h2 class="section-title">Begin your protocol</h2>
+  <p class="section-body">Schedule a private consultation to discuss your goals, review biomarkers, and receive a tailored peptide protocol.</p>
+  <a href="contact.html" class="btn btn-lg">Book Consultation</a>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="index.html" class="logo">Engineered Adherence</a>
+      <p>Peptide therapeutics integrated into structured wellness programs. Designed for adherence, built for results.</p>
+    </div>
+    <div class="footer-links">
+      <div class="footer-col"><h4>Platform</h4><a href="pillars.html">Five Pillars</a><a href="protocols.html">Protocols</a><a href="science.html">Science</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="market.html">Market</a><a href="contact.html">Contact</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>2026 Engineered Adherence</span><span>Doha, Qatar</span></div>
+</footer>
+
+<script>
+function updateVials(theme){
+  const d = theme === 'dark';
+  document.querySelectorAll('.gs-top').forEach(el => el.setAttribute('stop-color', d ? '#3A3A3A' : '#F0F0F2'));
+  document.querySelectorAll('.gs-mid').forEach(el => el.setAttribute('stop-color', d ? '#2E2E2E' : '#E4E4E8'));
+  document.querySelectorAll('.gs-bot').forEach(el => el.setAttribute('stop-color', d ? '#262626' : '#CCCCD2'));
+  document.querySelectorAll('.ls1-top').forEach(el => el.setAttribute('stop-color', d ? '#A09C96' : '#2A2C34'));
+  document.querySelectorAll('.ls1-bot').forEach(el => el.setAttribute('stop-color', d ? '#787470' : '#1C1E24'));
+  document.querySelectorAll('.ls2-top').forEach(el => el.setAttribute('stop-color', d ? '#969290' : '#24262E'));
+  document.querySelectorAll('.ls2-bot').forEach(el => el.setAttribute('stop-color', d ? '#706C68' : '#14161C'));
+  document.querySelectorAll('.ls3-top').forEach(el => el.setAttribute('stop-color', d ? '#9C9894' : '#282A32'));
+  document.querySelectorAll('.ls3-bot').forEach(el => el.setAttribute('stop-color', d ? '#74706C' : '#1A1C22'));
+  document.querySelectorAll('.cap-body').forEach(el => { el.setAttribute('fill', d?'#444':'#B8B8BE'); el.setAttribute('stroke', d?'#555':'#A0A0A8'); el.setAttribute('stroke-width','0.6'); });
+  document.querySelectorAll('.cap-top-fill').forEach(el => el.setAttribute('fill', d?'#4A4A4A':'#C4C4CA'));
+  document.querySelectorAll('.neck-fill').forEach(el => { el.setAttribute('fill', d?'#3A3A3A':'#E4E4E8'); el.setAttribute('stroke', d?'#4A4A4A':'#B8B8BE'); el.setAttribute('stroke-width','0.4'); });
+  document.querySelectorAll('.glass-stroke').forEach(el => { el.setAttribute('stroke', d?'#444':'#B8B8BE'); el.setAttribute('stroke-width','0.6'); });
+  document.querySelectorAll('.glass-sheen-fill').forEach(el => el.setAttribute('fill', d?'rgba(255,255,255,0.03)':'rgba(255,255,255,0.12)'));
+  document.querySelectorAll('.glass-hl').forEach(el => el.setAttribute('stroke', d?'rgba(255,255,255,0.06)':'rgba(255,255,255,0.35)'));
+  const m=d?['rgba(160,156,150,0.2)','rgba(150,146,144,0.2)','rgba(156,152,148,0.2)']:['rgba(42,44,52,0.2)','rgba(36,38,46,0.2)','rgba(40,42,50,0.2)'];
+  document.querySelectorAll('.meniscus-1').forEach(el=>el.setAttribute('fill',m[0]));
+  document.querySelectorAll('.meniscus-2').forEach(el=>el.setAttribute('fill',m[1]));
+  document.querySelectorAll('.meniscus-3').forEach(el=>el.setAttribute('fill',m[2]));
+  document.querySelectorAll('.label-rect').forEach(el => { el.setAttribute('fill', d?'rgba(28,28,28,0.7)':'rgba(240,240,242,0.9)'); el.setAttribute('stroke', d?'rgba(212,208,202,0.06)':'rgba(0,0,0,0.08)'); el.setAttribute('stroke-width','0.4'); });
+  document.querySelectorAll('.label-title').forEach(el => el.setAttribute('fill', d?'#5A5856':'#5C606A'));
+  document.querySelectorAll('.label-sub-text').forEach(el => el.setAttribute('fill', d?'#787470':'#1C1E24'));
+  document.querySelectorAll('.reflect-fill').forEach(el => { el.setAttribute('fill', d?'#787470':'#1C1E24'); el.setAttribute('opacity', d?'.04':'.1'); });
+}
+updateVials(document.documentElement.getAttribute('data-theme')||'dark');
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>

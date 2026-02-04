@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Engineered Adherence</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:100px;align-items:start}
+  .contact-info{margin-top:56px}
+  .contact-item{margin-bottom:36px}
+  .contact-item h4{
+    font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--faint);font-weight:400;margin-bottom:10px;transition:color .5s;
+  }
+  .contact-item p{
+    font-size:15px;color:var(--text-heading);font-weight:300;
+    line-height:1.75;transition:color .5s;
+  }
+  .form-card{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:52px 44px;transition:all .5s;
+  }
+  .form-title{
+    font-family:'Playfair Display',serif;
+    font-size:26px;font-weight:500;margin-bottom:10px;
+    color:var(--text-heading);transition:color .5s;
+  }
+  .form-subtitle{
+    font-size:14px;color:var(--muted);font-weight:300;
+    margin-bottom:40px;transition:color .5s;
+  }
+  .form-success{display:none;text-align:center;padding:48px 0}
+  .form-success h3{
+    font-family:'Playfair Display',serif;
+    font-size:30px;font-weight:500;
+    color:var(--text-heading);margin-bottom:14px;
+  }
+  .form-success p{font-size:15px;color:var(--muted);font-weight:300;line-height:1.85}
+  @media(max-width:768px){
+    .contact-grid{grid-template-columns:1fr;gap:56px}
+    .form-card{padding:40px 28px}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Engineered Adherence</a>
+  <ul class="nav-center">
+    <li><a href="about.html">About</a></li>
+    <li><a href="pillars.html">Pillars</a></li>
+    <li><a href="protocols.html">Protocols</a></li>
+    <li><a href="science.html">Science</a></li>
+    <li><a href="market.html">Market</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+    <a href="contact.html" class="nav-cta">Book Consultation</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <p class="section-label">Get Started</p>
+  <h1 class="section-title">Begin your protocol</h1>
+  <p class="section-body">Schedule a private consultation to discuss your goals, review biomarkers, and receive a protocol designed around your training and lifestyle.</p>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section reveal">
+  <div class="contact-grid">
+    <div>
+      <p class="section-label">Private Consultation</p>
+      <h2 class="section-title">How it works</h2>
+      <p class="section-body">Every engagement begins with a one-on-one consultation. We assess your current health status, training history, goals, and any existing bloodwork. From there, we design a protocol, not a product recommendation.</p>
+
+      <div class="contact-info">
+        <div class="contact-item"><h4>Location</h4><p>Doha, Qatar</p></div>
+        <div class="contact-item"><h4>Consultation Format</h4><p>In-person or secure video call<br>45–60 minutes initial session</p></div>
+        <div class="contact-item"><h4>What to Prepare</h4><p>Recent bloodwork (if available)<br>Current supplement/medication list<br>Training history and goals</p></div>
+        <div class="contact-item"><h4>Response Time</h4><p>Within 48 hours</p></div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div id="formContent">
+        <div class="form-title">Request Consultation</div>
+        <div class="form-subtitle">All consultations are private and confidential.</div>
+
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone (optional)</label>
+            <input type="tel" id="phone" name="phone">
+          </div>
+
+          <div class="form-group">
+            <label for="interest">Primary Interest</label>
+            <select id="interest" name="interest" required>
+              <option value="" disabled selected>Select a focus area</option>
+              <option value="foundation">Foundation Reset — New to training</option>
+              <option value="performance">Performance Edge — Active training</option>
+              <option value="longevity">Longevity Maintenance — Long-term health</option>
+              <option value="injury">Injury Return — Post-injury recovery</option>
+              <option value="consultation">General Consultation</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="goals">Goals &amp; Context</label>
+            <textarea id="goals" name="goals" placeholder="Tell us about your current training, health goals, and any relevant history."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="referral">How did you hear about us?</label>
+            <select id="referral" name="referral">
+              <option value="" disabled selected>Select one</option>
+              <option value="gym">Gym / Training facility</option>
+              <option value="referral">Personal referral</option>
+              <option value="physician">Physician / Clinic</option>
+              <option value="online">Online research</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-lg" style="width:100%;text-align:center;cursor:pointer;border:1px solid var(--btn-border);margin-top:12px">Request Consultation</button>
+        </form>
+      </div>
+
+      <div class="form-success" id="formSuccess">
+        <h3>Request received</h3>
+        <p>Thank you for your interest. We will review your information and respond within 48 hours to schedule your private consultation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section reveal">
+  <p class="section-label">The Process</p>
+  <h2 class="section-title">What to expect</h2>
+  <div class="three-col stagger-children" style="margin-top:56px">
+    <div class="card stagger-item">
+      <span class="card-tag">Step 1</span>
+      <h3>Initial Consultation</h3>
+      <p>One-on-one assessment of your health status, training history, goals, and existing bloodwork. We identify which therapeutic pillars apply to your situation.</p>
+    </div>
+    <div class="card stagger-item">
+      <span class="card-tag">Step 2</span>
+      <h3>Protocol Design</h3>
+      <p>Your protocol is built — compounds, dosing schedule, nutrition guidance, and training alignment. Everything is time-bound with clear milestones and biomarker targets.</p>
+    </div>
+    <div class="card stagger-item">
+      <span class="card-tag">Step 3</span>
+      <h3>Program Delivery</h3>
+      <p>Products delivered with full documentation. Dosing calendar, check-in schedule, and direct access to clinical oversight throughout the program duration.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="cta-band reveal">
+  <p class="section-label">Questions?</p>
+  <h2 class="section-title">We're here to help</h2>
+  <p class="section-body">If you have questions about protocols, compounds, or whether this platform is right for you, the consultation is the best place to start. No commitment required.</p>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><a href="index.html" class="logo">Engineered Adherence</a><p>Peptide therapeutics integrated into structured wellness programs. Designed for adherence, built for results.</p></div>
+    <div class="footer-links">
+      <div class="footer-col"><h4>Platform</h4><a href="pillars.html">Five Pillars</a><a href="protocols.html">Protocols</a><a href="science.html">Science</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="market.html">Market</a><a href="contact.html">Contact</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>2026 Engineered Adherence</span><span>Doha, Qatar</span></div>
+</footer>
+
+<script>
+function handleSubmit(e){
+  e.preventDefault();
+  document.getElementById('formContent').style.display='none';
+  document.getElementById('formSuccess').style.display='block';
+}
+</script>
+<script src="js/main.js"></script>
+</body>
+</html>

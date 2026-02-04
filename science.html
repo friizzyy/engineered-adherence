@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Science — Engineered Adherence</title>
+<link rel="stylesheet" href="css/style.css">
+<style>
+  .compound-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:56px}
+  .compound-card{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:44px 36px;transition:all .5s cubic-bezier(0.4,0,0.2,1);
+    position:relative;overflow:hidden;
+  }
+  .compound-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
+    transform:scaleX(0);transition:transform .5s cubic-bezier(0.4,0,0.2,1);
+    opacity:0.6;
+  }
+  .compound-card:hover{
+    transform:translateY(-3px);box-shadow:var(--shadow-card-subtle);
+    border-color:var(--line-strong);background:var(--bg-card-hover);
+  }
+  .compound-card:hover::before{transform:scaleX(1)}
+  .compound-card h3{
+    font-family:'Playfair Display',serif;
+    font-size:22px;font-weight:500;margin-bottom:8px;
+    color:var(--text-heading);transition:color .5s;
+  }
+  .compound-subtitle{
+    font-size:13px;color:var(--faint);margin-bottom:18px;
+    font-weight:300;font-style:italic;transition:color .5s;
+  }
+  .compound-card p{font-size:14px;color:var(--muted);line-height:1.8;font-weight:300;transition:color .5s}
+  .compound-meta{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+  .source-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:56px}
+  @media(max-width:768px){.compound-grid,.source-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Engineered Adherence</a>
+  <ul class="nav-center">
+    <li><a href="about.html">About</a></li>
+    <li><a href="pillars.html">Pillars</a></li>
+    <li><a href="protocols.html">Protocols</a></li>
+    <li><a href="science.html" class="active">Science</a></li>
+    <li><a href="market.html">Market</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+    <a href="contact.html" class="nav-cta">Book Consultation</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <p class="section-label">The Science</p>
+  <h1 class="section-title">Compounds backed by<br>peer-reviewed research</h1>
+  <p class="section-body">Every peptide in our protocols is selected based on published clinical evidence, dosing precision, and synergistic stacking potential across therapeutic pillars. No compound enters the portfolio without demonstrated adherence impact.</p>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section reveal">
+  <p class="section-label">Compound Library</p>
+  <h2 class="section-title">The portfolio</h2>
+
+  <div class="compound-grid stagger-children">
+    <div class="compound-card stagger-item">
+      <div class="compound-meta"><span class="card-tag">Pillar II — Recovery</span></div>
+      <h3>BPC-157</h3>
+      <div class="compound-subtitle">Body Protection Compound</div>
+      <p>Accelerates tendon, ligament, and gut tissue healing with demonstrated angiogenic and anti-inflammatory action. Over 100 preclinical studies support its regenerative profile. One of the most researched compounds in the portfolio.</p>
+    </div>
+
+    <div class="compound-card stagger-item">
+      <div class="compound-meta"><span class="card-tag">Pillar I — Longevity</span></div>
+      <h3>GHK-Cu</h3>
+      <div class="compound-subtitle">Copper Tripeptide</div>
+      <p>Triggers collagen synthesis, wound repair, and anti-aging gene expression. Research shows activation of over 4,000 genes involved in tissue remodeling, with applications across dermatology, orthopedics, and neuroscience.</p>
+    </div>
+
+    <div class="compound-card stagger-item">
+      <div class="compound-meta"><span class="card-tag">Pillar II — Recovery</span></div>
+      <h3>TB-500</h3>
+      <div class="compound-subtitle">Thymosin Beta-4 Fragment</div>
+      <p>Promotes cell migration, reduces inflammation, and supports recovery from muscle, tendon, and cardiac tissue damage. The primary mechanism involves upregulation of actin, enabling faster tissue repair and reduced scar formation.</p>
+    </div>
+
+    <div class="compound-card stagger-item">
+      <div class="compound-meta"><span class="card-tag">Pillar I — Longevity</span></div>
+      <h3>Epithalon</h3>
+      <div class="compound-subtitle">Telomerase Activator</div>
+      <p>Extends telomere length to slow biological aging. The only peptide with direct evidence of lifespan extension in mammalian studies. Works by stimulating telomerase production in somatic cells.</p>
+    </div>
+
+    <div class="compound-card stagger-item">
+      <div class="compound-meta"><span class="card-tag">Pillar IV — Cognitive</span></div>
+      <h3>Semax</h3>
+      <div class="compound-subtitle">Synthetic ACTH Analog</div>
+      <p>Enhances BDNF expression for cognitive clarity, memory retention, and neuroprotection under physical and psychological stress. Approved as a pharmaceutical in Russia since 2001 for cognitive and vascular conditions.</p>
+    </div>
+
+    <div class="compound-card stagger-item">
+      <div class="compound-meta"><span class="card-tag">Pillar V — Performance</span></div>
+      <h3>CJC-1295 / Ipamorelin</h3>
+      <div class="compound-subtitle">GH Secretagogue Stack</div>
+      <p>Stimulates natural GH pulsatility for lean mass, fat metabolism, and deep restorative sleep architecture. The combination produces synergistic GH release without appetite stimulation or cortisol increase.</p>
+    </div>
+
+    <div class="compound-card stagger-item">
+      <div class="compound-meta"><span class="card-tag">Pillar III — Metabolic</span></div>
+      <h3>Tesamorelin</h3>
+      <div class="compound-subtitle">GHRH Analog</div>
+      <p>FDA-approved for visceral adipose tissue reduction. Stimulates the pituitary to produce growth hormone through the natural GHRH pathway, resulting in targeted abdominal fat reduction while preserving lean mass.</p>
+    </div>
+
+    <div class="compound-card stagger-item">
+      <div class="compound-meta"><span class="card-tag">Pillar IV — Cognitive</span></div>
+      <h3>Selank</h3>
+      <div class="compound-subtitle">Tuftsin Analog</div>
+      <p>Anxiolytic peptide with demonstrated effects on stress resilience, mood regulation, and immune modulation. Operates through GABA-ergic pathways without sedation or dependency risks. Complementary to Semax in cognitive stacks.</p>
+    </div>
+
+    <div class="compound-card stagger-item">
+      <div class="compound-meta"><span class="card-tag">Pillar III — Metabolic</span></div>
+      <h3>AOD-9604</h3>
+      <div class="compound-subtitle">Modified GH Fragment</div>
+      <p>Modified fragment of human growth hormone targeting fat metabolism without impacting IGF-1 levels or blood sugar. Stimulates lipolysis and inhibits lipogenesis for body composition changes without systemic GH effects.</p>
+    </div>
+
+    <div class="compound-card stagger-item">
+      <div class="compound-meta"><span class="card-tag">Pillar III — Metabolic</span></div>
+      <h3>5-Amino-1MQ</h3>
+      <div class="compound-subtitle">NNMT Inhibitor</div>
+      <p>Small molecule that inhibits NNMT, an enzyme linked to metabolic dysfunction and obesity. Research demonstrates increased NAD+ levels, enhanced cellular energy metabolism, and potential reversal of diet-induced obesity pathways.</p>
+    </div>
+
+    <div class="compound-card stagger-item">
+      <div class="compound-meta"><span class="card-tag">Pillar II — Recovery</span></div>
+      <h3>KPV</h3>
+      <div class="compound-subtitle">Alpha-MSH Fragment</div>
+      <p>Anti-inflammatory tripeptide derived from alpha-melanocyte-stimulating hormone. Reduces gut inflammation, supports intestinal barrier function, and modulates immune responses. Particularly effective for inflammatory bowel conditions and systemic inflammation.</p>
+    </div>
+
+    <div class="compound-card stagger-item">
+      <div class="compound-meta"><span class="card-tag">Pillar III — Metabolic</span></div>
+      <h3>Retatrutide</h3>
+      <div class="compound-subtitle">Triple Agonist (GIP/GLP-1/Glucagon)</div>
+      <p>Triple agonist targeting GIP, GLP-1, and glucagon receptors simultaneously. Clinical trials show weight loss exceeding 24% of body weight. Works through coordinated appetite regulation, glucose metabolism, and increased energy expenditure.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section reveal">
+  <p class="section-label">Sourcing &amp; Quality</p>
+  <h2 class="section-title">Pharmaceutical discipline<br>at every step</h2>
+  <p class="section-body" style="max-width:600px;margin-bottom:0">The company does not manufacture peptides. It operates as a branded distributor sourcing exclusively from GMP-certified facilities. Pharmaceutical discipline applies to every compound regardless of regulatory classification.</p>
+
+  <div class="source-grid stagger-children">
+    <div class="card stagger-item">
+      <span class="card-tag">Primary</span>
+      <h3>US-Sourced</h3>
+      <p>FDA-registered compounding pharmacies for established peptides with the highest regulatory confidence. Full chain-of-custody documentation for every batch.</p>
+    </div>
+    <div class="card stagger-item">
+      <span class="card-tag">Secondary</span>
+      <h3>EU-Sourced</h3>
+      <p>EU-GMP certified laboratories for research-grade compounds with documented safety profiles. European regulatory standards applied to all manufacturing processes.</p>
+    </div>
+    <div class="card stagger-item">
+      <span class="card-tag">Complementary</span>
+      <h3>India-Sourced</h3>
+      <p>Cost-effective GMP manufacturing for oral and topical formulations. Same quality standards, same testing protocols, applied to high-volume supplement-classified products.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section reveal">
+  <div class="two-col">
+    <div>
+      <p class="section-label">Transparency System</p>
+      <h2 class="section-title">Every product,<br>fully traceable</h2>
+      <p class="section-body">Every product carries a QR code linking to its Certificate of Analysis, batch number, expiration date, sourcing origin, and storage instructions. This is a non-negotiable brand standard.</p>
+    </div>
+    <div>
+      <div class="three-col" style="grid-template-columns:1fr 1fr">
+        <div class="card"><h3>CoA Access</h3><p>Certificate of Analysis for every batch, accessible by QR scan on the product itself.</p></div>
+        <div class="card"><h3>Batch Tracking</h3><p>Every unit traceable to its manufacturing batch with full purity testing records.</p></div>
+        <div class="card"><h3>Cold Chain</h3><p>Temperature-controlled from manufacturer to end user. Real-time monitoring logs maintained.</p></div>
+        <div class="card"><h3>Third-Party Testing</h3><p>Independent lab verification on every batch before distribution. No exceptions.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="cta-band reveal">
+  <p class="section-label">Get Started</p>
+  <h2 class="section-title">Begin your protocol</h2>
+  <p class="section-body">Schedule a private consultation to discuss your goals, review biomarkers, and receive a tailored peptide protocol.</p>
+  <a href="contact.html" class="btn btn-lg">Book Consultation</a>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><a href="index.html" class="logo">Engineered Adherence</a><p>Peptide therapeutics integrated into structured wellness programs. Designed for adherence, built for results.</p></div>
+    <div class="footer-links">
+      <div class="footer-col"><h4>Platform</h4><a href="pillars.html">Five Pillars</a><a href="protocols.html">Protocols</a><a href="science.html">Science</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="market.html">Market</a><a href="contact.html">Contact</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>2026 Engineered Adherence</span><span>Doha, Qatar</span></div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

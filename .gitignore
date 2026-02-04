@@ -1,0 +1,17 @@
+# Dependencies
+node_modules/
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Claude config (optional - remove if you want to track)
+.claude/
+
+# Misc
+nul
+*.log
