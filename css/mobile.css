@@ -653,44 +653,96 @@
   }
 
   /* ═══════════════════════════════════════════
-     MOBILE FOOTER
+     MOBILE FOOTER — PREMIUM REDESIGN
      ═══════════════════════════════════════════ */
   footer{
-    padding:40px 24px !important;
+    padding:48px 24px 32px !important;
+    text-align:center;
+  }
+
+  .footer-inner{
+    flex-direction:column !important;
+    align-items:center !important;
+    gap:40px !important;
+  }
+
+  .footer-brand{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:center;
   }
 
   .footer-brand .logo{
-    font-size:15px;
+    font-size:16px;
+    margin-bottom:16px !important;
   }
 
   .footer-brand p{
-    font-size:12px;
-    line-height:1.7;
-    max-width:280px;
+    font-size:13px;
+    line-height:1.8;
+    max-width:300px;
+    color:var(--muted);
+    text-align:center;
   }
 
   .footer-links{
-    gap:36px !important;
+    display:flex !important;
+    flex-direction:row !important;
+    justify-content:center !important;
+    gap:48px !important;
+    width:100%;
+    padding:32px 0;
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
+  }
+
+  .footer-col{
+    text-align:center;
   }
 
   .footer-col h4{
     font-size:9px;
-    letter-spacing:2px;
-    margin-bottom:14px;
+    letter-spacing:2.5px;
+    margin-bottom:16px;
+    color:var(--faint);
   }
 
   .footer-col a{
     font-size:13px;
-    margin-bottom:8px;
+    margin-bottom:10px;
+    display:block;
+    color:var(--muted);
+    transition:color .3s ease;
+  }
+
+  .footer-col a:active{
+    color:var(--text-heading);
   }
 
   .footer-bottom{
-    margin-top:36px;
-    padding-top:20px;
+    margin-top:24px !important;
+    padding-top:0 !important;
+    border-top:none !important;
+    flex-direction:column !important;
+    align-items:center !important;
+    gap:6px !important;
   }
 
   .footer-bottom span{
     font-size:11px;
+    color:var(--faint);
+    letter-spacing:0.5px;
+  }
+
+  .footer-bottom span:first-child{
+    font-weight:400;
+  }
+
+  .footer-bottom span:last-child{
+    font-size:10px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
   }
 
   /* ═══════════════════════════════════════════
