@@ -11,6 +11,7 @@
 })();
 </script>
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/mobile.css">
 <style>
   nav{opacity:0;animation:fadeDown .8s ease 2.6s forwards}
   @keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
@@ -226,9 +227,16 @@
   </ul>
   <a href="contact.html" class="mobile-nav-cta">Book Consultation</a>
   <div class="mobile-nav-footer">
-    <div class="mobile-nav-theme">
-      <span>Theme</span>
-      <button class="theme-toggle" id="mobileThemeToggle" aria-label="Toggle theme"></button>
+    <div class="mobile-theme-switch">
+      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+      <button class="theme-toggle-track" id="mobileThemeToggle" aria-label="Toggle theme">
+        <span class="theme-toggle-knob"></span>
+      </button>
+      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
     </div>
   </div>
 </div>
@@ -348,7 +356,7 @@
     <div class="pillar-card stagger-item"><div class="pillar-num">IV</div><h3>Metabolic</h3><p>Body composition optimization and metabolic rate recovery</p></div>
     <div class="pillar-card stagger-item"><div class="pillar-num">V</div><h3>Performance</h3><p>Strength output, endurance capacity, and training recovery</p></div>
   </div>
-  <div style="text-align:center;margin-top:56px"><a href="pillars.html" class="btn btn-ghost">Explore All Pillars</a></div>
+  <div class="pillars-cta" style="text-align:center;margin-top:56px"><a href="pillars.html" class="btn btn-ghost">Explore All Pillars</a></div>
 </section>
 
 <div class="divider"><div class="divider-line"></div></div>
@@ -406,5 +414,6 @@ function updateVials(theme){
 updateVials(document.documentElement.getAttribute('data-theme')||'dark');
 </script>
 <script src="js/main.js"></script>
+<script src="js/mobile.js"></script>
 </body>
 </html>

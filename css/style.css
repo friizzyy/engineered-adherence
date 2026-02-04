@@ -722,6 +722,40 @@ footer{
   font-size:12px;color:var(--faint);
   line-height:1.8;margin-bottom:16px;
 }
+
+/* Mobile Theme Switch with Sun/Moon Icons */
+.mobile-theme-switch{
+  display:flex;align-items:center;gap:14px;
+  justify-content:center;
+}
+.theme-icon{
+  width:20px;height:20px;
+  color:var(--faint);
+  transition:color .3s ease,opacity .3s ease;
+}
+.theme-icon-sun{opacity:0.4}
+.theme-icon-moon{opacity:1}
+[data-theme="light"] .theme-icon-sun{opacity:1}
+[data-theme="light"] .theme-icon-moon{opacity:0.4}
+
+.theme-toggle-track{
+  width:52px;height:28px;
+  background:var(--toggle-bg);
+  border-radius:14px;border:none;cursor:pointer;
+  position:relative;transition:background .3s;
+  padding:0;
+}
+.theme-toggle-knob{
+  position:absolute;top:4px;left:4px;
+  width:20px;height:20px;border-radius:50%;
+  background:var(--toggle-knob);
+  transition:transform .4s cubic-bezier(0.4,0,0.2,1),background .3s;
+}
+[data-theme="light"] .theme-toggle-knob{
+  transform:translateX(24px);
+}
+
+/* Keep old class for desktop nav */
 .mobile-nav-theme{
   display:flex;align-items:center;gap:12px;
   font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
