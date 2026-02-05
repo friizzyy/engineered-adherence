@@ -1062,6 +1062,13 @@ document.querySelectorAll('.compound-row').forEach(row => {
     const detailPanel = panel.querySelector('.detail-panel');
     const detailCard = detailPanel.querySelector('.compound-detail-card');
 
+    // Toggle: if already selected, deselect and hide
+    if(row.classList.contains('selected')){
+      row.classList.remove('selected');
+      detailPanel.classList.remove('showing-compound');
+      return;
+    }
+
     // Deselect all rows in this panel
     panel.querySelectorAll('.compound-row').forEach(r => r.classList.remove('selected'));
 
