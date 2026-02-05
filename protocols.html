@@ -13,84 +13,241 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/mobile.css">
 <style>
-  .protocol-detail{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:56px}
-  .protocol-detail .card{padding:44px 36px}
-  .protocol-meta{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap}
-  .protocol-meta .card-tag{margin-bottom:0}
-  .protocol-includes{list-style:none;padding:0;margin-top:20px}
-  .protocol-includes li{
-    font-size:13px;color:var(--muted);line-height:1.8;font-weight:300;
-    padding:7px 0;padding-left:18px;position:relative;transition:color .5s;
-  }
-  .protocol-includes li::before{
-    content:'';position:absolute;left:0;top:14px;
-    width:8px;height:1px;background:var(--faint);
-  }
-  .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-  .pricing-card{
-    background:var(--bg-card);border:1px solid var(--line);
-    padding:40px 28px;transition:all .5s cubic-bezier(0.4,0,0.2,1);text-align:center;
-    min-width:0;
-  }
-  .pricing-card:hover{
-    border-color:var(--line-strong);background:var(--bg-card-hover);
-    transform:translateY(-4px);
-    box-shadow:var(--shadow-card-subtle);
-  }
-  .pricing-tier{
-    font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
-    color:var(--faint);margin-bottom:16px;transition:color .5s;
-    white-space:nowrap;
-  }
-  .pricing-range{
-    font-family:'Playfair Display',serif;
-    font-size:32px;font-weight:500;
-    color:var(--stat-num);margin-bottom:10px;
-    transition:color .5s;letter-spacing:-0.02em;
-    white-space:nowrap;
-  }
-  .pricing-unit{font-size:12px;color:var(--muted);margin-bottom:24px;transition:color .5s}
-  .pricing-desc{font-size:13px;color:var(--muted);line-height:1.7;font-weight:300;transition:color .5s}
-  .includes-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
-  }
-  .include-card{
-    background:var(--bg-card);border:1px solid var(--line);
-    padding:32px 28px;position:relative;overflow:hidden;
-    transition:all .5s cubic-bezier(0.4,0,0.2,1);
-  }
-  .include-card::before{
-    content:'';position:absolute;top:0;left:0;
-    width:3px;height:100%;
-    background:var(--accent-solid);
-    opacity:0;transition:opacity .3s ease;
-  }
-  .include-card:hover{
-    border-color:var(--line-strong);
-    background:var(--bg-card-hover);
-    transform:translateY(-4px);
-    box-shadow:var(--shadow-card-subtle);
-  }
-  .include-card:hover::before{opacity:1}
-  .include-num{
-    font-family:'Playfair Display',serif;
-    font-size:14px;font-weight:600;
-    color:var(--accent-solid);
-    display:block;margin-bottom:14px;
-  }
-  .include-card h3{
-    font-family:'Playfair Display',serif;
-    font-size:17px;font-weight:500;
-    color:var(--text-heading);margin:0 0 10px;
-    transition:color .5s;
-  }
-  .include-card p{
-    font-size:13px;color:var(--muted);
-    line-height:1.75;font-weight:300;margin:0;
-    transition:color .5s;
-  }
-  @media(max-width:1024px){.pricing-grid{grid-template-columns:1fr 1fr}.includes-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:768px){.protocol-detail{grid-template-columns:1fr}.pricing-grid{grid-template-columns:1fr}.includes-grid{grid-template-columns:1fr}}
+/* ═══════════════════════════════════════════
+   PROTOCOLS PAGE — SELECTOR + EXPANDED DETAIL
+   ═══════════════════════════════════════════ */
+
+/* Protocol Selector Bar */
+.proto-selector{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:1px;
+  background:var(--line);
+  margin-top:56px;
+}
+
+.proto-tab{
+  background:var(--bg-card);
+  padding:28px 24px;
+  cursor:pointer;
+  border:none;
+  text-align:left;
+  transition:all .4s cubic-bezier(0.4,0,0.2,1);
+  position:relative;
+}
+
+.proto-tab::after{
+  content:'';
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:2px;
+  background:var(--accent-solid);
+  transform:scaleX(0);
+  transition:transform .4s ease;
+}
+
+.proto-tab:hover{
+  background:var(--bg-card-hover);
+}
+
+.proto-tab.active{
+  background:var(--bg-card-hover);
+}
+
+.proto-tab.active::after{
+  transform:scaleX(1);
+}
+
+.proto-tab-num{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  font-weight:500;
+  color:var(--pillar-num);
+  line-height:1;
+  margin-bottom:12px;
+  transition:color .4s;
+}
+
+.proto-tab.active .proto-tab-num{
+  color:var(--accent-solid);
+}
+
+.proto-tab-name{
+  font-family:'Playfair Display',serif;
+  font-size:17px;
+  font-weight:500;
+  color:var(--text-heading);
+  margin-bottom:6px;
+  transition:color .5s;
+}
+
+.proto-tab-meta{
+  font-size:10px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--faint);
+  transition:color .5s;
+}
+
+/* Expanded Detail Panel */
+.proto-detail{
+  display:none;
+  animation:slideDown .5s cubic-bezier(0.4,0,0.2,1);
+}
+
+.proto-detail.active{
+  display:block;
+}
+
+@keyframes slideDown{
+  from{opacity:0;transform:translateY(-12px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.proto-detail-inner{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:80px;
+  padding:64px 0;
+  align-items:start;
+}
+
+.proto-desc h3{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  font-weight:500;
+  color:var(--text-heading);
+  margin:0 0 20px;
+  line-height:1.3;
+}
+
+.proto-desc p{
+  font-size:15px;
+  color:var(--muted);
+  line-height:1.9;
+  font-weight:300;
+}
+
+.proto-price-bar{
+  display:flex;
+  align-items:baseline;
+  gap:16px;
+  margin-top:32px;
+  padding-top:32px;
+  border-top:1px solid var(--line);
+}
+
+.proto-price{
+  font-family:'Playfair Display',serif;
+  font-size:36px;
+  font-weight:500;
+  color:var(--stat-num);
+  letter-spacing:-0.02em;
+}
+
+.proto-price-unit{
+  font-size:12px;
+  color:var(--faint);
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.proto-cta{
+  margin-top:32px;
+}
+
+/* Right: Includes list */
+.proto-includes-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.proto-includes-list li{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  padding:18px 0;
+  border-bottom:1px solid var(--line);
+  transition:all .3s;
+}
+
+.proto-includes-list li:first-child{
+  padding-top:0;
+}
+
+.proto-includes-list li:last-child{
+  border-bottom:none;
+}
+
+.proto-includes-list li:hover{
+  padding-left:8px;
+}
+
+.proto-li-num{
+  font-family:'Playfair Display',serif;
+  font-size:14px;
+  font-weight:600;
+  color:var(--accent-solid);
+  min-width:20px;
+  padding-top:1px;
+}
+
+.proto-li-text{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.7;
+  font-weight:300;
+}
+
+/* Horizontal Includes Strip */
+.includes-strip{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:1px;
+  background:var(--line);
+  margin-top:64px;
+}
+
+.strip-item{
+  background:var(--bg-card);
+  padding:28px 20px;
+  text-align:center;
+  transition:all .4s;
+}
+
+.strip-item:hover{
+  background:var(--bg-card-hover);
+}
+
+.strip-icon{
+  width:24px;
+  height:24px;
+  margin:0 auto 14px;
+  color:var(--accent-solid);
+}
+
+.strip-label{
+  font-size:11px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--muted);
+  line-height:1.4;
+}
+
+@media(max-width:1024px){
+  .proto-selector{grid-template-columns:1fr 1fr}
+  .proto-detail-inner{grid-template-columns:1fr;gap:48px}
+  .includes-strip{grid-template-columns:repeat(3,1fr)}
+}
+
+@media(max-width:768px){
+  .proto-selector{grid-template-columns:1fr}
+  .includes-strip{grid-template-columns:1fr 1fr}
+  .proto-tab-num{font-size:24px}
+  .proto-desc h3{font-size:24px}
+  .proto-price{font-size:28px}
+}
 </style>
 </head>
 <body>
@@ -139,7 +296,7 @@
 <section class="page-hero">
   <p class="section-label">Protocol-as-Product</p>
   <h1 class="section-title">Curated systems,<br>not individual compounds</h1>
-  <p class="section-body">Individual peptides are not the primary offering. The core product is the protocol itself: a curated combination of compounds, timing, dosing, nutrition guidance, and training alignment designed to achieve a specific outcome within a defined timeframe.</p>
+  <p class="section-body">The core product is the protocol itself: compounds, timing, dosing, nutrition, and training alignment designed for a specific outcome within a defined timeframe.</p>
 </section>
 
 <div class="divider"><div class="divider-line"></div></div>
@@ -164,63 +321,132 @@
 
 <section class="section reveal">
   <p class="section-label">Core Protocols</p>
-  <h2 class="section-title">Four entry points,<br>one standard of care</h2>
+  <h2 class="section-title">Four entry points, one standard of care</h2>
 
-  <div class="protocol-detail stagger-children">
-    <div class="card stagger-item">
-      <div class="protocol-meta"><span class="card-tag">New Clients</span><span class="card-tag">12 Weeks</span></div>
-      <h3>Foundation Reset</h3>
-      <p>For new clients beginning a structured training program. This protocol addresses the three systems that fail first: metabolism, recovery, and sleep.</p>
-      <ul class="protocol-includes">
-        <li>Metabolic peptide stack for early body composition changes</li>
-        <li>Recovery compounds to reduce DOMS and training soreness</li>
-        <li>Sleep architecture support through GH secretagogues</li>
-        <li>Dosing calendar synced to training schedule</li>
-        <li>Nutrition protocol and supplement guidance</li>
-        <li>Bi-weekly biomarker check-ins</li>
-      </ul>
+  <div class="proto-selector">
+    <button class="proto-tab active" data-proto="foundation">
+      <div class="proto-tab-num">01</div>
+      <div class="proto-tab-name">Foundation Reset</div>
+      <div class="proto-tab-meta">New Clients · 12 Weeks</div>
+    </button>
+    <button class="proto-tab" data-proto="performance">
+      <div class="proto-tab-num">02</div>
+      <div class="proto-tab-name">Performance Edge</div>
+      <div class="proto-tab-meta">Active Clients · 8 Weeks</div>
+    </button>
+    <button class="proto-tab" data-proto="longevity">
+      <div class="proto-tab-num">03</div>
+      <div class="proto-tab-name">Longevity Maintenance</div>
+      <div class="proto-tab-meta">Established · Ongoing</div>
+    </button>
+    <button class="proto-tab" data-proto="injury">
+      <div class="proto-tab-num">04</div>
+      <div class="proto-tab-name">Injury Return</div>
+      <div class="proto-tab-meta">Recovery · 6–8 Weeks</div>
+    </button>
+  </div>
+
+  <div class="proto-detail active" id="proto-foundation">
+    <div class="proto-detail-inner">
+      <div class="proto-desc">
+        <h3>Rebuild the systems that fail first</h3>
+        <p>For new clients beginning a structured training program. This protocol addresses the three systems that fail first: metabolism, recovery, and sleep. The combination compresses the discomfort phase and creates visible results within the first four weeks.</p>
+        <div class="proto-price-bar">
+          <span class="proto-price">$2–4K</span>
+          <span class="proto-price-unit">per 12-week protocol</span>
+        </div>
+        <div class="proto-cta">
+          <a href="contact.html" class="btn">Book Consultation</a>
+        </div>
+      </div>
+      <div>
+        <ol class="proto-includes-list">
+          <li><span class="proto-li-num">01</span><span class="proto-li-text">Metabolic peptide stack for early body composition changes</span></li>
+          <li><span class="proto-li-num">02</span><span class="proto-li-text">Recovery compounds to reduce DOMS and training soreness</span></li>
+          <li><span class="proto-li-num">03</span><span class="proto-li-text">Sleep architecture support through GH secretagogues</span></li>
+          <li><span class="proto-li-num">04</span><span class="proto-li-text">Dosing calendar synced to training schedule</span></li>
+          <li><span class="proto-li-num">05</span><span class="proto-li-text">Nutrition protocol and supplement guidance</span></li>
+          <li><span class="proto-li-num">06</span><span class="proto-li-text">Bi-weekly biomarker check-ins</span></li>
+        </ol>
+      </div>
     </div>
+  </div>
 
-    <div class="card stagger-item">
-      <div class="protocol-meta"><span class="card-tag">Active Clients</span><span class="card-tag">8 Weeks</span></div>
-      <h3>Performance Edge</h3>
-      <p>For active individuals seeking measurable progression. This protocol targets growth hormone output, cognitive sharpness, and accelerated recovery between sessions.</p>
-      <ul class="protocol-includes">
-        <li>CJC-1295/Ipamorelin GH secretagogue stack</li>
-        <li>Cognitive compounds for focus and training intensity</li>
-        <li>Recovery peptides for inter-session repair</li>
-        <li>Training periodization alignment</li>
-        <li>Body composition tracking at weeks 0, 4, and 8</li>
-        <li>Performance metric benchmarks</li>
-      </ul>
+  <div class="proto-detail" id="proto-performance">
+    <div class="proto-detail-inner">
+      <div class="proto-desc">
+        <h3>Measurable progression, session to session</h3>
+        <p>For active individuals seeking measurable progression. This protocol targets growth hormone output, cognitive sharpness, and accelerated recovery between sessions. Every metric is tracked.</p>
+        <div class="proto-price-bar">
+          <span class="proto-price">$3–5K</span>
+          <span class="proto-price-unit">per 8-week protocol</span>
+        </div>
+        <div class="proto-cta">
+          <a href="contact.html" class="btn">Book Consultation</a>
+        </div>
+      </div>
+      <div>
+        <ol class="proto-includes-list">
+          <li><span class="proto-li-num">01</span><span class="proto-li-text">CJC-1295/Ipamorelin GH secretagogue stack</span></li>
+          <li><span class="proto-li-num">02</span><span class="proto-li-text">Cognitive compounds for focus and training intensity</span></li>
+          <li><span class="proto-li-num">03</span><span class="proto-li-text">Recovery peptides for inter-session repair</span></li>
+          <li><span class="proto-li-num">04</span><span class="proto-li-text">Training periodization alignment</span></li>
+          <li><span class="proto-li-num">05</span><span class="proto-li-text">Body composition tracking at weeks 0, 4, and 8</span></li>
+          <li><span class="proto-li-num">06</span><span class="proto-li-text">Performance metric benchmarks</span></li>
+        </ol>
+      </div>
     </div>
+  </div>
 
-    <div class="card stagger-item">
-      <div class="protocol-meta"><span class="card-tag">Established Clients</span><span class="card-tag">Ongoing</span></div>
-      <h3>Longevity Maintenance</h3>
-      <p>For established clients sustaining long-term health. This protocol focuses on cellular repair, neuroprotection, and systemic maintenance that prevents age-related decline.</p>
-      <ul class="protocol-includes">
-        <li>GHK-Cu for collagen and tissue remodeling</li>
-        <li>Epithalon for telomere maintenance cycles</li>
-        <li>Semax/Selank for cognitive preservation</li>
-        <li>Quarterly bloodwork and biomarker panels</li>
-        <li>Annual protocol review and adjustment</li>
-        <li>Priority access to new compound additions</li>
-      </ul>
+  <div class="proto-detail" id="proto-longevity">
+    <div class="proto-detail-inner">
+      <div class="proto-desc">
+        <h3>Sustain what you've built, indefinitely</h3>
+        <p>For established clients sustaining long-term health. This protocol focuses on cellular repair, neuroprotection, and systemic maintenance that prevents age-related decline.</p>
+        <div class="proto-price-bar">
+          <span class="proto-price">$1–2K</span>
+          <span class="proto-price-unit">per month ongoing</span>
+        </div>
+        <div class="proto-cta">
+          <a href="contact.html" class="btn">Book Consultation</a>
+        </div>
+      </div>
+      <div>
+        <ol class="proto-includes-list">
+          <li><span class="proto-li-num">01</span><span class="proto-li-text">GHK-Cu for collagen and tissue remodeling</span></li>
+          <li><span class="proto-li-num">02</span><span class="proto-li-text">Epithalon for telomere maintenance cycles</span></li>
+          <li><span class="proto-li-num">03</span><span class="proto-li-text">Semax/Selank for cognitive preservation</span></li>
+          <li><span class="proto-li-num">04</span><span class="proto-li-text">Quarterly bloodwork and biomarker panels</span></li>
+          <li><span class="proto-li-num">05</span><span class="proto-li-text">Annual protocol review and adjustment</span></li>
+          <li><span class="proto-li-num">06</span><span class="proto-li-text">Priority access to new compound additions</span></li>
+        </ol>
+      </div>
     </div>
+  </div>
 
-    <div class="card stagger-item">
-      <div class="protocol-meta"><span class="card-tag">Injury</span><span class="card-tag">6–8 Weeks</span></div>
-      <h3>Injury Return</h3>
-      <p>For individuals returning to training after injury or surgery. This protocol accelerates tissue repair and structural rebuilding to reduce time away from the gym.</p>
-      <ul class="protocol-includes">
-        <li>BPC-157 for tissue and ligament repair</li>
-        <li>TB-500 for inflammation and cell migration</li>
-        <li>Joint support compounds as needed</li>
-        <li>Graduated return-to-training schedule</li>
-        <li>Weekly pain and mobility assessments</li>
-        <li>Coordination with physiotherapy where applicable</li>
-      </ul>
+  <div class="proto-detail" id="proto-injury">
+    <div class="proto-detail-inner">
+      <div class="proto-desc">
+        <h3>Accelerated return to full capacity</h3>
+        <p>For individuals returning to training after injury or surgery. This protocol accelerates tissue repair and structural rebuilding to reduce time away from the gym.</p>
+        <div class="proto-price-bar">
+          <span class="proto-price">$2–3K</span>
+          <span class="proto-price-unit">per 6–8 week protocol</span>
+        </div>
+        <div class="proto-cta">
+          <a href="contact.html" class="btn">Book Consultation</a>
+        </div>
+      </div>
+      <div>
+        <ol class="proto-includes-list">
+          <li><span class="proto-li-num">01</span><span class="proto-li-text">BPC-157 for tissue and ligament repair</span></li>
+          <li><span class="proto-li-num">02</span><span class="proto-li-text">TB-500 for inflammation and cell migration</span></li>
+          <li><span class="proto-li-num">03</span><span class="proto-li-text">Joint support compounds as needed</span></li>
+          <li><span class="proto-li-num">04</span><span class="proto-li-text">Graduated return-to-training schedule</span></li>
+          <li><span class="proto-li-num">05</span><span class="proto-li-text">Weekly pain and mobility assessments</span></li>
+          <li><span class="proto-li-num">06</span><span class="proto-li-text">Coordination with physiotherapy where applicable</span></li>
+        </ol>
+      </div>
     </div>
   </div>
 </section>
@@ -229,47 +455,32 @@
 
 <section class="section reveal">
   <p class="section-label">Every Protocol Includes</p>
-  <h2 class="section-title">The complete<br>adherence architecture</h2>
-  <div class="includes-grid stagger-children" style="margin-top:56px">
-    <div class="include-card stagger-item"><span class="include-num">01</span><h3>Dosing Calendar</h3><p>Precise timing, dosages, and injection schedules synced to your training days and sleep cycle.</p></div>
-    <div class="include-card stagger-item"><span class="include-num">02</span><h3>Nutrition Protocol</h3><p>Macronutrient targets, meal timing, and supplement integration designed around your protocol compounds.</p></div>
-    <div class="include-card stagger-item"><span class="include-num">03</span><h3>Training Alignment</h3><p>Protocol timing matched to training periodization for maximum compound effectiveness.</p></div>
-    <div class="include-card stagger-item"><span class="include-num">04</span><h3>Biomarker Tracking</h3><p>Regular bloodwork and health markers to measure protocol impact and adjust dosing.</p></div>
-    <div class="include-card stagger-item"><span class="include-num">05</span><h3>Clinical Oversight</h3><p>Licensed physician review of all protocols with ongoing monitoring throughout the program.</p></div>
-    <div class="include-card stagger-item"><span class="include-num">06</span><h3>QR Transparency</h3><p>Every product carries a QR code linking to its Certificate of Analysis, batch number, and sourcing origin.</p></div>
-  </div>
-</section>
+  <h2 class="section-title">The complete adherence architecture</h2>
 
-<div class="divider"><div class="divider-line"></div></div>
-
-<section class="section reveal">
-  <div class="two-col">
-    <div>
-      <p class="section-label">Pricing</p>
-      <h2 class="section-title">Structured investment,<br>sustained outcomes</h2>
-      <p class="section-body">Protocols are priced as complete systems: compounds, clinical oversight, nutrition guidance, and ongoing support bundled into time-bound programs. This structure ensures continuity, accountability, and the conditions required for lasting change.</p>
+  <div class="includes-strip" style="margin-top:56px">
+    <div class="strip-item">
+      <svg class="strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+      <div class="strip-label">Dosing Calendar</div>
     </div>
-    <div>
-      <div class="pricing-grid">
-        <div class="pricing-card">
-          <div class="pricing-tier">Foundation</div>
-          <div class="pricing-range">$2–4K</div>
-          <div class="pricing-unit">per 12-week protocol</div>
-          <div class="pricing-desc">Entry-level clients beginning structured training programs</div>
-        </div>
-        <div class="pricing-card">
-          <div class="pricing-tier">Performance</div>
-          <div class="pricing-range">$3–5K</div>
-          <div class="pricing-unit">per 8-week protocol</div>
-          <div class="pricing-desc">Active clients seeking measurable performance progression</div>
-        </div>
-        <div class="pricing-card">
-          <div class="pricing-tier">Longevity</div>
-          <div class="pricing-range">$1–2K</div>
-          <div class="pricing-unit">per month ongoing</div>
-          <div class="pricing-desc">Established clients on sustained maintenance protocols</div>
-        </div>
-      </div>
+    <div class="strip-item">
+      <svg class="strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+      <div class="strip-label">Nutrition Protocol</div>
+    </div>
+    <div class="strip-item">
+      <svg class="strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      <div class="strip-label">Training Alignment</div>
+    </div>
+    <div class="strip-item">
+      <svg class="strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+      <div class="strip-label">Biomarker Tracking</div>
+    </div>
+    <div class="strip-item">
+      <svg class="strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="strip-label">Clinical Oversight</div>
+    </div>
+    <div class="strip-item">
+      <svg class="strip-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10M7 12h10M7 17h4"/></svg>
+      <div class="strip-label">QR Transparency</div>
     </div>
   </div>
 </section>
@@ -296,6 +507,17 @@
   <div class="footer-bottom"><span>2026 Engineered Adherence</span><span>Doha, Qatar</span></div>
 </footer>
 
+<script>
+// Protocol selector
+document.querySelectorAll('.proto-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.proto-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    document.querySelectorAll('.proto-detail').forEach(d => d.classList.remove('active'));
+    document.getElementById('proto-' + tab.dataset.proto).classList.add('active');
+  });
+});
+</script>
 <script src="js/main.js"></script>
 <script src="js/mobile.js"></script>
 </body>
