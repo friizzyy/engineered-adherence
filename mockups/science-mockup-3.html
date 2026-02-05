@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Science Mockup 3 — Compact Table with Expandable Details</title>
+<script>
+(function(){
+  var t = localStorage.getItem('ea-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<style>
+  /* ═══════════════════════════════════════════
+     MOCKUP 3: COMPACT TABLE WITH EXPANDABLE ROWS
+     Dense, scannable layout with pillar grouping
+     Tap/click to expand for full description
+     ═══════════════════════════════════════════ */
+
+  .compound-table{
+    width:100%;
+    margin-top:48px;
+  }
+
+  /* Pillar Group Header */
+  .pillar-group-header{
+    display:grid;
+    grid-template-columns:48px 1fr auto;
+    align-items:center;
+    gap:16px;
+    padding:20px 24px;
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    margin-bottom:2px;
+    cursor:default;
+  }
+
+  .pillar-group-header .numeral{
+    font-family:'Playfair Display',serif;
+    font-size:28px;
+    font-weight:600;
+    color:var(--pillar-color);
+    line-height:1;
+  }
+
+  .pillar-group-header .info h3{
+    font-size:14px;
+    font-weight:500;
+    color:var(--text-heading);
+    margin-bottom:2px;
+  }
+
+  .pillar-group-header .info p{
+    font-size:11px;
+    color:var(--faint);
+  }
+
+  .pillar-group-header .count{
+    font-size:10px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--faint);
+    padding:6px 12px;
+    border:1px solid var(--line);
+  }
+
+  /* Color variants */
+  [data-pillar="1"]{--pillar-color:#7dd3c0}
+  [data-pillar="2"]{--pillar-color:#f5a962}
+  [data-pillar="3"]{--pillar-color:#e879a9}
+  [data-pillar="4"]{--pillar-color:#8b9cf4}
+  [data-pillar="5"]{--pillar-color:#c4a962}
+
+  /* Compound Row */
+  .compound-table-row{
+    display:grid;
+    grid-template-columns:48px 180px 1fr 100px 60px;
+    align-items:center;
+    gap:16px;
+    padding:16px 24px;
+    background:var(--bg);
+    border:1px solid var(--line);
+    border-top:none;
+    cursor:pointer;
+    transition:all .3s ease;
+  }
+
+  .compound-table-row:hover{
+    background:var(--bg-card);
+  }
+
+  .compound-table-row.expanded{
+    background:var(--bg-card);
+    border-color:var(--pillar-color);
+  }
+
+  .compound-table-row .indicator{
+    width:4px;
+    height:32px;
+    background:var(--pillar-color);
+    border-radius:2px;
+    opacity:0.4;
+    transition:opacity .3s ease;
+  }
+
+  .compound-table-row:hover .indicator,
+  .compound-table-row.expanded .indicator{
+    opacity:1;
+  }
+
+  .compound-table-row .name{
+    font-family:'Playfair Display',serif;
+    font-size:16px;
+    font-weight:500;
+    color:var(--text-heading);
+  }
+
+  .compound-table-row .type{
+    font-size:12px;
+    color:var(--muted);
+    font-weight:300;
+  }
+
+  .compound-table-row .route{
+    font-size:10px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--pillar-color);
+    text-align:center;
+  }
+
+  .compound-table-row .expand-icon{
+    width:24px;
+    height:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:var(--faint);
+    transition:transform .3s ease;
+  }
+
+  .compound-table-row.expanded .expand-icon{
+    transform:rotate(180deg);
+  }
+
+  /* Expanded Content */
+  .compound-expanded{
+    display:none;
+    padding:24px 24px 24px 88px;
+    background:var(--bg-card);
+    border:1px solid var(--pillar-color);
+    border-top:none;
+    margin-bottom:2px;
+  }
+
+  .compound-expanded.show{
+    display:block;
+  }
+
+  .compound-expanded p{
+    font-size:14px;
+    color:var(--muted);
+    line-height:1.8;
+    font-weight:300;
+    max-width:640px;
+  }
+
+  .compound-expanded .stats{
+    display:flex;
+    gap:32px;
+    margin-top:20px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+  }
+
+  .compound-expanded .stat{
+    text-align:left;
+  }
+
+  .compound-expanded .stat .val{
+    font-family:'Playfair Display',serif;
+    font-size:20px;
+    color:var(--pillar-color);
+    display:block;
+  }
+
+  .compound-expanded .stat .label{
+    font-size:9px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--faint);
+    margin-top:4px;
+  }
+
+  /* Summary Stats */
+  .summary-stats{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:16px;
+    margin-bottom:48px;
+  }
+
+  .summary-stat{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    padding:24px 20px;
+    text-align:center;
+    transition:all .3s ease;
+  }
+
+  .summary-stat:hover{
+    border-color:var(--line-strong);
+  }
+
+  .summary-stat .num{
+    font-family:'Playfair Display',serif;
+    font-size:32px;
+    font-weight:500;
+    color:var(--text-heading);
+    margin-bottom:4px;
+    display:block;
+  }
+
+  .summary-stat .label{
+    font-size:10px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--faint);
+  }
+
+  /* Mobile Adjustments */
+  @media(max-width:1024px){
+    .compound-table-row{
+      grid-template-columns:4px 140px 1fr 80px 40px;
+    }
+    .compound-table-row .indicator{
+      width:3px;
+      height:100%;
+    }
+    .summary-stats{
+      grid-template-columns:repeat(3, 1fr);
+    }
+  }
+
+  @media(max-width:768px){
+    .summary-stats{
+      grid-template-columns:repeat(2, 1fr);
+      gap:12px;
+    }
+    .summary-stat{
+      padding:20px 16px;
+    }
+    .summary-stat .num{
+      font-size:24px;
+    }
+
+    .pillar-group-header{
+      grid-template-columns:40px 1fr;
+      gap:12px;
+      padding:16px 20px;
+    }
+    .pillar-group-header .numeral{
+      font-size:24px;
+    }
+    .pillar-group-header .count{
+      display:none;
+    }
+
+    .compound-table-row{
+      grid-template-columns:4px 1fr auto;
+      gap:12px;
+      padding:16px 16px;
+    }
+    .compound-table-row .type{
+      display:none;
+    }
+    .compound-table-row .route{
+      font-size:9px;
+    }
+    .compound-table-row .name{
+      font-size:15px;
+    }
+    .compound-expanded{
+      padding:20px 16px 20px 24px;
+    }
+    .compound-expanded .stats{
+      flex-wrap:wrap;
+      gap:20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="logo">Engineered Adherence</a>
+  <ul class="nav-center">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../pillars.html">Pillars</a></li>
+    <li><a href="../protocols.html">Protocols</a></li>
+    <li><a href="../science.html" class="active">Science</a></li>
+    <li><a href="../market.html">Market</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+    <a href="../contact.html" class="nav-cta">Book Consultation</a>
+    <button class="mobile-menu-btn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-nav-overlay"></div>
+<div class="mobile-nav">
+  <ul class="mobile-nav-links">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../pillars.html">Pillars</a></li>
+    <li><a href="../protocols.html">Protocols</a></li>
+    <li><a href="../science.html">Science</a></li>
+    <li><a href="../market.html">Market</a></li>
+  </ul>
+  <a href="../contact.html" class="mobile-nav-cta">Book Consultation</a>
+</div>
+
+<section class="page-hero">
+  <p class="section-label">Mockup 3 — Compact Table</p>
+  <h1 class="section-title">Dense, scannable compound<br>table with expansion</h1>
+  <p class="section-body">Compact table layout grouped by pillar. Each row shows compound name, type, and route at a glance. Click any row to expand and reveal full description and stats. Efficient for users who know what they're looking for.</p>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section">
+  <p class="section-label">Portfolio Overview</p>
+  <h2 class="section-title">At a glance</h2>
+
+  <!-- Summary Stats -->
+  <div class="summary-stats">
+    <div class="summary-stat">
+      <span class="num">12</span>
+      <span class="label">Compounds</span>
+    </div>
+    <div class="summary-stat">
+      <span class="num">5</span>
+      <span class="label">Pillars</span>
+    </div>
+    <div class="summary-stat">
+      <span class="num">4</span>
+      <span class="label">Routes</span>
+    </div>
+    <div class="summary-stat">
+      <span class="num">1</span>
+      <span class="label">FDA Approved</span>
+    </div>
+    <div class="summary-stat">
+      <span class="num">100+</span>
+      <span class="label">Studies</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <p class="section-label">Compound Library</p>
+  <h2 class="section-title">The portfolio</h2>
+
+  <div class="compound-table">
+    <!-- PILLAR I -->
+    <div class="pillar-group-header" data-pillar="1">
+      <div class="numeral">I</div>
+      <div class="info">
+        <h3>Cellular Repair & Longevity</h3>
+        <p>Foundational cellular processes for long-term vitality</p>
+      </div>
+      <div class="count">2 compounds</div>
+    </div>
+
+    <div class="compound-table-row" data-pillar="1" onclick="toggleExpand(this)">
+      <div class="indicator"></div>
+      <div class="name">GHK-Cu</div>
+      <div class="type">Copper Tripeptide</div>
+      <div class="route">Topical</div>
+      <div class="expand-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="compound-expanded" data-pillar="1">
+      <p>Triggers collagen synthesis, wound repair, and anti-aging gene expression. Research shows activation of over 4,000 genes involved in tissue remodeling, with applications across dermatology, orthopedics, and neuroscience.</p>
+      <div class="stats">
+        <div class="stat"><span class="val">4,000+</span><span class="label">Genes Activated</span></div>
+        <div class="stat"><span class="val">Topical/SubQ</span><span class="label">Administration</span></div>
+        <div class="stat"><span class="val">Multi-system</span><span class="label">Application</span></div>
+      </div>
+    </div>
+
+    <div class="compound-table-row" data-pillar="1" onclick="toggleExpand(this)">
+      <div class="indicator"></div>
+      <div class="name">Epithalon</div>
+      <div class="type">Telomerase Activator</div>
+      <div class="route">SubQ</div>
+      <div class="expand-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="compound-expanded" data-pillar="1">
+      <p>Extends telomere length to slow biological aging. The only peptide with direct evidence of lifespan extension in mammalian studies. Works by stimulating telomerase production in somatic cells.</p>
+      <div class="stats">
+        <div class="stat"><span class="val">33%</span><span class="label">Lifespan Extension</span></div>
+        <div class="stat"><span class="val">Telomeres</span><span class="label">Target</span></div>
+        <div class="stat"><span class="val">Cycled</span><span class="label">Protocol</span></div>
+      </div>
+    </div>
+
+    <!-- PILLAR II -->
+    <div class="pillar-group-header" data-pillar="2" style="margin-top:24px">
+      <div class="numeral">II</div>
+      <div class="info">
+        <h3>Injury Recovery & Structural Resilience</h3>
+        <p>Accelerate healing and prevent training dropout</p>
+      </div>
+      <div class="count">3 compounds</div>
+    </div>
+
+    <div class="compound-table-row" data-pillar="2" onclick="toggleExpand(this)">
+      <div class="indicator"></div>
+      <div class="name">BPC-157</div>
+      <div class="type">Body Protection Compound</div>
+      <div class="route">Oral/SubQ</div>
+      <div class="expand-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="compound-expanded" data-pillar="2">
+      <p>Accelerates tendon, ligament, and gut tissue healing with demonstrated angiogenic and anti-inflammatory action. Over 100 preclinical studies support its regenerative profile. One of the most researched compounds in the portfolio.</p>
+      <div class="stats">
+        <div class="stat"><span class="val">100+</span><span class="label">Studies</span></div>
+        <div class="stat"><span class="val">Multi-tissue</span><span class="label">Repair</span></div>
+        <div class="stat"><span class="val">Fast</span><span class="label">Onset</span></div>
+      </div>
+    </div>
+
+    <div class="compound-table-row" data-pillar="2" onclick="toggleExpand(this)">
+      <div class="indicator"></div>
+      <div class="name">TB-500</div>
+      <div class="type">Thymosin Beta-4 Fragment</div>
+      <div class="route">SubQ</div>
+      <div class="expand-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="compound-expanded" data-pillar="2">
+      <p>Promotes cell migration, reduces inflammation, and supports recovery from muscle, tendon, and cardiac tissue damage. The primary mechanism involves upregulation of actin, enabling faster tissue repair and reduced scar formation.</p>
+      <div class="stats">
+        <div class="stat"><span class="val">Actin</span><span class="label">Pathway</span></div>
+        <div class="stat"><span class="val">Systemic</span><span class="label">Action</span></div>
+        <div class="stat"><span class="val">Low Scar</span><span class="label">Formation</span></div>
+      </div>
+    </div>
+
+    <div class="compound-table-row" data-pillar="2" onclick="toggleExpand(this)">
+      <div class="indicator"></div>
+      <div class="name">KPV</div>
+      <div class="type">Alpha-MSH Fragment</div>
+      <div class="route">Oral</div>
+      <div class="expand-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="compound-expanded" data-pillar="2">
+      <p>Anti-inflammatory tripeptide derived from alpha-melanocyte-stimulating hormone. Reduces gut inflammation, supports intestinal barrier function, and modulates immune responses. Particularly effective for inflammatory bowel conditions.</p>
+      <div class="stats">
+        <div class="stat"><span class="val">Gut</span><span class="label">Target</span></div>
+        <div class="stat"><span class="val">Oral</span><span class="label">Convenient</span></div>
+        <div class="stat"><span class="val">Immune</span><span class="label">Modulation</span></div>
+      </div>
+    </div>
+
+    <!-- PILLAR III -->
+    <div class="pillar-group-header" data-pillar="3" style="margin-top:24px">
+      <div class="numeral">III</div>
+      <div class="info">
+        <h3>Metabolic Reset & Body Composition</h3>
+        <p>Restore metabolic responsiveness and create momentum</p>
+      </div>
+      <div class="count">4 compounds</div>
+    </div>
+
+    <div class="compound-table-row" data-pillar="3" onclick="toggleExpand(this)">
+      <div class="indicator"></div>
+      <div class="name">Tesamorelin</div>
+      <div class="type">GHRH Analog</div>
+      <div class="route">SubQ</div>
+      <div class="expand-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="compound-expanded" data-pillar="3">
+      <p>FDA-approved for visceral adipose tissue reduction. Stimulates the pituitary to produce growth hormone through the natural GHRH pathway, resulting in targeted abdominal fat reduction while preserving lean mass.</p>
+      <div class="stats">
+        <div class="stat"><span class="val">FDA</span><span class="label">Approved</span></div>
+        <div class="stat"><span class="val">Visceral</span><span class="label">Fat Target</span></div>
+        <div class="stat"><span class="val">Natural GH</span><span class="label">Pathway</span></div>
+      </div>
+    </div>
+
+    <div class="compound-table-row" data-pillar="3" onclick="toggleExpand(this)">
+      <div class="indicator"></div>
+      <div class="name">AOD-9604</div>
+      <div class="type">Modified GH Fragment</div>
+      <div class="route">SubQ</div>
+      <div class="expand-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="compound-expanded" data-pillar="3">
+      <p>Modified fragment of human growth hormone targeting fat metabolism without impacting IGF-1 levels or blood sugar. Stimulates lipolysis and inhibits lipogenesis for body composition changes without systemic GH effects.</p>
+      <div class="stats">
+        <div class="stat"><span class="val">No IGF-1</span><span class="label">Impact</span></div>
+        <div class="stat"><span class="val">Lipolysis</span><span class="label">Activation</span></div>
+        <div class="stat"><span class="val">Safe</span><span class="label">Profile</span></div>
+      </div>
+    </div>
+
+    <div class="compound-table-row" data-pillar="3" onclick="toggleExpand(this)">
+      <div class="indicator"></div>
+      <div class="name">5-Amino-1MQ</div>
+      <div class="type">NNMT Inhibitor</div>
+      <div class="route">Oral</div>
+      <div class="expand-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="compound-expanded" data-pillar="3">
+      <p>Small molecule that inhibits NNMT, an enzyme linked to metabolic dysfunction and obesity. Research demonstrates increased NAD+ levels, enhanced cellular energy metabolism, and potential reversal of diet-induced obesity pathways.</p>
+      <div class="stats">
+        <div class="stat"><span class="val">NAD+</span><span class="label">Increase</span></div>
+        <div class="stat"><span class="val">NNMT</span><span class="label">Inhibition</span></div>
+        <div class="stat"><span class="val">Oral</span><span class="label">Convenient</span></div>
+      </div>
+    </div>
+
+    <div class="compound-table-row" data-pillar="3" onclick="toggleExpand(this)">
+      <div class="indicator"></div>
+      <div class="name">Retatrutide</div>
+      <div class="type">Triple Agonist</div>
+      <div class="route">SubQ</div>
+      <div class="expand-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="compound-expanded" data-pillar="3">
+      <p>Triple agonist targeting GIP, GLP-1, and glucagon receptors simultaneously. Clinical trials show weight loss exceeding 24% of body weight. Works through coordinated appetite regulation, glucose metabolism, and increased energy expenditure.</p>
+      <div class="stats">
+        <div class="stat"><span class="val">24%+</span><span class="label">Weight Loss</span></div>
+        <div class="stat"><span class="val">Triple</span><span class="label">Receptor</span></div>
+        <div class="stat"><span class="val">Weekly</span><span class="label">Dosing</span></div>
+      </div>
+    </div>
+
+    <!-- PILLAR IV -->
+    <div class="pillar-group-header" data-pillar="4" style="margin-top:24px">
+      <div class="numeral">IV</div>
+      <div class="info">
+        <h3>Cognitive Performance & Behavioral Consistency</h3>
+        <p>Focus, stress regulation, and mental discipline</p>
+      </div>
+      <div class="count">2 compounds</div>
+    </div>
+
+    <div class="compound-table-row" data-pillar="4" onclick="toggleExpand(this)">
+      <div class="indicator"></div>
+      <div class="name">Semax</div>
+      <div class="type">Synthetic ACTH Analog</div>
+      <div class="route">Nasal</div>
+      <div class="expand-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="compound-expanded" data-pillar="4">
+      <p>Enhances BDNF expression for cognitive clarity, memory retention, and neuroprotection under physical and psychological stress. Approved as a pharmaceutical in Russia since 2001 for cognitive and vascular conditions.</p>
+      <div class="stats">
+        <div class="stat"><span class="val">BDNF</span><span class="label">Expression</span></div>
+        <div class="stat"><span class="val">2001</span><span class="label">Approved</span></div>
+        <div class="stat"><span class="val">Nasal</span><span class="label">Fast Acting</span></div>
+      </div>
+    </div>
+
+    <div class="compound-table-row" data-pillar="4" onclick="toggleExpand(this)">
+      <div class="indicator"></div>
+      <div class="name">Selank</div>
+      <div class="type">Tuftsin Analog</div>
+      <div class="route">Nasal</div>
+      <div class="expand-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="compound-expanded" data-pillar="4">
+      <p>Anxiolytic peptide with demonstrated effects on stress resilience, mood regulation, and immune modulation. Operates through GABA-ergic pathways without sedation or dependency risks. Complementary to Semax in cognitive stacks.</p>
+      <div class="stats">
+        <div class="stat"><span class="val">GABA</span><span class="label">Pathway</span></div>
+        <div class="stat"><span class="val">No</span><span class="label">Dependency</span></div>
+        <div class="stat"><span class="val">Stackable</span><span class="label">With Semax</span></div>
+      </div>
+    </div>
+
+    <!-- PILLAR V -->
+    <div class="pillar-group-header" data-pillar="5" style="margin-top:24px">
+      <div class="numeral">V</div>
+      <div class="info">
+        <h3>Muscle Growth, Strength & Capacity</h3>
+        <p>Build lean mass as a metabolic health asset</p>
+      </div>
+      <div class="count">1 compound</div>
+    </div>
+
+    <div class="compound-table-row" data-pillar="5" onclick="toggleExpand(this)">
+      <div class="indicator"></div>
+      <div class="name">CJC-1295 / Ipamorelin</div>
+      <div class="type">GH Secretagogue Stack</div>
+      <div class="route">SubQ</div>
+      <div class="expand-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </div>
+    <div class="compound-expanded" data-pillar="5">
+      <p>Stimulates natural GH pulsatility for lean mass, fat metabolism, and deep restorative sleep architecture. The combination produces synergistic GH release without appetite stimulation or cortisol increase.</p>
+      <div class="stats">
+        <div class="stat"><span class="val">Natural</span><span class="label">GH Pulse</span></div>
+        <div class="stat"><span class="val">Sleep</span><span class="label">Quality</span></div>
+        <div class="stat"><span class="val">No Cortisol</span><span class="label">Increase</span></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><a href="../index.html" class="logo">Engineered Adherence</a><p>Peptide therapeutics integrated into structured wellness programs.</p></div>
+    <div class="footer-links">
+      <div class="footer-col"><h4>Platform</h4><a href="../pillars.html">Five Pillars</a><a href="../protocols.html">Protocols</a><a href="../science.html">Science</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="../about.html">About</a><a href="../market.html">Market</a><a href="../contact.html">Contact</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>2026 Engineered Adherence</span><span>Doha, Qatar</span></div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script>
+function toggleExpand(row) {
+  const expanded = row.nextElementSibling;
+  const wasExpanded = row.classList.contains('expanded');
+
+  // Close all other expanded rows
+  document.querySelectorAll('.compound-table-row.expanded').forEach(r => {
+    r.classList.remove('expanded');
+    r.nextElementSibling.classList.remove('show');
+  });
+
+  // Toggle current row
+  if (!wasExpanded) {
+    row.classList.add('expanded');
+    expanded.classList.add('show');
+  }
+}
+</script>
+</body>
+</html>

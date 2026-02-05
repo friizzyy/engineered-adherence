@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Science Mockup 2 — Grouped Sections by Pillar</title>
+<script>
+(function(){
+  var t = localStorage.getItem('ea-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/mobile.css">
+<style>
+  /* ═══════════════════════════════════════════
+     MOCKUP 2: GROUPED SECTIONS BY PILLAR
+     Each pillar gets its own section with compounds
+     ═══════════════════════════════════════════ */
+
+  .pillar-section-header{
+    display:flex;
+    align-items:center;
+    gap:24px;
+    margin-bottom:32px;
+    padding-bottom:24px;
+    border-bottom:1px solid var(--line);
+  }
+
+  .pillar-numeral{
+    font-family:'Playfair Display',serif;
+    font-size:64px;
+    font-weight:600;
+    color:var(--pillar-color, var(--accent-solid));
+    line-height:1;
+    letter-spacing:-0.03em;
+    opacity:0.8;
+  }
+
+  .pillar-section-info h3{
+    font-family:'Playfair Display',serif;
+    font-size:24px;
+    font-weight:500;
+    color:var(--text-heading);
+    margin-bottom:6px;
+  }
+
+  .pillar-section-info p{
+    font-size:13px;
+    color:var(--muted);
+    font-weight:300;
+  }
+
+  /* Color variants */
+  .pillar-group[data-pillar="1"]{--pillar-color:#7dd3c0}
+  .pillar-group[data-pillar="2"]{--pillar-color:#f5a962}
+  .pillar-group[data-pillar="3"]{--pillar-color:#e879a9}
+  .pillar-group[data-pillar="4"]{--pillar-color:#8b9cf4}
+  .pillar-group[data-pillar="5"]{--pillar-color:#c4a962}
+
+  /* Compound row layout */
+  .compound-row{
+    display:grid;
+    grid-template-columns:200px 1fr;
+    gap:32px;
+    padding:28px 0;
+    border-bottom:1px solid var(--line);
+    transition:all .3s ease;
+  }
+
+  .compound-row:last-child{
+    border-bottom:none;
+  }
+
+  .compound-row:hover{
+    background:var(--bg-card);
+    margin-left:-24px;
+    margin-right:-24px;
+    padding-left:24px;
+    padding-right:24px;
+  }
+
+  .compound-name-col h4{
+    font-family:'Playfair Display',serif;
+    font-size:20px;
+    font-weight:500;
+    color:var(--text-heading);
+    margin-bottom:4px;
+  }
+
+  .compound-name-col .type{
+    font-size:11px;
+    color:var(--faint);
+    font-style:italic;
+  }
+
+  .compound-name-col .route{
+    display:inline-block;
+    margin-top:12px;
+    font-size:9px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--pillar-color);
+    padding:4px 10px;
+    border:1px solid var(--pillar-color);
+    opacity:0.8;
+  }
+
+  .compound-desc-col{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  .compound-desc-col p{
+    font-size:14px;
+    color:var(--muted);
+    line-height:1.8;
+    font-weight:300;
+  }
+
+  .compound-desc-col .highlight{
+    margin-top:12px;
+    font-size:12px;
+    color:var(--faint);
+  }
+
+  .compound-desc-col .highlight strong{
+    color:var(--pillar-color);
+    font-weight:500;
+  }
+
+  /* Pillar quick nav */
+  .pillar-quick-nav{
+    display:flex;
+    gap:12px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-bottom:48px;
+  }
+
+  .pillar-quick-link{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:10px 20px;
+    font-size:11px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--muted);
+    border:1px solid var(--line);
+    transition:all .3s ease;
+    text-decoration:none;
+  }
+
+  .pillar-quick-link:hover{
+    color:var(--text-heading);
+    border-color:var(--line-strong);
+  }
+
+  .pillar-quick-link .num{
+    font-family:'Playfair Display',serif;
+    font-size:16px;
+    opacity:0.6;
+  }
+
+  /* Mobile */
+  @media(max-width:768px){
+    .pillar-section-header{
+      flex-direction:column;
+      align-items:flex-start;
+      gap:16px;
+    }
+    .pillar-numeral{
+      font-size:48px;
+    }
+    .pillar-section-info h3{
+      font-size:20px;
+    }
+    .compound-row{
+      grid-template-columns:1fr;
+      gap:16px;
+      padding:24px 0;
+    }
+    .compound-row:hover{
+      margin-left:-16px;
+      margin-right:-16px;
+      padding-left:16px;
+      padding-right:16px;
+    }
+    .compound-name-col h4{
+      font-size:18px;
+    }
+    .pillar-quick-nav{
+      overflow-x:auto;
+      flex-wrap:nowrap;
+      justify-content:flex-start;
+      margin-left:-24px;
+      margin-right:-24px;
+      padding-left:24px;
+      padding-right:24px;
+      scrollbar-width:none;
+    }
+    .pillar-quick-nav::-webkit-scrollbar{display:none}
+    .pillar-quick-link{
+      flex-shrink:0;
+      padding:8px 14px;
+      font-size:10px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="logo">Engineered Adherence</a>
+  <ul class="nav-center">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../pillars.html">Pillars</a></li>
+    <li><a href="../protocols.html">Protocols</a></li>
+    <li><a href="../science.html" class="active">Science</a></li>
+    <li><a href="../market.html">Market</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+    <a href="../contact.html" class="nav-cta">Book Consultation</a>
+    <button class="mobile-menu-btn" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-nav-overlay"></div>
+<div class="mobile-nav">
+  <ul class="mobile-nav-links">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../pillars.html">Pillars</a></li>
+    <li><a href="../protocols.html">Protocols</a></li>
+    <li><a href="../science.html">Science</a></li>
+    <li><a href="../market.html">Market</a></li>
+  </ul>
+  <a href="../contact.html" class="mobile-nav-cta">Book Consultation</a>
+</div>
+
+<section class="page-hero">
+  <p class="section-label">Mockup 2 — Grouped Sections</p>
+  <h1 class="section-title">Compounds organized in<br>distinct pillar sections</h1>
+  <p class="section-body">Each pillar gets its own dedicated section with a large roman numeral header. Compounds are displayed in a clean horizontal row layout. Quick navigation links at top for jumping to specific pillars.</p>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section">
+  <p class="section-label">Compound Library</p>
+  <h2 class="section-title">The portfolio</h2>
+
+  <!-- Quick Navigation -->
+  <nav class="pillar-quick-nav">
+    <a href="#pillar-1" class="pillar-quick-link"><span class="num">I</span>Longevity</a>
+    <a href="#pillar-2" class="pillar-quick-link"><span class="num">II</span>Recovery</a>
+    <a href="#pillar-3" class="pillar-quick-link"><span class="num">III</span>Metabolic</a>
+    <a href="#pillar-4" class="pillar-quick-link"><span class="num">IV</span>Cognitive</a>
+    <a href="#pillar-5" class="pillar-quick-link"><span class="num">V</span>Performance</a>
+  </nav>
+</section>
+
+<!-- PILLAR I -->
+<section class="section pillar-group" data-pillar="1" id="pillar-1">
+  <div class="pillar-section-header">
+    <div class="pillar-numeral">I</div>
+    <div class="pillar-section-info">
+      <h3>Cellular Repair & Longevity</h3>
+      <p>Systemic resilience and long-term vitality through foundational cellular processes</p>
+    </div>
+  </div>
+
+  <div class="compound-row">
+    <div class="compound-name-col">
+      <h4>GHK-Cu</h4>
+      <div class="type">Copper Tripeptide</div>
+      <span class="route">Topical / SubQ</span>
+    </div>
+    <div class="compound-desc-col">
+      <p>Triggers collagen synthesis, wound repair, and anti-aging gene expression. Research shows activation of over 4,000 genes involved in tissue remodeling, with applications across dermatology, orthopedics, and neuroscience.</p>
+      <div class="highlight"><strong>4,000+</strong> genes activated · Tissue remodeling</div>
+    </div>
+  </div>
+
+  <div class="compound-row">
+    <div class="compound-name-col">
+      <h4>Epithalon</h4>
+      <div class="type">Telomerase Activator</div>
+      <span class="route">SubQ</span>
+    </div>
+    <div class="compound-desc-col">
+      <p>Extends telomere length to slow biological aging. The only peptide with direct evidence of lifespan extension in mammalian studies. Works by stimulating telomerase production in somatic cells.</p>
+      <div class="highlight"><strong>33%</strong> lifespan extension in studies</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- PILLAR II -->
+<section class="section pillar-group" data-pillar="2" id="pillar-2">
+  <div class="pillar-section-header">
+    <div class="pillar-numeral">II</div>
+    <div class="pillar-section-info">
+      <h3>Injury Recovery & Structural Resilience</h3>
+      <p>Reduce pain, accelerate healing, and prevent training dropout</p>
+    </div>
+  </div>
+
+  <div class="compound-row">
+    <div class="compound-name-col">
+      <h4>BPC-157</h4>
+      <div class="type">Body Protection Compound</div>
+      <span class="route">Oral / SubQ</span>
+    </div>
+    <div class="compound-desc-col">
+      <p>Accelerates tendon, ligament, and gut tissue healing with demonstrated angiogenic and anti-inflammatory action. Over 100 preclinical studies support its regenerative profile.</p>
+      <div class="highlight"><strong>100+</strong> preclinical studies · Multi-tissue repair</div>
+    </div>
+  </div>
+
+  <div class="compound-row">
+    <div class="compound-name-col">
+      <h4>TB-500</h4>
+      <div class="type">Thymosin Beta-4 Fragment</div>
+      <span class="route">SubQ</span>
+    </div>
+    <div class="compound-desc-col">
+      <p>Promotes cell migration, reduces inflammation, and supports recovery from muscle, tendon, and cardiac tissue damage. Upregulates actin for faster tissue repair.</p>
+      <div class="highlight">Actin upregulation · Reduced scar formation</div>
+    </div>
+  </div>
+
+  <div class="compound-row">
+    <div class="compound-name-col">
+      <h4>KPV</h4>
+      <div class="type">Alpha-MSH Fragment</div>
+      <span class="route">Oral</span>
+    </div>
+    <div class="compound-desc-col">
+      <p>Anti-inflammatory tripeptide derived from alpha-melanocyte-stimulating hormone. Reduces gut inflammation, supports intestinal barrier function, and modulates immune responses.</p>
+      <div class="highlight">Gut-specific · Immune modulation</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- PILLAR III -->
+<section class="section pillar-group" data-pillar="3" id="pillar-3">
+  <div class="pillar-section-header">
+    <div class="pillar-numeral">III</div>
+    <div class="pillar-section-info">
+      <h3>Metabolic Reset & Body Composition</h3>
+      <p>Restore metabolic responsiveness and create early momentum</p>
+    </div>
+  </div>
+
+  <div class="compound-row">
+    <div class="compound-name-col">
+      <h4>Tesamorelin</h4>
+      <div class="type">GHRH Analog</div>
+      <span class="route">SubQ</span>
+    </div>
+    <div class="compound-desc-col">
+      <p>FDA-approved for visceral adipose tissue reduction. Stimulates the pituitary to produce growth hormone through the natural GHRH pathway.</p>
+      <div class="highlight"><strong>FDA-approved</strong> · Targeted abdominal fat reduction</div>
+    </div>
+  </div>
+
+  <div class="compound-row">
+    <div class="compound-name-col">
+      <h4>AOD-9604</h4>
+      <div class="type">Modified GH Fragment</div>
+      <span class="route">SubQ</span>
+    </div>
+    <div class="compound-desc-col">
+      <p>Modified fragment of human growth hormone targeting fat metabolism without impacting IGF-1 levels or blood sugar. Stimulates lipolysis and inhibits lipogenesis.</p>
+      <div class="highlight">No IGF-1 impact · Lipolysis activation</div>
+    </div>
+  </div>
+
+  <div class="compound-row">
+    <div class="compound-name-col">
+      <h4>5-Amino-1MQ</h4>
+      <div class="type">NNMT Inhibitor</div>
+      <span class="route">Oral</span>
+    </div>
+    <div class="compound-desc-col">
+      <p>Small molecule that inhibits NNMT, an enzyme linked to metabolic dysfunction. Increases NAD+ levels and enhances cellular energy metabolism.</p>
+      <div class="highlight">NAD+ pathway · Metabolic reset</div>
+    </div>
+  </div>
+
+  <div class="compound-row">
+    <div class="compound-name-col">
+      <h4>Retatrutide</h4>
+      <div class="type">Triple Agonist</div>
+      <span class="route">SubQ</span>
+    </div>
+    <div class="compound-desc-col">
+      <p>Triple agonist targeting GIP, GLP-1, and glucagon receptors simultaneously. Clinical trials show weight loss exceeding 24% of body weight.</p>
+      <div class="highlight"><strong>24%+</strong> weight loss · Triple receptor action</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- PILLAR IV -->
+<section class="section pillar-group" data-pillar="4" id="pillar-4">
+  <div class="pillar-section-header">
+    <div class="pillar-numeral">IV</div>
+    <div class="pillar-section-info">
+      <h3>Cognitive Performance & Behavioral Consistency</h3>
+      <p>Focus, stress regulation, and mental discipline for training adherence</p>
+    </div>
+  </div>
+
+  <div class="compound-row">
+    <div class="compound-name-col">
+      <h4>Semax</h4>
+      <div class="type">Synthetic ACTH Analog</div>
+      <span class="route">Nasal</span>
+    </div>
+    <div class="compound-desc-col">
+      <p>Enhances BDNF expression for cognitive clarity, memory retention, and neuroprotection under physical and psychological stress. Approved pharmaceutical since 2001.</p>
+      <div class="highlight">BDNF expression · Neuroprotection</div>
+    </div>
+  </div>
+
+  <div class="compound-row">
+    <div class="compound-name-col">
+      <h4>Selank</h4>
+      <div class="type">Tuftsin Analog</div>
+      <span class="route">Nasal</span>
+    </div>
+    <div class="compound-desc-col">
+      <p>Anxiolytic peptide with demonstrated effects on stress resilience, mood regulation, and immune modulation. Operates through GABA-ergic pathways without sedation.</p>
+      <div class="highlight">GABA pathway · No dependency risk</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- PILLAR V -->
+<section class="section pillar-group" data-pillar="5" id="pillar-5">
+  <div class="pillar-section-header">
+    <div class="pillar-numeral">V</div>
+    <div class="pillar-section-info">
+      <h3>Muscle Growth, Strength & Capacity</h3>
+      <p>Build lean mass as a metabolic and structural health asset</p>
+    </div>
+  </div>
+
+  <div class="compound-row">
+    <div class="compound-name-col">
+      <h4>CJC-1295 / Ipamorelin</h4>
+      <div class="type">GH Secretagogue Stack</div>
+      <span class="route">SubQ</span>
+    </div>
+    <div class="compound-desc-col">
+      <p>Stimulates natural GH pulsatility for lean mass, fat metabolism, and deep restorative sleep architecture. Synergistic release without appetite stimulation.</p>
+      <div class="highlight">Natural GH pulse · Sleep architecture</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><a href="../index.html" class="logo">Engineered Adherence</a><p>Peptide therapeutics integrated into structured wellness programs.</p></div>
+    <div class="footer-links">
+      <div class="footer-col"><h4>Platform</h4><a href="../pillars.html">Five Pillars</a><a href="../protocols.html">Protocols</a><a href="../science.html">Science</a></div>
+      <div class="footer-col"><h4>Company</h4><a href="../about.html">About</a><a href="../market.html">Market</a><a href="../contact.html">Contact</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>2026 Engineered Adherence</span><span>Doha, Qatar</span></div>
+</footer>
+
+<script src="../js/main.js"></script>
+</body>
+</html>
