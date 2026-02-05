@@ -51,8 +51,46 @@
   }
   .pricing-unit{font-size:12px;color:var(--muted);margin-bottom:24px;transition:color .5s}
   .pricing-desc{font-size:13px;color:var(--muted);line-height:1.7;font-weight:300;transition:color .5s}
-  @media(max-width:1024px){.pricing-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:768px){.protocol-detail{grid-template-columns:1fr}.pricing-grid{grid-template-columns:1fr}}
+  .includes-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  }
+  .include-card{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:32px 28px;position:relative;overflow:hidden;
+    transition:all .5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .include-card::before{
+    content:'';position:absolute;top:0;left:0;
+    width:3px;height:100%;
+    background:var(--accent-solid);
+    opacity:0;transition:opacity .3s ease;
+  }
+  .include-card:hover{
+    border-color:var(--line-strong);
+    background:var(--bg-card-hover);
+    transform:translateY(-4px);
+    box-shadow:var(--shadow-card-subtle);
+  }
+  .include-card:hover::before{opacity:1}
+  .include-num{
+    font-family:'Playfair Display',serif;
+    font-size:14px;font-weight:600;
+    color:var(--accent-solid);
+    display:block;margin-bottom:14px;
+  }
+  .include-card h3{
+    font-family:'Playfair Display',serif;
+    font-size:17px;font-weight:500;
+    color:var(--text-heading);margin:0 0 10px;
+    transition:color .5s;
+  }
+  .include-card p{
+    font-size:13px;color:var(--muted);
+    line-height:1.75;font-weight:300;margin:0;
+    transition:color .5s;
+  }
+  @media(max-width:1024px){.pricing-grid{grid-template-columns:1fr 1fr}.includes-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:768px){.protocol-detail{grid-template-columns:1fr}.pricing-grid{grid-template-columns:1fr}.includes-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -192,13 +230,13 @@
 <section class="section reveal">
   <p class="section-label">Every Protocol Includes</p>
   <h2 class="section-title">The complete<br>adherence architecture</h2>
-  <div class="three-col stagger-children" style="margin-top:56px">
-    <div class="card stagger-item"><h3>Dosing Calendar</h3><p>Precise timing, dosages, and injection schedules synced to your training days and sleep cycle.</p></div>
-    <div class="card stagger-item"><h3>Nutrition Protocol</h3><p>Macronutrient targets, meal timing, and supplement integration designed around your protocol compounds.</p></div>
-    <div class="card stagger-item"><h3>Training Alignment</h3><p>Protocol timing matched to training periodization for maximum compound effectiveness.</p></div>
-    <div class="card stagger-item"><h3>Biomarker Tracking</h3><p>Regular bloodwork and health markers to measure protocol impact and adjust dosing.</p></div>
-    <div class="card stagger-item"><h3>Clinical Oversight</h3><p>Licensed physician review of all protocols with ongoing monitoring throughout the program.</p></div>
-    <div class="card stagger-item"><h3>QR Transparency</h3><p>Every product carries a QR code linking to its Certificate of Analysis, batch number, and sourcing origin.</p></div>
+  <div class="includes-grid stagger-children" style="margin-top:56px">
+    <div class="include-card stagger-item"><span class="include-num">01</span><h3>Dosing Calendar</h3><p>Precise timing, dosages, and injection schedules synced to your training days and sleep cycle.</p></div>
+    <div class="include-card stagger-item"><span class="include-num">02</span><h3>Nutrition Protocol</h3><p>Macronutrient targets, meal timing, and supplement integration designed around your protocol compounds.</p></div>
+    <div class="include-card stagger-item"><span class="include-num">03</span><h3>Training Alignment</h3><p>Protocol timing matched to training periodization for maximum compound effectiveness.</p></div>
+    <div class="include-card stagger-item"><span class="include-num">04</span><h3>Biomarker Tracking</h3><p>Regular bloodwork and health markers to measure protocol impact and adjust dosing.</p></div>
+    <div class="include-card stagger-item"><span class="include-num">05</span><h3>Clinical Oversight</h3><p>Licensed physician review of all protocols with ongoing monitoring throughout the program.</p></div>
+    <div class="include-card stagger-item"><span class="include-num">06</span><h3>QR Transparency</h3><p>Every product carries a QR code linking to its Certificate of Analysis, batch number, and sourcing origin.</p></div>
   </div>
 </section>
 

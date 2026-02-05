@@ -32,16 +32,18 @@
 .pillar-nav-btn{
   display:flex;
   align-items:center;
-  gap:12px;
-  padding:14px 24px;
+  gap:14px;
+  padding:16px 28px;
   background:transparent;
   border:1px solid var(--line);
   cursor:pointer;
   transition:all .3s ease;
+  text-align:left;
 }
 
 .pillar-nav-btn:hover{
   border-color:var(--line-strong);
+  background:var(--bg-card);
 }
 
 .pillar-nav-btn.active{
@@ -51,20 +53,39 @@
 
 .pillar-nav-num{
   font-family:'Playfair Display',serif;
-  font-size:20px;
+  font-size:22px;
   font-weight:600;
   color:var(--accent-solid);
+  min-width:24px;
+}
+
+.pillar-nav-text{
+  display:flex;
+  flex-direction:column;
+  gap:2px;
 }
 
 .pillar-nav-label{
-  font-size:11px;
+  font-size:12px;
   letter-spacing:1px;
   text-transform:uppercase;
   color:var(--muted);
+  font-weight:500;
+}
+
+.pillar-nav-sub{
+  font-size:10px;
+  color:var(--faint);
+  font-weight:300;
+  letter-spacing:0.3px;
 }
 
 .pillar-nav-btn.active .pillar-nav-label{
   color:var(--text-heading);
+}
+
+.pillar-nav-btn.active .pillar-nav-sub{
+  color:var(--muted);
 }
 
 .pillars-panels{
@@ -439,7 +460,7 @@
     padding:10px 14px;
     flex-shrink:0;
   }
-  .pillar-nav-label{display:none}
+  .pillar-nav-text{display:none}
 
   /* Panel header - compact */
   .panel-header{margin-bottom:32px}
@@ -547,7 +568,7 @@
 <section class="page-hero">
   <p class="section-label">The Science</p>
   <h1 class="section-title">Five Pillars of<br>human transformation</h1>
-  <p class="section-body">Every peptide in our protocols is selected based on published clinical evidence, dosing precision, and synergistic stacking potential. Select any compound to explore detailed mechanisms and protocols.</p>
+  <p class="section-body">Clinical-grade compounds selected for evidence, precision, and synergistic potential.</p>
 </section>
 
 <div class="divider"><div class="divider-line"></div></div>
@@ -556,23 +577,38 @@
   <div class="pillars-nav">
     <button class="pillar-nav-btn active" data-target="1">
       <span class="pillar-nav-num">I</span>
-      <span class="pillar-nav-label">Longevity</span>
+      <div class="pillar-nav-text">
+        <span class="pillar-nav-label">Longevity</span>
+        <span class="pillar-nav-sub">Cellular repair & anti-aging</span>
+      </div>
     </button>
     <button class="pillar-nav-btn" data-target="2">
       <span class="pillar-nav-num">II</span>
-      <span class="pillar-nav-label">Recovery</span>
+      <div class="pillar-nav-text">
+        <span class="pillar-nav-label">Recovery</span>
+        <span class="pillar-nav-sub">Tissue healing & resilience</span>
+      </div>
     </button>
     <button class="pillar-nav-btn" data-target="3">
       <span class="pillar-nav-num">III</span>
-      <span class="pillar-nav-label">Metabolic</span>
+      <div class="pillar-nav-text">
+        <span class="pillar-nav-label">Metabolic</span>
+        <span class="pillar-nav-sub">Body composition & fat loss</span>
+      </div>
     </button>
     <button class="pillar-nav-btn" data-target="4">
       <span class="pillar-nav-num">IV</span>
-      <span class="pillar-nav-label">Cognitive</span>
+      <div class="pillar-nav-text">
+        <span class="pillar-nav-label">Cognitive</span>
+        <span class="pillar-nav-sub">Focus & neuroprotection</span>
+      </div>
     </button>
     <button class="pillar-nav-btn" data-target="5">
       <span class="pillar-nav-num">V</span>
-      <span class="pillar-nav-label">Performance</span>
+      <div class="pillar-nav-text">
+        <span class="pillar-nav-label">Performance</span>
+        <span class="pillar-nav-sub">Strength & muscle growth</span>
+      </div>
     </button>
   </div>
 
@@ -1041,11 +1077,13 @@ document.querySelectorAll('.pillar-nav-btn').forEach(btn => {
     document.querySelectorAll('.pillar-nav-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     document.querySelectorAll('.pillar-panel').forEach(p => p.classList.remove('active'));
-    document.querySelector(`.pillar-panel[data-pillar="${target}"]`).classList.add('active');
+    const newPanel = document.querySelector(`.pillar-panel[data-pillar="${target}"]`);
+    newPanel.classList.add('active');
 
-    // Reset any open detail panels
+    // Reset any open detail panels then auto-select first compound
     document.querySelectorAll('.detail-panel').forEach(dp => dp.classList.remove('showing-compound'));
     document.querySelectorAll('.compound-row').forEach(cr => cr.classList.remove('selected'));
+    setTimeout(() => autoSelectFirstCompound(newPanel), 50);
   });
 });
 
@@ -1088,6 +1126,18 @@ document.querySelectorAll('.compound-detail-close').forEach(btn => {
     panel.querySelectorAll('.compound-row').forEach(r => r.classList.remove('selected'));
   });
 });
+
+// Auto-select first compound in each visible panel
+function autoSelectFirstCompound(panel){
+  const firstRow = panel.querySelector('.compound-row');
+  if(firstRow && !panel.querySelector('.compound-row.selected')){
+    firstRow.click();
+  }
+}
+
+// Auto-select on initial load
+const activePanel = document.querySelector('.pillar-panel.active');
+if(activePanel) autoSelectFirstCompound(activePanel);
 
 // Handle URL hash to open specific pillar
 function selectPillarFromHash(){
