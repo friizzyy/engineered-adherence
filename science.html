@@ -1047,7 +1047,6 @@ document.querySelectorAll('.pillar-nav-btn').forEach(btn => {
     // Reset any open detail panels then auto-select first compound
     document.querySelectorAll('.detail-panel').forEach(dp => dp.classList.remove('showing-compound'));
     document.querySelectorAll('.compound-row').forEach(cr => cr.classList.remove('selected'));
-    setTimeout(() => autoSelectFirstCompound(newPanel), 50);
   });
 });
 
@@ -1098,17 +1097,7 @@ document.querySelectorAll('.compound-detail-close').forEach(btn => {
   });
 });
 
-// Auto-select first compound in each visible panel
-function autoSelectFirstCompound(panel){
-  const firstRow = panel.querySelector('.compound-row');
-  if(firstRow && !panel.querySelector('.compound-row.selected')){
-    firstRow.click();
-  }
-}
-
-// Auto-select on initial load
-const activePanel = document.querySelector('.pillar-panel.active');
-if(activePanel) autoSelectFirstCompound(activePanel);
+// No auto-select: start on adherence impact view
 
 // Handle URL hash to open specific pillar
 function selectPillarFromHash(){
