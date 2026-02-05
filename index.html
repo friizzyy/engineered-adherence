@@ -473,8 +473,8 @@ function updateVials(theme){
   document.querySelectorAll('.meniscus-4').forEach(el=>el.setAttribute('fill',m[3]));
   document.querySelectorAll('.meniscus-5').forEach(el=>el.setAttribute('fill',m[4]));
   document.querySelectorAll('.label-rect').forEach(el => { el.setAttribute('fill', d?'rgba(28,28,28,0.7)':'rgba(240,240,242,0.9)'); el.setAttribute('stroke', d?'rgba(212,208,202,0.06)':'rgba(0,0,0,0.08)'); el.setAttribute('stroke-width','0.4'); });
-  document.querySelectorAll('.label-title').forEach(el => el.setAttribute('fill', d?'#5A5856':'#5C606A'));
-  document.querySelectorAll('.label-sub-text').forEach(el => el.setAttribute('fill', d?'#787470':'#1C1E24'));
+  document.querySelectorAll('.label-title').forEach(el => el.setAttribute('fill', d?'#7A7874':'#5C606A'));
+  document.querySelectorAll('.label-sub-text').forEach(el => el.setAttribute('fill', d?'#9A9690':'#1C1E24'));
   document.querySelectorAll('.reflect-fill').forEach(el => { el.setAttribute('fill', d?'#787470':'#1C1E24'); el.setAttribute('opacity', d?'.04':'.1'); });
 }
 updateVials(document.documentElement.getAttribute('data-theme')||'dark');
