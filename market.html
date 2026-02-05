@@ -12,6 +12,492 @@
 </script>
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/mobile.css">
+<style>
+/* ═══════════════════════════════════════════
+   MARKET PAGE — ENHANCED UI
+   ═══════════════════════════════════════════ */
+
+/* Section Navigation */
+.market-nav{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-bottom:56px;
+  position:sticky;
+  top:80px;
+  z-index:50;
+  background:var(--bg);
+  padding:20px 0;
+}
+
+.market-nav-btn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 20px;
+  background:transparent;
+  border:1px solid var(--line);
+  cursor:pointer;
+  transition:all .3s ease;
+}
+
+.market-nav-btn:hover{
+  border-color:var(--line-strong);
+}
+
+.market-nav-btn.active{
+  background:var(--bg-card);
+  border-color:var(--accent-solid);
+}
+
+.market-nav-num{
+  font-family:'Playfair Display',serif;
+  font-size:16px;
+  font-weight:600;
+  color:var(--accent-solid);
+}
+
+.market-nav-label{
+  font-size:10px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.market-nav-btn.active .market-nav-label{
+  color:var(--text-heading);
+}
+
+/* Panels */
+.market-panels{
+  max-width:1100px;
+  margin:0 auto;
+}
+
+.market-panel{
+  display:none;
+  animation:fadeIn .4s ease;
+}
+
+.market-panel.active{
+  display:block;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* Panel Headers */
+.panel-header{
+  text-align:center;
+  margin-bottom:64px;
+}
+
+.panel-num{
+  font-family:'Playfair Display',serif;
+  font-size:100px;
+  font-weight:600;
+  color:var(--pillar-num);
+  line-height:1;
+  margin-bottom:-20px;
+}
+
+.panel-header h2{
+  font-size:32px;
+  font-weight:400;
+  color:var(--text-heading);
+  margin:0 0 16px;
+}
+
+.panel-header p{
+  font-size:16px;
+  color:var(--muted);
+  max-width:560px;
+  margin:0 auto;
+  line-height:1.8;
+}
+
+/* Stats Grid - Large */
+.stats-grid-large{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+  margin-bottom:48px;
+}
+
+.stat-large{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  padding:36px 28px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+  transition:all .4s ease;
+}
+
+.stat-large:hover{
+  border-color:var(--line-strong);
+  transform:translateY(-4px);
+}
+
+.stat-large::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:40px;
+  height:2px;
+  background:var(--accent-solid);
+  opacity:0.5;
+}
+
+.stat-large-val{
+  font-family:'Playfair Display',serif;
+  font-size:48px;
+  font-weight:500;
+  color:var(--stat-num);
+  line-height:1;
+  margin-bottom:8px;
+}
+
+.stat-large-label{
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--faint);
+}
+
+/* Content Grid */
+.market-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+  align-items:start;
+}
+
+/* Feature Cards */
+.market-card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  padding:32px;
+  position:relative;
+  overflow:hidden;
+  transition:all .4s cubic-bezier(0.4,0,0.2,1);
+}
+
+.market-card::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:2px;
+  background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
+  transform:scaleX(0);
+  transition:transform .4s ease;
+}
+
+.market-card:hover{
+  border-color:var(--line-strong);
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-card-subtle);
+}
+
+.market-card:hover::before{
+  transform:scaleX(1);
+}
+
+.market-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+  font-weight:500;
+  color:var(--text-heading);
+  margin:0 0 16px;
+}
+
+.market-card p{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.8;
+  margin:0;
+}
+
+/* Strategy Grid */
+.strategy-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:24px;
+}
+
+.strategy-phase{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  padding:32px;
+  position:relative;
+  transition:all .4s ease;
+}
+
+.strategy-phase:hover{
+  border-color:var(--line-strong);
+  transform:translateY(-4px);
+  box-shadow:var(--shadow-card-subtle);
+}
+
+.strategy-header{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+  margin-bottom:20px;
+}
+
+.strategy-num{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  font-weight:600;
+  color:var(--pillar-num);
+  line-height:1;
+}
+
+.strategy-meta{
+  flex:1;
+}
+
+.strategy-tag{
+  display:inline-block;
+  font-size:9px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:4px 10px;
+  background:var(--tag-bg);
+  color:var(--accent-solid);
+  margin-bottom:8px;
+}
+
+.strategy-title{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+  font-weight:500;
+  color:var(--text-heading);
+  margin:0;
+}
+
+.strategy-desc{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.75;
+  margin:0 0 20px;
+  padding-bottom:20px;
+  border-bottom:1px solid var(--line);
+}
+
+.strategy-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.strategy-list li{
+  font-size:13px;
+  color:var(--muted);
+  padding:8px 0 8px 16px;
+  position:relative;
+  line-height:1.5;
+  border-bottom:1px solid var(--line);
+}
+
+.strategy-list li:last-child{
+  border-bottom:none;
+}
+
+.strategy-list li::before{
+  content:'';
+  position:absolute;
+  left:0;
+  top:14px;
+  width:6px;
+  height:1px;
+  background:var(--accent-solid);
+}
+
+/* Revenue Cards */
+.revenue-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+  margin-bottom:40px;
+}
+
+.revenue-card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  padding:28px 20px;
+  text-align:center;
+  transition:all .4s ease;
+}
+
+.revenue-card:hover{
+  border-color:var(--line-strong);
+  transform:translateY(-4px);
+}
+
+.revenue-year{
+  font-family:'Playfair Display',serif;
+  font-size:24px;
+  font-weight:500;
+  color:var(--stat-num);
+  margin-bottom:4px;
+}
+
+.revenue-target{
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:12px;
+}
+
+.revenue-bar{
+  height:4px;
+  background:var(--line);
+  margin-top:auto;
+}
+
+.revenue-bar-fill{
+  height:100%;
+  background:var(--accent-solid);
+  transition:width .6s ease;
+}
+
+/* Channel Cards */
+.channel-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.channel-card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  padding:28px;
+  position:relative;
+  transition:all .4s ease;
+}
+
+.channel-card:hover{
+  border-color:var(--line-strong);
+  transform:translateY(-4px);
+}
+
+.channel-tag{
+  display:inline-block;
+  font-size:9px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:5px 10px;
+  background:var(--tag-bg);
+  color:var(--accent-solid);
+  margin-bottom:16px;
+}
+
+.channel-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:18px;
+  font-weight:500;
+  color:var(--text-heading);
+  margin:0 0 12px;
+}
+
+.channel-card p{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.75;
+  margin:0;
+}
+
+/* Alignment Cards */
+.alignment-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.alignment-card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  padding:28px;
+  position:relative;
+  transition:all .4s ease;
+  display:flex;
+  gap:20px;
+  align-items:flex-start;
+}
+
+.alignment-card:hover{
+  border-color:var(--line-strong);
+  transform:translateY(-4px);
+}
+
+.alignment-icon{
+  width:48px;
+  height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--line);
+  flex-shrink:0;
+  color:var(--accent-solid);
+}
+
+.alignment-content h3{
+  font-size:16px;
+  font-weight:500;
+  color:var(--text-heading);
+  margin:0 0 8px;
+}
+
+.alignment-content p{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.7;
+  margin:0;
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .market-nav{
+    flex-wrap:nowrap;
+    gap:6px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    padding:16px 24px;
+    margin:0 -24px 32px;
+    justify-content:flex-start;
+    top:60px;
+  }
+  .market-nav::-webkit-scrollbar{display:none}
+  .market-nav-btn{padding:10px 14px;flex-shrink:0}
+  .market-nav-label{display:none}
+
+  .panel-num{font-size:60px;margin-bottom:-12px}
+  .panel-header h2{font-size:26px}
+  .panel-header{margin-bottom:40px}
+
+  .market-grid{grid-template-columns:1fr;gap:24px}
+  .stats-grid-large{grid-template-columns:1fr;gap:16px}
+  .stat-large-val{font-size:40px}
+
+  .strategy-grid{grid-template-columns:1fr;gap:16px}
+  .strategy-phase{padding:24px}
+  .strategy-num{font-size:28px}
+  .strategy-title{font-size:18px}
+
+  .revenue-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .channel-grid{grid-template-columns:1fr}
+  .alignment-grid{grid-template-columns:1fr}
+  .alignment-card{flex-direction:column}
+}
+</style>
 </head>
 <body>
 
@@ -19,8 +505,8 @@
   <a href="index.html" class="logo">Engineered Adherence</a>
   <ul class="nav-center">
     <li><a href="about.html">About</a></li>
-    <li><a href="protocols.html">Protocols</a></li>
     <li><a href="science.html">Science</a></li>
+    <li><a href="protocols.html">Protocols</a></li>
     <li><a href="market.html" class="active">Market</a></li>
   </ul>
   <div class="nav-right">
@@ -36,8 +522,8 @@
 <div class="mobile-nav">
   <ul class="mobile-nav-links">
     <li><a href="about.html">About</a></li>
-    <li><a href="protocols.html">Protocols</a></li>
     <li><a href="science.html">Science</a></li>
+    <li><a href="protocols.html">Protocols</a></li>
     <li><a href="market.html">Market</a></li>
   </ul>
   <a href="contact.html" class="mobile-nav-cta">Book Consultation</a>
@@ -59,158 +545,253 @@
 <section class="page-hero">
   <p class="section-label">Market Position</p>
   <h1 class="section-title">Built for the<br>Gulf wellness market</h1>
-  <p class="section-body">Qatar's health-conscious population demands clinical-grade wellness without the noise. The peptide and bio-longevity market in the Gulf is currently concentrated in Dubai. Qatar has no equivalent, and this platform is designed to fill that gap.</p>
+  <p class="section-body">Qatar's health-conscious population demands clinical-grade wellness. The peptide market in the Gulf is concentrated in Dubai. Qatar has no equivalent.</p>
 </section>
 
 <div class="divider"><div class="divider-line"></div></div>
 
-<section class="section reveal">
-  <div class="two-col">
-    <div>
-      <p class="section-label">The Numbers</p>
-      <h2 class="section-title">A country that<br>has the money but<br>not the outcomes</h2>
-      <p class="section-body">These are not statistics from a country that lacks resources. Qatar has among the highest GDP per capita on earth. The money is there. The facilities are being built. The behavior is the bottleneck.</p>
-    </div>
-    <div>
-      <div class="stat-grid stagger-children">
-        <div class="stat-card stagger-item"><div class="val">2.9M</div><div class="label">Population</div></div>
-        <div class="stat-card stagger-item"><div class="val">70%</div><div class="label">Adults overweight</div></div>
-        <div class="stat-card stagger-item"><div class="val">43.9%</div><div class="label">Low physical activity</div></div>
-        <div class="stat-card stagger-item"><div class="val">69%</div><div class="label">NCD health burden</div></div>
-        <div class="stat-card stagger-item"><div class="val">$5.2B</div><div class="label">Annual health spend</div></div>
-        <div class="stat-card stagger-item"><div class="val">$128K</div><div class="label">GDP per capita</div></div>
+<section class="section">
+  <!-- Section Navigation -->
+  <div class="market-nav">
+    <button class="market-nav-btn active" data-target="opportunity">
+      <span class="market-nav-num">01</span>
+      <span class="market-nav-label">Opportunity</span>
+    </button>
+    <button class="market-nav-btn" data-target="strategy">
+      <span class="market-nav-num">02</span>
+      <span class="market-nav-label">Strategy</span>
+    </button>
+    <button class="market-nav-btn" data-target="revenue">
+      <span class="market-nav-num">03</span>
+      <span class="market-nav-label">Revenue</span>
+    </button>
+    <button class="market-nav-btn" data-target="alignment">
+      <span class="market-nav-num">04</span>
+      <span class="market-nav-label">Alignment</span>
+    </button>
+  </div>
+
+  <div class="market-panels">
+    <!-- Panel 1: Opportunity -->
+    <div class="market-panel active" id="panel-opportunity">
+      <div class="panel-header">
+        <div class="panel-num">01</div>
+        <h2>Money without outcomes</h2>
+        <p>Qatar has among the highest GDP per capita on earth. The money is there. The facilities are being built. Behavior is the bottleneck.</p>
+      </div>
+
+      <div class="stats-grid-large">
+        <div class="stat-large">
+          <div class="stat-large-val">2.9M</div>
+          <div class="stat-large-label">Population</div>
+        </div>
+        <div class="stat-large">
+          <div class="stat-large-val">70%</div>
+          <div class="stat-large-label">Adults Overweight</div>
+        </div>
+        <div class="stat-large">
+          <div class="stat-large-val">$128K</div>
+          <div class="stat-large-label">GDP Per Capita</div>
+        </div>
+        <div class="stat-large">
+          <div class="stat-large-val">43.9%</div>
+          <div class="stat-large-label">Low Physical Activity</div>
+        </div>
+        <div class="stat-large">
+          <div class="stat-large-val">69%</div>
+          <div class="stat-large-label">NCD Health Burden</div>
+        </div>
+        <div class="stat-large">
+          <div class="stat-large-val">$5.2B</div>
+          <div class="stat-large-label">Annual Health Spend</div>
+        </div>
+      </div>
+
+      <div class="market-grid">
+        <div class="market-card">
+          <h3>The Gap</h3>
+          <p style="margin-bottom:16px">The peptide and bio-longevity market in the Gulf is currently concentrated in Dubai. Clinics like AEON, DNA Health, Skin111, and Wellth have established the category in the UAE.</p>
+          <p>Qatar has no equivalent platform: no dedicated peptide clinic, no structured protocol provider, no brand building the adherence infrastructure.</p>
+        </div>
+        <div class="market-card">
+          <h3>The Timing</h3>
+          <p style="margin-bottom:16px">Post-World Cup investment has accelerated infrastructure across every sector. The country is actively constructing the lifestyle systems that will define the next generation of Gulf residents.</p>
+          <p>The founding team is positioned to build it now, while the country is still in its construction phase.</p>
+        </div>
       </div>
     </div>
-  </div>
-</section>
 
-<div class="divider"><div class="divider-line"></div></div>
-
-<section class="section reveal">
-  <div class="two-col">
-    <div>
-      <p class="section-label">The Gap</p>
-      <h2 class="section-title">No equivalent<br>exists in Qatar</h2>
-      <p class="section-body">The peptide and bio-longevity market in the Gulf is currently concentrated in Dubai. Clinics like AEON, DNA Health, Skin111, and Wellth have established the category in the UAE. Qatar has no equivalent platform: no dedicated peptide clinic, no structured protocol provider, no brand building the adherence infrastructure.</p>
-    </div>
-    <div>
-      <p class="section-body" style="margin-bottom:28px">This gap exists because no one has built the infrastructure in Qatar. The founding team is positioned to build it now, while the country is still in its construction phase, with the relationships required to move through regulatory and partnership channels efficiently.</p>
-      <p class="section-body">Post-World Cup investment has accelerated infrastructure across every sector, and the country is actively constructing the lifestyle systems that will define the next generation of Gulf residents.</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><div class="divider-line"></div></div>
-
-<section class="section reveal">
-  <p class="section-label">Go-to-Market</p>
-  <h2 class="section-title">Infrastructure first,<br>influence last</h2>
-  <p class="section-body" style="max-width:600px;margin-bottom:64px">The brand earns trust through operational credibility, not marketing reach.</p>
-
-  <div class="timeline">
-    <div class="timeline-item reveal">
-      <div class="timeline-dot"></div>
-      <div class="timeline-phase">Phase 1 — Months 1–6</div>
-      <div class="timeline-title">Foundation</div>
-      <div class="timeline-body">Legal entity, regulatory clarity, clinical infrastructure, and initial partnerships. No public marketing during this phase.</div>
-      <ul class="timeline-list">
-        <li>Register commercial entity in Qatar (QFC or mainland)</li>
-        <li>Engage regulatory consultant for MoPH product classification</li>
-        <li>Secure medical license through physician partnership</li>
-        <li>Source 2–3 GMP-certified manufacturing partners</li>
-        <li>Build protocol library (8–10 curated stacks)</li>
-        <li>Identify first 2–3 gym or facility partnerships</li>
-      </ul>
-    </div>
-
-    <div class="timeline-item reveal">
-      <div class="timeline-dot"></div>
-      <div class="timeline-phase">Phase 2 — Months 6–12</div>
-      <div class="timeline-title">Controlled Launch</div>
-      <div class="timeline-body">Begin operations with deliberate constraint. Scarcity builds trust.</div>
-      <ul class="timeline-list">
-        <li>Open clinical facility for referral-only appointments</li>
-        <li>Launch DTC platform for supplement-classified products</li>
-        <li>Deploy branded product in partner gym locations</li>
-        <li>Host private launch event for invited stakeholders</li>
-        <li>Launch client protocol management system</li>
-        <li>Begin collecting outcome data for all protocol clients</li>
-      </ul>
-    </div>
-
-    <div class="timeline-item reveal">
-      <div class="timeline-dot"></div>
-      <div class="timeline-phase">Phase 3 — Months 12–24</div>
-      <div class="timeline-title">Expansion</div>
-      <div class="timeline-body">Scale operations, deepen partnerships, and prepare for regional expansion.</div>
-      <ul class="timeline-list">
-        <li>Expand to 5–8 facility partnerships</li>
-        <li>Register remaining portfolio compounds</li>
-        <li>Launch subscription model for recurring clients</li>
-        <li>Develop standalone wellness facility (cryo, sauna, clinic)</li>
-        <li>Build medical advisory board</li>
-        <li>Evaluate Saudi Arabia and Bahrain as secondary markets</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><div class="divider-line"></div></div>
-
-<section class="section reveal">
-  <p class="section-label">Revenue</p>
-  <h2 class="section-title">Conservative projections,<br>referral-based growth</h2>
-  <div class="stat-grid stagger-children" style="margin-top:56px">
-    <div class="stat-card stagger-item"><div class="val">Y1</div><div class="label">$300K–$500K target</div></div>
-    <div class="stat-card stagger-item"><div class="val">Y2</div><div class="label">$800K–$1.2M target</div></div>
-    <div class="stat-card stagger-item"><div class="val">Y3</div><div class="label">$1.5M–$2.5M target</div></div>
-    <div class="stat-card stagger-item"><div class="val">3</div><div class="label">Revenue channels</div></div>
-  </div>
-
-  <div class="three-col stagger-children" style="margin-top:40px">
-    <div class="card stagger-item">
-      <span class="card-tag">Channel 1</span>
-      <h3>Clinical Facility</h3>
-      <p>Licensed clinic for prescription peptides. Referral-only appointments with full physician oversight. Premium positioning with highest per-client revenue.</p>
-    </div>
-    <div class="card stagger-item">
-      <span class="card-tag">Channel 2</span>
-      <h3>DTC Platform</h3>
-      <p>Direct-to-consumer e-commerce for supplement-classified products. Lower barrier to entry, higher volume. QR-linked transparency for every product.</p>
-    </div>
-    <div class="card stagger-item">
-      <span class="card-tag">Channel 3</span>
-      <h3>Institutional</h3>
-      <p>Gym partnerships, corporate wellness, and medical clinic integrations. Branded product placement and trainer referral programs with commission structures.</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><div class="divider-line"></div></div>
-
-<section class="section reveal">
-  <div class="two-col">
-    <div>
-      <p class="section-label">National Alignment</p>
-      <h2 class="section-title">Advancing Qatar's<br>health objectives</h2>
-      <p class="section-body">The brand is not positioned as a commercial venture seeking government tolerance. It is positioned as a health-enabling system that advances national objectives.</p>
-    </div>
-    <div>
-      <div class="card card-lg" style="margin-bottom:16px">
-        <h3>Obesity Reduction</h3>
-        <p>Metabolic peptides integrated with gym programming to address the 70% overweight rate through sustainable body composition protocols.</p>
+    <!-- Panel 2: Strategy -->
+    <div class="market-panel" id="panel-strategy">
+      <div class="panel-header">
+        <div class="panel-num">02</div>
+        <h2>Infrastructure first</h2>
+        <p>The brand earns trust through operational credibility, not marketing reach. Influence comes last.</p>
       </div>
-      <div class="card card-lg" style="margin-bottom:16px">
-        <h3>Physical Activity Increase</h3>
-        <p>Adherence-focused protocols reduce dropout and make the transition to regular exercise sustainable for the 43.9% currently inactive.</p>
+
+      <div class="strategy-grid">
+        <div class="strategy-phase">
+          <div class="strategy-header">
+            <span class="strategy-num">01</span>
+            <div class="strategy-meta">
+              <span class="strategy-tag">Months 1–6</span>
+              <h3 class="strategy-title">Foundation</h3>
+            </div>
+          </div>
+          <p class="strategy-desc">Legal entity, regulatory clarity, clinical infrastructure, and initial partnerships. No public marketing.</p>
+          <ul class="strategy-list">
+            <li>Register commercial entity in Qatar</li>
+            <li>Engage regulatory consultant for MoPH</li>
+            <li>Secure medical license through physician partnership</li>
+            <li>Source 2–3 GMP-certified manufacturing partners</li>
+            <li>Build protocol library (8–10 curated stacks)</li>
+            <li>Identify first 2–3 facility partnerships</li>
+          </ul>
+        </div>
+
+        <div class="strategy-phase">
+          <div class="strategy-header">
+            <span class="strategy-num">02</span>
+            <div class="strategy-meta">
+              <span class="strategy-tag">Months 6–12</span>
+              <h3 class="strategy-title">Controlled Launch</h3>
+            </div>
+          </div>
+          <p class="strategy-desc">Begin operations with deliberate constraint. Scarcity builds trust.</p>
+          <ul class="strategy-list">
+            <li>Open clinical facility for referral-only</li>
+            <li>Launch DTC platform for supplements</li>
+            <li>Deploy branded product in partner gyms</li>
+            <li>Host private launch event</li>
+            <li>Launch protocol management system</li>
+            <li>Begin collecting outcome data</li>
+          </ul>
+        </div>
+
+        <div class="strategy-phase">
+          <div class="strategy-header">
+            <span class="strategy-num">03</span>
+            <div class="strategy-meta">
+              <span class="strategy-tag">Months 12–24</span>
+              <h3 class="strategy-title">Expansion</h3>
+            </div>
+          </div>
+          <p class="strategy-desc">Scale operations, deepen partnerships, and prepare for regional expansion.</p>
+          <ul class="strategy-list">
+            <li>Expand to 5–8 facility partnerships</li>
+            <li>Register remaining portfolio compounds</li>
+            <li>Launch subscription model</li>
+            <li>Develop standalone wellness facility</li>
+            <li>Build medical advisory board</li>
+            <li>Evaluate Saudi Arabia and Bahrain</li>
+          </ul>
+        </div>
       </div>
-      <div class="card card-lg" style="margin-bottom:16px">
-        <h3>NCD Prevention</h3>
-        <p>Regenerative and metabolic peptides applied preventively, addressing cardiovascular, metabolic, and inflammatory disease pathways before they require acute intervention.</p>
+    </div>
+
+    <!-- Panel 3: Revenue -->
+    <div class="market-panel" id="panel-revenue">
+      <div class="panel-header">
+        <div class="panel-num">03</div>
+        <h2>Conservative projections</h2>
+        <p>Referral-based growth with three complementary revenue channels.</p>
       </div>
-      <div class="card card-lg">
-        <h3>Talent Attraction</h3>
-        <p>World-class wellness infrastructure positions Qatar as a destination for global professionals who prioritize health optimization.</p>
+
+      <div class="revenue-grid">
+        <div class="revenue-card">
+          <div class="revenue-year">Y1</div>
+          <div class="revenue-target">$300K–$500K</div>
+          <div class="revenue-bar"><div class="revenue-bar-fill" style="width:20%"></div></div>
+        </div>
+        <div class="revenue-card">
+          <div class="revenue-year">Y2</div>
+          <div class="revenue-target">$800K–$1.2M</div>
+          <div class="revenue-bar"><div class="revenue-bar-fill" style="width:48%"></div></div>
+        </div>
+        <div class="revenue-card">
+          <div class="revenue-year">Y3</div>
+          <div class="revenue-target">$1.5M–$2.5M</div>
+          <div class="revenue-bar"><div class="revenue-bar-fill" style="width:100%"></div></div>
+        </div>
+        <div class="revenue-card">
+          <div class="revenue-year">3</div>
+          <div class="revenue-target">Revenue Channels</div>
+          <div class="revenue-bar"><div class="revenue-bar-fill" style="width:100%"></div></div>
+        </div>
+      </div>
+
+      <div class="channel-grid">
+        <div class="channel-card">
+          <span class="channel-tag">Channel 1</span>
+          <h3>Clinical Facility</h3>
+          <p>Licensed clinic for prescription peptides. Referral-only appointments with full physician oversight. Premium positioning with highest per-client revenue.</p>
+        </div>
+        <div class="channel-card">
+          <span class="channel-tag">Channel 2</span>
+          <h3>DTC Platform</h3>
+          <p>Direct-to-consumer e-commerce for supplement-classified products. Lower barrier to entry, higher volume. QR-linked transparency for every product.</p>
+        </div>
+        <div class="channel-card">
+          <span class="channel-tag">Channel 3</span>
+          <h3>Institutional</h3>
+          <p>Gym partnerships, corporate wellness, and medical clinic integrations. Branded product placement and trainer referral programs with commission structures.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 4: Alignment -->
+    <div class="market-panel" id="panel-alignment">
+      <div class="panel-header">
+        <div class="panel-num">04</div>
+        <h2>National alignment</h2>
+        <p>The brand is positioned as a health-enabling system that advances Qatar's national health objectives.</p>
+      </div>
+
+      <div class="alignment-grid">
+        <div class="alignment-card">
+          <div class="alignment-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+            </svg>
+          </div>
+          <div class="alignment-content">
+            <h3>Obesity Reduction</h3>
+            <p>Metabolic peptides integrated with gym programming to address the 70% overweight rate through sustainable body composition protocols.</p>
+          </div>
+        </div>
+        <div class="alignment-card">
+          <div class="alignment-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+            </svg>
+          </div>
+          <div class="alignment-content">
+            <h3>Physical Activity Increase</h3>
+            <p>Adherence-focused protocols reduce dropout and make the transition to regular exercise sustainable for the 43.9% currently inactive.</p>
+          </div>
+        </div>
+        <div class="alignment-card">
+          <div class="alignment-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <div class="alignment-content">
+            <h3>NCD Prevention</h3>
+            <p>Regenerative and metabolic peptides applied preventively, addressing cardiovascular and inflammatory disease pathways.</p>
+          </div>
+        </div>
+        <div class="alignment-card">
+          <div class="alignment-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <div class="alignment-content">
+            <h3>Talent Attraction</h3>
+            <p>World-class wellness infrastructure positions Qatar as a destination for global professionals who prioritize health optimization.</p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -231,13 +812,28 @@
   <div class="footer-inner">
     <div class="footer-brand"><a href="index.html" class="logo">Engineered Adherence</a><p>Peptide therapeutics integrated into structured wellness programs. Designed for adherence, built for results.</p></div>
     <div class="footer-links">
-      <div class="footer-col"><h4>Platform</h4><a href="protocols.html">Protocols</a><a href="science.html">Science</a></div>
+      <div class="footer-col"><h4>Platform</h4><a href="science.html">Science</a><a href="protocols.html">Protocols</a></div>
       <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="market.html">Market</a><a href="contact.html">Contact</a></div>
     </div>
   </div>
   <div class="footer-bottom"><span>2026 Engineered Adherence</span><span>Doha, Qatar</span></div>
 </footer>
 
+<script>
+// Panel navigation
+document.querySelectorAll('.market-nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    // Update buttons
+    document.querySelectorAll('.market-nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Update panels
+    const target = btn.dataset.target;
+    document.querySelectorAll('.market-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('panel-' + target).classList.add('active');
+  });
+});
+</script>
 <script src="js/main.js"></script>
 <script src="js/mobile.js"></script>
 </body>

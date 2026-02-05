@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Tab 1 Mockups — Engineered Adherence</title>
+<script>
+(function(){
+  var t = localStorage.getItem('ea-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="stylesheet" href="../../css/style.css">
+<style>
+/* ═══════════════════════════════════════════
+   MOCKUP PAGE STYLES
+   ═══════════════════════════════════════════ */
+
+.mockup-header{
+  padding:120px 72px 60px;
+  max-width:1140px;
+  margin:0 auto;
+  text-align:center;
+}
+
+.mockup-header h1{
+  font-family:'Playfair Display',serif;
+  font-size:42px;
+  font-weight:500;
+  color:var(--text-heading);
+  margin-bottom:16px;
+}
+
+.mockup-header p{
+  font-size:16px;
+  color:var(--muted);
+  max-width:600px;
+  margin:0 auto;
+  line-height:1.8;
+}
+
+.mockup-section{
+  padding:80px 72px;
+  max-width:1200px;
+  margin:0 auto;
+  border-top:1px solid var(--line);
+}
+
+.mockup-label{
+  display:inline-block;
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:8px 16px;
+  background:var(--tag-bg);
+  color:var(--accent-solid);
+  margin-bottom:32px;
+}
+
+.mockup-container{
+  background:var(--bg-warm);
+  border:1px solid var(--line);
+  padding:60px;
+  position:relative;
+}
+
+.mockup-container::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--accent-solid),transparent);
+}
+
+/* ═══════════════════════════════════════════
+   SHARED PANEL HEADER
+   ═══════════════════════════════════════════ */
+
+.panel-header{
+  text-align:center;
+  margin-bottom:64px;
+}
+
+.panel-num{
+  font-family:'Playfair Display',serif;
+  font-size:100px;
+  font-weight:600;
+  color:var(--pillar-num);
+  line-height:1;
+  margin-bottom:-20px;
+}
+
+.panel-header h2{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  font-weight:400;
+  color:var(--text-heading);
+  margin:0 0 16px;
+}
+
+.panel-header p{
+  font-size:16px;
+  color:var(--muted);
+  max-width:560px;
+  margin:0 auto;
+  line-height:1.8;
+}
+
+/* ═══════════════════════════════════════════
+   MOCKUP A — CENTERED STATS + SIDE CARDS
+   ═══════════════════════════════════════════ */
+
+.mockup-a .stats-showcase{
+  display:flex;
+  justify-content:center;
+  gap:80px;
+  margin-bottom:64px;
+}
+
+.mockup-a .stat-item{
+  text-align:center;
+}
+
+.mockup-a .stat-value{
+  font-family:'Playfair Display',serif;
+  font-size:72px;
+  font-weight:500;
+  color:var(--stat-num);
+  line-height:1;
+}
+
+.mockup-a .stat-unit{
+  font-family:'Playfair Display',serif;
+  font-size:32px;
+  font-weight:400;
+  color:var(--faint);
+}
+
+.mockup-a .stat-label{
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--faint);
+  margin-top:12px;
+}
+
+.mockup-a .content-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+
+.mockup-a .content-card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  padding:40px;
+  transition:all .4s ease;
+}
+
+.mockup-a .content-card:hover{
+  border-color:var(--line-strong);
+  transform:translateY(-4px);
+}
+
+.mockup-a .content-card h3{
+  font-family:'Playfair Display',serif;
+  font-size:22px;
+  font-weight:500;
+  color:var(--text-heading);
+  margin:0 0 16px;
+}
+
+.mockup-a .content-card p{
+  font-size:15px;
+  color:var(--muted);
+  line-height:1.85;
+  margin:0;
+}
+
+/* ═══════════════════════════════════════════
+   MOCKUP B — ASYMMETRIC HERO + PROBLEM STACK
+   ═══════════════════════════════════════════ */
+
+.mockup-b .hero-split{
+  display:grid;
+  grid-template-columns:1.2fr 1fr;
+  gap:80px;
+  align-items:center;
+  margin-bottom:64px;
+}
+
+.mockup-b .hero-content h3{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  font-weight:500;
+  color:var(--text-heading);
+  margin:0 0 24px;
+  line-height:1.3;
+}
+
+.mockup-b .hero-content p{
+  font-size:16px;
+  color:var(--muted);
+  line-height:1.9;
+  margin:0;
+}
+
+.mockup-b .stat-stack{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+.mockup-b .stat-bar{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  padding:24px 32px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  transition:all .3s ease;
+}
+
+.mockup-b .stat-bar:hover{
+  border-color:var(--line-strong);
+  padding-left:40px;
+}
+
+.mockup-b .stat-bar-label{
+  font-size:13px;
+  color:var(--muted);
+  letter-spacing:0.5px;
+}
+
+.mockup-b .stat-bar-value{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  font-weight:500;
+  color:var(--stat-num);
+}
+
+.mockup-b .problem-cards{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.mockup-b .problem-card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  padding:32px;
+  position:relative;
+  transition:all .4s ease;
+}
+
+.mockup-b .problem-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;
+  width:3px;height:100%;
+  background:var(--accent-solid);
+  opacity:0;
+  transition:opacity .3s ease;
+}
+
+.mockup-b .problem-card:hover{
+  border-color:var(--line-strong);
+}
+
+.mockup-b .problem-card:hover::before{
+  opacity:1;
+}
+
+.mockup-b .problem-num{
+  font-family:'Playfair Display',serif;
+  font-size:14px;
+  color:var(--accent-solid);
+  margin-bottom:16px;
+}
+
+.mockup-b .problem-card h4{
+  font-size:16px;
+  font-weight:500;
+  color:var(--text-heading);
+  margin:0 0 12px;
+}
+
+.mockup-b .problem-card p{
+  font-size:13px;
+  color:var(--muted);
+  line-height:1.75;
+  margin:0;
+}
+
+/* ═══════════════════════════════════════════
+   MOCKUP C — EDITORIAL FLOW + PULL QUOTES
+   ═══════════════════════════════════════════ */
+
+.mockup-c .editorial-hero{
+  text-align:center;
+  max-width:700px;
+  margin:0 auto 64px;
+}
+
+.mockup-c .editorial-hero blockquote{
+  font-family:'Playfair Display',serif;
+  font-size:28px;
+  font-weight:400;
+  font-style:italic;
+  color:var(--text-heading);
+  line-height:1.5;
+  margin:0 0 24px;
+  position:relative;
+  padding:0 40px;
+}
+
+.mockup-c .editorial-hero blockquote::before,
+.mockup-c .editorial-hero blockquote::after{
+  content:'"';
+  font-family:'Playfair Display',serif;
+  font-size:64px;
+  color:var(--pillar-num);
+  position:absolute;
+  line-height:1;
+}
+
+.mockup-c .editorial-hero blockquote::before{
+  top:-10px;left:0;
+}
+
+.mockup-c .editorial-hero blockquote::after{
+  content:'"';
+  bottom:-30px;right:0;
+}
+
+.mockup-c .editorial-hero cite{
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--faint);
+  font-style:normal;
+}
+
+.mockup-c .data-row{
+  display:flex;
+  justify-content:center;
+  gap:1px;
+  margin-bottom:64px;
+  background:var(--line);
+}
+
+.mockup-c .data-cell{
+  background:var(--bg-card);
+  padding:40px 48px;
+  text-align:center;
+  flex:1;
+  transition:all .3s ease;
+}
+
+.mockup-c .data-cell:hover{
+  background:var(--bg-card-hover);
+}
+
+.mockup-c .data-value{
+  font-family:'Playfair Display',serif;
+  font-size:48px;
+  font-weight:500;
+  color:var(--stat-num);
+  line-height:1;
+  margin-bottom:8px;
+}
+
+.mockup-c .data-label{
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--faint);
+}
+
+.mockup-c .narrative-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:48px;
+}
+
+.mockup-c .narrative-col{
+  position:relative;
+}
+
+.mockup-c .narrative-col::before{
+  content:'';
+  position:absolute;
+  top:0;left:-24px;
+  width:1px;height:100%;
+  background:linear-gradient(180deg,var(--accent-solid),transparent);
+}
+
+.mockup-c .narrative-col:first-child::before{
+  display:none;
+}
+
+.mockup-c .narrative-tag{
+  display:inline-block;
+  font-size:9px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--accent-solid);
+  margin-bottom:16px;
+}
+
+.mockup-c .narrative-col h3{
+  font-family:'Playfair Display',serif;
+  font-size:24px;
+  font-weight:500;
+  color:var(--text-heading);
+  margin:0 0 20px;
+}
+
+.mockup-c .narrative-col p{
+  font-size:15px;
+  color:var(--muted);
+  line-height:1.9;
+  margin:0 0 16px;
+}
+
+.mockup-c .narrative-col p:last-child{
+  margin-bottom:0;
+}
+
+/* ═══════════════════════════════════════════
+   NAV
+   ═══════════════════════════════════════════ */
+
+nav{
+  position:fixed;top:0;left:0;right:0;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:0 72px;height:72px;z-index:100;
+  background:var(--nav-bg);
+  backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);
+  border-bottom:1px solid var(--line);
+}
+
+.logo{
+  font-family:'Playfair Display',serif;
+  font-size:17px;font-weight:500;letter-spacing:0.02em;
+  color:var(--text-heading);
+}
+
+.back-link{
+  font-size:12px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--muted);
+  transition:color .3s;
+}
+
+.back-link:hover{
+  color:var(--text-heading);
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════ */
+
+@media(max-width:1024px){
+  .mockup-header,.mockup-section{padding-left:40px;padding-right:40px}
+  .mockup-container{padding:40px}
+  .mockup-a .stats-showcase{gap:48px}
+  .mockup-a .stat-value{font-size:56px}
+  .mockup-b .hero-split{grid-template-columns:1fr;gap:48px}
+  .mockup-b .problem-cards{grid-template-columns:1fr}
+  .mockup-c .narrative-grid{grid-template-columns:1fr;gap:32px}
+  .mockup-c .narrative-col::before{display:none}
+}
+
+@media(max-width:768px){
+  nav{padding:0 24px}
+  .mockup-header,.mockup-section{padding-left:24px;padding-right:24px}
+  .mockup-header h1{font-size:32px}
+  .mockup-container{padding:32px}
+  .panel-num{font-size:60px}
+  .panel-header h2{font-size:26px}
+  .mockup-a .stats-showcase{flex-direction:column;gap:32px}
+  .mockup-a .stat-value{font-size:48px}
+  .mockup-a .content-grid{grid-template-columns:1fr}
+  .mockup-c .data-row{flex-direction:column}
+  .mockup-c .editorial-hero blockquote{font-size:22px;padding:0 24px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../../about.html" class="logo">Engineered Adherence</a>
+  <a href="../../about.html" class="back-link">← Back to About</a>
+</nav>
+
+<div class="mockup-header">
+  <h1>About Tab 1 Mockups</h1>
+  <p>Three layout variations for the "Programs Fail People" section. Each follows the premium theme while presenting the content differently.</p>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     MOCKUP A — CENTERED STATS + SIDE CARDS
+     ═══════════════════════════════════════════ -->
+
+<section class="mockup-section mockup-a">
+  <span class="mockup-label">Mockup A — Bold Stats Focus</span>
+
+  <div class="mockup-container">
+    <div class="panel-header">
+      <div class="panel-num">01</div>
+      <h2>Programs fail people</h2>
+      <p>Every gym in the world faces the same challenge: most people quit. The infrastructure exists. The science exists. Behavior is the bottleneck.</p>
+    </div>
+
+    <div class="stats-showcase">
+      <div class="stat-item">
+        <div class="stat-value">50<span class="stat-unit">%+</span></div>
+        <div class="stat-label">Dropout Rate</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">8<span class="stat-unit">–12</span></div>
+        <div class="stat-label">Weeks to Results</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-value">∞</div>
+        <div class="stat-label">Programs That Fail</div>
+      </div>
+    </div>
+
+    <div class="content-grid">
+      <div class="content-card">
+        <h3>The gap</h3>
+        <p>The reasons are consistent across cultures: early-stage discomfort is high, visible results take 8 to 12 weeks, and the psychological reward of exercise does not establish until a habit loop is formed. For most people, that window is too long and too painful.</p>
+      </div>
+      <div class="content-card">
+        <h3>The cost</h3>
+        <p>Qatar is investing in world-class fitness infrastructure. Without addressing the adherence problem, that infrastructure will underperform. This platform is designed to make the early phase tolerable, rewarding, and ultimately sustainable.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MOCKUP B — ASYMMETRIC HERO + PROBLEM STACK
+     ═══════════════════════════════════════════ -->
+
+<section class="mockup-section mockup-b">
+  <span class="mockup-label">Mockup B — Asymmetric Layout</span>
+
+  <div class="mockup-container">
+    <div class="panel-header">
+      <div class="panel-num">01</div>
+      <h2>Programs fail people</h2>
+      <p>Every gym in the world faces the same challenge: most people quit. The infrastructure exists. The science exists. Behavior is the bottleneck.</p>
+    </div>
+
+    <div class="hero-split">
+      <div class="hero-content">
+        <h3>The investment in willpower exceeds the perceived return</h3>
+        <p>The reasons are consistent across cultures: early-stage discomfort is high, visible results take 8 to 12 weeks, and the psychological reward of exercise does not establish until a habit loop is formed. For most people, that window is too long and too painful. Qatar is investing in world-class fitness infrastructure. Without addressing the adherence problem, that infrastructure will underperform.</p>
+      </div>
+      <div class="stat-stack">
+        <div class="stat-bar">
+          <span class="stat-bar-label">Global dropout rate within 6 months</span>
+          <span class="stat-bar-value">50%+</span>
+        </div>
+        <div class="stat-bar">
+          <span class="stat-bar-label">Weeks until visible results appear</span>
+          <span class="stat-bar-value">8–12</span>
+        </div>
+        <div class="stat-bar">
+          <span class="stat-bar-label">Days to form new habit patterns</span>
+          <span class="stat-bar-value">66</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-cards">
+      <div class="problem-card">
+        <div class="problem-num">01</div>
+        <h4>High Early Discomfort</h4>
+        <p>The initial phase of any fitness program produces pain, fatigue, and frustration before any visible benefit.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">02</div>
+        <h4>Delayed Reward Loop</h4>
+        <p>Results take months to materialize. The brain does not receive positive reinforcement in time to form habits.</p>
+      </div>
+      <div class="problem-card">
+        <div class="problem-num">03</div>
+        <h4>Infrastructure Waste</h4>
+        <p>World-class facilities underperform when designed around equipment instead of behavior change.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     MOCKUP C — EDITORIAL FLOW + PULL QUOTES
+     ═══════════════════════════════════════════ -->
+
+<section class="mockup-section mockup-c">
+  <span class="mockup-label">Mockup C — Editorial Style</span>
+
+  <div class="mockup-container">
+    <div class="panel-header">
+      <div class="panel-num">01</div>
+      <h2>Programs fail people</h2>
+      <p>Every gym in the world faces the same challenge: most people quit. The infrastructure exists. The science exists. Behavior is the bottleneck.</p>
+    </div>
+
+    <div class="editorial-hero">
+      <blockquote>For most people, the window between effort and reward is too long and too painful.</blockquote>
+      <cite>The Adherence Problem</cite>
+    </div>
+
+    <div class="data-row">
+      <div class="data-cell">
+        <div class="data-value">50%+</div>
+        <div class="data-label">Dropout Rate</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-value">8–12</div>
+        <div class="data-label">Weeks to Results</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-value">66</div>
+        <div class="data-label">Days to Habit</div>
+      </div>
+    </div>
+
+    <div class="narrative-grid">
+      <div class="narrative-col">
+        <span class="narrative-tag">The Pattern</span>
+        <h3>Why programs fail</h3>
+        <p>The reasons are consistent across cultures: early-stage discomfort is high, visible results take 8 to 12 weeks, and the psychological reward of exercise does not establish until a habit loop is formed.</p>
+        <p>The investment in willpower exceeds the perceived return. People don't fail programs. Programs fail people.</p>
+      </div>
+      <div class="narrative-col">
+        <span class="narrative-tag">The Opportunity</span>
+        <h3>What we're building</h3>
+        <p>Qatar is investing in world-class fitness infrastructure. Without addressing the adherence problem, that infrastructure will underperform.</p>
+        <p>This platform is designed to make the early phase tolerable, rewarding, and — ultimately — sustainable. We compress the timeline from effort to feedback.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="../../js/main.js"></script>
+</body>
+</html>

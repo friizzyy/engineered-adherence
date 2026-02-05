@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineered Adherence — Logo Mockups</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@200;300;400;500;600&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #0d0d0d;
+  color: #e8e4de;
+  min-height: 100vh;
+  padding: 60px;
+}
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  font-weight: 400;
+  margin-bottom: 16px;
+  color: #f0ece6;
+}
+.subtitle {
+  color: #6a665f;
+  font-size: 13px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 60px;
+}
+
+.section {
+  margin-bottom: 80px;
+}
+.section-title {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #6a665f;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(232,228,222,0.06);
+}
+
+.mockup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 32px;
+}
+
+.mockup-card {
+  background: #161616;
+  border: 1px solid rgba(232,228,222,0.06);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.mockup-preview {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  background: rgba(22,22,22,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(232,228,222,0.06);
+}
+
+.mockup-preview.light {
+  background: rgba(242,243,245,0.94);
+}
+
+.mockup-info {
+  padding: 24px;
+}
+.mockup-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  color: #f0ece6;
+  margin-bottom: 8px;
+}
+.mockup-desc {
+  font-size: 13px;
+  color: #6a665f;
+  line-height: 1.6;
+}
+
+/* Logo Styles */
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #f0ece6;
+}
+.light .logo-text {
+  color: #0a0b0d;
+}
+
+/* Icon Variations */
+.logo-icon {
+  flex-shrink: 0;
+}
+
+/* ═══ MOCKUP 1: Minimal Vial ═══ */
+.icon-vial-minimal svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* ═══ MOCKUP 2: Abstract Helix ═══ */
+.icon-helix svg {
+  width: 26px;
+  height: 26px;
+}
+
+/* ═══ MOCKUP 3: Geometric E ═══ */
+.icon-geo-e svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* ═══ MOCKUP 4: Circular Monogram ═══ */
+.icon-circle-mono svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* ═══ MOCKUP 5: Peptide Chain ═══ */
+.icon-peptide svg {
+  width: 30px;
+  height: 30px;
+}
+
+/* ═══ MOCKUP 6: Double Helix Ring ═══ */
+.icon-helix-ring svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Toggle */
+.theme-row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.theme-btn {
+  padding: 10px 20px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid rgba(232,228,222,0.15);
+  color: #6a665f;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.theme-btn.active {
+  background: rgba(232,228,222,0.08);
+  border-color: rgba(232,228,222,0.3);
+  color: #e8e4de;
+}
+.theme-btn:hover {
+  border-color: rgba(232,228,222,0.25);
+}
+
+/* In-Context Preview */
+.context-preview {
+  background: #161616;
+  border: 1px solid rgba(232,228,222,0.06);
+  border-radius: 16px;
+  overflow: hidden;
+  margin-top: 32px;
+}
+.context-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 48px;
+  background: rgba(22,22,22,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(232,228,222,0.06);
+}
+.context-nav.light-mode {
+  background: rgba(242,243,245,0.94);
+}
+.context-links {
+  display: flex;
+  gap: 48px;
+}
+.context-links a {
+  color: #6a665f;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.context-nav.light-mode .context-links a {
+  color: #6e7280;
+}
+.context-cta {
+  padding: 10px 24px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid rgba(232,228,222,0.2);
+  color: #e8e4de;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.context-nav.light-mode .context-cta {
+  border-color: rgba(26,28,34,0.25);
+  color: #1a1c22;
+}
+</style>
+</head>
+<body>
+
+<h1>Brand Icon Concepts</h1>
+<p class="subtitle">Navbar Logo Mockups for Engineered Adherence</p>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1: ABSTRACT / MINIMAL ICONS
+     ═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Concept 1 — Abstract & Minimal</div>
+  <div class="mockup-grid">
+
+    <!-- 1A: Minimal Vial -->
+    <div class="mockup-card">
+      <div class="mockup-preview">
+        <div class="logo-container">
+          <div class="logo-icon icon-vial-minimal">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="8" y="2" width="12" height="4" rx="1" stroke="#f0ece6" stroke-width="1.2"/>
+              <path d="M9 6V22C9 24.2091 10.7909 26 13 26H15C17.2091 26 19 24.2091 19 22V6" stroke="#f0ece6" stroke-width="1.2"/>
+              <path d="M9 18C9 18 11 16.5 14 18C17 19.5 19 18 19 18" stroke="#f0ece6" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+            </svg>
+          </div>
+          <span class="logo-text">Engineered Adherence</span>
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">1A — Minimal Vial</div>
+        <div class="mockup-desc">Clean line-art vial with subtle liquid wave. Directly references the peptide therapeutics core.</div>
+      </div>
+    </div>
+
+    <!-- 1B: Abstract Droplet -->
+    <div class="mockup-card">
+      <div class="mockup-preview">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3C12 3 5 11 5 15C5 18.866 8.134 22 12 22C15.866 22 19 18.866 19 15C19 11 12 3 12 3Z" stroke="#f0ece6" stroke-width="1.2"/>
+              <circle cx="12" cy="15" r="3" stroke="#f0ece6" stroke-width="1" opacity="0.4"/>
+            </svg>
+          </div>
+          <span class="logo-text">Engineered Adherence</span>
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">1B — Precision Droplet</div>
+        <div class="mockup-desc">Elegant droplet form with inner precision circle. Suggests purity and measured dosing.</div>
+      </div>
+    </div>
+
+    <!-- 1C: Abstract Molecule -->
+    <div class="mockup-card">
+      <div class="mockup-preview">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="8" r="3" stroke="#f0ece6" stroke-width="1.2"/>
+              <circle cx="8" cy="18" r="3" stroke="#f0ece6" stroke-width="1.2"/>
+              <circle cx="20" cy="18" r="3" stroke="#f0ece6" stroke-width="1.2"/>
+              <line x1="12" y1="10.5" x2="9.5" y2="15.5" stroke="#f0ece6" stroke-width="1" opacity="0.6"/>
+              <line x1="16" y1="10.5" x2="18.5" y2="15.5" stroke="#f0ece6" stroke-width="1" opacity="0.6"/>
+              <line x1="11" y1="18" x2="17" y2="18" stroke="#f0ece6" stroke-width="1" opacity="0.6"/>
+            </svg>
+          </div>
+          <span class="logo-text">Engineered Adherence</span>
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">1C — Molecular Bond</div>
+        <div class="mockup-desc">Simple molecular structure representing peptide bonds. Scientific yet approachable.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2: MONOGRAM / LETTERMARK
+     ═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Concept 2 — Monogram & Lettermark</div>
+  <div class="mockup-grid">
+
+    <!-- 2A: Geometric EA -->
+    <div class="mockup-card">
+      <div class="mockup-preview">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M4 22V6L14 6L14 10L8 10L8 12L13 12L13 16L8 16L8 18L14 18L14 22L4 22Z" stroke="#f0ece6" stroke-width="1.2" stroke-linejoin="round" fill="none"/>
+              <path d="M16 22L22 6L28 22M18 17H26" stroke="#f0ece6" stroke-width="1.2" stroke-linejoin="round" stroke-linecap="round" transform="translate(-4, 0)"/>
+            </svg>
+          </div>
+          <span class="logo-text">Engineered Adherence</span>
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">2A — EA Monogram</div>
+        <div class="mockup-desc">Clean geometric "EA" lettermark. Bold and distinctive brand anchor.</div>
+      </div>
+    </div>
+
+    <!-- 2B: Circle Monogram -->
+    <div class="mockup-card">
+      <div class="mockup-preview">
+        <div class="logo-container">
+          <div class="logo-icon icon-circle-mono">
+            <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="16" cy="16" r="14.5" stroke="#f0ece6" stroke-width="1"/>
+              <text x="16" y="20" text-anchor="middle" font-family="Playfair Display, serif" font-size="12" font-weight="500" fill="#f0ece6">EA</text>
+            </svg>
+          </div>
+          <span class="logo-text">Engineered Adherence</span>
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">2B — Circle Monogram</div>
+        <div class="mockup-desc">Elegant circled initials. Classic luxury feel with modern restraint.</div>
+      </div>
+    </div>
+
+    <!-- 2C: Stacked Initials -->
+    <div class="mockup-card">
+      <div class="mockup-preview">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <svg width="22" height="28" viewBox="0 0 22 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <text x="0" y="12" font-family="Playfair Display, serif" font-size="14" font-weight="500" fill="#f0ece6">E</text>
+              <text x="0" y="26" font-family="Playfair Display, serif" font-size="14" font-weight="500" fill="#f0ece6" opacity="0.5">A</text>
+              <line x1="14" y1="4" x2="14" y2="24" stroke="#f0ece6" stroke-width="0.75" opacity="0.3"/>
+            </svg>
+          </div>
+          <span class="logo-text">Engineered Adherence</span>
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">2C — Stacked Initials</div>
+        <div class="mockup-desc">Vertically stacked E over A with divider line. Editorial, typographic focus.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3: SCIENTIFIC / DNA / HELIX
+     ═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Concept 3 — Scientific Motifs</div>
+  <div class="mockup-grid">
+
+    <!-- 3A: Double Helix -->
+    <div class="mockup-card">
+      <div class="mockup-preview">
+        <div class="logo-container">
+          <div class="logo-icon icon-helix">
+            <svg viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 3C8 3 6 8 6 13C6 18 8 23 8 23" stroke="#f0ece6" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M18 3C18 3 20 8 20 13C20 18 18 23 18 23" stroke="#f0ece6" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="8" y1="7" x2="18" y2="7" stroke="#f0ece6" stroke-width="0.8" opacity="0.4"/>
+              <line x1="7" y1="13" x2="19" y2="13" stroke="#f0ece6" stroke-width="0.8" opacity="0.6"/>
+              <line x1="8" y1="19" x2="18" y2="19" stroke="#f0ece6" stroke-width="0.8" opacity="0.4"/>
+            </svg>
+          </div>
+          <span class="logo-text">Engineered Adherence</span>
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">3A — Double Helix</div>
+        <div class="mockup-desc">Stylized DNA helix with rungs. Clear biotech signal with elegant restraint.</div>
+      </div>
+    </div>
+
+    <!-- 3B: Peptide Chain -->
+    <div class="mockup-card">
+      <div class="mockup-preview">
+        <div class="logo-container">
+          <div class="logo-icon icon-peptide">
+            <svg viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="6" cy="15" r="3" stroke="#f0ece6" stroke-width="1"/>
+              <circle cx="15" cy="15" r="3" stroke="#f0ece6" stroke-width="1"/>
+              <circle cx="24" cy="15" r="3" stroke="#f0ece6" stroke-width="1"/>
+              <line x1="9" y1="15" x2="12" y2="15" stroke="#f0ece6" stroke-width="1.2"/>
+              <line x1="18" y1="15" x2="21" y2="15" stroke="#f0ece6" stroke-width="1.2"/>
+              <circle cx="6" cy="15" r="1" fill="#f0ece6" opacity="0.3"/>
+              <circle cx="15" cy="15" r="1" fill="#f0ece6" opacity="0.3"/>
+              <circle cx="24" cy="15" r="1" fill="#f0ece6" opacity="0.3"/>
+            </svg>
+          </div>
+          <span class="logo-text">Engineered Adherence</span>
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">3B — Peptide Chain</div>
+        <div class="mockup-desc">Three-unit peptide chain. Directly represents the therapeutic core offering.</div>
+      </div>
+    </div>
+
+    <!-- 3C: Helix Ring -->
+    <div class="mockup-card">
+      <div class="mockup-preview">
+        <div class="logo-container">
+          <div class="logo-icon icon-helix-ring">
+            <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="14" cy="14" r="11" stroke="#f0ece6" stroke-width="1" opacity="0.3"/>
+              <path d="M8 7C10 11 10 17 8 21" stroke="#f0ece6" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M20 7C18 11 18 17 20 21" stroke="#f0ece6" stroke-width="1.2" stroke-linecap="round"/>
+              <ellipse cx="14" cy="10" rx="5" ry="1.5" stroke="#f0ece6" stroke-width="0.8" opacity="0.5"/>
+              <ellipse cx="14" cy="18" rx="5" ry="1.5" stroke="#f0ece6" stroke-width="0.8" opacity="0.5"/>
+            </svg>
+          </div>
+          <span class="logo-text">Engineered Adherence</span>
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">3C — Helix Ring</div>
+        <div class="mockup-desc">DNA strands within circular boundary. Combines precision with completeness.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4: PREMIUM / LUXURY
+     ═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">Concept 4 — Premium & Luxury</div>
+  <div class="mockup-grid">
+
+    <!-- 4A: Diamond Cut -->
+    <div class="mockup-card">
+      <div class="mockup-preview">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L22 9L12 22L2 9L12 2Z" stroke="#f0ece6" stroke-width="1.2" stroke-linejoin="round"/>
+              <path d="M2 9H22" stroke="#f0ece6" stroke-width="0.8" opacity="0.4"/>
+              <path d="M12 2L9 9L12 22L15 9L12 2Z" stroke="#f0ece6" stroke-width="0.8" opacity="0.4"/>
+            </svg>
+          </div>
+          <span class="logo-text">Engineered Adherence</span>
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">4A — Precision Cut</div>
+        <div class="mockup-desc">Diamond-like geometric form. Speaks to precision, value, and refinement.</div>
+      </div>
+    </div>
+
+    <!-- 4B: Infinity Loop -->
+    <div class="mockup-card">
+      <div class="mockup-preview">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <svg width="32" height="20" viewBox="0 0 32 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8 10C8 6.5 5 4 2 4C5 4 8 6.5 8 10C8 13.5 5 16 2 16C5 16 8 13.5 8 10Z" stroke="#f0ece6" stroke-width="1.2" transform="translate(6,0)"/>
+              <path d="M24 10C24 6.5 27 4 30 4C27 4 24 6.5 24 10C24 13.5 27 16 30 16C27 16 24 13.5 24 10Z" stroke="#f0ece6" stroke-width="1.2" transform="translate(-6,0)"/>
+              <circle cx="16" cy="10" r="2" stroke="#f0ece6" stroke-width="1" opacity="0.5"/>
+            </svg>
+          </div>
+          <span class="logo-text">Engineered Adherence</span>
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">4B — Continuous Loop</div>
+        <div class="mockup-desc">Stylized infinity with central focus point. Represents sustained adherence and ongoing wellness.</div>
+      </div>
+    </div>
+
+    <!-- 4C: Shield Crest -->
+    <div class="mockup-card">
+      <div class="mockup-preview">
+        <div class="logo-container">
+          <div class="logo-icon">
+            <svg width="24" height="28" viewBox="0 0 24 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L22 6V14C22 20 17 25 12 27C7 25 2 20 2 14V6L12 2Z" stroke="#f0ece6" stroke-width="1.2" stroke-linejoin="round"/>
+              <path d="M12 8V18M8 13H16" stroke="#f0ece6" stroke-width="1" opacity="0.5"/>
+            </svg>
+          </div>
+          <span class="logo-text">Engineered Adherence</span>
+        </div>
+      </div>
+      <div class="mockup-info">
+        <div class="mockup-name">4C — Shield Crest</div>
+        <div class="mockup-desc">Protective shield with centered cross. Conveys trust, protection, and medical authority.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     IN-CONTEXT PREVIEW
+     ═══════════════════════════════════════════ -->
+<div class="section">
+  <div class="section-title">In-Context Preview — Select a Logo</div>
+
+  <div class="theme-row">
+    <button class="theme-btn active" onclick="setPreviewTheme('dark')">Dark Mode</button>
+    <button class="theme-btn" onclick="setPreviewTheme('light')">Light Mode</button>
+  </div>
+
+  <div class="context-preview">
+    <div class="context-nav" id="contextNav">
+      <div class="logo-container" id="previewLogo">
+        <!-- Default: Minimal Vial -->
+        <div class="logo-icon icon-vial-minimal">
+          <svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="2" width="12" height="4" rx="1" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M9 6V22C9 24.2091 10.7909 26 13 26H15C17.2091 26 19 24.2091 19 22V6" stroke="currentColor" stroke-width="1.2"/>
+            <path d="M9 18C9 18 11 16.5 14 18C17 19.5 19 18 19 18" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+        <span class="logo-text">Engineered Adherence</span>
+      </div>
+      <div class="context-links">
+        <a href="#">About</a>
+        <a href="#">Protocols</a>
+        <a href="#">Science</a>
+        <a href="#">Market</a>
+      </div>
+      <a href="#" class="context-cta">Book Consultation</a>
+    </div>
+  </div>
+
+  <p style="margin-top:24px;color:#6a665f;font-size:13px;">Click any mockup card above to preview it in the navbar context.</p>
+</div>
+
+<script>
+// Click to preview logo
+document.querySelectorAll('.mockup-card').forEach(card => {
+  card.style.cursor = 'pointer';
+  card.addEventListener('click', () => {
+    const iconHtml = card.querySelector('.logo-icon').outerHTML;
+    document.getElementById('previewLogo').innerHTML = iconHtml + '<span class="logo-text">Engineered Adherence</span>';
+    updateLogoColors();
+  });
+});
+
+function setPreviewTheme(theme) {
+  const nav = document.getElementById('contextNav');
+  const btns = document.querySelectorAll('.theme-btn');
+  btns.forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+
+  if (theme === 'light') {
+    nav.classList.add('light-mode');
+  } else {
+    nav.classList.remove('light-mode');
+  }
+  updateLogoColors();
+}
+
+function updateLogoColors() {
+  const nav = document.getElementById('contextNav');
+  const isLight = nav.classList.contains('light-mode');
+  const logoText = nav.querySelector('.logo-text');
+  const svgs = nav.querySelectorAll('svg');
+
+  if (isLight) {
+    logoText.style.color = '#0a0b0d';
+    svgs.forEach(svg => svg.style.color = '#0a0b0d');
+  } else {
+    logoText.style.color = '#f0ece6';
+    svgs.forEach(svg => svg.style.color = '#f0ece6');
+  }
+}
+</script>
+
+</body>
+</html>
