@@ -208,7 +208,6 @@
   <a href="index.html" class="logo">Engineered Adherence</a>
   <ul class="nav-center">
     <li><a href="about.html">About</a></li>
-    <li><a href="pillars.html">Pillars</a></li>
     <li><a href="protocols.html">Protocols</a></li>
     <li><a href="science.html">Science</a></li>
     <li><a href="market.html">Market</a></li>
@@ -226,7 +225,6 @@
 <div class="mobile-nav">
   <ul class="mobile-nav-links">
     <li><a href="about.html">About</a></li>
-    <li><a href="pillars.html">Pillars</a></li>
     <li><a href="protocols.html">Protocols</a></li>
     <li><a href="science.html">Science</a></li>
     <li><a href="market.html">Market</a></li>
@@ -254,7 +252,7 @@
 
   <div class="vials-stage">
     <!-- Pillar IV - Cognitive (Semax) -->
-    <div class="vial-wrapper">
+    <div class="vial-wrapper" data-pillar="4" style="cursor:pointer">
       <svg class="vial-svg" viewBox="0 0 74 196" fill="none">
         <defs>
           <linearGradient id="g4" x1="0" y1="0" x2="74" y2="196" gradientUnits="userSpaceOnUse"><stop offset="0%" class="gs-top"/><stop offset="50%" class="gs-mid"/><stop offset="100%" class="gs-bot"/></linearGradient>
@@ -277,7 +275,7 @@
     </div>
 
     <!-- Pillar II - Recovery (BPC-157) -->
-    <div class="vial-wrapper" style="margin-bottom:8px">
+    <div class="vial-wrapper" data-pillar="2" style="margin-bottom:8px;cursor:pointer">
       <svg class="vial-svg" viewBox="0 0 74 206" style="height:208px" fill="none">
         <defs>
           <linearGradient id="g1" x1="0" y1="0" x2="74" y2="206" gradientUnits="userSpaceOnUse"><stop offset="0%" class="gs-top"/><stop offset="50%" class="gs-mid"/><stop offset="100%" class="gs-bot"/></linearGradient>
@@ -300,7 +298,7 @@
     </div>
 
     <!-- Pillar I - Longevity (GHK-Cu) - Center/Tallest -->
-    <div class="vial-wrapper" style="margin-bottom:16px">
+    <div class="vial-wrapper" data-pillar="1" style="margin-bottom:16px;cursor:pointer">
       <svg class="vial-svg" viewBox="0 0 74 216" style="height:220px" fill="none">
         <defs>
           <linearGradient id="g2" x1="0" y1="0" x2="74" y2="216" gradientUnits="userSpaceOnUse"><stop offset="0%" class="gs-top"/><stop offset="50%" class="gs-mid"/><stop offset="100%" class="gs-bot"/></linearGradient>
@@ -323,7 +321,7 @@
     </div>
 
     <!-- Pillar III - Metabolic (Retatrutide) -->
-    <div class="vial-wrapper" style="margin-bottom:8px">
+    <div class="vial-wrapper" data-pillar="3" style="margin-bottom:8px;cursor:pointer">
       <svg class="vial-svg" viewBox="0 0 74 206" style="height:208px" fill="none">
         <defs>
           <linearGradient id="g3" x1="0" y1="0" x2="74" y2="206" gradientUnits="userSpaceOnUse"><stop offset="0%" class="gs-top"/><stop offset="50%" class="gs-mid"/><stop offset="100%" class="gs-bot"/></linearGradient>
@@ -346,7 +344,7 @@
     </div>
 
     <!-- Pillar V - Performance (MK-677) -->
-    <div class="vial-wrapper">
+    <div class="vial-wrapper" data-pillar="5" style="cursor:pointer">
       <svg class="vial-svg" viewBox="0 0 74 196" fill="none">
         <defs>
           <linearGradient id="g5" x1="0" y1="0" x2="74" y2="196" gradientUnits="userSpaceOnUse"><stop offset="0%" class="gs-top"/><stop offset="50%" class="gs-mid"/><stop offset="100%" class="gs-bot"/></linearGradient>
@@ -411,7 +409,7 @@
     <div class="pillar-card stagger-item"><div class="pillar-num">IV</div><h3>Metabolic</h3><p>Body composition optimization and metabolic rate recovery</p></div>
     <div class="pillar-card stagger-item"><div class="pillar-num">V</div><h3>Performance</h3><p>Strength output, endurance capacity, and training recovery</p></div>
   </div>
-  <div class="pillars-cta" style="text-align:center;margin-top:56px"><a href="pillars.html" class="btn btn-ghost">Explore All Pillars</a></div>
+  <div class="pillars-cta" style="text-align:center;margin-top:56px"><a href="science.html" class="btn btn-ghost">Explore All Pillars</a></div>
 </section>
 
 <div class="divider"><div class="divider-line"></div></div>
@@ -432,7 +430,7 @@
       <p>Peptide therapeutics integrated into structured wellness programs. Designed for adherence, built for results.</p>
     </div>
     <div class="footer-links">
-      <div class="footer-col"><h4>Platform</h4><a href="pillars.html">Five Pillars</a><a href="protocols.html">Protocols</a><a href="science.html">Science</a></div>
+      <div class="footer-col"><h4>Platform</h4><a href="protocols.html">Protocols</a><a href="science.html">Science</a></div>
       <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="market.html">Market</a><a href="contact.html">Contact</a></div>
     </div>
   </div>
@@ -480,6 +478,14 @@ function updateVials(theme){
   document.querySelectorAll('.reflect-fill').forEach(el => { el.setAttribute('fill', d?'#787470':'#1C1E24'); el.setAttribute('opacity', d?'.04':'.1'); });
 }
 updateVials(document.documentElement.getAttribute('data-theme')||'dark');
+
+// Vial click handlers - navigate to Science page with pillar
+document.querySelectorAll('.vial-wrapper[data-pillar]').forEach(vial => {
+  vial.addEventListener('click', () => {
+    const pillar = vial.dataset.pillar;
+    window.location.href = 'science.html#pillar-' + pillar;
+  });
+});
 </script>
 <script src="js/main.js"></script>
 <script src="js/mobile.js"></script>
