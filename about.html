@@ -255,16 +255,22 @@
   top:0;left:0;
   width:3px;height:100%;
   background:var(--accent-solid);
-  opacity:0;
-  transition:opacity .3s ease;
+  opacity:1;
 }
 
 .content-card:hover{
   border-color:var(--line-strong);
 }
 
-.content-card:hover::before{
-  opacity:1;
+.content-tag{
+  display:inline-block;
+  font-size:9px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  padding:5px 10px;
+  background:var(--tag-bg);
+  color:var(--accent-solid);
+  margin-bottom:16px;
 }
 
 .content-card h3{
@@ -594,14 +600,18 @@
 
       <div class="two-cards">
         <div class="content-card">
-          <h3>What we are</h3>
-          <p>A system designed to make healthy behavior sustainable. Every protocol bundles peptides, dosing schedules, nutrition guidance, and training alignment into a time-bound program. The brand operates on a simple principle: peptides accelerate what effort initiates.</p>
+          <span class="content-tag">What We Are</span>
+          <h3>A System for Sustainability</h3>
+          <p>Every protocol bundles peptides, dosing schedules, nutrition guidance, and training alignment into a time-bound program. The brand operates on a simple principle: peptides accelerate what effort initiates.</p>
         </div>
         <div class="content-card">
-          <h3>What we are not</h3>
-          <p>Not a supplement company. Not a biohacking brand. Not a shortcut to aesthetic outcomes. Not a clinic selling compounds without context. We do not promise transformation without effort. We build the system that makes effort compound.</p>
+          <span class="content-tag">What We Are Not</span>
+          <h3>Not a Shortcut</h3>
+          <p>Not a supplement company. Not a biohacking brand. Not a shortcut to aesthetic outcomes. Not a clinic selling compounds without context. We do not promise transformation without effort.</p>
         </div>
       </div>
+
+      <p class="section-label" style="margin-top:64px">Target Segments</p>
 
       <div class="stats-grid">
         <div class="stat-card"><div class="stat-card-val">87%</div><div class="stat-card-label">Protocol Completion</div></div>
