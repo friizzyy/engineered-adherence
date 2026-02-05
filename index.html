@@ -445,26 +445,30 @@ function updateVials(theme){
   document.querySelectorAll('.gs-top').forEach(el => el.setAttribute('stop-color', d ? '#3A3A3A' : '#F0F0F2'));
   document.querySelectorAll('.gs-mid').forEach(el => el.setAttribute('stop-color', d ? '#2E2E2E' : '#E4E4E8'));
   document.querySelectorAll('.gs-bot').forEach(el => el.setAttribute('stop-color', d ? '#262626' : '#CCCCD2'));
-  // Neutral liquid colors for all vials except GHK-Cu
-  document.querySelectorAll('.ls1-top').forEach(el => el.setAttribute('stop-color', d ? '#A09C96' : '#2A2C34'));
-  document.querySelectorAll('.ls1-bot').forEach(el => el.setAttribute('stop-color', d ? '#787470' : '#1C1E24'));
+  // Neutral liquid colors for all vials except GHK-Cu (warm gray, no color tint)
+  const neutralTop = d ? '#A09A94' : '#2A2A2E';
+  const neutralBot = d ? '#787470' : '#1C1C20';
+  document.querySelectorAll('.ls1-top').forEach(el => el.setAttribute('stop-color', neutralTop));
+  document.querySelectorAll('.ls1-bot').forEach(el => el.setAttribute('stop-color', neutralBot));
   // Pillar I - Longevity/GHK-Cu (steel blue - actual product color)
   document.querySelectorAll('.ls2-top').forEach(el => el.setAttribute('stop-color', d ? '#7A8A98' : '#3A4A5A'));
   document.querySelectorAll('.ls2-bot').forEach(el => el.setAttribute('stop-color', d ? '#5A6A78' : '#2A3A4A'));
-  // Neutral for remaining vials
-  document.querySelectorAll('.ls3-top').forEach(el => el.setAttribute('stop-color', d ? '#9C9894' : '#282A32'));
-  document.querySelectorAll('.ls3-bot').forEach(el => el.setAttribute('stop-color', d ? '#74706C' : '#1A1C22'));
-  document.querySelectorAll('.ls4-top').forEach(el => el.setAttribute('stop-color', d ? '#9C9894' : '#282A32'));
-  document.querySelectorAll('.ls4-bot').forEach(el => el.setAttribute('stop-color', d ? '#74706C' : '#1A1C22'));
-  document.querySelectorAll('.ls5-top').forEach(el => el.setAttribute('stop-color', d ? '#9C9894' : '#282A32'));
-  document.querySelectorAll('.ls5-bot').forEach(el => el.setAttribute('stop-color', d ? '#74706C' : '#1A1C22'));
+  // Neutral for remaining vials (same as ls1)
+  document.querySelectorAll('.ls3-top').forEach(el => el.setAttribute('stop-color', neutralTop));
+  document.querySelectorAll('.ls3-bot').forEach(el => el.setAttribute('stop-color', neutralBot));
+  document.querySelectorAll('.ls4-top').forEach(el => el.setAttribute('stop-color', neutralTop));
+  document.querySelectorAll('.ls4-bot').forEach(el => el.setAttribute('stop-color', neutralBot));
+  document.querySelectorAll('.ls5-top').forEach(el => el.setAttribute('stop-color', neutralTop));
+  document.querySelectorAll('.ls5-bot').forEach(el => el.setAttribute('stop-color', neutralBot));
   document.querySelectorAll('.cap-body').forEach(el => { el.setAttribute('fill', d?'#444':'#B8B8BE'); el.setAttribute('stroke', d?'#555':'#A0A0A8'); el.setAttribute('stroke-width','0.6'); });
   document.querySelectorAll('.cap-top-fill').forEach(el => el.setAttribute('fill', d?'#4A4A4A':'#C4C4CA'));
   document.querySelectorAll('.neck-fill').forEach(el => { el.setAttribute('fill', d?'#3A3A3A':'#E4E4E8'); el.setAttribute('stroke', d?'#4A4A4A':'#B8B8BE'); el.setAttribute('stroke-width','0.4'); });
   document.querySelectorAll('.glass-stroke').forEach(el => { el.setAttribute('stroke', d?'#444':'#B8B8BE'); el.setAttribute('stroke-width','0.6'); });
   document.querySelectorAll('.glass-sheen-fill').forEach(el => el.setAttribute('fill', d?'rgba(255,255,255,0.03)':'rgba(255,255,255,0.12)'));
   document.querySelectorAll('.glass-hl').forEach(el => el.setAttribute('stroke', d?'rgba(255,255,255,0.06)':'rgba(255,255,255,0.35)'));
-  const m=d?['rgba(160,156,150,0.2)','rgba(122,138,152,0.25)','rgba(156,152,148,0.2)','rgba(156,152,148,0.2)','rgba(156,152,148,0.2)']:['rgba(42,44,52,0.2)','rgba(58,74,90,0.25)','rgba(40,42,50,0.2)','rgba(40,42,50,0.2)','rgba(40,42,50,0.2)'];
+  // Meniscus colors: neutral for all except GHK-Cu (index 1) which has blue tint
+  const neutralMeniscus = d ? 'rgba(160,154,148,0.2)' : 'rgba(42,42,46,0.2)';
+  const m = [neutralMeniscus, d ? 'rgba(122,138,152,0.25)' : 'rgba(58,74,90,0.25)', neutralMeniscus, neutralMeniscus, neutralMeniscus];
   document.querySelectorAll('.meniscus-1').forEach(el=>el.setAttribute('fill',m[0]));
   document.querySelectorAll('.meniscus-2').forEach(el=>el.setAttribute('fill',m[1]));
   document.querySelectorAll('.meniscus-3').forEach(el=>el.setAttribute('fill',m[2]));
