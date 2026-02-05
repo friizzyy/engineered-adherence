@@ -20,16 +20,16 @@
 
   .pillar-tabs{
     display:flex;
-    gap:8px;
+    gap:6px;
     margin-bottom:48px;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
     justify-content:center;
   }
 
   .pillar-tab{
-    padding:12px 24px;
-    font-size:11px;
-    letter-spacing:2px;
+    padding:12px 18px;
+    font-size:10px;
+    letter-spacing:1.5px;
     text-transform:uppercase;
     font-weight:400;
     color:var(--muted);
@@ -38,6 +38,7 @@
     cursor:pointer;
     transition:all .3s ease;
     position:relative;
+    white-space:nowrap;
   }
 
   .pillar-tab:hover{
@@ -53,8 +54,8 @@
 
   .pillar-tab .tab-count{
     display:inline-block;
-    margin-left:8px;
-    font-size:9px;
+    margin-left:6px;
+    font-size:8px;
     opacity:0.6;
   }
 
