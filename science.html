@@ -13,36 +13,175 @@
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/mobile.css">
 <style>
-  .compound-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:56px}
-  .compound-card{
-    background:var(--bg-card);border:1px solid var(--line);
-    padding:44px 36px;transition:all .5s cubic-bezier(0.4,0,0.2,1);
-    position:relative;overflow:hidden;
+  /* Pillar Filter Tabs */
+  .pillar-tabs{
+    display:flex;
+    gap:6px;
+    margin-top:48px;
+    margin-bottom:48px;
+    flex-wrap:nowrap;
+    justify-content:center;
   }
-  .compound-card::before{
-    content:'';position:absolute;top:0;left:0;right:0;height:1px;
-    background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
-    transform:scaleX(0);transition:transform .5s cubic-bezier(0.4,0,0.2,1);
+  .pillar-tab{
+    padding:12px 18px;
+    font-size:10px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    font-weight:400;
+    color:var(--muted);
+    background:transparent;
+    border:1px solid var(--line);
+    cursor:pointer;
+    transition:all .3s ease;
+    white-space:nowrap;
+  }
+  .pillar-tab:hover{
+    color:var(--text-heading);
+    border-color:var(--line-strong);
+  }
+  .pillar-tab.active{
+    color:var(--accent-solid);
+    border-color:var(--accent-solid);
+    background:var(--bg-card);
+  }
+  .pillar-tab .tab-count{
+    display:inline-block;
+    margin-left:6px;
+    font-size:8px;
     opacity:0.6;
   }
-  .compound-card:hover{
-    transform:translateY(-3px);box-shadow:var(--shadow-card-subtle);
-    border-color:var(--line-strong);background:var(--bg-card-hover);
+
+  /* Compound Grid */
+  .compound-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:20px;
   }
-  .compound-card:hover::before{transform:scaleX(1)}
+  .compound-card{
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    padding:32px 28px;
+    transition:all .4s cubic-bezier(0.4,0,0.2,1);
+    position:relative;
+  }
+  .compound-card::before{
+    content:'';
+    position:absolute;
+    top:0;left:0;right:0;
+    height:3px;
+    background:var(--pillar-color, var(--accent-solid));
+    transform:scaleX(0);
+    transform-origin:left;
+    transition:transform .4s ease;
+  }
+  .compound-card:hover{
+    transform:translateY(-4px);
+    box-shadow:var(--shadow-card-subtle);
+    border-color:var(--line-strong);
+  }
+  .compound-card:hover::before{
+    transform:scaleX(1);
+  }
+
+  /* Pillar color accents */
+  .compound-card[data-pillar="1"]{--pillar-color:#7dd3c0}
+  .compound-card[data-pillar="2"]{--pillar-color:#f5a962}
+  .compound-card[data-pillar="3"]{--pillar-color:#e879a9}
+  .compound-card[data-pillar="4"]{--pillar-color:#8b9cf4}
+  .compound-card[data-pillar="5"]{--pillar-color:#c4a962}
+
+  .compound-pillar-badge{
+    display:inline-block;
+    font-size:9px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--pillar-color, var(--faint));
+    margin-bottom:16px;
+    font-weight:500;
+  }
   .compound-card h3{
     font-family:'Playfair Display',serif;
-    font-size:22px;font-weight:500;margin-bottom:8px;
-    color:var(--text-heading);transition:color .5s;
+    font-size:20px;
+    font-weight:500;
+    margin-bottom:6px;
+    color:var(--text-heading);
+    transition:color .5s;
   }
-  .compound-subtitle{
-    font-size:13px;color:var(--faint);margin-bottom:18px;
-    font-weight:300;font-style:italic;transition:color .5s;
+  .compound-card .subtitle{
+    font-size:12px;
+    color:var(--faint);
+    font-style:italic;
+    margin-bottom:16px;
+    transition:color .5s;
   }
-  .compound-card p{font-size:14px;color:var(--muted);line-height:1.8;font-weight:300;transition:color .5s}
-  .compound-meta{display:flex;gap:12px;margin-bottom:18px;flex-wrap:wrap}
+  .compound-card p{
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.75;
+    font-weight:300;
+    transition:color .5s;
+  }
+  .compound-stats{
+    display:flex;
+    gap:24px;
+    margin-top:20px;
+    padding-top:16px;
+    border-top:1px solid var(--line);
+  }
+  .compound-stat{
+    text-align:center;
+  }
+  .compound-stat .val{
+    font-family:'Playfair Display',serif;
+    font-size:18px;
+    color:var(--text-heading);
+    display:block;
+    transition:color .5s;
+  }
+  .compound-stat .label{
+    font-size:8px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--faint);
+    margin-top:4px;
+    transition:color .5s;
+  }
+
+  /* Source Grid */
   .source-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:56px}
-  @media(max-width:768px){.compound-grid,.source-grid{grid-template-columns:1fr}}
+
+  /* Responsive */
+  @media(max-width:1024px){
+    .compound-grid{grid-template-columns:repeat(2, 1fr)}
+  }
+  @media(max-width:768px){
+    .pillar-tabs{
+      overflow-x:auto;
+      justify-content:flex-start;
+      margin-left:-24px;
+      margin-right:-24px;
+      padding-left:24px;
+      padding-right:24px;
+      scrollbar-width:none;
+    }
+    .pillar-tabs::-webkit-scrollbar{display:none}
+    .pillar-tab{
+      flex-shrink:0;
+      padding:10px 14px;
+      font-size:9px;
+    }
+    .compound-grid{
+      grid-template-columns:1fr;
+      gap:16px;
+    }
+    .compound-card{
+      padding:24px 20px;
+    }
+    .compound-card h3{
+      font-size:18px;
+    }
+    .source-grid{grid-template-columns:1fr}
+  }
 </style>
 </head>
 <body>
@@ -102,89 +241,152 @@
   <p class="section-label">Compound Library</p>
   <h2 class="section-title">The portfolio</h2>
 
+  <!-- Pillar Filter Tabs -->
+  <div class="pillar-tabs">
+    <button class="pillar-tab active" data-filter="all">All<span class="tab-count">12</span></button>
+    <button class="pillar-tab" data-filter="1">I · Longevity<span class="tab-count">2</span></button>
+    <button class="pillar-tab" data-filter="2">II · Recovery<span class="tab-count">3</span></button>
+    <button class="pillar-tab" data-filter="3">III · Metabolic<span class="tab-count">4</span></button>
+    <button class="pillar-tab" data-filter="4">IV · Cognitive<span class="tab-count">2</span></button>
+    <button class="pillar-tab" data-filter="5">V · Performance<span class="tab-count">1</span></button>
+  </div>
+
   <div class="compound-grid stagger-children">
-    <div class="compound-card stagger-item">
-      <div class="compound-meta"><span class="card-tag">Pillar II — Recovery</span></div>
-      <h3>BPC-157</h3>
-      <div class="compound-subtitle">Body Protection Compound</div>
-      <p>Accelerates tendon, ligament, and gut tissue healing with demonstrated angiogenic and anti-inflammatory action. Over 100 preclinical studies support its regenerative profile. One of the most researched compounds in the portfolio.</p>
-    </div>
-
-    <div class="compound-card stagger-item">
-      <div class="compound-meta"><span class="card-tag">Pillar I — Longevity</span></div>
+    <!-- Pillar I - Longevity -->
+    <div class="compound-card stagger-item" data-pillar="1">
+      <span class="compound-pillar-badge">Pillar I · Longevity</span>
       <h3>GHK-Cu</h3>
-      <div class="compound-subtitle">Copper Tripeptide</div>
-      <p>Triggers collagen synthesis, wound repair, and anti-aging gene expression. Research shows activation of over 4,000 genes involved in tissue remodeling, with applications across dermatology, orthopedics, and neuroscience.</p>
+      <div class="subtitle">Copper Tripeptide</div>
+      <p>Triggers collagen synthesis, wound repair, and anti-aging gene expression. Activates over 4,000 genes involved in tissue remodeling.</p>
+      <div class="compound-stats">
+        <div class="compound-stat"><span class="val">4,000+</span><span class="label">Genes</span></div>
+        <div class="compound-stat"><span class="val">Topical</span><span class="label">Route</span></div>
+      </div>
     </div>
 
-    <div class="compound-card stagger-item">
-      <div class="compound-meta"><span class="card-tag">Pillar II — Recovery</span></div>
-      <h3>TB-500</h3>
-      <div class="compound-subtitle">Thymosin Beta-4 Fragment</div>
-      <p>Promotes cell migration, reduces inflammation, and supports recovery from muscle, tendon, and cardiac tissue damage. The primary mechanism involves upregulation of actin, enabling faster tissue repair and reduced scar formation.</p>
-    </div>
-
-    <div class="compound-card stagger-item">
-      <div class="compound-meta"><span class="card-tag">Pillar I — Longevity</span></div>
+    <div class="compound-card stagger-item" data-pillar="1">
+      <span class="compound-pillar-badge">Pillar I · Longevity</span>
       <h3>Epithalon</h3>
-      <div class="compound-subtitle">Telomerase Activator</div>
-      <p>Extends telomere length to slow biological aging. The only peptide with direct evidence of lifespan extension in mammalian studies. Works by stimulating telomerase production in somatic cells.</p>
+      <div class="subtitle">Telomerase Activator</div>
+      <p>Extends telomere length to slow biological aging. The only peptide with direct evidence of lifespan extension in mammalian studies.</p>
+      <div class="compound-stats">
+        <div class="compound-stat"><span class="val">33%</span><span class="label">Lifespan</span></div>
+        <div class="compound-stat"><span class="val">SubQ</span><span class="label">Route</span></div>
+      </div>
     </div>
 
-    <div class="compound-card stagger-item">
-      <div class="compound-meta"><span class="card-tag">Pillar IV — Cognitive</span></div>
-      <h3>Semax</h3>
-      <div class="compound-subtitle">Synthetic ACTH Analog</div>
-      <p>Enhances BDNF expression for cognitive clarity, memory retention, and neuroprotection under physical and psychological stress. Approved as a pharmaceutical in Russia since 2001 for cognitive and vascular conditions.</p>
+    <!-- Pillar II - Recovery -->
+    <div class="compound-card stagger-item" data-pillar="2">
+      <span class="compound-pillar-badge">Pillar II · Recovery</span>
+      <h3>BPC-157</h3>
+      <div class="subtitle">Body Protection Compound</div>
+      <p>Accelerates tendon, ligament, and gut tissue healing with demonstrated angiogenic and anti-inflammatory action.</p>
+      <div class="compound-stats">
+        <div class="compound-stat"><span class="val">100+</span><span class="label">Studies</span></div>
+        <div class="compound-stat"><span class="val">Oral/SubQ</span><span class="label">Route</span></div>
+      </div>
     </div>
 
-    <div class="compound-card stagger-item">
-      <div class="compound-meta"><span class="card-tag">Pillar V — Performance</span></div>
-      <h3>CJC-1295 / Ipamorelin</h3>
-      <div class="compound-subtitle">GH Secretagogue Stack</div>
-      <p>Stimulates natural GH pulsatility for lean mass, fat metabolism, and deep restorative sleep architecture. The combination produces synergistic GH release without appetite stimulation or cortisol increase.</p>
+    <div class="compound-card stagger-item" data-pillar="2">
+      <span class="compound-pillar-badge">Pillar II · Recovery</span>
+      <h3>TB-500</h3>
+      <div class="subtitle">Thymosin Beta-4 Fragment</div>
+      <p>Promotes cell migration, reduces inflammation, and supports recovery from muscle, tendon, and cardiac tissue damage.</p>
+      <div class="compound-stats">
+        <div class="compound-stat"><span class="val">Fast</span><span class="label">Onset</span></div>
+        <div class="compound-stat"><span class="val">SubQ</span><span class="label">Route</span></div>
+      </div>
     </div>
 
-    <div class="compound-card stagger-item">
-      <div class="compound-meta"><span class="card-tag">Pillar III — Metabolic</span></div>
-      <h3>Tesamorelin</h3>
-      <div class="compound-subtitle">GHRH Analog</div>
-      <p>FDA-approved for visceral adipose tissue reduction. Stimulates the pituitary to produce growth hormone through the natural GHRH pathway, resulting in targeted abdominal fat reduction while preserving lean mass.</p>
-    </div>
-
-    <div class="compound-card stagger-item">
-      <div class="compound-meta"><span class="card-tag">Pillar IV — Cognitive</span></div>
-      <h3>Selank</h3>
-      <div class="compound-subtitle">Tuftsin Analog</div>
-      <p>Anxiolytic peptide with demonstrated effects on stress resilience, mood regulation, and immune modulation. Operates through GABA-ergic pathways without sedation or dependency risks. Complementary to Semax in cognitive stacks.</p>
-    </div>
-
-    <div class="compound-card stagger-item">
-      <div class="compound-meta"><span class="card-tag">Pillar III — Metabolic</span></div>
-      <h3>AOD-9604</h3>
-      <div class="compound-subtitle">Modified GH Fragment</div>
-      <p>Modified fragment of human growth hormone targeting fat metabolism without impacting IGF-1 levels or blood sugar. Stimulates lipolysis and inhibits lipogenesis for body composition changes without systemic GH effects.</p>
-    </div>
-
-    <div class="compound-card stagger-item">
-      <div class="compound-meta"><span class="card-tag">Pillar III — Metabolic</span></div>
-      <h3>5-Amino-1MQ</h3>
-      <div class="compound-subtitle">NNMT Inhibitor</div>
-      <p>Small molecule that inhibits NNMT, an enzyme linked to metabolic dysfunction and obesity. Research demonstrates increased NAD+ levels, enhanced cellular energy metabolism, and potential reversal of diet-induced obesity pathways.</p>
-    </div>
-
-    <div class="compound-card stagger-item">
-      <div class="compound-meta"><span class="card-tag">Pillar II — Recovery</span></div>
+    <div class="compound-card stagger-item" data-pillar="2">
+      <span class="compound-pillar-badge">Pillar II · Recovery</span>
       <h3>KPV</h3>
-      <div class="compound-subtitle">Alpha-MSH Fragment</div>
-      <p>Anti-inflammatory tripeptide derived from alpha-melanocyte-stimulating hormone. Reduces gut inflammation, supports intestinal barrier function, and modulates immune responses. Particularly effective for inflammatory bowel conditions and systemic inflammation.</p>
+      <div class="subtitle">Alpha-MSH Fragment</div>
+      <p>Anti-inflammatory tripeptide that reduces gut inflammation, supports intestinal barrier function, and modulates immune responses.</p>
+      <div class="compound-stats">
+        <div class="compound-stat"><span class="val">Gut</span><span class="label">Target</span></div>
+        <div class="compound-stat"><span class="val">Oral</span><span class="label">Route</span></div>
+      </div>
     </div>
 
-    <div class="compound-card stagger-item">
-      <div class="compound-meta"><span class="card-tag">Pillar III — Metabolic</span></div>
+    <!-- Pillar III - Metabolic -->
+    <div class="compound-card stagger-item" data-pillar="3">
+      <span class="compound-pillar-badge">Pillar III · Metabolic</span>
+      <h3>Tesamorelin</h3>
+      <div class="subtitle">GHRH Analog</div>
+      <p>FDA-approved for visceral adipose tissue reduction. Stimulates natural growth hormone production through the GHRH pathway.</p>
+      <div class="compound-stats">
+        <div class="compound-stat"><span class="val">FDA</span><span class="label">Approved</span></div>
+        <div class="compound-stat"><span class="val">SubQ</span><span class="label">Route</span></div>
+      </div>
+    </div>
+
+    <div class="compound-card stagger-item" data-pillar="3">
+      <span class="compound-pillar-badge">Pillar III · Metabolic</span>
+      <h3>AOD-9604</h3>
+      <div class="subtitle">Modified GH Fragment</div>
+      <p>Modified fragment of human growth hormone targeting fat metabolism without impacting IGF-1 levels or blood sugar.</p>
+      <div class="compound-stats">
+        <div class="compound-stat"><span class="val">Fat</span><span class="label">Target</span></div>
+        <div class="compound-stat"><span class="val">SubQ</span><span class="label">Route</span></div>
+      </div>
+    </div>
+
+    <div class="compound-card stagger-item" data-pillar="3">
+      <span class="compound-pillar-badge">Pillar III · Metabolic</span>
+      <h3>5-Amino-1MQ</h3>
+      <div class="subtitle">NNMT Inhibitor</div>
+      <p>Small molecule that inhibits NNMT, increasing NAD+ levels and enhancing cellular energy metabolism.</p>
+      <div class="compound-stats">
+        <div class="compound-stat"><span class="val">NAD+</span><span class="label">Pathway</span></div>
+        <div class="compound-stat"><span class="val">Oral</span><span class="label">Route</span></div>
+      </div>
+    </div>
+
+    <div class="compound-card stagger-item" data-pillar="3">
+      <span class="compound-pillar-badge">Pillar III · Metabolic</span>
       <h3>Retatrutide</h3>
-      <div class="compound-subtitle">Triple Agonist (GIP/GLP-1/Glucagon)</div>
-      <p>Triple agonist targeting GIP, GLP-1, and glucagon receptors simultaneously. Clinical trials show weight loss exceeding 24% of body weight. Works through coordinated appetite regulation, glucose metabolism, and increased energy expenditure.</p>
+      <div class="subtitle">Triple Agonist</div>
+      <p>Triple agonist targeting GIP, GLP-1, and glucagon receptors. Clinical trials show weight loss exceeding 24% of body weight.</p>
+      <div class="compound-stats">
+        <div class="compound-stat"><span class="val">24%</span><span class="label">Weight Loss</span></div>
+        <div class="compound-stat"><span class="val">SubQ</span><span class="label">Route</span></div>
+      </div>
+    </div>
+
+    <!-- Pillar IV - Cognitive -->
+    <div class="compound-card stagger-item" data-pillar="4">
+      <span class="compound-pillar-badge">Pillar IV · Cognitive</span>
+      <h3>Semax</h3>
+      <div class="subtitle">Synthetic ACTH Analog</div>
+      <p>Enhances BDNF expression for cognitive clarity, memory retention, and neuroprotection under stress.</p>
+      <div class="compound-stats">
+        <div class="compound-stat"><span class="val">BDNF</span><span class="label">Pathway</span></div>
+        <div class="compound-stat"><span class="val">Nasal</span><span class="label">Route</span></div>
+      </div>
+    </div>
+
+    <div class="compound-card stagger-item" data-pillar="4">
+      <span class="compound-pillar-badge">Pillar IV · Cognitive</span>
+      <h3>Selank</h3>
+      <div class="subtitle">Tuftsin Analog</div>
+      <p>Anxiolytic peptide with effects on stress resilience and mood regulation through GABA-ergic pathways.</p>
+      <div class="compound-stats">
+        <div class="compound-stat"><span class="val">GABA</span><span class="label">Pathway</span></div>
+        <div class="compound-stat"><span class="val">Nasal</span><span class="label">Route</span></div>
+      </div>
+    </div>
+
+    <!-- Pillar V - Performance -->
+    <div class="compound-card stagger-item" data-pillar="5">
+      <span class="compound-pillar-badge">Pillar V · Performance</span>
+      <h3>CJC-1295 / Ipamorelin</h3>
+      <div class="subtitle">GH Secretagogue Stack</div>
+      <p>Stimulates natural GH pulsatility for lean mass, fat metabolism, and deep restorative sleep architecture.</p>
+      <div class="compound-stats">
+        <div class="compound-stat"><span class="val">GH</span><span class="label">Pathway</span></div>
+        <div class="compound-stat"><span class="val">SubQ</span><span class="label">Route</span></div>
+      </div>
     </div>
   </div>
 </section>
@@ -259,5 +461,37 @@
 
 <script src="js/main.js"></script>
 <script src="js/mobile.js"></script>
+<script>
+// Pillar Tab Filtering
+(function(){
+  const tabs = document.querySelectorAll('.pillar-tab');
+  const cards = document.querySelectorAll('.compound-card');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      // Update active tab
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      // Filter cards
+      const filter = tab.dataset.filter;
+      cards.forEach(card => {
+        if(filter === 'all' || card.dataset.pillar === filter){
+          card.style.display = '';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(10px)';
+          setTimeout(() => {
+            card.style.transition = 'opacity .3s ease, transform .3s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 50);
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+})();
+</script>
 </body>
 </html>
