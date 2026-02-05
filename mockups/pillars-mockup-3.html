@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pillars Mockup 3 — Horizontal Timeline</title>
+<script>
+(function(){
+  var t = localStorage.getItem('ea-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* ═══════════════════════════════════════════
+   MOCKUP 3: HORIZONTAL TIMELINE / JOURNEY
+   Side-scrolling progression with sticky nav
+   ═══════════════════════════════════════════ */
+
+.pillars-nav{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-bottom:56px;
+  position:sticky;
+  top:80px;
+  z-index:50;
+  background:var(--bg);
+  padding:20px 0;
+}
+
+.pillar-nav-btn{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 24px;
+  background:transparent;
+  border:1px solid var(--line);
+  cursor:pointer;
+  transition:all .3s ease;
+}
+
+.pillar-nav-btn:hover{
+  border-color:var(--line-strong);
+}
+
+.pillar-nav-btn.active{
+  background:var(--bg-card);
+  border-color:var(--accent-solid);
+}
+
+.pillar-nav-num{
+  font-family:'Playfair Display',serif;
+  font-size:20px;
+  font-weight:600;
+  color:var(--accent-solid);
+}
+
+.pillar-nav-label{
+  font-size:11px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.pillar-nav-btn.active .pillar-nav-label{
+  color:var(--text-heading);
+}
+
+/* Main content panels */
+.pillars-panels{
+  max-width:1000px;
+  margin:0 auto;
+}
+
+.pillar-panel{
+  display:none;
+  animation:fadeIn .4s ease;
+}
+
+.pillar-panel.active{
+  display:block;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.panel-header{
+  text-align:center;
+  margin-bottom:56px;
+}
+
+.panel-num{
+  font-family:'Playfair Display',serif;
+  font-size:100px;
+  font-weight:600;
+  color:var(--pillar-accent);
+  line-height:1;
+  opacity:0.3;
+  margin-bottom:-20px;
+}
+
+.panel-header h2{
+  font-size:32px;
+  font-weight:400;
+  color:var(--text-heading);
+  margin:0 0 12px;
+}
+
+.panel-header p{
+  font-size:16px;
+  color:var(--muted);
+  max-width:500px;
+  margin:0 auto;
+}
+
+.panel-content{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+}
+
+.compounds-section h4,
+.impact-section h4{
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--faint);
+  margin:0 0 20px;
+}
+
+.compound-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 0;
+  border-bottom:1px solid var(--line);
+}
+
+.compound-row:last-child{border-bottom:none}
+
+.compound-name{
+  font-size:16px;
+  color:var(--text-heading);
+  font-weight:400;
+}
+
+.compound-role{
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  padding:6px 12px;
+  background:var(--bg-card);
+  border:1px solid var(--line);
+}
+
+.impact-card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  padding:32px;
+  height:100%;
+}
+
+.impact-card p{
+  font-size:15px;
+  color:var(--muted);
+  line-height:1.8;
+  margin:0 0 24px;
+}
+
+.impact-stats{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+}
+
+.impact-stat{
+  text-align:center;
+}
+
+.impact-stat-val{
+  font-size:28px;
+  font-weight:300;
+  color:var(--pillar-accent);
+}
+
+.impact-stat-label{
+  font-size:10px;
+  color:var(--faint);
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-top:4px;
+}
+
+/* Pillar accent colors */
+[data-pillar="1"]{--pillar-accent:#7A8A98}
+[data-pillar="2"]{--pillar-accent:#f5a962}
+[data-pillar="3"]{--pillar-accent:#e879a9}
+[data-pillar="4"]{--pillar-accent:#8b9cf4}
+[data-pillar="5"]{--pillar-accent:#c4a962}
+
+@media(max-width:768px){
+  .pillars-nav{
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .pillar-nav-btn{
+    padding:10px 16px;
+  }
+  .pillar-nav-label{display:none}
+  .panel-content{grid-template-columns:1fr}
+  .panel-num{font-size:60px}
+  .panel-header h2{font-size:24px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="logo">Engineered Adherence</a>
+  <ul class="nav-center">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../pillars.html" class="active">Pillars</a></li>
+    <li><a href="../protocols.html">Protocols</a></li>
+    <li><a href="../science.html">Science</a></li>
+    <li><a href="../market.html">Market</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+    <a href="../contact.html" class="nav-cta">Book Consultation</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <p class="section-label">The Framework</p>
+  <h1 class="section-title">Five Pillars of<br>human transformation</h1>
+  <p class="section-body">Navigate through each pillar to explore the complete framework.</p>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section">
+  <div class="pillars-nav">
+    <button class="pillar-nav-btn active" data-target="1">
+      <span class="pillar-nav-num">I</span>
+      <span class="pillar-nav-label">Longevity</span>
+    </button>
+    <button class="pillar-nav-btn" data-target="2">
+      <span class="pillar-nav-num">II</span>
+      <span class="pillar-nav-label">Recovery</span>
+    </button>
+    <button class="pillar-nav-btn" data-target="3">
+      <span class="pillar-nav-num">III</span>
+      <span class="pillar-nav-label">Metabolic</span>
+    </button>
+    <button class="pillar-nav-btn" data-target="4">
+      <span class="pillar-nav-num">IV</span>
+      <span class="pillar-nav-label">Cognitive</span>
+    </button>
+    <button class="pillar-nav-btn" data-target="5">
+      <span class="pillar-nav-num">V</span>
+      <span class="pillar-nav-label">Performance</span>
+    </button>
+  </div>
+
+  <div class="pillars-panels">
+
+    <div class="pillar-panel active" data-pillar="1">
+      <div class="panel-header">
+        <div class="panel-num">I</div>
+        <h2>Cellular Repair & Longevity</h2>
+        <p>Systemic resilience and long-term vitality. Foundational cellular processes that degrade with age.</p>
+      </div>
+      <div class="panel-content">
+        <div class="compounds-section">
+          <h4>Core Compounds</h4>
+          <div class="compound-row">
+            <span class="compound-name">GHK-Cu</span>
+            <span class="compound-role">Collagen synthesis</span>
+          </div>
+          <div class="compound-row">
+            <span class="compound-name">Epithalon</span>
+            <span class="compound-role">Telomerase activation</span>
+          </div>
+          <div class="compound-row">
+            <span class="compound-name">Thymalin</span>
+            <span class="compound-role">Immune modulation</span>
+          </div>
+        </div>
+        <div class="impact-section">
+          <h4>Adherence Impact</h4>
+          <div class="impact-card">
+            <p>Longevity compounds create systemic improvements that build over time: better sleep, reduced inflammation, improved skin and tissue quality.</p>
+            <div class="impact-stats">
+              <div class="impact-stat">
+                <div class="impact-stat-val">8-12</div>
+                <div class="impact-stat-label">Week timeline</div>
+              </div>
+              <div class="impact-stat">
+                <div class="impact-stat-val">Systemic</div>
+                <div class="impact-stat-label">Effect type</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-panel" data-pillar="2">
+      <div class="panel-header">
+        <div class="panel-num">II</div>
+        <h2>Injury Recovery & Resilience</h2>
+        <p>Reduce pain, accelerate healing, and prevent training dropout.</p>
+      </div>
+      <div class="panel-content">
+        <div class="compounds-section">
+          <h4>Core Compounds</h4>
+          <div class="compound-row">
+            <span class="compound-name">BPC-157</span>
+            <span class="compound-role">Tissue repair</span>
+          </div>
+          <div class="compound-row">
+            <span class="compound-name">TB-500</span>
+            <span class="compound-role">Cell migration</span>
+          </div>
+          <div class="compound-row">
+            <span class="compound-name">KPV</span>
+            <span class="compound-role">Anti-inflammatory</span>
+          </div>
+          <div class="compound-row">
+            <span class="compound-name">Pentosan Polysulfate</span>
+            <span class="compound-role">Joint protection</span>
+          </div>
+        </div>
+        <div class="impact-section">
+          <h4>Adherence Impact</h4>
+          <div class="impact-card">
+            <p>Recovery peptides create the fastest visible feedback loop. Reduced soreness and pain reduction are felt within days.</p>
+            <div class="impact-stats">
+              <div class="impact-stat">
+                <div class="impact-stat-val">3-7</div>
+                <div class="impact-stat-label">Day response</div>
+              </div>
+              <div class="impact-stat">
+                <div class="impact-stat-val">Fastest</div>
+                <div class="impact-stat-label">Feedback loop</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-panel" data-pillar="3">
+      <div class="panel-header">
+        <div class="panel-num">III</div>
+        <h2>Metabolic Reset & Composition</h2>
+        <p>Restore metabolic responsiveness and create early momentum.</p>
+      </div>
+      <div class="panel-content">
+        <div class="compounds-section">
+          <h4>Core Compounds</h4>
+          <div class="compound-row">
+            <span class="compound-name">Retatrutide</span>
+            <span class="compound-role">Triple agonist</span>
+          </div>
+          <div class="compound-row">
+            <span class="compound-name">Tirzepatide</span>
+            <span class="compound-role">Dual GIP/GLP-1</span>
+          </div>
+          <div class="compound-row">
+            <span class="compound-name">Semaglutide</span>
+            <span class="compound-role">GLP-1 agonist</span>
+          </div>
+          <div class="compound-row">
+            <span class="compound-name">Tesamorelin</span>
+            <span class="compound-role">Visceral fat reduction</span>
+          </div>
+        </div>
+        <div class="impact-section">
+          <h4>Adherence Impact</h4>
+          <div class="impact-card">
+            <p>Metabolic peptides create the scale movement and body composition changes that new clients need to see in weeks 2–6.</p>
+            <div class="impact-stats">
+              <div class="impact-stat">
+                <div class="impact-stat-val">2-6</div>
+                <div class="impact-stat-label">Week visibility</div>
+              </div>
+              <div class="impact-stat">
+                <div class="impact-stat-val">24%</div>
+                <div class="impact-stat-label">Max weight loss</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-panel" data-pillar="4">
+      <div class="panel-header">
+        <div class="panel-num">IV</div>
+        <h2>Cognitive Performance & Consistency</h2>
+        <p>Focus, stress regulation, and mental discipline for training.</p>
+      </div>
+      <div class="panel-content">
+        <div class="compounds-section">
+          <h4>Core Compounds</h4>
+          <div class="compound-row">
+            <span class="compound-name">Semax</span>
+            <span class="compound-role">BDNF expression</span>
+          </div>
+          <div class="compound-row">
+            <span class="compound-name">Selank</span>
+            <span class="compound-role">Anxiolytic</span>
+          </div>
+          <div class="compound-row">
+            <span class="compound-name">Dihexa</span>
+            <span class="compound-role">Neuroplasticity</span>
+          </div>
+        </div>
+        <div class="impact-section">
+          <h4>Adherence Impact</h4>
+          <div class="impact-card">
+            <p>Cognitive compounds reduce the mental friction of discipline. Better focus and lower anxiety make daily decisions easier.</p>
+            <div class="impact-stats">
+              <div class="impact-stat">
+                <div class="impact-stat-val">BDNF</div>
+                <div class="impact-stat-label">Primary pathway</div>
+              </div>
+              <div class="impact-stat">
+                <div class="impact-stat-val">Daily</div>
+                <div class="impact-stat-label">Effect duration</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-panel" data-pillar="5">
+      <div class="panel-header">
+        <div class="panel-num">V</div>
+        <h2>Muscle Growth, Strength & Capacity</h2>
+        <p>Lean mass as a metabolic and structural health asset.</p>
+      </div>
+      <div class="panel-content">
+        <div class="compounds-section">
+          <h4>Core Compounds</h4>
+          <div class="compound-row">
+            <span class="compound-name">CJC-1295 / Ipamorelin</span>
+            <span class="compound-role">GH secretagogue</span>
+          </div>
+          <div class="compound-row">
+            <span class="compound-name">MK-677</span>
+            <span class="compound-role">Oral GH secretagogue</span>
+          </div>
+          <div class="compound-row">
+            <span class="compound-name">Follistatin 344</span>
+            <span class="compound-role">Myostatin inhibition</span>
+          </div>
+        </div>
+        <div class="impact-section">
+          <h4>Adherence Impact</h4>
+          <div class="impact-card">
+            <p>Performance compounds create strength gains that make training feel rewarding. That cycle is the foundation of permanent change.</p>
+            <div class="impact-stats">
+              <div class="impact-stat">
+                <div class="impact-stat-val">GH</div>
+                <div class="impact-stat-label">Primary pathway</div>
+              </div>
+              <div class="impact-stat">
+                <div class="impact-stat-val">4-8</div>
+                <div class="impact-stat-label">Week gains</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="cta-band reveal">
+  <p class="section-label">Get Started</p>
+  <h2 class="section-title">Begin your protocol</h2>
+  <p class="section-body">Schedule a private consultation to discuss your goals.</p>
+  <a href="../contact.html" class="btn btn-lg">Book Consultation</a>
+</section>
+
+<script>
+// Tab navigation
+document.querySelectorAll('.pillar-nav-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.dataset.target;
+
+    // Update nav buttons
+    document.querySelectorAll('.pillar-nav-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Update panels
+    document.querySelectorAll('.pillar-panel').forEach(p => p.classList.remove('active'));
+    document.querySelector(`.pillar-panel[data-pillar="${target}"]`).classList.add('active');
+  });
+});
+</script>
+<script src="../js/main.js"></script>
+</body>
+</html>

@@ -3,18 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Science — Engineered Adherence</title>
+<title>Pillars Mockup 3C — Side Panel Detail</title>
 <script>
 (function(){
   var t = localStorage.getItem('ea-theme') || 'dark';
   document.documentElement.setAttribute('data-theme', t);
 })();
 </script>
-<link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/mobile.css">
+<link rel="stylesheet" href="../css/style.css">
 <style>
 /* ═══════════════════════════════════════════
-   PILLARS NAVIGATION
+   MOCKUP 3C: SIDE PANEL SLIDE-IN
+   Click compound - right panel slides in with details
+   Replaces the impact card area with compound detail
    ═══════════════════════════════════════════ */
 
 .pillars-nav{
@@ -405,149 +406,38 @@
 [data-pillar="4"]{--pillar-accent:#B8A8B8}
 [data-pillar="5"]{--pillar-accent:#c4a962}
 
-/* ═══════════════════════════════════════════
-   SOURCING & QUALITY SECTION
-   ═══════════════════════════════════════════ */
-
-.source-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr 1fr;
-  gap:16px;
-  margin-top:56px;
-}
-
-/* ═══════════════════════════════════════════
-   RESPONSIVE
-   ═══════════════════════════════════════════ */
-
 @media(max-width:768px){
-  /* Pillars nav - horizontal scroll on mobile */
-  .pillars-nav{
-    flex-wrap:nowrap;
-    gap:6px;
-    overflow-x:auto;
-    overflow-y:hidden;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-    padding:16px 24px;
-    margin:0 -24px 32px;
-    justify-content:flex-start;
-    top:60px;
-  }
-  .pillars-nav::-webkit-scrollbar{display:none}
-  .pillar-nav-btn{
-    padding:10px 14px;
-    flex-shrink:0;
-  }
+  .pillars-nav{flex-wrap:wrap;gap:6px}
+  .pillar-nav-btn{padding:10px 16px}
   .pillar-nav-label{display:none}
-
-  /* Panel header - compact */
-  .panel-header{margin-bottom:32px}
-  .panel-num{font-size:48px;margin-bottom:-12px}
-  .panel-header h2{font-size:22px}
-  .panel-header p{font-size:14px}
-
-  /* Panel content - stack vertically */
-  .panel-content{
-    grid-template-columns:1fr;
-    gap:24px;
-  }
-
-  /* Compounds section */
-  .compounds-section h4{margin-bottom:12px}
-  .compound-row{padding:14px 12px;margin:0 -12px}
-  .compound-name{font-size:15px}
-  .compound-role{font-size:10px;padding:5px 10px}
-
-  /* Detail panel - full width on mobile */
-  .detail-panel{min-height:auto}
-  .impact-card{padding:24px}
-  .impact-card p{font-size:14px;margin-bottom:20px}
-  .impact-stats{gap:12px;padding-top:20px}
-  .impact-stat-val{font-size:24px}
-  .impact-stat-label{font-size:9px}
-
-  /* Compound detail card */
-  .compound-detail-card{position:relative}
-  .compound-detail-header{padding:20px}
-  .compound-detail-header h3{font-size:18px}
-  .compound-detail-body{padding:20px}
-  .compound-detail-desc{font-size:13px;margin-bottom:20px}
-  .detail-stats-row{grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
-  .detail-stat{padding:12px 8px}
-  .detail-stat-val{font-size:14px}
-  .detail-stat-label{font-size:7px}
-  .detail-protocol{padding:14px}
-  .detail-protocol p{font-size:12px}
-
-  /* Source grid - horizontal swipe */
-  .source-grid{
-    display:flex !important;
-    grid-template-columns:unset !important;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
-    gap:12px;
-    margin-left:-24px;
-    margin-right:-24px;
-    padding-left:24px;
-    padding-right:24px;
-  }
-  .source-grid::-webkit-scrollbar{display:none}
-  .source-grid .card{
-    flex:0 0 280px;
-    scroll-snap-align:center;
-  }
+  .panel-content{grid-template-columns:1fr}
+  .panel-num{font-size:60px}
+  .panel-header h2{font-size:24px}
+  .detail-stats-row{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="index.html" class="logo">Engineered Adherence</a>
+  <a href="../index.html" class="logo">Engineered Adherence</a>
   <ul class="nav-center">
-    <li><a href="about.html">About</a></li>
-    <li><a href="science.html" class="active">Science</a></li>
-    <li><a href="protocols.html">Protocols</a></li>
-    <li><a href="market.html">Market</a></li>
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../pillars.html" class="active">Pillars</a></li>
+    <li><a href="../protocols.html">Protocols</a></li>
+    <li><a href="../science.html">Science</a></li>
+    <li><a href="../market.html">Market</a></li>
   </ul>
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
-    <a href="contact.html" class="nav-cta">Book Consultation</a>
-    <button class="mobile-menu-btn" aria-label="Open menu">
-      <span></span><span></span><span></span>
-    </button>
+    <a href="../contact.html" class="nav-cta">Book Consultation</a>
   </div>
 </nav>
 
-<div class="mobile-nav-overlay"></div>
-<div class="mobile-nav">
-  <ul class="mobile-nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="science.html">Science</a></li>
-    <li><a href="protocols.html">Protocols</a></li>
-    <li><a href="market.html">Market</a></li>
-  </ul>
-  <a href="contact.html" class="mobile-nav-cta">Book Consultation</a>
-  <div class="mobile-nav-footer">
-    <div class="mobile-theme-switch">
-      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
-      </svg>
-      <button class="theme-toggle-track" id="mobileThemeToggle" aria-label="Toggle theme">
-        <span class="theme-toggle-knob"></span>
-      </button>
-      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-      </svg>
-    </div>
-  </div>
-</div>
-
 <section class="page-hero">
-  <p class="section-label">The Science</p>
+  <p class="section-label">The Framework</p>
   <h1 class="section-title">Five Pillars of<br>human transformation</h1>
-  <p class="section-body">Every peptide in our protocols is selected based on published clinical evidence, dosing precision, and synergistic stacking potential. Select any compound to explore detailed mechanisms and protocols.</p>
+  <p class="section-body">Select any compound to explore detailed mechanisms and protocols.</p>
 </section>
 
 <div class="divider"><div class="divider-line"></div></div>
@@ -946,71 +836,12 @@
 
 <div class="divider"><div class="divider-line"></div></div>
 
-<section class="section reveal">
-  <p class="section-label">Sourcing & Quality</p>
-  <h2 class="section-title">Pharmaceutical discipline<br>at every step</h2>
-  <p class="section-body" style="max-width:600px;margin-bottom:0">The company does not manufacture peptides. It operates as a branded distributor sourcing exclusively from GMP-certified facilities. Pharmaceutical discipline applies to every compound regardless of regulatory classification.</p>
-
-  <div class="source-grid stagger-children">
-    <div class="card stagger-item">
-      <span class="card-tag">Primary</span>
-      <h3>US-Sourced</h3>
-      <p>FDA-registered compounding pharmacies for established peptides with the highest regulatory confidence. Full chain-of-custody documentation for every batch.</p>
-    </div>
-    <div class="card stagger-item">
-      <span class="card-tag">Secondary</span>
-      <h3>EU-Sourced</h3>
-      <p>EU-GMP certified laboratories for research-grade compounds with documented safety profiles. European regulatory standards applied to all manufacturing processes.</p>
-    </div>
-    <div class="card stagger-item">
-      <span class="card-tag">Complementary</span>
-      <h3>India-Sourced</h3>
-      <p>Cost-effective GMP manufacturing for oral and topical formulations. Same quality standards, same testing protocols, applied to high-volume supplement-classified products.</p>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><div class="divider-line"></div></div>
-
-<section class="section reveal">
-  <div class="two-col">
-    <div>
-      <p class="section-label">Transparency System</p>
-      <h2 class="section-title">Every product,<br>fully traceable</h2>
-      <p class="section-body">Every product carries a QR code linking to its Certificate of Analysis, batch number, expiration date, sourcing origin, and storage instructions. This is a non-negotiable brand standard.</p>
-    </div>
-    <div>
-      <div class="three-col" style="grid-template-columns:1fr 1fr">
-        <div class="card"><h3>CoA Access</h3><p>Certificate of Analysis for every batch, accessible by QR scan on the product itself.</p></div>
-        <div class="card"><h3>Batch Tracking</h3><p>Every unit traceable to its manufacturing batch with full purity testing records.</p></div>
-        <div class="card"><h3>Cold Chain</h3><p>Temperature-controlled from manufacturer to end user. Real-time monitoring logs maintained.</p></div>
-        <div class="card"><h3>Third-Party Testing</h3><p>Independent lab verification on every batch before distribution. No exceptions.</p></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"><div class="divider-line"></div></div>
-
 <section class="cta-band reveal">
   <p class="section-label">Get Started</p>
   <h2 class="section-title">Begin your protocol</h2>
-  <p class="section-body">Schedule a private consultation to discuss your goals, review biomarkers, and receive a tailored peptide protocol.</p>
-  <a href="contact.html" class="btn btn-lg">Book Consultation</a>
+  <p class="section-body">Schedule a private consultation to discuss your goals.</p>
+  <a href="../contact.html" class="btn btn-lg">Book Consultation</a>
 </section>
-
-<div class="divider"><div class="divider-line"></div></div>
-
-<footer>
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="index.html" class="logo">Engineered Adherence</a><p>Peptide therapeutics integrated into structured wellness programs. Designed for adherence, built for results.</p></div>
-    <div class="footer-links">
-      <div class="footer-col"><h4>Platform</h4><a href="science.html">Science</a><a href="protocols.html">Protocols</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="market.html">Market</a><a href="contact.html">Contact</a></div>
-    </div>
-  </div>
-  <div class="footer-bottom"><span>2026 Engineered Adherence</span><span>Doha, Qatar</span></div>
-</footer>
 
 <script>
 // Compound data
@@ -1088,31 +919,7 @@ document.querySelectorAll('.compound-detail-close').forEach(btn => {
     panel.querySelectorAll('.compound-row').forEach(r => r.classList.remove('selected'));
   });
 });
-
-// Handle URL hash to open specific pillar
-function selectPillarFromHash(){
-  const hash = window.location.hash;
-  if(hash && hash.startsWith('#pillar-')){
-    const pillarNum = hash.replace('#pillar-','');
-    const btn = document.querySelector(`.pillar-nav-btn[data-target="${pillarNum}"]`);
-    if(btn){
-      btn.click();
-      // Scroll to center the pillar content nicely
-      setTimeout(() => {
-        const pillarsNav = document.querySelector('.pillars-nav');
-        if(pillarsNav){
-          const navTop = pillarsNav.getBoundingClientRect().top + window.pageYOffset;
-          // Position pillars-nav ~300px from top of viewport for centered view
-          window.scrollTo({top: navTop - 300, behavior: 'smooth'});
-        }
-      }, 150);
-    }
-  }
-}
-selectPillarFromHash();
-window.addEventListener('hashchange', selectPillarFromHash);
 </script>
-<script src="js/main.js"></script>
-<script src="js/mobile.js"></script>
+<script src="../js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pillars Mockup 2 — Stacked Cards</title>
+<script>
+(function(){
+  var t = localStorage.getItem('ea-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* ═══════════════════════════════════════════
+   MOCKUP 2: STACKED CARDS WITH COLOR ACCENTS
+   All visible at once, compact grid, color-coded
+   ═══════════════════════════════════════════ */
+
+.pillars-grid{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:16px;
+  max-width:1200px;
+  margin:0 auto;
+}
+
+.pillar-card{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  padding:32px 24px;
+  position:relative;
+  overflow:hidden;
+  transition:all .3s ease;
+}
+
+.pillar-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:3px;
+  background:var(--pillar-accent);
+}
+
+.pillar-card:hover{
+  transform:translateY(-4px);
+  border-color:var(--pillar-accent);
+  box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+
+.pillar-card[data-pillar="1"]{--pillar-accent:#7A8A98}
+.pillar-card[data-pillar="2"]{--pillar-accent:#f5a962}
+.pillar-card[data-pillar="3"]{--pillar-accent:#e879a9}
+.pillar-card[data-pillar="4"]{--pillar-accent:#8b9cf4}
+.pillar-card[data-pillar="5"]{--pillar-accent:#c4a962}
+
+.pillar-card-num{
+  font-family:'Playfair Display',serif;
+  font-size:48px;
+  font-weight:600;
+  color:var(--pillar-accent);
+  line-height:1;
+  margin-bottom:20px;
+  opacity:0.8;
+}
+
+.pillar-card h3{
+  font-size:15px;
+  font-weight:500;
+  color:var(--text-heading);
+  margin:0 0 8px;
+  line-height:1.4;
+}
+
+.pillar-card-subtitle{
+  font-size:11px;
+  color:var(--muted);
+  letter-spacing:0.5px;
+  margin-bottom:24px;
+  line-height:1.5;
+}
+
+.compound-pills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-bottom:20px;
+}
+
+.compound-pill{
+  font-size:10px;
+  padding:6px 10px;
+  background:var(--bg);
+  border:1px solid var(--line);
+  color:var(--muted);
+  letter-spacing:0.3px;
+}
+
+.pillar-card-impact{
+  font-size:12px;
+  color:var(--faint);
+  line-height:1.6;
+  padding-top:16px;
+  border-top:1px solid var(--line);
+}
+
+/* Stats row at bottom */
+.pillars-stats{
+  display:grid;
+  grid-template-columns:repeat(5, 1fr);
+  gap:16px;
+  max-width:1200px;
+  margin:48px auto 0;
+}
+
+.pillar-stat{
+  text-align:center;
+  padding:24px;
+  background:var(--bg-card);
+  border:1px solid var(--line);
+}
+
+.pillar-stat-num{
+  font-size:32px;
+  font-weight:300;
+  color:var(--text-heading);
+  margin-bottom:4px;
+}
+
+.pillar-stat-label{
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+@media(max-width:1024px){
+  .pillars-grid{grid-template-columns:repeat(3, 1fr)}
+  .pillars-stats{grid-template-columns:repeat(3, 1fr)}
+}
+
+@media(max-width:768px){
+  .pillars-grid{grid-template-columns:1fr 1fr}
+  .pillars-stats{grid-template-columns:1fr 1fr}
+  .pillar-card{padding:24px 20px}
+  .pillar-card-num{font-size:36px}
+}
+
+@media(max-width:480px){
+  .pillars-grid{grid-template-columns:1fr}
+  .pillars-stats{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="logo">Engineered Adherence</a>
+  <ul class="nav-center">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../pillars.html" class="active">Pillars</a></li>
+    <li><a href="../protocols.html">Protocols</a></li>
+    <li><a href="../science.html">Science</a></li>
+    <li><a href="../market.html">Market</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+    <a href="../contact.html" class="nav-cta">Book Consultation</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <p class="section-label">The Framework</p>
+  <h1 class="section-title">Five Pillars of<br>human transformation</h1>
+  <p class="section-body">The portfolio organized around five functional dimensions of human performance.</p>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section">
+  <div class="pillars-grid">
+
+    <div class="pillar-card" data-pillar="1">
+      <div class="pillar-card-num">I</div>
+      <h3>Cellular Repair & Longevity</h3>
+      <p class="pillar-card-subtitle">Systemic resilience and long-term vitality</p>
+      <div class="compound-pills">
+        <span class="compound-pill">GHK-Cu</span>
+        <span class="compound-pill">Epithalon</span>
+        <span class="compound-pill">Thymalin</span>
+      </div>
+      <p class="pillar-card-impact">Better sleep, reduced inflammation, improved tissue quality over time.</p>
+    </div>
+
+    <div class="pillar-card" data-pillar="2">
+      <div class="pillar-card-num">II</div>
+      <h3>Injury Recovery & Resilience</h3>
+      <p class="pillar-card-subtitle">Reduce pain, accelerate healing</p>
+      <div class="compound-pills">
+        <span class="compound-pill">BPC-157</span>
+        <span class="compound-pill">TB-500</span>
+        <span class="compound-pill">KPV</span>
+        <span class="compound-pill">Pentosan</span>
+      </div>
+      <p class="pillar-card-impact">Fastest visible feedback. Pain reduction felt within days.</p>
+    </div>
+
+    <div class="pillar-card" data-pillar="3">
+      <div class="pillar-card-num">III</div>
+      <h3>Metabolic Reset & Composition</h3>
+      <p class="pillar-card-subtitle">Restore metabolic responsiveness</p>
+      <div class="compound-pills">
+        <span class="compound-pill">Retatrutide</span>
+        <span class="compound-pill">Tirzepatide</span>
+        <span class="compound-pill">Semaglutide</span>
+        <span class="compound-pill">Tesamorelin</span>
+      </div>
+      <p class="pillar-card-impact">Scale movement and body composition changes in weeks 2–6.</p>
+    </div>
+
+    <div class="pillar-card" data-pillar="4">
+      <div class="pillar-card-num">IV</div>
+      <h3>Cognitive Performance</h3>
+      <p class="pillar-card-subtitle">Focus, stress regulation, discipline</p>
+      <div class="compound-pills">
+        <span class="compound-pill">Semax</span>
+        <span class="compound-pill">Selank</span>
+        <span class="compound-pill">Dihexa</span>
+      </div>
+      <p class="pillar-card-impact">Reduced mental friction. Better focus, lower anxiety.</p>
+    </div>
+
+    <div class="pillar-card" data-pillar="5">
+      <div class="pillar-card-num">V</div>
+      <h3>Muscle Growth & Strength</h3>
+      <p class="pillar-card-subtitle">Lean mass as a metabolic asset</p>
+      <div class="compound-pills">
+        <span class="compound-pill">CJC/Ipa</span>
+        <span class="compound-pill">MK-677</span>
+        <span class="compound-pill">Follistatin</span>
+      </div>
+      <p class="pillar-card-impact">Strength gains that make training feel rewarding.</p>
+    </div>
+
+  </div>
+
+  <div class="pillars-stats">
+    <div class="pillar-stat">
+      <div class="pillar-stat-num">3</div>
+      <div class="pillar-stat-label">Longevity Compounds</div>
+    </div>
+    <div class="pillar-stat">
+      <div class="pillar-stat-num">4</div>
+      <div class="pillar-stat-label">Recovery Compounds</div>
+    </div>
+    <div class="pillar-stat">
+      <div class="pillar-stat-num">4</div>
+      <div class="pillar-stat-label">Metabolic Compounds</div>
+    </div>
+    <div class="pillar-stat">
+      <div class="pillar-stat-num">3</div>
+      <div class="pillar-stat-label">Cognitive Compounds</div>
+    </div>
+    <div class="pillar-stat">
+      <div class="pillar-stat-num">3</div>
+      <div class="pillar-stat-label">Performance Compounds</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section reveal">
+  <div class="card card-lg" style="max-width:720px">
+    <span class="card-tag">Discipline Rule</span>
+    <h3 style="font-size:22px">Portfolio governance</h3>
+    <p style="margin-top:14px;font-size:15px;line-height:1.9">No compound is added to the portfolio unless it demonstrably supports training adherence, injury recovery, metabolic health, cognitive function, or long-term vitality. Every molecule must earn its place.</p>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="cta-band reveal">
+  <p class="section-label">Get Started</p>
+  <h2 class="section-title">Begin your protocol</h2>
+  <p class="section-body">Schedule a private consultation to discuss your goals.</p>
+  <a href="../contact.html" class="btn btn-lg">Book Consultation</a>
+</section>
+
+<script src="../js/main.js"></script>
+</body>
+</html>

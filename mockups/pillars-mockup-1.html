@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pillars Mockup 1 — Accordion Expand</title>
+<script>
+(function(){
+  var t = localStorage.getItem('ea-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+/* ═══════════════════════════════════════════
+   MOCKUP 1: ACCORDION EXPAND
+   Click to expand each pillar - compact, interactive
+   ═══════════════════════════════════════════ */
+
+.pillars-accordion{
+  max-width:900px;
+  margin:0 auto;
+}
+
+.pillar-item{
+  border-bottom:1px solid var(--line);
+  overflow:hidden;
+}
+
+.pillar-header{
+  display:grid;
+  grid-template-columns:80px 1fr auto;
+  align-items:center;
+  gap:32px;
+  padding:40px 0;
+  cursor:pointer;
+  transition:all .3s ease;
+}
+
+.pillar-header:hover{
+  padding-left:12px;
+}
+
+.pillar-num{
+  font-family:'Playfair Display',serif;
+  font-size:56px;
+  font-weight:600;
+  color:var(--accent-solid);
+  line-height:1;
+  transition:transform .3s ease;
+}
+
+.pillar-item.active .pillar-num{
+  transform:scale(1.1);
+}
+
+.pillar-header-text h3{
+  font-size:20px;
+  font-weight:400;
+  color:var(--text-heading);
+  margin:0 0 6px;
+  transition:color .5s;
+}
+
+.pillar-header-text p{
+  font-size:13px;
+  color:var(--muted);
+  margin:0;
+  transition:color .5s;
+}
+
+.pillar-toggle{
+  width:40px;
+  height:40px;
+  border:1px solid var(--line);
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:all .3s ease;
+}
+
+.pillar-toggle::before,
+.pillar-toggle::after{
+  content:'';
+  position:absolute;
+  background:var(--muted);
+  transition:all .3s ease;
+}
+
+.pillar-toggle::before{
+  width:14px;height:1px;
+}
+
+.pillar-toggle::after{
+  width:1px;height:14px;
+}
+
+.pillar-item.active .pillar-toggle::after{
+  transform:rotate(90deg);
+  opacity:0;
+}
+
+.pillar-item.active .pillar-toggle{
+  border-color:var(--accent-solid);
+  background:var(--accent-solid);
+}
+
+.pillar-item.active .pillar-toggle::before{
+  background:#fff;
+}
+
+.pillar-content{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+}
+
+.pillar-item.active .pillar-content{
+  max-height:500px;
+}
+
+.pillar-content-inner{
+  padding:0 0 48px 112px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:32px;
+}
+
+.compound-list{
+  list-style:none;
+  padding:0;
+  margin:0;
+}
+
+.compound-list li{
+  display:flex;
+  justify-content:space-between;
+  padding:14px 0;
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+}
+
+.compound-list li:last-child{border-bottom:none}
+
+.compound-list .name{
+  color:var(--text-heading);
+  font-weight:400;
+}
+
+.compound-list .role{
+  font-size:11px;
+  color:var(--faint);
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+
+.pillar-impact{
+  background:var(--bg-card);
+  border:1px solid var(--line);
+  padding:24px;
+  border-radius:4px;
+}
+
+.pillar-impact h4{
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:var(--accent-solid);
+  margin:0 0 12px;
+}
+
+.pillar-impact p{
+  font-size:14px;
+  color:var(--muted);
+  line-height:1.7;
+  margin:0;
+}
+
+@media(max-width:768px){
+  .pillar-header{
+    grid-template-columns:50px 1fr 36px;
+    gap:20px;
+    padding:28px 0;
+  }
+  .pillar-num{font-size:36px}
+  .pillar-header-text h3{font-size:16px}
+  .pillar-content-inner{
+    padding:0 0 32px 0;
+    grid-template-columns:1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="../index.html" class="logo">Engineered Adherence</a>
+  <ul class="nav-center">
+    <li><a href="../about.html">About</a></li>
+    <li><a href="../pillars.html" class="active">Pillars</a></li>
+    <li><a href="../protocols.html">Protocols</a></li>
+    <li><a href="../science.html">Science</a></li>
+    <li><a href="../market.html">Market</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+    <a href="../contact.html" class="nav-cta">Book Consultation</a>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <p class="section-label">The Framework</p>
+  <h1 class="section-title">Five Pillars of<br>human transformation</h1>
+  <p class="section-body">Click each pillar to explore compounds and adherence impact.</p>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="section">
+  <div class="pillars-accordion">
+
+    <div class="pillar-item active">
+      <div class="pillar-header">
+        <div class="pillar-num">I</div>
+        <div class="pillar-header-text">
+          <h3>Cellular Repair & Longevity</h3>
+          <p>Systemic resilience and long-term vitality</p>
+        </div>
+        <div class="pillar-toggle"></div>
+      </div>
+      <div class="pillar-content">
+        <div class="pillar-content-inner">
+          <ul class="compound-list">
+            <li><span class="name">GHK-Cu</span><span class="role">Collagen synthesis</span></li>
+            <li><span class="name">Epithalon</span><span class="role">Telomerase activation</span></li>
+            <li><span class="name">Thymalin</span><span class="role">Immune modulation</span></li>
+          </ul>
+          <div class="pillar-impact">
+            <h4>Adherence Impact</h4>
+            <p>Longevity compounds create systemic improvements that build over time: better sleep, reduced inflammation, improved skin and tissue quality.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-item">
+      <div class="pillar-header">
+        <div class="pillar-num">II</div>
+        <div class="pillar-header-text">
+          <h3>Injury Recovery & Structural Resilience</h3>
+          <p>Reduce pain, accelerate healing</p>
+        </div>
+        <div class="pillar-toggle"></div>
+      </div>
+      <div class="pillar-content">
+        <div class="pillar-content-inner">
+          <ul class="compound-list">
+            <li><span class="name">BPC-157</span><span class="role">Tissue repair</span></li>
+            <li><span class="name">TB-500</span><span class="role">Cell migration</span></li>
+            <li><span class="name">KPV</span><span class="role">Anti-inflammatory</span></li>
+            <li><span class="name">Pentosan Polysulfate</span><span class="role">Joint protection</span></li>
+          </ul>
+          <div class="pillar-impact">
+            <h4>Adherence Impact</h4>
+            <p>Recovery peptides create the fastest visible feedback loop. Reduced soreness and pain reduction are felt within days.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-item">
+      <div class="pillar-header">
+        <div class="pillar-num">III</div>
+        <div class="pillar-header-text">
+          <h3>Metabolic Reset & Body Composition</h3>
+          <p>Restore metabolic responsiveness</p>
+        </div>
+        <div class="pillar-toggle"></div>
+      </div>
+      <div class="pillar-content">
+        <div class="pillar-content-inner">
+          <ul class="compound-list">
+            <li><span class="name">Retatrutide</span><span class="role">Triple agonist</span></li>
+            <li><span class="name">Tirzepatide</span><span class="role">Dual GIP/GLP-1</span></li>
+            <li><span class="name">Semaglutide</span><span class="role">GLP-1 agonist</span></li>
+            <li><span class="name">Tesamorelin</span><span class="role">Visceral fat reduction</span></li>
+          </ul>
+          <div class="pillar-impact">
+            <h4>Adherence Impact</h4>
+            <p>Metabolic peptides create the scale movement and body composition changes that new clients need to see in weeks 2–6.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-item">
+      <div class="pillar-header">
+        <div class="pillar-num">IV</div>
+        <div class="pillar-header-text">
+          <h3>Cognitive Performance & Consistency</h3>
+          <p>Focus, stress regulation, mental discipline</p>
+        </div>
+        <div class="pillar-toggle"></div>
+      </div>
+      <div class="pillar-content">
+        <div class="pillar-content-inner">
+          <ul class="compound-list">
+            <li><span class="name">Semax</span><span class="role">BDNF expression</span></li>
+            <li><span class="name">Selank</span><span class="role">Anxiolytic</span></li>
+            <li><span class="name">Dihexa</span><span class="role">Neuroplasticity</span></li>
+          </ul>
+          <div class="pillar-impact">
+            <h4>Adherence Impact</h4>
+            <p>Cognitive compounds reduce the mental friction of discipline. Better focus and lower anxiety make daily decisions easier.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pillar-item">
+      <div class="pillar-header">
+        <div class="pillar-num">V</div>
+        <div class="pillar-header-text">
+          <h3>Muscle Growth, Strength & Capacity</h3>
+          <p>Build lean mass as a metabolic asset</p>
+        </div>
+        <div class="pillar-toggle"></div>
+      </div>
+      <div class="pillar-content">
+        <div class="pillar-content-inner">
+          <ul class="compound-list">
+            <li><span class="name">CJC-1295 / Ipamorelin</span><span class="role">GH secretagogue</span></li>
+            <li><span class="name">MK-677</span><span class="role">Oral GH secretagogue</span></li>
+            <li><span class="name">Follistatin 344</span><span class="role">Myostatin inhibition</span></li>
+          </ul>
+          <div class="pillar-impact">
+            <h4>Adherence Impact</h4>
+            <p>Performance compounds create strength gains that make training feel rewarding. That cycle is the foundation of permanent change.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<section class="cta-band reveal">
+  <p class="section-label">Get Started</p>
+  <h2 class="section-title">Begin your protocol</h2>
+  <p class="section-body">Schedule a private consultation to discuss your goals.</p>
+  <a href="../contact.html" class="btn btn-lg">Book Consultation</a>
+</section>
+
+<script>
+// Accordion functionality
+document.querySelectorAll('.pillar-header').forEach(header => {
+  header.addEventListener('click', () => {
+    const item = header.parentElement;
+    const wasActive = item.classList.contains('active');
+
+    // Close all
+    document.querySelectorAll('.pillar-item').forEach(i => i.classList.remove('active'));
+
+    // Open clicked (if wasn't already open)
+    if(!wasActive) item.classList.add('active');
+  });
+});
+</script>
+<script src="../js/main.js"></script>
+</body>
+</html>

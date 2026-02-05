@@ -262,6 +262,24 @@
   border-color:var(--line-strong);
 }
 
+/* Green accent for "What We Are" */
+.content-card.card-positive::before{
+  background:rgba(76,175,80,0.5);
+}
+.content-card.card-positive .content-tag{
+  background:rgba(76,175,80,0.12);
+  color:rgba(76,175,80,0.8);
+}
+
+/* Red accent for "What We Are Not" */
+.content-card.card-negative::before{
+  background:rgba(211,84,84,0.5);
+}
+.content-card.card-negative .content-tag{
+  background:rgba(211,84,84,0.12);
+  color:rgba(211,84,84,0.8);
+}
+
 .content-tag{
   display:inline-block;
   font-size:9px;
@@ -599,12 +617,12 @@
       </div>
 
       <div class="two-cards">
-        <div class="content-card">
+        <div class="content-card card-positive">
           <span class="content-tag">What We Are</span>
           <h3>A System for Sustainability</h3>
           <p>Every protocol bundles peptides, dosing schedules, nutrition guidance, and training alignment into a time-bound program. The brand operates on a simple principle: peptides accelerate what effort initiates.</p>
         </div>
-        <div class="content-card">
+        <div class="content-card card-negative">
           <span class="content-tag">What We Are Not</span>
           <h3>Not a Shortcut</h3>
           <p>Not a supplement company. Not a biohacking brand. Not a shortcut to aesthetic outcomes. Not a clinic selling compounds without context. We do not promise transformation without effort.</p>
@@ -612,15 +630,6 @@
       </div>
 
       <p class="section-label" style="margin-top:64px">Target Segments</p>
-
-      <div class="stats-grid">
-        <div class="stat-card"><div class="stat-card-val">87%</div><div class="stat-card-label">Protocol Completion</div></div>
-        <div class="stat-card"><div class="stat-card-val">5</div><div class="stat-card-label">Therapeutic Pillars</div></div>
-        <div class="stat-card"><div class="stat-card-val">12</div><div class="stat-card-label">Week Core Program</div></div>
-        <div class="stat-card"><div class="stat-card-val">15</div><div class="stat-card-label">Portfolio Compounds</div></div>
-        <div class="stat-card"><div class="stat-card-val">3</div><div class="stat-card-label">Revenue Channels</div></div>
-        <div class="stat-card"><div class="stat-card-val">GMP</div><div class="stat-card-label">Certified Sourcing</div></div>
-      </div>
 
       <div class="segment-cards">
         <div class="segment-card">
