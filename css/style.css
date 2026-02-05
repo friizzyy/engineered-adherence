@@ -391,6 +391,7 @@ nav{
 .stat-card:hover{
   border-color:var(--line-strong);
   background:var(--bg-card-hover);
+  transform:translateY(-4px);
   box-shadow:var(--shadow-card-subtle);
 }
 .stat-card .val{
