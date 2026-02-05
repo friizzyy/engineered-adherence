@@ -32,18 +32,16 @@
 .pillar-nav-btn{
   display:flex;
   align-items:center;
-  gap:14px;
-  padding:16px 28px;
+  gap:12px;
+  padding:14px 24px;
   background:transparent;
   border:1px solid var(--line);
   cursor:pointer;
   transition:all .3s ease;
-  text-align:left;
 }
 
 .pillar-nav-btn:hover{
   border-color:var(--line-strong);
-  background:var(--bg-card);
 }
 
 .pillar-nav-btn.active{
@@ -53,39 +51,20 @@
 
 .pillar-nav-num{
   font-family:'Playfair Display',serif;
-  font-size:22px;
+  font-size:20px;
   font-weight:600;
   color:var(--accent-solid);
-  min-width:24px;
-}
-
-.pillar-nav-text{
-  display:flex;
-  flex-direction:column;
-  gap:2px;
 }
 
 .pillar-nav-label{
-  font-size:12px;
+  font-size:11px;
   letter-spacing:1px;
   text-transform:uppercase;
   color:var(--muted);
-  font-weight:500;
-}
-
-.pillar-nav-sub{
-  font-size:10px;
-  color:var(--faint);
-  font-weight:300;
-  letter-spacing:0.3px;
 }
 
 .pillar-nav-btn.active .pillar-nav-label{
   color:var(--text-heading);
-}
-
-.pillar-nav-btn.active .pillar-nav-sub{
-  color:var(--muted);
 }
 
 .pillars-panels{
@@ -460,7 +439,7 @@
     padding:10px 14px;
     flex-shrink:0;
   }
-  .pillar-nav-text{display:none}
+  .pillar-nav-label{display:none}
 
   /* Panel header - compact */
   .panel-header{margin-bottom:32px}
@@ -577,38 +556,23 @@
   <div class="pillars-nav">
     <button class="pillar-nav-btn active" data-target="1">
       <span class="pillar-nav-num">I</span>
-      <div class="pillar-nav-text">
-        <span class="pillar-nav-label">Longevity</span>
-        <span class="pillar-nav-sub">Cellular repair & anti-aging</span>
-      </div>
+      <span class="pillar-nav-label">Longevity</span>
     </button>
     <button class="pillar-nav-btn" data-target="2">
       <span class="pillar-nav-num">II</span>
-      <div class="pillar-nav-text">
-        <span class="pillar-nav-label">Recovery</span>
-        <span class="pillar-nav-sub">Tissue healing & resilience</span>
-      </div>
+      <span class="pillar-nav-label">Recovery</span>
     </button>
     <button class="pillar-nav-btn" data-target="3">
       <span class="pillar-nav-num">III</span>
-      <div class="pillar-nav-text">
-        <span class="pillar-nav-label">Metabolic</span>
-        <span class="pillar-nav-sub">Body composition & fat loss</span>
-      </div>
+      <span class="pillar-nav-label">Metabolic</span>
     </button>
     <button class="pillar-nav-btn" data-target="4">
       <span class="pillar-nav-num">IV</span>
-      <div class="pillar-nav-text">
-        <span class="pillar-nav-label">Cognitive</span>
-        <span class="pillar-nav-sub">Focus & neuroprotection</span>
-      </div>
+      <span class="pillar-nav-label">Cognitive</span>
     </button>
     <button class="pillar-nav-btn" data-target="5">
       <span class="pillar-nav-num">V</span>
-      <div class="pillar-nav-text">
-        <span class="pillar-nav-label">Performance</span>
-        <span class="pillar-nav-sub">Strength & muscle growth</span>
-      </div>
+      <span class="pillar-nav-label">Performance</span>
     </button>
   </div>
 
