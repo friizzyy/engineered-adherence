@@ -37,16 +37,18 @@
   .circle-3{width:940px;height:940px;top:50%;left:50%;transform:translate(-50%,-50%);animation:ce 1.6s cubic-bezier(.16,1,.3,1) .6s both}
 
   .vials-stage{
-    display:flex;gap:64px;align-items:flex-end;
+    display:flex;gap:48px;align-items:flex-end;
     position:relative;z-index:10;margin-bottom:56px;
   }
   .vial-wrapper{
     display:flex;flex-direction:column;align-items:center;
     opacity:0;transform:translateY(50px);
   }
-  .vial-wrapper:nth-child(1){animation:vf 1.4s cubic-bezier(.16,1,.3,1) .5s forwards}
-  .vial-wrapper:nth-child(2){animation:vf 1.4s cubic-bezier(.16,1,.3,1) .7s forwards}
-  .vial-wrapper:nth-child(3){animation:vf 1.4s cubic-bezier(.16,1,.3,1) .9s forwards}
+  .vial-wrapper:nth-child(1){animation:vf 1.4s cubic-bezier(.16,1,.3,1) .4s forwards}
+  .vial-wrapper:nth-child(2){animation:vf 1.4s cubic-bezier(.16,1,.3,1) .55s forwards}
+  .vial-wrapper:nth-child(3){animation:vf 1.4s cubic-bezier(.16,1,.3,1) .7s forwards}
+  .vial-wrapper:nth-child(4){animation:vf 1.4s cubic-bezier(.16,1,.3,1) .85s forwards}
+  .vial-wrapper:nth-child(5){animation:vf 1.4s cubic-bezier(.16,1,.3,1) 1s forwards}
 
   .vial-svg{
     width:78px;height:200px;
@@ -59,8 +61,10 @@
   }
 
   .liq-1{animation:lp 6s ease-in-out infinite}
-  .liq-2{animation:lp 6s ease-in-out 2s infinite}
-  .liq-3{animation:lp 6s ease-in-out 4s infinite}
+  .liq-2{animation:lp 6s ease-in-out 1.2s infinite}
+  .liq-3{animation:lp 6s ease-in-out 2.4s infinite}
+  .liq-4{animation:lp 6s ease-in-out 3.6s infinite}
+  .liq-5{animation:lp 6s ease-in-out 4.8s infinite}
 
   .vial-reflect{
     width:66px;height:52px;
@@ -185,14 +189,16 @@
     .about-grid{grid-template-columns:1fr;gap:48px}
     .pillar-grid{grid-template-columns:1fr 1fr}
     .hero-title{font-size:38px}
-    .vials-stage{gap:36px}
-    .vial-svg{width:60px;height:160px}
+    .vials-stage{gap:20px}
+    .vial-svg{width:50px;height:130px}
   }
   @media(max-width:480px){
     .pillar-grid{grid-template-columns:1fr}
     .hero-title{font-size:30px}
-    .vials-stage{gap:28px}
-    .vial-svg{width:52px;height:140px}
+    .vials-stage{gap:12px}
+    .vial-svg{width:40px;height:105px}
+    .vial-name{font-size:11px}
+    .vial-detail{font-size:7px;letter-spacing:2px}
   }
 </style>
 </head>
@@ -247,6 +253,7 @@
   <div class="circle circle-3"></div>
 
   <div class="vials-stage">
+    <!-- Pillar II - Recovery (BPC-157) -->
     <div class="vial-wrapper">
       <svg class="vial-svg" viewBox="0 0 74 196" fill="none">
         <defs>
@@ -262,13 +269,37 @@
         <ellipse cx="37" cy="78" rx="20" ry="2" class="meniscus-1"/>
         <rect x="18" y="100" width="38" height="42" rx="3" class="label-rect"/>
         <text x="37" y="116" text-anchor="middle" font-family="DM Sans" font-size="5.5" class="label-title" font-weight="500" letter-spacing="1">BPC-157</text>
-        <text x="37" y="128" text-anchor="middle" font-family="DM Sans" font-size="4" class="label-sub-text" letter-spacing="0.8">5mg/mL</text>
+        <text x="37" y="128" text-anchor="middle" font-family="DM Sans" font-size="4" class="label-sub-text" letter-spacing="0.8">10mg</text>
       </svg>
       <svg class="vial-reflect" viewBox="0 0 74 196" fill="none"><rect x="11" y="36" width="52" height="144" rx="7" class="reflect-fill"/></svg>
       <div class="vial-name">Recovery</div>
       <div class="vial-detail">Pillar II</div>
     </div>
 
+    <!-- Pillar III - Metabolic (Semaglutide) -->
+    <div class="vial-wrapper" style="margin-bottom:8px">
+      <svg class="vial-svg" viewBox="0 0 74 206" style="height:208px" fill="none">
+        <defs>
+          <linearGradient id="g4" x1="0" y1="0" x2="74" y2="206" gradientUnits="userSpaceOnUse"><stop offset="0%" class="gs-top"/><stop offset="50%" class="gs-mid"/><stop offset="100%" class="gs-bot"/></linearGradient>
+          <linearGradient id="l4" x1="16" y1="82" x2="58" y2="182" gradientUnits="userSpaceOnUse"><stop offset="0%" class="ls4-top"/><stop offset="100%" class="ls4-bot"/></linearGradient>
+        </defs>
+        <rect x="22" y="2" width="30" height="20" rx="3" class="cap-body"/><rect x="22" y="2" width="30" height="10" rx="3" class="cap-top-fill"/>
+        <rect x="28" y="22" width="18" height="14" rx="2" class="neck-fill"/>
+        <rect x="11" y="36" width="52" height="154" rx="7" fill="url(#g4)" class="glass-stroke"/>
+        <rect x="15" y="80" width="44" height="106" rx="5" fill="url(#l4)" class="liq-4" style="opacity:var(--liq-opacity)"/>
+        <rect x="11" y="36" width="52" height="154" rx="7" class="glass-sheen-fill"/>
+        <line x1="16" y1="44" x2="16" y2="184" class="glass-hl" stroke-width="1"/>
+        <ellipse cx="37" cy="80" rx="20" ry="2" class="meniscus-4"/>
+        <rect x="18" y="105" width="38" height="42" rx="3" class="label-rect"/>
+        <text x="37" y="121" text-anchor="middle" font-family="DM Sans" font-size="5" class="label-title" font-weight="500" letter-spacing="0.8">Retatrutide</text>
+        <text x="37" y="133" text-anchor="middle" font-family="DM Sans" font-size="4" class="label-sub-text" letter-spacing="0.8">10mg</text>
+      </svg>
+      <svg class="vial-reflect" viewBox="0 0 74 206" style="height:52px" fill="none"><rect x="11" y="36" width="52" height="154" rx="7" class="reflect-fill"/></svg>
+      <div class="vial-name">Metabolic</div>
+      <div class="vial-detail">Pillar III</div>
+    </div>
+
+    <!-- Pillar I - Longevity (GHK-Cu) - Center/Tallest -->
     <div class="vial-wrapper" style="margin-bottom:16px">
       <svg class="vial-svg" viewBox="0 0 74 216" style="height:220px" fill="none">
         <defs>
@@ -284,13 +315,37 @@
         <ellipse cx="37" cy="84" rx="20" ry="2" class="meniscus-2"/>
         <rect x="18" y="110" width="38" height="42" rx="3" class="label-rect"/>
         <text x="37" y="126" text-anchor="middle" font-family="DM Sans" font-size="5.5" class="label-title" font-weight="500" letter-spacing="1">GHK-Cu</text>
-        <text x="37" y="138" text-anchor="middle" font-family="DM Sans" font-size="4" class="label-sub-text" letter-spacing="0.8">10mg/mL</text>
+        <text x="37" y="138" text-anchor="middle" font-family="DM Sans" font-size="4" class="label-sub-text" letter-spacing="0.8">50mg</text>
       </svg>
       <svg class="vial-reflect" viewBox="0 0 74 216" style="height:52px" fill="none"><rect x="11" y="36" width="52" height="166" rx="7" class="reflect-fill"/></svg>
       <div class="vial-name">Longevity</div>
       <div class="vial-detail">Pillar I</div>
     </div>
 
+    <!-- Pillar IV - Cognitive (Semax) -->
+    <div class="vial-wrapper" style="margin-bottom:8px">
+      <svg class="vial-svg" viewBox="0 0 74 206" style="height:208px" fill="none">
+        <defs>
+          <linearGradient id="g5" x1="0" y1="0" x2="74" y2="206" gradientUnits="userSpaceOnUse"><stop offset="0%" class="gs-top"/><stop offset="50%" class="gs-mid"/><stop offset="100%" class="gs-bot"/></linearGradient>
+          <linearGradient id="l5" x1="16" y1="82" x2="58" y2="182" gradientUnits="userSpaceOnUse"><stop offset="0%" class="ls5-top"/><stop offset="100%" class="ls5-bot"/></linearGradient>
+        </defs>
+        <rect x="22" y="2" width="30" height="20" rx="3" class="cap-body"/><rect x="22" y="2" width="30" height="10" rx="3" class="cap-top-fill"/>
+        <rect x="28" y="22" width="18" height="14" rx="2" class="neck-fill"/>
+        <rect x="11" y="36" width="52" height="154" rx="7" fill="url(#g5)" class="glass-stroke"/>
+        <rect x="15" y="80" width="44" height="106" rx="5" fill="url(#l5)" class="liq-5" style="opacity:var(--liq-opacity)"/>
+        <rect x="11" y="36" width="52" height="154" rx="7" class="glass-sheen-fill"/>
+        <line x1="16" y1="44" x2="16" y2="184" class="glass-hl" stroke-width="1"/>
+        <ellipse cx="37" cy="80" rx="20" ry="2" class="meniscus-5"/>
+        <rect x="18" y="105" width="38" height="42" rx="3" class="label-rect"/>
+        <text x="37" y="121" text-anchor="middle" font-family="DM Sans" font-size="5.5" class="label-title" font-weight="500" letter-spacing="1">Semax</text>
+        <text x="37" y="133" text-anchor="middle" font-family="DM Sans" font-size="4" class="label-sub-text" letter-spacing="0.8">10mg</text>
+      </svg>
+      <svg class="vial-reflect" viewBox="0 0 74 206" style="height:52px" fill="none"><rect x="11" y="36" width="52" height="154" rx="7" class="reflect-fill"/></svg>
+      <div class="vial-name">Cognitive</div>
+      <div class="vial-detail">Pillar IV</div>
+    </div>
+
+    <!-- Pillar V - Performance (CJC/Ipa) -->
     <div class="vial-wrapper">
       <svg class="vial-svg" viewBox="0 0 74 196" fill="none">
         <defs>
@@ -305,8 +360,8 @@
         <line x1="16" y1="44" x2="16" y2="174" class="glass-hl" stroke-width="1"/>
         <ellipse cx="37" cy="78" rx="20" ry="2" class="meniscus-3"/>
         <rect x="18" y="100" width="38" height="42" rx="3" class="label-rect"/>
-        <text x="37" y="116" text-anchor="middle" font-family="DM Sans" font-size="5.5" class="label-title" font-weight="500" letter-spacing="1">TB-500</text>
-        <text x="37" y="128" text-anchor="middle" font-family="DM Sans" font-size="4" class="label-sub-text" letter-spacing="0.8">5mg/mL</text>
+        <text x="37" y="116" text-anchor="middle" font-family="DM Sans" font-size="5.5" class="label-title" font-weight="500" letter-spacing="1">MK-677</text>
+        <text x="37" y="128" text-anchor="middle" font-family="DM Sans" font-size="4" class="label-sub-text" letter-spacing="0.8">10mg</text>
       </svg>
       <svg class="vial-reflect" viewBox="0 0 74 196" fill="none"><rect x="11" y="36" width="52" height="144" rx="7" class="reflect-fill"/></svg>
       <div class="vial-name">Performance</div>
@@ -392,20 +447,29 @@ function updateVials(theme){
   document.querySelectorAll('.gs-bot').forEach(el => el.setAttribute('stop-color', d ? '#262626' : '#CCCCD2'));
   document.querySelectorAll('.ls1-top').forEach(el => el.setAttribute('stop-color', d ? '#A09C96' : '#2A2C34'));
   document.querySelectorAll('.ls1-bot').forEach(el => el.setAttribute('stop-color', d ? '#787470' : '#1C1E24'));
-  document.querySelectorAll('.ls2-top').forEach(el => el.setAttribute('stop-color', d ? '#969290' : '#24262E'));
-  document.querySelectorAll('.ls2-bot').forEach(el => el.setAttribute('stop-color', d ? '#706C68' : '#14161C'));
+  // Pillar I - Longevity/GHK-Cu (steel blue tint)
+  document.querySelectorAll('.ls2-top').forEach(el => el.setAttribute('stop-color', d ? '#7A8A98' : '#3A4A5A'));
+  document.querySelectorAll('.ls2-bot').forEach(el => el.setAttribute('stop-color', d ? '#5A6A78' : '#2A3A4A'));
   document.querySelectorAll('.ls3-top').forEach(el => el.setAttribute('stop-color', d ? '#9C9894' : '#282A32'));
   document.querySelectorAll('.ls3-bot').forEach(el => el.setAttribute('stop-color', d ? '#74706C' : '#1A1C22'));
+  // Pillar III - Metabolic (pink/coral tint)
+  document.querySelectorAll('.ls4-top').forEach(el => el.setAttribute('stop-color', d ? '#A8968F' : '#3A2832'));
+  document.querySelectorAll('.ls4-bot').forEach(el => el.setAttribute('stop-color', d ? '#7A6C68' : '#241820'));
+  // Pillar IV - Cognitive (blue/purple tint)
+  document.querySelectorAll('.ls5-top').forEach(el => el.setAttribute('stop-color', d ? '#8E96A0' : '#2A2C3A'));
+  document.querySelectorAll('.ls5-bot').forEach(el => el.setAttribute('stop-color', d ? '#686E78' : '#181A24'));
   document.querySelectorAll('.cap-body').forEach(el => { el.setAttribute('fill', d?'#444':'#B8B8BE'); el.setAttribute('stroke', d?'#555':'#A0A0A8'); el.setAttribute('stroke-width','0.6'); });
   document.querySelectorAll('.cap-top-fill').forEach(el => el.setAttribute('fill', d?'#4A4A4A':'#C4C4CA'));
   document.querySelectorAll('.neck-fill').forEach(el => { el.setAttribute('fill', d?'#3A3A3A':'#E4E4E8'); el.setAttribute('stroke', d?'#4A4A4A':'#B8B8BE'); el.setAttribute('stroke-width','0.4'); });
   document.querySelectorAll('.glass-stroke').forEach(el => { el.setAttribute('stroke', d?'#444':'#B8B8BE'); el.setAttribute('stroke-width','0.6'); });
   document.querySelectorAll('.glass-sheen-fill').forEach(el => el.setAttribute('fill', d?'rgba(255,255,255,0.03)':'rgba(255,255,255,0.12)'));
   document.querySelectorAll('.glass-hl').forEach(el => el.setAttribute('stroke', d?'rgba(255,255,255,0.06)':'rgba(255,255,255,0.35)'));
-  const m=d?['rgba(160,156,150,0.2)','rgba(150,146,144,0.2)','rgba(156,152,148,0.2)']:['rgba(42,44,52,0.2)','rgba(36,38,46,0.2)','rgba(40,42,50,0.2)'];
+  const m=d?['rgba(160,156,150,0.2)','rgba(122,138,152,0.25)','rgba(156,152,148,0.2)','rgba(168,150,143,0.2)','rgba(142,150,160,0.2)']:['rgba(42,44,52,0.2)','rgba(58,74,90,0.25)','rgba(40,42,50,0.2)','rgba(58,40,50,0.2)','rgba(42,44,58,0.2)'];
   document.querySelectorAll('.meniscus-1').forEach(el=>el.setAttribute('fill',m[0]));
   document.querySelectorAll('.meniscus-2').forEach(el=>el.setAttribute('fill',m[1]));
   document.querySelectorAll('.meniscus-3').forEach(el=>el.setAttribute('fill',m[2]));
+  document.querySelectorAll('.meniscus-4').forEach(el=>el.setAttribute('fill',m[3]));
+  document.querySelectorAll('.meniscus-5').forEach(el=>el.setAttribute('fill',m[4]));
   document.querySelectorAll('.label-rect').forEach(el => { el.setAttribute('fill', d?'rgba(28,28,28,0.7)':'rgba(240,240,242,0.9)'); el.setAttribute('stroke', d?'rgba(212,208,202,0.06)':'rgba(0,0,0,0.08)'); el.setAttribute('stroke-width','0.4'); });
   document.querySelectorAll('.label-title').forEach(el => el.setAttribute('fill', d?'#5A5856':'#5C606A'));
   document.querySelectorAll('.label-sub-text').forEach(el => el.setAttribute('fill', d?'#787470':'#1C1E24'));
