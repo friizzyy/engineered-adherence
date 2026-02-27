@@ -494,7 +494,11 @@ footer{
   display:flex;justify-content:space-between;align-items:center;
 }
 .footer-nav{
+  position:static;
   display:flex;gap:32px;
+  padding:0;height:auto;
+  background:none;backdrop-filter:none;-webkit-backdrop-filter:none;
+  border:none;z-index:auto;
 }
 .footer-nav a{
   font-size:13px;color:var(--muted);
