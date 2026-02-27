@@ -44,7 +44,18 @@
       if(!document.querySelector('.swipe-hint')){
         const hint = document.createElement('div');
         hint.className = 'swipe-hint';
-        hint.innerHTML = '<span>Swipe</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+        const span = document.createElement('span');
+        span.textContent = 'Swipe';
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', '0 0 24 24');
+        svg.setAttribute('fill', 'none');
+        svg.setAttribute('stroke', 'currentColor');
+        svg.setAttribute('stroke-width', '2');
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', 'M5 12h14M12 5l7 7-7 7');
+        svg.appendChild(path);
+        hint.appendChild(span);
+        hint.appendChild(svg);
         indicatorWrapper.parentNode.insertBefore(hint, indicatorWrapper.nextSibling);
       }
 

@@ -3,13 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Science - Engineered Adherence</title>
+<title>Science | Engineered Adherence</title>
 <script>
 (function(){
   var t = localStorage.getItem('ea-theme') || 'dark';
   document.documentElement.setAttribute('data-theme', t);
 })();
 </script>
+<meta name="description" content="Explore the five therapeutic pillars behind Engineered Adherence: longevity, recovery, metabolic, cognitive, and performance peptide protocols backed by clinical research.">
+<meta property="og:title" content="Science | Engineered Adherence">
+<meta property="og:description" content="Five therapeutic pillars of peptide protocols backed by clinical research. Longevity, recovery, metabolic, cognitive, and performance.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://engineeredadherence.com/science.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Science | Engineered Adherence">
+<meta name="twitter:description" content="Five therapeutic pillars of peptide protocols backed by clinical research.">
+<link rel="canonical" href="https://engineeredadherence.com/science.html">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/mobile.css">
 <style>
@@ -200,7 +210,7 @@
 .compound-row.selected .compound-role{
   background:var(--pillar-accent);
   border-color:var(--pillar-accent);
-  color:#fff;
+  color:var(--text-heading);
 }
 
 /* ═══════════════════════════════════════════
@@ -502,6 +512,7 @@
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
 <nav>
   <a href="index.html" class="logo">Engineered Adherence</a>
@@ -514,14 +525,14 @@
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
     <a href="contact.html" class="nav-cta">Book Consultation</a>
-    <button class="mobile-menu-btn" aria-label="Open menu">
+    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<div class="mobile-nav-overlay"></div>
-<div class="mobile-nav">
+<div class="mobile-nav-overlay" aria-hidden="true"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
   <ul class="mobile-nav-links">
     <li><a href="about.html">About</a></li>
     <li><a href="science.html">Science</a></li>
@@ -531,19 +542,20 @@
   <a href="contact.html" class="mobile-nav-cta">Book Consultation</a>
   <div class="mobile-nav-footer">
     <div class="mobile-theme-switch">
-      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
       </svg>
       <button class="theme-toggle-track" id="mobileThemeToggle" aria-label="Toggle theme">
         <span class="theme-toggle-knob"></span>
       </button>
-      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
       </svg>
     </div>
   </div>
-</div>
+</nav>
 
+<main id="main-content">
 <section class="page-hero">
   <p class="section-label">The Science</p>
   <h1 class="section-title">Proven compounds.<br>Real results.</h1>
@@ -553,24 +565,24 @@
 <div class="divider"><div class="divider-line"></div></div>
 
 <section class="section">
-  <div class="pillars-nav">
-    <button class="pillar-nav-btn active" data-target="1">
+  <div class="pillars-nav" role="tablist">
+    <button class="pillar-nav-btn active" role="tab" aria-selected="true" data-target="1" aria-controls="panel-pillar-1">
       <span class="pillar-nav-num">I</span>
       <span class="pillar-nav-label">Longevity</span>
     </button>
-    <button class="pillar-nav-btn" data-target="2">
+    <button class="pillar-nav-btn" role="tab" aria-selected="false" data-target="2" aria-controls="panel-pillar-2">
       <span class="pillar-nav-num">II</span>
       <span class="pillar-nav-label">Recovery</span>
     </button>
-    <button class="pillar-nav-btn" data-target="3">
+    <button class="pillar-nav-btn" role="tab" aria-selected="false" data-target="3" aria-controls="panel-pillar-3">
       <span class="pillar-nav-num">III</span>
       <span class="pillar-nav-label">Metabolic</span>
     </button>
-    <button class="pillar-nav-btn" data-target="4">
+    <button class="pillar-nav-btn" role="tab" aria-selected="false" data-target="4" aria-controls="panel-pillar-4">
       <span class="pillar-nav-num">IV</span>
       <span class="pillar-nav-label">Cognitive</span>
     </button>
-    <button class="pillar-nav-btn" data-target="5">
+    <button class="pillar-nav-btn" role="tab" aria-selected="false" data-target="5" aria-controls="panel-pillar-5">
       <span class="pillar-nav-num">V</span>
       <span class="pillar-nav-label">Performance</span>
     </button>
@@ -579,7 +591,7 @@
   <div class="pillars-panels">
 
     <!-- PILLAR 1 -->
-    <div class="pillar-panel active" data-pillar="1">
+    <div class="pillar-panel active" role="tabpanel" data-pillar="1" id="panel-pillar-1">
       <div class="panel-header">
         <div class="panel-num">I</div>
         <h2>Cellular Repair & Longevity</h2>
@@ -650,7 +662,7 @@
     </div>
 
     <!-- PILLAR 2 -->
-    <div class="pillar-panel" data-pillar="2">
+    <div class="pillar-panel" role="tabpanel" data-pillar="2" id="panel-pillar-2">
       <div class="panel-header">
         <div class="panel-num">II</div>
         <h2>Injury Recovery & Resilience</h2>
@@ -725,7 +737,7 @@
     </div>
 
     <!-- PILLAR 3 -->
-    <div class="pillar-panel" data-pillar="3">
+    <div class="pillar-panel" role="tabpanel" data-pillar="3" id="panel-pillar-3">
       <div class="panel-header">
         <div class="panel-num">III</div>
         <h2>Metabolic Reset & Composition</h2>
@@ -800,7 +812,7 @@
     </div>
 
     <!-- PILLAR 4 -->
-    <div class="pillar-panel" data-pillar="4">
+    <div class="pillar-panel" role="tabpanel" data-pillar="4" id="panel-pillar-4">
       <div class="panel-header">
         <div class="panel-num">IV</div>
         <h2>Cognitive Performance</h2>
@@ -871,7 +883,7 @@
     </div>
 
     <!-- PILLAR 5 -->
-    <div class="pillar-panel" data-pillar="5">
+    <div class="pillar-panel" role="tabpanel" data-pillar="5" id="panel-pillar-5">
       <div class="panel-header">
         <div class="panel-num">V</div>
         <h2>Muscle Growth & Strength</h2>
@@ -1001,18 +1013,24 @@
 
 <div class="divider"><div class="divider-line"></div></div>
 
+</main>
+
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="index.html" class="logo">Engineered Adherence</a><p>Clinically proven peptide protocols. Built in Doha. Engineered for real results.</p></div>
-    <div class="footer-links">
-      <div class="footer-col"><h4>Platform</h4><a href="science.html">Science</a><a href="protocols.html">Protocols</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="market.html">Market</a><a href="contact.html">Contact</a></div>
-    </div>
+  <div class="footer-bar">
+    <a href="index.html" class="logo">Engineered Adherence</a>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="science.html">Science</a>
+      <a href="protocols.html">Protocols</a>
+      <a href="about.html">About</a>
+      <a href="market.html">Market</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <span class="footer-copy">&copy; 2026 &middot; Doha, Qatar</span>
   </div>
-  <div class="footer-bottom"><span>2026 Engineered Adherence</span><span>Doha, Qatar</span></div>
 </footer>
 
 <script>
+(function(){
 // Compound data
 const compoundData = {
   'ghk-cu': { title:'GHK-Cu', subtitle:'Copper Tripeptide Complex', desc:'A naturally occurring tripeptide bound to copper that declines significantly with age. GHK-Cu activates over 4,000 genes involved in tissue remodeling, switching them toward a regenerative profile. It stimulates collagen and elastin synthesis, accelerates wound healing, and reduces oxidative damage. Research demonstrates measurable improvements in skin thickness, elasticity, and firmness within 8–12 weeks of consistent use.', stats:['SubQ','1-2mg','Daily'], protocol:'Administer subcutaneously or apply topically. Best results seen with consistent daily use over 8-12 weeks.' },
@@ -1038,8 +1056,12 @@ const compoundData = {
 document.querySelectorAll('.pillar-nav-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const target = btn.dataset.target;
-    document.querySelectorAll('.pillar-nav-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.pillar-nav-btn').forEach(b => {
+      b.classList.remove('active');
+      b.setAttribute('aria-selected', 'false');
+    });
     btn.classList.add('active');
+    btn.setAttribute('aria-selected', 'true');
     document.querySelectorAll('.pillar-panel').forEach(p => p.classList.remove('active'));
     const newPanel = document.querySelector(`.pillar-panel[data-pillar="${target}"]`);
     newPanel.classList.add('active');
@@ -1121,6 +1143,7 @@ function selectPillarFromHash(){
 }
 selectPillarFromHash();
 window.addEventListener('hashchange', selectPillarFromHash);
+})();
 </script>
 <script src="js/main.js"></script>
 <script src="js/mobile.js"></script>

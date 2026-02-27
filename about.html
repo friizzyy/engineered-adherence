@@ -3,13 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About - Engineered Adherence</title>
+<title>About | Engineered Adherence</title>
 <script>
 (function(){
   var t = localStorage.getItem('ea-theme') || 'dark';
   document.documentElement.setAttribute('data-theme', t);
 })();
 </script>
+<meta name="description" content="Meet the team behind Engineered Adherence. A Doha-based clinical platform delivering peptide protocols with 87% completion rates and real-world health outcomes.">
+<meta property="og:title" content="About | Engineered Adherence">
+<meta property="og:description" content="Meet the team behind Engineered Adherence. A Doha-based clinical platform delivering peptide protocols with real-world health outcomes.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://engineeredadherence.com/about.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="About | Engineered Adherence">
+<meta name="twitter:description" content="Meet the team behind Engineered Adherence. Doha-based clinical platform delivering peptide protocols with real-world outcomes.">
+<link rel="canonical" href="https://engineeredadherence.com/about.html">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/mobile.css">
 <style>
@@ -266,7 +276,7 @@
 
 /* Green accent for "What We Are" */
 .content-card.card-positive::before{
-  background:rgba(76,175,80,0.5);
+  background:var(--line-strong);
 }
 .content-card.card-positive .content-tag{
   background:rgba(76,175,80,0.12);
@@ -275,7 +285,7 @@
 
 /* Red accent for "What We Are Not" */
 .content-card.card-negative::before{
-  background:rgba(211,84,84,0.5);
+  background:var(--line-strong);
 }
 .content-card.card-negative .content-tag{
   background:rgba(211,84,84,0.12);
@@ -444,6 +454,7 @@
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
 <nav>
   <a href="index.html" class="logo">Engineered Adherence</a>
@@ -456,14 +467,14 @@
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
     <a href="contact.html" class="nav-cta">Book Consultation</a>
-    <button class="mobile-menu-btn" aria-label="Open menu">
+    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<div class="mobile-nav-overlay"></div>
-<div class="mobile-nav">
+<div class="mobile-nav-overlay" aria-hidden="true"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
   <ul class="mobile-nav-links">
     <li><a href="about.html">About</a></li>
     <li><a href="science.html">Science</a></li>
@@ -473,18 +484,20 @@
   <a href="contact.html" class="mobile-nav-cta">Book Consultation</a>
   <div class="mobile-nav-footer">
     <div class="mobile-theme-switch">
-      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <svg class="theme-icon theme-icon-sun" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
       </svg>
       <button class="theme-toggle-track" id="mobileThemeToggle" aria-label="Toggle theme">
         <span class="theme-toggle-knob"></span>
       </button>
-      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <svg class="theme-icon theme-icon-moon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
       </svg>
     </div>
   </div>
-</div>
+</nav>
+
+<main id="main-content">
 
 <section class="page-hero">
   <p class="section-label">The Problem Is Clear</p>
@@ -496,20 +509,20 @@
 
 <section class="section">
   <!-- Section Navigation -->
-  <div class="about-nav">
-    <button class="about-nav-btn active" data-target="problem">
+  <div class="about-nav" role="tablist">
+    <button class="about-nav-btn active" data-target="problem" role="tab" aria-selected="true" aria-controls="panel-problem">
       <span class="about-nav-num">01</span>
       <span class="about-nav-label">Problem</span>
     </button>
-    <button class="about-nav-btn" data-target="solution">
+    <button class="about-nav-btn" data-target="solution" role="tab" aria-selected="false" aria-controls="panel-solution">
       <span class="about-nav-num">02</span>
       <span class="about-nav-label">Solution</span>
     </button>
-    <button class="about-nav-btn" data-target="identity">
+    <button class="about-nav-btn" data-target="identity" role="tab" aria-selected="false" aria-controls="panel-identity">
       <span class="about-nav-num">03</span>
       <span class="about-nav-label">Identity</span>
     </button>
-    <button class="about-nav-btn" data-target="team">
+    <button class="about-nav-btn" data-target="team" role="tab" aria-selected="false" aria-controls="panel-team">
       <span class="about-nav-num">04</span>
       <span class="about-nav-label">Team</span>
     </button>
@@ -517,7 +530,7 @@
 
   <div class="about-panels">
     <!-- Panel 1: Problem -->
-    <div class="about-panel active" id="panel-problem">
+    <div class="about-panel active" id="panel-problem" role="tabpanel">
       <div class="panel-header">
         <div class="panel-num">01</div>
         <h2>The compliance problem is universal</h2>
@@ -565,7 +578,7 @@
     </div>
 
     <!-- Panel 2: Solution -->
-    <div class="about-panel" id="panel-solution">
+    <div class="about-panel" id="panel-solution" role="tabpanel">
       <div class="panel-header">
         <div class="panel-num">02</div>
         <h2>Clinically validated. Built for Qatar.</h2>
@@ -613,7 +626,7 @@
     </div>
 
     <!-- Panel 3: Identity -->
-    <div class="about-panel" id="panel-identity">
+    <div class="about-panel" id="panel-identity" role="tabpanel">
       <div class="panel-header">
         <div class="panel-num">03</div>
         <h2>What we do - and what we do not</h2>
@@ -655,7 +668,7 @@
     </div>
 
     <!-- Panel 4: Team -->
-    <div class="about-panel" id="panel-team">
+    <div class="about-panel" id="panel-team" role="tabpanel">
       <div class="panel-header">
         <div class="panel-num">04</div>
         <h2>Built by practitioners with direct market access</h2>
@@ -715,31 +728,42 @@
 
 <div class="divider"><div class="divider-line"></div></div>
 
+</main>
+
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="index.html" class="logo">Engineered Adherence</a><p>Clinically proven peptide protocols. Built in Doha. Engineered for real results.</p></div>
-    <div class="footer-links">
-      <div class="footer-col"><h4>Platform</h4><a href="science.html">Science</a><a href="protocols.html">Protocols</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="market.html">Market</a><a href="contact.html">Contact</a></div>
-    </div>
+  <div class="footer-bar">
+    <a href="index.html" class="logo">Engineered Adherence</a>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="science.html">Science</a>
+      <a href="protocols.html">Protocols</a>
+      <a href="about.html">About</a>
+      <a href="market.html">Market</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <span class="footer-copy">&copy; 2026 &middot; Doha, Qatar</span>
   </div>
-  <div class="footer-bottom"><span>2026 Engineered Adherence</span><span>Doha, Qatar</span></div>
 </footer>
 
 <script>
-// Panel navigation
-document.querySelectorAll('.about-nav-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    // Update buttons
-    document.querySelectorAll('.about-nav-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+(function(){
+  // Panel navigation
+  document.querySelectorAll('.about-nav-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Update buttons and aria-selected state
+      document.querySelectorAll('.about-nav-btn').forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
 
-    // Update panels
-    const target = btn.dataset.target;
-    document.querySelectorAll('.about-panel').forEach(p => p.classList.remove('active'));
-    document.getElementById('panel-' + target).classList.add('active');
+      // Update panels
+      const target = btn.dataset.target;
+      document.querySelectorAll('.about-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + target).classList.add('active');
+    });
   });
-});
+})();
 </script>
 <script src="js/main.js"></script>
 <script src="js/mobile.js"></script>

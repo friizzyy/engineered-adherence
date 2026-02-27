@@ -38,6 +38,7 @@
 
   function openMenu(){
     menuBtn.classList.add('active');
+    menuBtn.setAttribute('aria-expanded', 'true');
     mobileNav.classList.add('active');
     overlay.classList.add('active');
     body.classList.add('menu-open');
@@ -45,6 +46,7 @@
 
   function closeMenu(){
     menuBtn.classList.remove('active');
+    menuBtn.setAttribute('aria-expanded', 'false');
     mobileNav.classList.remove('active');
     overlay.classList.remove('active');
     body.classList.remove('menu-open');

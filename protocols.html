@@ -3,13 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Protocols - Engineered Adherence</title>
+<title>Protocols | Engineered Adherence</title>
 <script>
 (function(){
   var t = localStorage.getItem('ea-theme') || 'dark';
   document.documentElement.setAttribute('data-theme', t);
 })();
 </script>
+<meta name="description" content="Explore clinically validated peptide protocols for weight management, recovery, longevity, cognitive enhancement, and performance. Time-bound programs with biomarker tracking.">
+<meta property="og:title" content="Protocols | Engineered Adherence">
+<meta property="og:description" content="Clinically validated peptide protocols for weight management, recovery, longevity, cognitive enhancement, and performance.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://engineeredadherence.com/protocols.html">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Protocols | Engineered Adherence">
+<meta name="twitter:description" content="Clinically validated peptide protocols for weight management, recovery, longevity, and performance.">
+<link rel="canonical" href="https://engineeredadherence.com/protocols.html">
+<link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/mobile.css">
 <style>
@@ -251,6 +261,7 @@
 </style>
 </head>
 <body>
+<a href="#main-content" class="skip-link">Skip to content</a>
 
 <nav>
   <a href="index.html" class="logo">Engineered Adherence</a>
@@ -263,14 +274,14 @@
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
     <a href="contact.html" class="nav-cta">Book Consultation</a>
-    <button class="mobile-menu-btn" aria-label="Open menu">
+    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
 
-<div class="mobile-nav-overlay"></div>
-<div class="mobile-nav">
+<div class="mobile-nav-overlay" aria-hidden="true"></div>
+<nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
   <ul class="mobile-nav-links">
     <li><a href="about.html">About</a></li>
     <li><a href="science.html">Science</a></li>
@@ -280,19 +291,20 @@
   <a href="contact.html" class="mobile-nav-cta">Book Consultation</a>
   <div class="mobile-nav-footer">
     <div class="mobile-theme-switch">
-      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
         <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
       </svg>
       <button class="theme-toggle-track" id="mobileThemeToggle" aria-label="Toggle theme">
         <span class="theme-toggle-knob"></span>
       </button>
-      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
       </svg>
     </div>
   </div>
-</div>
+</nav>
 
+<main id="main-content">
 <section class="page-hero">
   <p class="section-label">Your Protocol</p>
   <h1 class="section-title">Structured programs.<br>Measurable outcomes.</h1>
@@ -323,30 +335,30 @@
   <p class="section-label">Core Protocols</p>
   <h2 class="section-title">Four entry points, one standard of care</h2>
 
-  <div class="proto-selector">
-    <button class="proto-tab active" data-proto="foundation">
+  <div class="proto-selector" role="tablist">
+    <button class="proto-tab active" data-proto="foundation" role="tab" aria-selected="true" aria-controls="proto-foundation">
       <div class="proto-tab-num">01</div>
       <div class="proto-tab-name">Foundation Reset</div>
       <div class="proto-tab-meta">New Clients · 12 Weeks</div>
     </button>
-    <button class="proto-tab" data-proto="performance">
+    <button class="proto-tab" data-proto="performance" role="tab" aria-selected="false" aria-controls="proto-performance">
       <div class="proto-tab-num">02</div>
       <div class="proto-tab-name">Performance Edge</div>
       <div class="proto-tab-meta">Active Clients · 8 Weeks</div>
     </button>
-    <button class="proto-tab" data-proto="longevity">
+    <button class="proto-tab" data-proto="longevity" role="tab" aria-selected="false" aria-controls="proto-longevity">
       <div class="proto-tab-num">03</div>
       <div class="proto-tab-name">Longevity Maintenance</div>
       <div class="proto-tab-meta">Established · Ongoing</div>
     </button>
-    <button class="proto-tab" data-proto="injury">
+    <button class="proto-tab" data-proto="injury" role="tab" aria-selected="false" aria-controls="proto-injury">
       <div class="proto-tab-num">04</div>
       <div class="proto-tab-name">Injury Return</div>
       <div class="proto-tab-meta">Recovery · 6–8 Weeks</div>
     </button>
   </div>
 
-  <div class="proto-detail active" id="proto-foundation">
+  <div class="proto-detail active" id="proto-foundation" role="tabpanel">
     <div class="proto-detail-inner">
       <div class="proto-desc">
         <h3>Rebuild the systems that fail first</h3>
@@ -372,7 +384,7 @@
     </div>
   </div>
 
-  <div class="proto-detail" id="proto-performance">
+  <div class="proto-detail" id="proto-performance" role="tabpanel">
     <div class="proto-detail-inner">
       <div class="proto-desc">
         <h3>Measurable progression, session to session</h3>
@@ -398,7 +410,7 @@
     </div>
   </div>
 
-  <div class="proto-detail" id="proto-longevity">
+  <div class="proto-detail" id="proto-longevity" role="tabpanel">
     <div class="proto-detail-inner">
       <div class="proto-desc">
         <h3>Sustain what you've built, indefinitely</h3>
@@ -424,7 +436,7 @@
     </div>
   </div>
 
-  <div class="proto-detail" id="proto-injury">
+  <div class="proto-detail" id="proto-injury" role="tabpanel">
     <div class="proto-detail-inner">
       <div class="proto-desc">
         <h3>Accelerated return to full capacity</h3>
@@ -496,27 +508,38 @@
 
 <div class="divider"><div class="divider-line"></div></div>
 
+</main>
+
 <footer>
-  <div class="footer-inner">
-    <div class="footer-brand"><a href="index.html" class="logo">Engineered Adherence</a><p>Clinically proven peptide protocols. Built in Doha. Engineered for real results.</p></div>
-    <div class="footer-links">
-      <div class="footer-col"><h4>Platform</h4><a href="science.html">Science</a><a href="protocols.html">Protocols</a></div>
-      <div class="footer-col"><h4>Company</h4><a href="about.html">About</a><a href="market.html">Market</a><a href="contact.html">Contact</a></div>
-    </div>
+  <div class="footer-bar">
+    <a href="index.html" class="logo">Engineered Adherence</a>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="science.html">Science</a>
+      <a href="protocols.html">Protocols</a>
+      <a href="about.html">About</a>
+      <a href="market.html">Market</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+    <span class="footer-copy">&copy; 2026 &middot; Doha, Qatar</span>
   </div>
-  <div class="footer-bottom"><span>2026 Engineered Adherence</span><span>Doha, Qatar</span></div>
 </footer>
 
 <script>
-// Protocol selector
-document.querySelectorAll('.proto-tab').forEach(tab => {
-  tab.addEventListener('click', () => {
-    document.querySelectorAll('.proto-tab').forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    document.querySelectorAll('.proto-detail').forEach(d => d.classList.remove('active'));
-    document.getElementById('proto-' + tab.dataset.proto).classList.add('active');
+(function(){
+  // Protocol selector
+  document.querySelectorAll('.proto-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.proto-tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      document.querySelectorAll('.proto-detail').forEach(d => d.classList.remove('active'));
+      document.getElementById('proto-' + tab.dataset.proto).classList.add('active');
+    });
   });
-});
+})();
 </script>
 <script src="js/main.js"></script>
 <script src="js/mobile.js"></script>
