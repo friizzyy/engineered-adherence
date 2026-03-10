@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Engineered Adherence USA</title>
+<meta name="description" content="Research-grade peptide compounds with clinical precision. AI-matched protocol design, third-party testing, and uncompromising purity standards.">
+<meta property="og:title" content="About | Engineered Adherence USA">
+<meta property="og:description" content="Research-grade peptide compounds with clinical precision. AI-matched protocol design and uncompromising purity standards.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<script>
+(function(){
+  var t = localStorage.getItem('ea-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="stylesheet" href="/qa/css/style.css">
+<link rel="stylesheet" href="/qa/css/mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════
+     NAV ENTRANCE
+     ═══════════════════════════════════════════ */
+  nav{opacity:0;animation:fadeDown .8s ease .3s forwards}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ═══════════════════════════════════════════
+     PAGE HERO
+     ═══════════════════════════════════════════ */
+  .about-hero{
+    padding:200px 72px 80px;
+    max-width:1140px;margin:0 auto;
+    position:relative;z-index:1;
+    text-align:center;
+  }
+  .about-hero .section-label{justify-content:center}
+  .about-hero .section-label::before{display:none}
+  .about-hero .section-title{
+    font-size:56px;margin-bottom:20px;letter-spacing:-0.02em;
+  }
+
+  /* ═══════════════════════════════════════════
+     SECTION 01 — TWO-COLUMN MISSION
+     ═══════════════════════════════════════════ */
+  .hero-split{
+    display:grid;
+    grid-template-columns:1.2fr 1fr;
+    gap:80px;
+    align-items:start;
+  }
+  .hero-content .panel-num{
+    font-family:'Playfair Display',serif;
+    font-size:100px;font-weight:600;
+    color:var(--pillar-num);line-height:1;
+    margin-bottom:-20px;
+  }
+  .hero-content h3{
+    font-family:'Playfair Display',serif;
+    font-size:28px;font-weight:500;
+    color:var(--text-heading);
+    margin:0 0 24px;line-height:1.3;
+  }
+  .hero-content p{
+    font-size:15px;color:var(--muted);
+    line-height:1.9;font-weight:300;
+    margin:0 0 16px;
+  }
+  .stat-stack{
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .stat-bar{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:24px 32px;display:flex;
+    justify-content:space-between;align-items:center;
+    transition:all .3s ease;
+  }
+  .stat-bar:hover{
+    border-color:var(--line-strong);padding-left:40px;
+  }
+  .stat-bar-label{
+    font-size:13px;color:var(--muted);letter-spacing:0.5px;
+  }
+  .stat-bar-value{
+    font-family:'Playfair Display',serif;
+    font-size:28px;font-weight:500;color:var(--stat-num);
+  }
+
+  /* ═══════════════════════════════════════════
+     SECTION 02 — THE STANDARD
+     ═══════════════════════════════════════════ */
+  .standard-section{
+    text-align:center;
+  }
+  .standard-section .section-label{justify-content:center}
+  .standard-section .section-label::before{display:none}
+  .standard-section .section-body{
+    max-width:640px;margin:0 auto 48px;
+  }
+  .info-cards{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:20px;
+  }
+  .info-card{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:32px;position:relative;transition:all .4s ease;
+    text-align:left;
+  }
+  .info-card::before{
+    content:'';position:absolute;top:0;left:0;
+    width:3px;height:100%;
+    background:var(--accent-solid);opacity:0;
+    transition:opacity .3s;
+  }
+  .info-card:hover{
+    border-color:var(--line-strong);
+    transform:translateY(-4px);
+    box-shadow:var(--shadow-card-subtle);
+  }
+  .info-card:hover::before{opacity:1}
+  .info-card-num{
+    font-family:'Playfair Display',serif;
+    font-size:14px;color:var(--accent-solid);margin-bottom:16px;
+  }
+  .info-card h4{
+    font-size:16px;font-weight:500;
+    color:var(--text-heading);margin:0 0 12px;
+  }
+  .info-card p{
+    font-size:13px;color:var(--muted);line-height:1.75;margin:0;
+  }
+
+  /* ═══════════════════════════════════════════
+     SECTION 03 — WHAT WE ARE / ARE NOT
+     ═══════════════════════════════════════════ */
+  .two-cards{
+    display:grid;grid-template-columns:1fr 1fr;gap:24px;
+  }
+  .content-card{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:40px;position:relative;transition:all .4s ease;
+  }
+  .content-card::before{
+    content:'';position:absolute;top:0;left:0;
+    width:3px;height:100%;background:var(--line-strong);opacity:1;
+  }
+  .content-card:hover{border-color:var(--line-strong)}
+  .content-tag{
+    display:inline-block;font-size:9px;
+    letter-spacing:1.5px;text-transform:uppercase;
+    padding:5px 10px;margin-bottom:24px;
+  }
+  .content-card.card-positive .content-tag{
+    background:rgba(76,175,80,0.12);color:rgba(76,175,80,0.8);
+  }
+  .content-card.card-negative .content-tag{
+    background:rgba(211,84,84,0.12);color:rgba(211,84,84,0.8);
+  }
+  .content-item{
+    padding-left:20px;border-left:1px solid var(--line);
+    margin-bottom:24px;
+  }
+  .content-item:last-child{margin-bottom:0}
+  .content-item h4{
+    font-size:15px;font-weight:500;
+    color:var(--text-heading);margin:0 0 8px;
+  }
+  .content-item p{
+    font-size:13px;color:var(--muted);line-height:1.75;margin:0;
+  }
+
+  /* ═══════════════════════════════════════════
+     SECTION 04 — FIVE PILLARS
+     ═══════════════════════════════════════════ */
+  .pillars-header{text-align:center;max-width:640px;margin:0 auto 64px}
+  .pillars-header .section-label{justify-content:center}
+  .pillars-header .section-label::before{display:none}
+
+  .pillar-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+  .pillar-card{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:40px 20px 36px;text-align:center;
+    transition:all .5s cubic-bezier(0.4,0,0.2,1);
+    position:relative;overflow:hidden;
+  }
+  .pillar-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
+    transform:scaleX(0);transition:transform .5s cubic-bezier(0.4,0,0.2,1);
+    opacity:0.6;
+  }
+  .pillar-card:hover{
+    transform:translateY(-5px);
+    box-shadow:var(--shadow-card-subtle);
+    border-color:var(--line-strong);
+    background:var(--bg-card-hover);
+  }
+  .pillar-card:hover::before{transform:scaleX(1)}
+  .pillar-num{
+    font-family:'Playfair Display',serif;
+    font-size:60px;font-weight:600;
+    color:var(--pillar-num);line-height:1;
+    margin-bottom:16px;transition:color .5s;
+  }
+  .pillar-card h3{
+    font-family:'Playfair Display',serif;
+    font-size:17px;font-weight:500;
+    margin-bottom:12px;color:var(--text-heading);
+    transition:color .5s;
+  }
+  .pillar-card p{
+    font-size:12px;color:var(--muted);
+    line-height:1.7;font-weight:300;transition:color .5s;
+  }
+
+  /* ═══════════════════════════════════════════
+     CTA BAND (ADVISOR TEASER)
+     ═══════════════════════════════════════════ */
+  .advisor-teaser{
+    text-align:center;padding:120px 72px;
+    position:relative;z-index:1;
+  }
+  .advisor-teaser::before{
+    content:'';position:absolute;inset:0;
+    background:var(--cta-band-bg);pointer-events:none;
+  }
+  .advisor-teaser>*{position:relative;z-index:1}
+  .advisor-teaser .section-label{justify-content:center}
+  .advisor-teaser .section-label::before{display:none}
+  .advisor-teaser .section-title{margin-bottom:16px}
+  .advisor-teaser .section-body{max-width:480px;margin:0 auto 40px}
+
+  /* ═══════════════════════════════════════════
+     CART DRAWER
+     ═══════════════════════════════════════════ */
+  .cart-drawer{
+    position:fixed;top:0;right:0;width:100%;max-width:380px;height:100vh;
+    background:var(--bg);border-left:1px solid var(--line);
+    z-index:200;transform:translateX(100%);
+    transition:transform .4s cubic-bezier(0.4,0,0.2,1);
+    padding:32px;overflow-y:auto;
+  }
+  .cart-drawer.open{transform:translateX(0)}
+  .cart-drawer-header{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--line);
+  }
+  .cart-drawer-title{
+    font-family:'Playfair Display',serif;font-size:20px;font-weight:500;
+    color:var(--text-heading);
+  }
+  .cart-close{
+    background:none;border:1px solid var(--line);
+    width:32px;height:32px;cursor:pointer;color:var(--muted);
+    display:flex;align-items:center;justify-content:center;font-size:14px;
+    transition:all .3s;
+  }
+  .cart-close:hover{border-color:var(--text-heading);color:var(--text-heading)}
+  .cart-item{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 0;border-bottom:1px solid var(--line);
+  }
+  .cart-item-name{
+    font-family:'Space Mono',monospace;font-size:13px;
+    color:var(--text-heading);font-weight:400;
+  }
+  .cart-item-qty{font-size:12px;color:var(--faint)}
+  .cart-item-price{font-size:14px;color:var(--text-heading);font-weight:400}
+  .cart-item button{
+    background:none;border:1px solid var(--line);
+    width:24px;height:24px;cursor:pointer;color:var(--faint);
+    font-size:11px;display:flex;align-items:center;justify-content:center;
+    transition:all .3s;
+  }
+  .cart-item button:hover{border-color:var(--text-heading);color:var(--text-heading)}
+  .cart-total{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:24px 0;margin-top:16px;border-top:1px solid var(--line-strong);
+  }
+  .cart-total-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
+  .cart-total-value{
+    font-family:'Playfair Display',serif;font-size:28px;font-weight:500;color:var(--stat-num);
+  }
+  .cart-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:190;
+    opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;
+    backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  }
+  .cart-overlay.open{opacity:1;visibility:visible}
+
+  /* ═══════════════════════════════════════════
+     NAV CART BUTTON
+     ═══════════════════════════════════════════ */
+  .nav-cart-btn{
+    padding:11px 20px;background:transparent;
+    border:1px solid var(--cta-border);cursor:pointer;
+    font-size:10px;letter-spacing:2.2px;text-transform:uppercase;
+    color:var(--cta-text);font-weight:400;font-family:'DM Sans',sans-serif;
+    transition:all .3s;position:relative;
+  }
+  .nav-cart-btn:hover{background:var(--cta-hover);border-color:var(--btn-hover-border)}
+  #cart-count{
+    font-size:9px;background:var(--accent-solid);color:var(--bg);
+    padding:2px 6px;border-radius:8px;margin-left:6px;
+    font-family:'DM Sans',sans-serif;
+  }
+
+  /* ═══════════════════════════════════════════
+     DISCLAIMER
+     ═══════════════════════════════════════════ */
+  .us-disclaimer{
+    text-align:center;padding:32px 24px;
+    font-size:11px;color:var(--faint);font-weight:300;
+    letter-spacing:0.5px;line-height:1.8;
+    border-top:1px solid var(--line);
+    max-width:1140px;margin:0 auto;
+    position:relative;z-index:1;
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE — TABLET
+     ═══════════════════════════════════════════ */
+  @media(max-width:1024px){
+    .about-hero{padding:160px 40px 60px}
+    .about-hero .section-title{font-size:44px}
+    .hero-split{grid-template-columns:1fr;gap:48px}
+    .info-cards{grid-template-columns:1fr}
+    .two-cards{grid-template-columns:1fr}
+    .pillar-grid{grid-template-columns:repeat(3,1fr)}
+    .advisor-teaser{padding:100px 40px}
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE — MOBILE
+     ═══════════════════════════════════════════ */
+  @media(max-width:768px){
+    .about-hero{padding:120px 24px 48px}
+    .about-hero .section-title{font-size:32px}
+    .hero-content .panel-num{font-size:60px;margin-bottom:-12px}
+    .hero-content h3{font-size:24px}
+    .stat-bar{padding:20px 24px}
+    .stat-bar-value{font-size:24px}
+    .pillar-grid{grid-template-columns:1fr 1fr}
+    .advisor-teaser{padding:64px 24px}
+    .nav-cart-btn{display:none}
+  }
+
+  @media(max-width:480px){
+    .about-hero .section-title{font-size:26px}
+    .pillar-grid{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<nav>
+  <a href="/us/" class="logo">Engineered Adherence</a>
+  <ul class="nav-center">
+    <li><a href="/us/shop.html">Shop</a></li>
+    <li><a href="/us/protocols.html">Protocols</a></li>
+    <li><a href="/us/advisor.html">Stack Advisor</a></li>
+    <li><a href="/us/about.html" class="active">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+    <button class="nav-cart-btn" id="cart-toggle" aria-label="Open cart">Stack <span id="cart-count" style="display:none">0</span></button>
+    <a href="/us/advisor.html" class="nav-cta">Build My Stack</a>
+    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-nav-overlay" aria-hidden="true"></div>
+<div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+  <ul class="mobile-nav-links">
+    <li><a href="/us/shop.html">Shop</a></li>
+    <li><a href="/us/protocols.html">Protocols</a></li>
+    <li><a href="/us/advisor.html">Stack Advisor</a></li>
+    <li><a href="/us/about.html">About</a></li>
+  </ul>
+  <a href="/us/advisor.html" class="mobile-nav-cta">Build My Stack</a>
+  <div class="mobile-nav-footer">
+    <div class="mobile-theme-switch">
+      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+      <button class="theme-toggle-track" id="mobileThemeToggle" aria-label="Toggle theme">
+        <span class="theme-toggle-knob"></span>
+      </button>
+      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div class="cart-overlay" id="cart-overlay"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-drawer-header">
+    <div class="cart-drawer-title">Your Stack</div>
+    <button class="cart-close" id="cart-close" aria-label="Close cart">&#10005;</button>
+  </div>
+  <div id="cart-items"></div>
+  <div class="cart-total">
+    <span class="cart-total-label">Subtotal</span>
+    <span class="cart-total-value">$<span id="cart-total">0</span></span>
+  </div>
+  <a href="mailto:orders@engineeredadherence.com?subject=Stack%20Order%20Request" class="btn btn-lg" style="width:100%;text-align:center;margin-top:24px">Request Order</a>
+</div>
+
+<main id="main-content">
+
+<!-- Page Hero -->
+<section class="about-hero">
+  <p class="section-label">About</p>
+  <h1 class="section-title">Research-grade compounds for<br>serious optimization.</h1>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- 01 — The Mission -->
+<section class="section reveal">
+  <div class="hero-split">
+    <div class="hero-content">
+      <div class="panel-num">01</div>
+      <h3>The Mission</h3>
+      <p>Engineered Adherence exists to provide research-grade peptide compounds with clinical precision. We bridge the gap between raw scientific literature and practical application, delivering verified compounds alongside AI-matched protocol design that removes guesswork from the optimization process.</p>
+      <p>Our platform is built on three non-negotiable principles: uncompromising purity standards verified through independent third-party analysis, transparent documentation shipped with every order, and protocol design informed exclusively by peer-reviewed research. We do not sell hope. We supply the molecular tools that the science actually supports.</p>
+    </div>
+    <div class="stat-stack">
+      <div class="stat-bar">
+        <span class="stat-bar-label">Compounds available</span>
+        <span class="stat-bar-value">30+</span>
+      </div>
+      <div class="stat-bar">
+        <span class="stat-bar-label">Purity standard</span>
+        <span class="stat-bar-value">99.9%</span>
+      </div>
+      <div class="stat-bar">
+        <span class="stat-bar-label">Dispatch window</span>
+        <span class="stat-bar-value">48hr</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- 02 — The Standard -->
+<section class="section standard-section reveal">
+  <p class="section-label">The Standard</p>
+  <h2 class="section-title">Purity is non-negotiable.</h2>
+  <p class="section-body">Every compound undergoes third-party mass spectrometry analysis. Every batch ships with a Certificate of Analysis. Every protocol is validated against peer-reviewed research.</p>
+  <div class="info-cards">
+    <div class="info-card">
+      <div class="info-card-num">01</div>
+      <h4>Third-Party Testing</h4>
+      <p>Independent laboratory verification via HPLC and mass spectrometry on every production batch.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-num">02</div>
+      <h4>Certificate of Analysis</h4>
+      <p>Full CoA documentation including purity percentage, molecular identity, and residual solvent analysis.</p>
+    </div>
+    <div class="info-card">
+      <div class="info-card-num">03</div>
+      <h4>Research Validation</h4>
+      <p>Protocol design informed by peer-reviewed literature and clinical dosing frameworks.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- 03 — What We Are / What We Are Not -->
+<section class="section reveal">
+  <div class="two-cards">
+    <div class="content-card card-positive">
+      <span class="content-tag">What We Are</span>
+      <div class="content-item">
+        <h4>A research compound provider</h4>
+        <p>We source, verify, and distribute peptide compounds for legitimate scientific research.</p>
+      </div>
+      <div class="content-item">
+        <h4>Precision protocols</h4>
+        <p>AI-matched stacking recommendations based on peer-reviewed mechanisms of action.</p>
+      </div>
+      <div class="content-item">
+        <h4>Transparency-first</h4>
+        <p>Every batch comes with full CoA documentation. No proprietary blends, no hidden ingredients.</p>
+      </div>
+    </div>
+    <div class="content-card card-negative">
+      <span class="content-tag">What We Are Not</span>
+      <div class="content-item">
+        <h4>Not a pharmaceutical company</h4>
+        <p>We do not manufacture drugs, make medical claims, or provide clinical treatment.</p>
+      </div>
+      <div class="content-item">
+        <h4>Not a supplement brand</h4>
+        <p>No proprietary blends, no marketing hype, no unsubstantiated performance claims.</p>
+      </div>
+      <div class="content-item">
+        <h4>Not a shortcut</h4>
+        <p>Optimization requires adherence, monitoring, and an understanding of the underlying science.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- 04 — The Five Pillars -->
+<section class="section reveal stagger-children">
+  <div class="pillars-header">
+    <p class="section-label">The Framework</p>
+    <h2 class="section-title">Five pillars. One system.</h2>
+  </div>
+  <div class="pillar-grid">
+    <div class="pillar-card stagger-item"><div class="pillar-num">I</div><h3>Longevity</h3><p>Telomerase activation, collagen synthesis, and cellular repair for sustained vitality.</p></div>
+    <div class="pillar-card stagger-item"><div class="pillar-num">II</div><h3>Recovery</h3><p>Tissue repair peptides that reduce recovery time by up to 40% in research models.</p></div>
+    <div class="pillar-card stagger-item"><div class="pillar-num">III</div><h3>Metabolic</h3><p>Targeted lipolysis and metabolic optimization validated in clinical research.</p></div>
+    <div class="pillar-card stagger-item"><div class="pillar-num">IV</div><h3>Cognitive</h3><p>BDNF upregulation, anxiolytic stabilization, and neuroprotection compounds.</p></div>
+    <div class="pillar-card stagger-item"><div class="pillar-num">V</div><h3>Performance</h3><p>GH secretagogues supporting lean mass, recovery, and deep restorative sleep.</p></div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- CTA Band -->
+<section class="advisor-teaser reveal">
+  <p class="section-label">Get Started</p>
+  <h2 class="section-title">Build your stack.</h2>
+  <p class="section-body">Answer five questions. Our AI returns a precision protocol matched to your biology and goals.</p>
+  <a href="/us/advisor.html" class="btn btn-lg">Build Your Stack &rarr;</a>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+</main>
+
+<footer>
+  <div class="footer-bar">
+    <a href="/us/" class="logo">Engineered Adherence</a>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/us/shop.html">Shop</a>
+      <a href="/us/protocols.html">Protocols</a>
+      <a href="/us/advisor.html">Advisor</a>
+      <a href="/us/about.html">About</a>
+      <a href="/qa/">QA Site</a>
+    </nav>
+    <span class="footer-copy">&copy; 2026 Engineered Adherence &middot; United States</span>
+  </div>
+</footer>
+
+<div class="us-disclaimer">
+  For research purposes only. Not intended for human consumption. These products are sold strictly for laboratory and scientific research.
+</div>
+
+<script src="/us/cart.js"></script>
+<script src="/qa/js/main.js"></script>
+<script src="/qa/js/mobile.js"></script>
+</body>
+</html>

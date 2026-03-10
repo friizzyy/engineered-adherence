@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Engineered Adherence | USA</title>
+<meta name="description" content="Research-grade peptide compounds for serious optimization. Precision protocols, clinical purity, delivered to your door.">
+<meta property="og:title" content="Engineered Adherence | USA">
+<meta property="og:description" content="Research-grade peptide compounds. Precision protocols, clinical purity, delivered to your door.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<script>
+(function(){
+  var t = localStorage.getItem('ea-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="stylesheet" href="/qa/css/style.css">
+<link rel="stylesheet" href="/qa/css/mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  nav{opacity:0;animation:fadeDown .8s ease 1s forwards}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+  .us-hero{
+    min-height:100vh;display:flex;flex-direction:column;
+    justify-content:center;align-items:center;
+    text-align:center;position:relative;z-index:1;
+    padding:120px 24px 80px;
+  }
+  .us-hero-eyebrow{
+    font-size:10px;letter-spacing:6px;text-transform:uppercase;
+    color:var(--faint);font-weight:400;
+    opacity:0;animation:fu .8s ease .2s forwards;
+    display:flex;align-items:center;justify-content:center;gap:16px;
+  }
+  .us-hero-eyebrow::before,.us-hero-eyebrow::after{
+    content:'';width:32px;height:1px;background:var(--faint);opacity:.4;
+  }
+  .us-hero-title{
+    font-family:'Playfair Display',serif;
+    font-size:60px;font-weight:500;line-height:1.1;
+    margin-top:20px;letter-spacing:-0.02em;
+    opacity:0;animation:fu .8s ease .4s forwards;
+    color:var(--text-heading);
+  }
+  .us-hero-title em{font-style:italic;font-weight:400;color:var(--muted)}
+  .us-hero-sub{
+    font-size:15px;color:var(--muted);font-weight:300;
+    margin-top:24px;max-width:520px;line-height:1.9;
+    opacity:0;animation:fu .8s ease .6s forwards;
+  }
+  .us-hero-ctas{
+    display:flex;gap:16px;margin-top:40px;
+    opacity:0;animation:fu .8s ease .8s forwards;
+  }
+
+  .compound-ticker{
+    display:flex;gap:12px;flex-wrap:wrap;justify-content:center;
+    margin-top:48px;max-width:600px;
+    opacity:0;animation:fu .8s ease 1s forwards;
+  }
+  .ticker-pill{
+    font-family:'Space Mono',monospace;
+    font-size:11px;letter-spacing:1px;
+    padding:8px 16px;
+    background:var(--bg-card);border:1px solid var(--line);
+    color:var(--muted);
+    transition:all .3s;
+  }
+  .ticker-pill:hover{
+    border-color:var(--line-strong);color:var(--text-heading);
+    transform:translateY(-2px);
+  }
+
+  .philosophy{
+    text-align:center;padding:120px 72px;
+    max-width:1140px;margin:0 auto;position:relative;z-index:1;
+  }
+  .philosophy .section-label{justify-content:center}
+  .philosophy .section-label::before{display:none}
+  .philosophy .section-body{max-width:560px;margin:0 auto 48px}
+
+  .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .compound-card{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:40px 28px;position:relative;overflow:hidden;
+    transition:all .5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .compound-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
+    transform:scaleX(0);transition:transform .5s;opacity:0.6;
+  }
+  .compound-card:hover{
+    transform:translateY(-5px);box-shadow:var(--shadow-card-subtle);
+    border-color:var(--line-strong);background:var(--bg-card-hover);
+  }
+  .compound-card:hover::before{transform:scaleX(1)}
+  .compound-card .pillar-tag{
+    font-size:9px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--tag-text);padding:5px 12px;
+    background:var(--tag-bg);border:1px solid var(--line);
+    display:inline-block;margin-bottom:16px;
+  }
+  .compound-card .compound-name{
+    font-family:'Space Mono',monospace;
+    font-size:18px;font-weight:700;
+    color:var(--text-heading);margin-bottom:8px;
+    letter-spacing:0.5px;
+  }
+  .compound-card .compound-desc{
+    font-size:13px;color:var(--muted);line-height:1.75;font-weight:300;
+    margin-bottom:20px;
+  }
+  .compound-card .compound-price{
+    font-family:'Playfair Display',serif;
+    font-size:28px;font-weight:500;color:var(--stat-num);
+    margin-bottom:20px;
+  }
+  .compound-card .compound-price span{
+    font-size:14px;color:var(--faint);font-family:'DM Sans',sans-serif;font-weight:300;
+  }
+
+  .advisor-teaser{
+    text-align:center;padding:120px 72px;
+    position:relative;z-index:1;
+  }
+  .advisor-teaser::before{
+    content:'';position:absolute;inset:0;
+    background:var(--cta-band-bg);pointer-events:none;
+  }
+  .advisor-teaser>*{position:relative;z-index:1}
+  .advisor-teaser .section-label{justify-content:center}
+  .advisor-teaser .section-label::before{display:none}
+  .advisor-teaser .section-body{max-width:480px;margin:0 auto 40px}
+
+  .proto-preview{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .proto-card{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:40px 32px;transition:all .5s cubic-bezier(0.4,0,0.2,1);
+    position:relative;overflow:hidden;
+  }
+  .proto-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
+    transform:scaleX(0);transition:transform .5s;opacity:0.6;
+  }
+  .proto-card:hover{
+    transform:translateY(-3px);box-shadow:var(--shadow-card-subtle);
+    border-color:var(--line-strong);background:var(--bg-card-hover);
+  }
+  .proto-card:hover::before{transform:scaleX(1)}
+  .proto-card .proto-num{
+    font-family:'Playfair Display',serif;font-size:48px;font-weight:600;
+    color:var(--pillar-num);line-height:1;margin-bottom:16px;
+  }
+  .proto-card h3{
+    font-family:'Playfair Display',serif;font-size:20px;font-weight:500;
+    color:var(--text-heading);margin-bottom:8px;
+  }
+  .proto-card .proto-meta{
+    font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--faint);margin-bottom:16px;
+  }
+  .proto-card p{font-size:13px;color:var(--muted);line-height:1.75;font-weight:300}
+
+  .us-disclaimer{
+    text-align:center;padding:32px 24px;
+    font-size:11px;color:var(--faint);font-weight:300;
+    letter-spacing:0.5px;line-height:1.8;
+    border-top:1px solid var(--line);
+    max-width:1140px;margin:0 auto;
+    position:relative;z-index:1;
+  }
+
+  /* Cart drawer */
+  .cart-drawer{
+    position:fixed;top:0;right:0;width:100%;max-width:380px;height:100vh;
+    background:var(--bg);border-left:1px solid var(--line);
+    z-index:200;transform:translateX(100%);
+    transition:transform .4s cubic-bezier(0.4,0,0.2,1);
+    padding:32px;overflow-y:auto;
+  }
+  .cart-drawer.open{transform:translateX(0)}
+  .cart-drawer-header{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--line);
+  }
+  .cart-drawer-title{
+    font-family:'Playfair Display',serif;font-size:20px;font-weight:500;
+    color:var(--text-heading);
+  }
+  .cart-close{
+    background:none;border:1px solid var(--line);
+    width:32px;height:32px;cursor:pointer;color:var(--muted);
+    display:flex;align-items:center;justify-content:center;font-size:14px;
+    transition:all .3s;
+  }
+  .cart-close:hover{border-color:var(--text-heading);color:var(--text-heading)}
+  .cart-item{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 0;border-bottom:1px solid var(--line);
+  }
+  .cart-item-name{
+    font-family:'Space Mono',monospace;font-size:13px;
+    color:var(--text-heading);font-weight:400;
+  }
+  .cart-item-qty{font-size:12px;color:var(--faint)}
+  .cart-item-price{font-size:14px;color:var(--text-heading);font-weight:400}
+  .cart-item button{
+    background:none;border:1px solid var(--line);
+    width:24px;height:24px;cursor:pointer;color:var(--faint);
+    font-size:11px;display:flex;align-items:center;justify-content:center;
+    transition:all .3s;
+  }
+  .cart-item button:hover{border-color:var(--text-heading);color:var(--text-heading)}
+  .cart-total{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:24px 0;margin-top:16px;border-top:1px solid var(--line-strong);
+  }
+  .cart-total-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
+  .cart-total-value{
+    font-family:'Playfair Display',serif;font-size:28px;font-weight:500;color:var(--stat-num);
+  }
+  .cart-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:190;
+    opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;
+    backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  }
+  .cart-overlay.open{opacity:1;visibility:visible}
+
+  .nav-cart-btn{
+    padding:11px 20px;background:transparent;
+    border:1px solid var(--cta-border);cursor:pointer;
+    font-size:10px;letter-spacing:2.2px;text-transform:uppercase;
+    color:var(--cta-text);font-weight:400;font-family:'DM Sans',sans-serif;
+    transition:all .3s;position:relative;
+  }
+  .nav-cart-btn:hover{background:var(--cta-hover);border-color:var(--btn-hover-border)}
+  #cart-count{
+    font-size:9px;background:var(--accent-solid);color:var(--bg);
+    padding:2px 6px;border-radius:8px;margin-left:6px;
+    font-family:'DM Sans',sans-serif;
+  }
+
+  @media(max-width:1024px){
+    .featured-grid{grid-template-columns:1fr 1fr}
+    .philosophy{padding:100px 40px}
+  }
+  @media(max-width:768px){
+    .us-hero{padding:100px 24px 60px}
+    .us-hero-title{font-size:36px}
+    .us-hero-sub{font-size:14px}
+    .us-hero-ctas{flex-direction:column;align-items:center}
+    .featured-grid{grid-template-columns:1fr}
+    .proto-preview{grid-template-columns:1fr}
+    .philosophy{padding:64px 24px}
+    .advisor-teaser{padding:64px 24px}
+    .compound-ticker{margin-top:32px}
+    .nav-cart-btn{display:none}
+  }
+  @media(max-width:480px){
+    .us-hero-title{font-size:28px}
+  }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<nav>
+  <a href="/us/" class="logo">Engineered Adherence</a>
+  <ul class="nav-center">
+    <li><a href="/us/shop.html">Shop</a></li>
+    <li><a href="/us/protocols.html">Protocols</a></li>
+    <li><a href="/us/advisor.html">Stack Advisor</a></li>
+    <li><a href="/us/about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+    <button class="nav-cart-btn" id="cart-toggle" aria-label="Open cart">Stack <span id="cart-count" style="display:none">0</span></button>
+    <a href="/us/advisor.html" class="nav-cta">Build My Stack</a>
+    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-nav-overlay" aria-hidden="true"></div>
+<div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+  <ul class="mobile-nav-links">
+    <li><a href="/us/shop.html">Shop</a></li>
+    <li><a href="/us/protocols.html">Protocols</a></li>
+    <li><a href="/us/advisor.html">Stack Advisor</a></li>
+    <li><a href="/us/about.html">About</a></li>
+  </ul>
+  <a href="/us/advisor.html" class="mobile-nav-cta">Build My Stack</a>
+  <div class="mobile-nav-footer">
+    <div class="mobile-theme-switch">
+      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+      <button class="theme-toggle-track" id="mobileThemeToggle" aria-label="Toggle theme">
+        <span class="theme-toggle-knob"></span>
+      </button>
+      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div class="cart-overlay" id="cart-overlay"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-drawer-header">
+    <div class="cart-drawer-title">Your Stack</div>
+    <button class="cart-close" id="cart-close" aria-label="Close cart">✕</button>
+  </div>
+  <div id="cart-items"></div>
+  <div class="cart-total">
+    <span class="cart-total-label">Subtotal</span>
+    <span class="cart-total-value">$<span id="cart-total">0</span></span>
+  </div>
+  <a href="mailto:orders@engineeredadherence.com?subject=Stack%20Order%20Request" class="btn btn-lg" style="width:100%;text-align:center;margin-top:24px">Request Order</a>
+</div>
+
+<main id="main-content">
+
+<!-- 01 — Hero -->
+<section class="us-hero">
+  <p class="us-hero-eyebrow">Research-Grade Peptide Compounds</p>
+  <h1 class="us-hero-title">The science of<br><em>sustained performance.</em></h1>
+  <p class="us-hero-sub">Research-grade peptide compounds for those serious about optimization. Precision protocols, clinical purity, delivered to your door.</p>
+  <div class="us-hero-ctas">
+    <a href="/us/shop.html" class="btn">Shop Compounds</a>
+    <a href="/us/advisor.html" class="btn btn-ghost">Build My Stack</a>
+  </div>
+  <div class="compound-ticker">
+    <span class="ticker-pill">Semax</span>
+    <span class="ticker-pill">BPC-157</span>
+    <span class="ticker-pill">Ipamorelin</span>
+    <span class="ticker-pill">Epithalon</span>
+    <span class="ticker-pill">TB-500</span>
+    <span class="ticker-pill">Hexarelin</span>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- 02 — Philosophy -->
+<section class="philosophy reveal">
+  <p class="section-label">The Standard</p>
+  <h2 class="section-title">Precision is the variable.</h2>
+  <p class="section-body">Every compound is third-party tested, CoA verified, and dispatched within 48 hours. We match research-grade purity with AI-driven protocol design. No guesswork. No filler. No compromise.</p>
+  <div class="stat-row" style="justify-content:center">
+    <div class="stat"><div class="stat-num">99.9%</div><div class="stat-label">Purity</div></div>
+    <div class="stat"><div class="stat-num">30+</div><div class="stat-label">Compounds</div></div>
+    <div class="stat"><div class="stat-num">48hr</div><div class="stat-label">Dispatch</div></div>
+    <div class="stat"><div class="stat-num">CoA</div><div class="stat-label">Verified</div></div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- 03 — Five Pillars -->
+<section class="section reveal stagger-children">
+  <div class="pillars-header">
+    <p class="section-label">Five Pillars</p>
+    <h2 class="section-title">One framework.<br>Five pathways.</h2>
+  </div>
+  <div class="pillar-grid">
+    <div class="pillar-card stagger-item"><div class="pillar-num">I</div><h3>Longevity</h3><p>Telomerase activation, collagen synthesis, and cellular repair for sustained vitality.</p></div>
+    <div class="pillar-card stagger-item"><div class="pillar-num">II</div><h3>Recovery</h3><p>Tissue repair peptides that reduce recovery time by up to 40% in research models.</p></div>
+    <div class="pillar-card stagger-item"><div class="pillar-num">III</div><h3>Metabolic</h3><p>Targeted lipolysis and metabolic optimization validated in clinical research.</p></div>
+    <div class="pillar-card stagger-item"><div class="pillar-num">IV</div><h3>Cognitive</h3><p>BDNF upregulation, anxiolytic stabilization, and neuroprotection compounds.</p></div>
+    <div class="pillar-card stagger-item"><div class="pillar-num">V</div><h3>Performance</h3><p>GH secretagogues supporting lean mass, recovery, and deep restorative sleep.</p></div>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- 04 — Featured Compounds -->
+<section class="section reveal">
+  <p class="section-label">Featured</p>
+  <h2 class="section-title">Core compounds</h2>
+  <div class="featured-grid" style="margin-top:48px">
+
+    <div class="compound-card">
+      <span class="pillar-tag">Pillar II · Recovery</span>
+      <div class="compound-name">BPC-157</div>
+      <p class="compound-desc">Tissue repair. Anti-inflammatory. Tendon healing.</p>
+      <div class="compound-price">$89 <span>/ 5mg</span></div>
+      <button class="btn" onclick="Cart.add({name:'BPC-157',slug:'bpc-157',price:89,pillar:'Recovery'})">Add to Stack</button>
+    </div>
+
+    <div class="compound-card">
+      <span class="pillar-tag">Pillar V · Performance</span>
+      <div class="compound-name">IPAMORELIN</div>
+      <p class="compound-desc">Clean GH pulse. Recomposition. Recovery.</p>
+      <div class="compound-price">$112 <span>/ 2mg</span></div>
+      <button class="btn" onclick="Cart.add({name:'IPAMORELIN',slug:'ipamorelin',price:112,pillar:'Performance'})">Add to Stack</button>
+    </div>
+
+    <div class="compound-card">
+      <span class="pillar-tag">Pillar IV · Cognitive</span>
+      <div class="compound-name">SEMAX</div>
+      <p class="compound-desc">BDNF upregulation. Focus. Neuroprotection.</p>
+      <div class="compound-price">$97 <span>/ 30mg</span></div>
+      <button class="btn" onclick="Cart.add({name:'SEMAX',slug:'semax',price:97,pillar:'Cognitive'})">Add to Stack</button>
+    </div>
+
+  </div>
+  <div style="text-align:center;margin-top:48px">
+    <a href="/us/shop.html" class="btn btn-ghost">View All Compounds</a>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- 05 — AI Advisor Teaser -->
+<section class="advisor-teaser reveal">
+  <p class="section-label">AI Protocol Advisor</p>
+  <h2 class="section-title">Your protocol. <em style="font-style:italic;font-weight:400;color:var(--muted)">Engineered.</em></h2>
+  <p class="section-body">Answer five questions. Our AI returns a bespoke peptide stack matched to your biology, goals, and timeline.</p>
+  <a href="/us/advisor.html" class="btn btn-lg">Begin Assessment →</a>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- 06 — Protocol Preview -->
+<section class="section reveal">
+  <p class="section-label">Protocols</p>
+  <h2 class="section-title">Complete stacks, not isolated compounds</h2>
+  <div class="proto-preview" style="margin-top:48px">
+    <div class="proto-card">
+      <div class="proto-num">01</div>
+      <h3>The Recomposition Protocol</h3>
+      <div class="proto-meta">Body Composition · 12 Weeks · Intermediate</div>
+      <p>Simultaneous fat loss and lean mass retention through lipolytic, anabolic, and recovery pathway activation.</p>
+    </div>
+    <div class="proto-card">
+      <div class="proto-num">02</div>
+      <h3>The Cognitive Edge</h3>
+      <div class="proto-meta">Neurological · 8 Weeks · Beginner Friendly</div>
+      <p>BDNF upregulation, anxiolytic stabilization, and neuroprotection for sustained performance under pressure.</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:48px">
+    <a href="/us/protocols.html" class="btn btn-ghost">View All Protocols</a>
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+</main>
+
+<footer>
+  <div class="footer-bar">
+    <a href="/us/" class="logo">Engineered Adherence</a>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/us/shop.html">Shop</a>
+      <a href="/us/protocols.html">Protocols</a>
+      <a href="/us/advisor.html">Advisor</a>
+      <a href="/us/about.html">About</a>
+      <a href="/qa/">QA Site</a>
+    </nav>
+    <span class="footer-copy">&copy; 2026 Engineered Adherence &middot; United States</span>
+  </div>
+</footer>
+
+<div class="us-disclaimer">
+  For research purposes only. Not intended for human consumption. These products are sold strictly for laboratory and scientific research.
+</div>
+
+<script src="/us/cart.js"></script>
+<script src="/qa/js/main.js"></script>
+<script src="/qa/js/mobile.js"></script>
+</body>
+</html>

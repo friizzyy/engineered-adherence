@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /mockups/
+Disallow: /.audit/
+
+Sitemap: https://engineeredadherence.com/sitemap.xml

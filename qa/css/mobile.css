@@ -1,0 +1,1184 @@
+/* ═══════════════════════════════════════════════════════════════
+   ENGINEERED ADHERENCE — MOBILE UX SYSTEM
+   Premium Mobile Experience · Swipe-First Design
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════
+   MOBILE SWIPE CAROUSEL BASE
+   ═══════════════════════════════════════════ */
+@media(max-width:768px){
+
+  /* Hide desktop scroll indicators */
+  .mobile-swipe-container{
+    position:relative;
+    margin-left:-24px;
+    margin-right:-24px;
+    padding-left:24px;
+    padding-right:24px;
+  }
+
+  .mobile-swipe-track{
+    display:flex;
+    gap:12px;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    padding-bottom:4px;
+  }
+
+  .mobile-swipe-track::-webkit-scrollbar{
+    display:none;
+  }
+
+  .mobile-swipe-item{
+    flex:0 0 85%;
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+  }
+
+  /* Variant: Compact cards (pricing, stats) */
+  .mobile-swipe-item--compact{
+    flex:0 0 280px;
+  }
+
+  /* Variant: Full-width panels */
+  .mobile-swipe-item--full{
+    flex:0 0 calc(100% - 48px);
+  }
+
+  /* Swipe indicators */
+  .swipe-indicators{
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    margin-top:20px;
+  }
+
+  .swipe-dot{
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    background:var(--line-strong);
+    transition:all .3s ease;
+  }
+
+  .swipe-dot.active{
+    width:20px;
+    border-radius:3px;
+    background:var(--accent-solid);
+  }
+
+  /* Swipe hint animation */
+  .swipe-hint{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    margin-top:16px;
+    font-size:10px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--faint);
+    opacity:0;
+    animation:swipeHintFade 1.5s ease 1s forwards;
+  }
+
+  .swipe-hint svg{
+    width:16px;
+    height:16px;
+    animation:swipeHintSlide 2s ease-in-out infinite;
+  }
+
+  @keyframes swipeHintFade{
+    0%{opacity:0;transform:translateY(8px)}
+    100%{opacity:1;transform:translateY(0)}
+  }
+
+  @keyframes swipeHintSlide{
+    0%,100%{transform:translateX(0)}
+    50%{transform:translateX(6px)}
+  }
+
+  /* Auto-hide swipe hint after first scroll */
+  .swipe-hint.touched{
+    opacity:0;
+    transition:opacity .3s ease;
+  }
+
+  /* ═══════════════════════════════════════════
+     HIDE DESKTOP THEME TOGGLE ON MOBILE
+     ═══════════════════════════════════════════ */
+  body #themeToggle{
+    display:none;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE HERO REFINEMENTS
+     ═══════════════════════════════════════════ */
+  .hero{
+    min-height:100svh;
+    min-height:100vh;
+    padding-top:80px;
+    padding-bottom:40px;
+  }
+
+  body .hero-title{
+    font-size:32px;
+    line-height:1.15;
+    letter-spacing:-0.01em;
+  }
+
+  .hero-sub{
+    font-size:14px;
+    line-height:1.75;
+    max-width:320px;
+    margin-top:20px;
+  }
+
+  .hero-eyebrow{
+    font-size:9px;
+    letter-spacing:5px;
+  }
+
+  .hero-btn{
+    padding:14px 40px;
+    font-size:9px;
+    margin-top:32px;
+  }
+
+  /* Decorative circles - lighter on mobile */
+  .circle{
+    opacity:0.5;
+  }
+
+  body .circle-1{width:300px;height:300px}
+  body .circle-2{width:440px;height:440px}
+  body .circle-3{width:580px;height:580px}
+
+  /* Vials - tighter mobile spacing */
+  body .vials-stage{
+    gap:24px;
+    margin-bottom:40px;
+    padding:0 12px;
+  }
+
+  body .vial-svg{
+    width:48px;
+    height:130px;
+  }
+
+  .vial-name{
+    font-size:12px;
+    margin-top:14px;
+  }
+
+  .vial-detail{
+    font-size:8px;
+    letter-spacing:2.5px;
+    margin-top:4px;
+  }
+
+  .vial-reflect{
+    width:44px;
+    height:36px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE SECTION SPACING
+     ═══════════════════════════════════════════ */
+  body .section{
+    padding-top:64px;
+    padding-bottom:64px;
+  }
+
+  body .page-hero{
+    padding-top:120px;
+    padding-bottom:64px;
+  }
+
+  body .page-hero .section-title{
+    font-size:30px;
+    line-height:1.18;
+  }
+
+  .page-hero .section-body{
+    font-size:14px;
+    line-height:1.8;
+  }
+
+  .section-label{
+    font-size:9px;
+    letter-spacing:3.5px;
+    margin-bottom:18px;
+  }
+
+  body .section-title{
+    font-size:26px;
+    line-height:1.22;
+    margin-bottom:18px;
+  }
+
+  .section-body{
+    font-size:14px;
+    line-height:1.8;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE STAT CARDS - HORIZONTAL SWIPE
+     ═══════════════════════════════════════════ */
+  body .stat-row{
+    display:flex;
+    flex-direction:row;
+    gap:12px;
+    margin-top:40px;
+  }
+
+  .stat{
+    flex:1;
+    text-align:center;
+  }
+
+  body .stat-num{
+    font-size:32px;
+  }
+
+  .stat-label{
+    font-size:9px;
+    letter-spacing:2px;
+    margin-top:8px;
+  }
+
+  /* Stat grid - horizontal swipe */
+  body .stat-grid{
+    display:flex;
+    grid-template-columns:unset;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:12px;
+    margin-left:-24px;
+    margin-right:-24px;
+    padding-left:24px;
+    padding-right:24px;
+    padding-bottom:4px;
+  }
+
+  .stat-grid::-webkit-scrollbar{
+    display:none;
+  }
+
+  .stat-card{
+    flex:0 0 180px;
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+    padding:28px 24px;
+  }
+
+  body .stat-card .val{
+    font-size:32px;
+  }
+
+  .stat-card .label{
+    font-size:10px;
+    letter-spacing:1.5px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE PILLAR GRID - HORIZONTAL SWIPE
+     ═══════════════════════════════════════════ */
+  body .pillar-grid{
+    display:flex;
+    grid-template-columns:unset;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:12px;
+    margin-left:-24px;
+    margin-right:-24px;
+    padding-left:24px;
+    padding-right:24px;
+    padding-bottom:4px;
+  }
+
+  .pillar-grid::-webkit-scrollbar{
+    display:none;
+  }
+
+  .pillar-card{
+    flex:0 0 200px;
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+    padding:32px 20px 28px;
+  }
+
+  .pillar-num{
+    font-size:48px;
+    margin-bottom:12px;
+  }
+
+  .pillar-card h3{
+    font-size:15px;
+    margin-bottom:10px;
+  }
+
+  .pillar-card p{
+    font-size:11px;
+    line-height:1.65;
+  }
+
+  /* Pillars CTA button - add spacing after swipe indicators */
+  body .pillars-cta{
+    margin-top:40px;
+  }
+
+  body .pillars-header{
+    margin-bottom:40px;
+  }
+
+  body .pillars-header .section-title{
+    font-size:26px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE PRICING GRID - HORIZONTAL SWIPE
+     ═══════════════════════════════════════════ */
+  body .pricing-grid{
+    display:flex;
+    grid-template-columns:unset;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:12px;
+    margin-left:-24px;
+    margin-right:-24px;
+    padding-left:24px;
+    padding-right:24px;
+    padding-bottom:4px;
+  }
+
+  .pricing-grid::-webkit-scrollbar{
+    display:none;
+  }
+
+  .pricing-card{
+    flex:0 0 260px;
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+    padding:32px 24px;
+  }
+
+  .pricing-tier{
+    font-size:9px;
+    letter-spacing:2px;
+  }
+
+  .pricing-range{
+    font-size:28px;
+  }
+
+  .pricing-unit{
+    font-size:11px;
+  }
+
+  .pricing-desc{
+    font-size:12px;
+    line-height:1.65;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE PROTOCOL CARDS - HORIZONTAL SWIPE
+     ═══════════════════════════════════════════ */
+  body .protocol-detail{
+    display:flex;
+    grid-template-columns:unset;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:12px;
+    margin-left:-24px;
+    margin-right:-24px;
+    padding-left:24px;
+    padding-right:24px;
+    padding-bottom:4px;
+  }
+
+  .protocol-detail::-webkit-scrollbar{
+    display:none;
+  }
+
+  .protocol-detail .card{
+    flex:0 0 calc(100vw - 72px);
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+    padding:32px 24px;
+  }
+
+  .protocol-meta{
+    margin-bottom:14px;
+  }
+
+  .protocol-meta .card-tag{
+    font-size:8px;
+    padding:4px 10px;
+  }
+
+  .protocol-detail .card h3{
+    font-size:18px;
+    margin-bottom:10px;
+  }
+
+  .protocol-detail .card p{
+    font-size:13px;
+    line-height:1.7;
+  }
+
+  .protocol-includes{
+    margin-top:16px;
+  }
+
+  .protocol-includes li{
+    font-size:12px;
+    padding:5px 0;
+    padding-left:14px;
+  }
+
+  .protocol-includes li::before{
+    width:6px;
+    top:12px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE COMPOUND GRID - HORIZONTAL SWIPE
+     ═══════════════════════════════════════════ */
+  body .compound-grid{
+    display:flex;
+    grid-template-columns:unset;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:12px;
+    margin-left:-24px;
+    margin-right:-24px;
+    padding-left:24px;
+    padding-right:24px;
+    padding-bottom:4px;
+  }
+
+  .compound-grid::-webkit-scrollbar{
+    display:none;
+  }
+
+  .compound-card{
+    flex:0 0 calc(100vw - 72px);
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+    padding:28px 24px;
+  }
+
+  .compound-meta{
+    margin-bottom:14px;
+  }
+
+  .compound-card h3{
+    font-size:20px;
+    margin-bottom:6px;
+  }
+
+  .compound-subtitle{
+    font-size:12px;
+    margin-bottom:14px;
+  }
+
+  .compound-card p{
+    font-size:13px;
+    line-height:1.75;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE THREE-COL GRID - VERTICAL STACK
+     ═══════════════════════════════════════════ */
+  .three-col{
+    gap:12px;
+  }
+
+  .three-col .card{
+    padding:24px 20px;
+  }
+
+  .three-col .card h3{
+    font-size:15px;
+  }
+
+  .three-col .card p{
+    font-size:12px;
+    line-height:1.7;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE CARD REFINEMENTS
+     ═══════════════════════════════════════════ */
+  .card{
+    padding:28px 22px;
+  }
+
+  .card h3{
+    font-size:15px;
+    margin-bottom:10px;
+  }
+
+  .card p{
+    font-size:12px;
+    line-height:1.7;
+  }
+
+  .card-lg{
+    padding:32px 24px;
+  }
+
+  .card-lg h3{
+    font-size:18px;
+    margin-bottom:14px;
+  }
+
+  .card-lg p{
+    font-size:13px;
+    line-height:1.75;
+  }
+
+  .card-tag{
+    font-size:8px;
+    letter-spacing:2px;
+    padding:4px 10px;
+    margin-bottom:12px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE PILLAR CAROUSEL (pillars.html)
+     ═══════════════════════════════════════════ */
+  body .pillar-carousel-section{
+    padding:0;
+  }
+
+  body .pillar-carousel{
+    display:flex;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:0;
+  }
+
+  .pillar-carousel::-webkit-scrollbar{
+    display:none;
+  }
+
+  .pillar-slide{
+    flex:0 0 100vw;
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+    padding:48px 24px;
+    box-sizing:border-box;
+  }
+
+  .pillar-slide .pillar-roman{
+    font-size:72px;
+    margin-bottom:8px;
+    color:var(--pillar-num);
+    font-family:'Playfair Display',serif;
+    font-weight:600;
+    line-height:1;
+    letter-spacing:-0.03em;
+    transition:color .5s;
+  }
+
+  .pillar-slide .section-label{
+    margin-bottom:12px;
+  }
+
+  body .pillar-slide .section-title{
+    font-size:24px;
+    margin-bottom:16px;
+  }
+
+  .pillar-slide .section-body{
+    font-size:13px;
+    line-height:1.75;
+    margin-bottom:24px;
+  }
+
+  .pillar-slide-cards{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .pillar-slide .card{
+    padding:24px 20px;
+  }
+
+  .pillar-slide .card h3{
+    font-size:14px;
+    margin-bottom:12px;
+  }
+
+  .pillar-slide .card p{
+    font-size:12px;
+    line-height:1.7;
+  }
+
+  .pillar-slide .compound-list li{
+    font-size:12px;
+    padding:8px 0;
+    gap:10px;
+  }
+
+  .pillar-slide .compound-list .name{
+    font-size:12px;
+  }
+
+  .pillar-slide .compound-list .role{
+    font-size:8px;
+    letter-spacing:1px;
+  }
+
+  /* Legacy pillar-section styles (for any remaining uses) */
+  body .pillar-section{
+    gap:36px;
+  }
+
+  body .pillar-roman{
+    font-size:64px;
+    margin-bottom:8px;
+  }
+
+  .compound-list li{
+    font-size:13px;
+    padding:10px 0;
+    gap:12px;
+  }
+
+  .compound-list .name{
+    font-size:13px;
+  }
+
+  .compound-list .role{
+    font-size:9px;
+    letter-spacing:1px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE SOURCE GRID - HORIZONTAL SWIPE
+     ═══════════════════════════════════════════ */
+  body .source-grid{
+    display:flex;
+    grid-template-columns:unset;
+    overflow-x:auto;
+    overflow-y:hidden;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    gap:12px;
+    margin-left:-24px;
+    margin-right:-24px;
+    padding-left:24px;
+    padding-right:24px;
+    padding-bottom:4px;
+  }
+
+  .source-grid::-webkit-scrollbar{
+    display:none;
+  }
+
+  .source-grid .card{
+    flex:0 0 280px;
+    scroll-snap-align:center;
+    scroll-snap-stop:always;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE CTA BAND
+     ═══════════════════════════════════════════ */
+  body .cta-band{
+    padding:64px 24px;
+  }
+
+  body .cta-band .section-title{
+    font-size:26px;
+    margin-bottom:14px;
+  }
+
+  body .cta-band .section-body{
+    font-size:13px;
+    margin-bottom:28px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE BUTTONS
+     ═══════════════════════════════════════════ */
+  .btn{
+    padding:14px 36px;
+    font-size:9px;
+    letter-spacing:2.2px;
+  }
+
+  .btn-lg{
+    padding:15px 40px;
+    font-size:10px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE TWO-COL IMPROVEMENTS
+     ═══════════════════════════════════════════ */
+  body .two-col{
+    gap:36px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE FOOTER
+     ═══════════════════════════════════════════ */
+  body footer{
+    padding:32px 24px;
+    text-align:center;
+  }
+
+  body .footer-bar{
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+  }
+
+  body .footer-nav{
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:16px 24px;
+  }
+
+  body .footer-nav a{
+    font-size:13px;
+  }
+
+  body .footer-copy{
+    font-size:11px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE NAVIGATION REFINEMENTS
+     ═══════════════════════════════════════════ */
+  body nav{
+    height:60px;
+    padding:0 20px;
+  }
+
+  .logo{
+    font-size:15px;
+  }
+
+  .mobile-menu-btn{
+    width:44px;
+    height:44px;
+  }
+
+  .mobile-menu-btn span{
+    width:20px;
+  }
+
+  .mobile-nav{
+    padding:88px 32px 32px;
+  }
+
+  .mobile-nav-links a{
+    font-size:22px;
+    padding:18px 0;
+  }
+
+  .mobile-nav-cta{
+    padding:16px 28px;
+    font-size:10px;
+  }
+
+  /* Mobile theme switch refinements */
+  .mobile-theme-switch{
+    gap:12px;
+  }
+
+  .theme-icon{
+    width:18px;
+    height:18px;
+  }
+
+  .theme-toggle-track{
+    width:48px;
+    height:26px;
+  }
+
+  .theme-toggle-knob{
+    width:18px;
+    height:18px;
+  }
+
+  [data-theme="light"] .theme-toggle-knob{
+    transform:translateX(22px);
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE TIMELINE
+     ═══════════════════════════════════════════ */
+  .timeline{
+    padding-left:32px;
+  }
+
+  .timeline::before{
+    left:10px;
+  }
+
+  .timeline-dot{
+    left:-26px;
+    width:10px;
+    height:10px;
+    top:6px;
+  }
+
+  .timeline-phase{
+    font-size:9px;
+    letter-spacing:3px;
+  }
+
+  .timeline-title{
+    font-size:20px;
+    margin-bottom:10px;
+  }
+
+  .timeline-body{
+    font-size:13px;
+    line-height:1.75;
+    margin-bottom:16px;
+  }
+
+  .timeline-item{
+    padding-bottom:48px;
+  }
+
+  .timeline-list li{
+    font-size:12px;
+    padding-left:14px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE FORM
+     ═══════════════════════════════════════════ */
+  .form-group{
+    margin-bottom:20px;
+  }
+
+  .form-group label{
+    font-size:9px;
+    letter-spacing:2px;
+    margin-bottom:8px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select{
+    padding:14px 16px;
+    font-size:16px; /* Prevents iOS zoom on focus */
+  }
+
+  .form-group textarea{
+    min-height:120px;
+  }
+
+  /* Contact page specifics */
+  body .contact-grid{
+    gap:40px;
+  }
+
+  .contact-info{
+    margin-top:36px;
+  }
+
+  .contact-item{
+    margin-bottom:28px;
+  }
+
+  .contact-item h4{
+    font-size:9px;
+    letter-spacing:2px;
+    margin-bottom:8px;
+  }
+
+  .contact-item p{
+    font-size:14px;
+    line-height:1.7;
+  }
+
+  body .form-card{
+    padding:32px 24px;
+  }
+
+  body .form-title{
+    font-size:22px;
+    margin-bottom:8px;
+  }
+
+  body .form-subtitle{
+    font-size:13px;
+    margin-bottom:28px;
+  }
+
+  body .form-success h3{
+    font-size:24px;
+  }
+
+  .form-success p{
+    font-size:14px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE DATA TABLE
+     ═══════════════════════════════════════════ */
+  .data-table{
+    margin-top:32px;
+  }
+
+  .data-table th{
+    font-size:9px;
+    padding:12px 14px;
+  }
+
+  .data-table td{
+    font-size:13px;
+    padding:14px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE SCROLL REVEAL - FASTER
+     ═══════════════════════════════════════════ */
+  .reveal{
+    transform:translateY(24px);
+    transition:opacity .6s cubic-bezier(0.4,0,0.2,1),transform .6s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .stagger-children .stagger-item{
+    transform:translateY(16px);
+    transition:opacity .5s cubic-bezier(0.4,0,0.2,1),transform .5s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  /* Faster stagger for mobile */
+  .stagger-children.visible .stagger-item:nth-child(1){transition-delay:.03s}
+  .stagger-children.visible .stagger-item:nth-child(2){transition-delay:.06s}
+  .stagger-children.visible .stagger-item:nth-child(3){transition-delay:.09s}
+  .stagger-children.visible .stagger-item:nth-child(4){transition-delay:.12s}
+  .stagger-children.visible .stagger-item:nth-child(5){transition-delay:.15s}
+  .stagger-children.visible .stagger-item:nth-child(6){transition-delay:.18s}
+
+  /* ═══════════════════════════════════════════
+     MOBILE DIVIDER
+     ═══════════════════════════════════════════ */
+  body .divider{
+    padding:0 24px;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE PROGRESSIVE DISCLOSURE
+     ═══════════════════════════════════════════ */
+  .mobile-accordion{
+    border:1px solid var(--line);
+    background:var(--bg-card);
+    margin-bottom:12px;
+    overflow:hidden;
+    transition:all .4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .mobile-accordion-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 22px;
+    cursor:pointer;
+    transition:background .3s ease;
+  }
+
+  .mobile-accordion-header:active{
+    background:var(--bg-card-hover);
+  }
+
+  .mobile-accordion-header h3{
+    font-family:'Playfair Display',serif;
+    font-size:16px;
+    font-weight:500;
+    color:var(--text-heading);
+    margin:0;
+  }
+
+  .mobile-accordion-icon{
+    width:24px;
+    height:24px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+  }
+
+  .mobile-accordion-icon::before,
+  .mobile-accordion-icon::after{
+    content:'';
+    position:absolute;
+    background:var(--faint);
+    transition:transform .3s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .mobile-accordion-icon::before{
+    width:12px;
+    height:1px;
+  }
+
+  .mobile-accordion-icon::after{
+    width:1px;
+    height:12px;
+  }
+
+  .mobile-accordion.active .mobile-accordion-icon::after{
+    transform:rotate(90deg);
+  }
+
+  .mobile-accordion-content{
+    max-height:0;
+    overflow:hidden;
+    transition:max-height .4s cubic-bezier(0.4,0,0.2,1);
+  }
+
+  .mobile-accordion.active .mobile-accordion-content{
+    max-height:500px;
+  }
+
+  .mobile-accordion-body{
+    padding:0 22px 22px;
+  }
+
+  .mobile-accordion-body p{
+    font-size:13px;
+    color:var(--muted);
+    line-height:1.75;
+  }
+
+  /* ═══════════════════════════════════════════
+     MOBILE QUICK JUMP ANCHORS
+     ═══════════════════════════════════════════ */
+  .mobile-section-nav{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:8px;
+    padding:10px 16px;
+    background:var(--nav-bg);
+    backdrop-filter:blur(24px);
+    -webkit-backdrop-filter:blur(24px);
+    border:1px solid var(--line);
+    border-radius:32px;
+    z-index:90;
+    opacity:0;
+    visibility:hidden;
+    transition:opacity .3s ease,visibility .3s ease;
+  }
+
+  .mobile-section-nav.visible{
+    opacity:1;
+    visibility:visible;
+  }
+
+  .mobile-section-nav a{
+    width:8px;
+    height:8px;
+    border-radius:50%;
+    background:var(--line-strong);
+    transition:all .3s ease;
+  }
+
+  .mobile-section-nav a.active{
+    background:var(--accent-solid);
+    transform:scale(1.25);
+  }
+
+  /* ═══════════════════════════════════════════
+     TOUCH FEEDBACK
+     ═══════════════════════════════════════════ */
+  .card:active,
+  .pricing-card:active,
+  .pillar-card:active,
+  .compound-card:active,
+  .stat-card:active{
+    transform:scale(0.98);
+    transition:transform .1s ease;
+  }
+
+  /* Disable hover transforms on touch */
+  @media(hover:none){
+    .card:hover,
+    .pricing-card:hover,
+    .pillar-card:hover,
+    .compound-card:hover,
+    .stat-card:hover{
+      transform:none;
+      box-shadow:none;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════
+   SMALL MOBILE (< 400px)
+   ═══════════════════════════════════════════ */
+@media(max-width:400px){
+  body .hero-title{
+    font-size:28px;
+  }
+
+  body .page-hero .section-title{
+    font-size:26px;
+  }
+
+  body .section-title{
+    font-size:24px;
+  }
+
+  body .vials-stage{
+    gap:18px;
+  }
+
+  body .vial-svg{
+    width:42px;
+    height:115px;
+  }
+
+  .pillar-card{
+    flex:0 0 180px;
+    padding:28px 18px 24px;
+  }
+
+  .pricing-card{
+    flex:0 0 240px;
+  }
+
+  body .stat-num{
+    font-size:28px;
+  }
+
+  body .stat-card .val{
+    font-size:28px;
+  }
+}

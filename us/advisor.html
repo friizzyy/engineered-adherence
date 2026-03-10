@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stack Advisor | Engineered Adherence USA</title>
+<meta name="description" content="AI-powered peptide protocol advisor. Five questions, one precision stack matched to your goals.">
+<meta property="og:title" content="Stack Advisor | Engineered Adherence USA">
+<meta property="og:description" content="AI-powered peptide protocol advisor. Five questions, one precision stack.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<!-- Replace YOUR_KEY_HERE with your actual Anthropic API key -->
+<meta name="ea-api-key" content="YOUR_KEY_HERE">
+<script>
+(function(){
+  var t = localStorage.getItem('ea-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="stylesheet" href="/qa/css/style.css">
+<link rel="stylesheet" href="/qa/css/mobile.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  /* ═══════════════════════════════════════════
+     NAV ENTRANCE
+     ═══════════════════════════════════════════ */
+  nav{opacity:0;animation:fadeDown .8s ease .3s forwards}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ═══════════════════════════════════════════
+     PAGE HERO
+     ═══════════════════════════════════════════ */
+  .advisor-hero{
+    padding:200px 72px 80px;
+    max-width:1140px;margin:0 auto;
+    position:relative;z-index:1;
+    text-align:center;
+  }
+  .advisor-hero .section-label{justify-content:center}
+  .advisor-hero .section-label::before{display:none}
+  .advisor-hero .section-title{
+    font-size:56px;margin-bottom:20px;letter-spacing:-0.02em;
+  }
+  .advisor-hero .section-body{
+    max-width:560px;margin:0 auto;font-size:16px;line-height:2;
+  }
+
+  /* ═══════════════════════════════════════════
+     ASSESSMENT CONTAINER
+     ═══════════════════════════════════════════ */
+  .assessment{
+    max-width:800px;margin:0 auto;padding:0 72px 80px;
+    position:relative;z-index:1;
+  }
+
+  /* ═══════════════════════════════════════════
+     PROGRESS INDICATOR
+     ═══════════════════════════════════════════ */
+  .progress-bar{
+    display:flex;align-items:center;justify-content:center;
+    gap:8px;margin-bottom:56px;
+  }
+  .progress-dot{
+    width:32px;height:3px;background:var(--line);
+    transition:all .4s cubic-bezier(0.4,0,0.2,1);
+  }
+  .progress-dot.active{background:var(--accent-solid)}
+  .progress-dot.done{background:var(--accent-solid);opacity:0.4}
+
+  /* ═══════════════════════════════════════════
+     STEP CONTAINER
+     ═══════════════════════════════════════════ */
+  .step{display:none;animation:fu .5s ease forwards}
+  .step.active{display:block}
+
+  .step-header{
+    text-align:center;margin-bottom:40px;
+  }
+  .step-num{
+    font-family:'Playfair Display',serif;font-size:64px;font-weight:600;
+    color:var(--pillar-num);line-height:1;margin-bottom:12px;
+    letter-spacing:-0.03em;
+  }
+  .step-question{
+    font-family:'Playfair Display',serif;font-size:28px;font-weight:500;
+    color:var(--text-heading);margin-bottom:8px;
+  }
+  .step-hint{
+    font-size:13px;color:var(--faint);font-weight:300;
+  }
+
+  /* ═══════════════════════════════════════════
+     OPTION GRID
+     ═══════════════════════════════════════════ */
+  .option-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:12px;
+  }
+  .option-grid.cols-3{grid-template-columns:repeat(3,1fr)}
+
+  .option-card{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:24px 20px;cursor:pointer;text-align:center;
+    transition:all .4s cubic-bezier(0.4,0,0.2,1);
+    position:relative;overflow:hidden;
+  }
+  .option-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
+    transform:scaleX(0);transition:transform .5s;opacity:0.6;
+  }
+  .option-card:hover{
+    transform:translateY(-3px);box-shadow:var(--shadow-card-subtle);
+    border-color:var(--line-strong);background:var(--bg-card-hover);
+  }
+  .option-card:hover::before{transform:scaleX(1)}
+  .option-card.selected{
+    border-color:var(--accent-solid);background:var(--bg-card-hover);
+  }
+  .option-card.selected::before{transform:scaleX(1)}
+
+  .option-card .option-label{
+    font-size:13px;font-weight:500;
+    color:var(--text-heading);letter-spacing:0.5px;
+    margin-bottom:4px;
+  }
+  .option-card .option-sub{
+    font-size:11px;color:var(--faint);font-weight:300;
+  }
+
+  /* ═══════════════════════════════════════════
+     STEP 05 — TEXTAREA
+     ═══════════════════════════════════════════ */
+  .notes-textarea{
+    width:100%;min-height:140px;padding:20px;
+    background:var(--bg-card);border:1px solid var(--line);
+    color:var(--text-heading);font-family:'DM Sans',sans-serif;
+    font-size:14px;font-weight:300;line-height:1.8;
+    resize:vertical;transition:border-color .3s;
+  }
+  .notes-textarea::placeholder{color:var(--faint)}
+  .notes-textarea:focus{
+    outline:none;border-color:var(--accent-solid);
+  }
+  .submit-row{
+    display:flex;justify-content:center;margin-top:32px;
+  }
+
+  /* ═══════════════════════════════════════════
+     BACK BUTTON
+     ═══════════════════════════════════════════ */
+  .step-back{
+    display:inline-flex;align-items:center;gap:8px;
+    background:none;border:none;cursor:pointer;
+    font-size:11px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--faint);font-family:'DM Sans',sans-serif;
+    transition:color .3s;margin-bottom:32px;padding:0;
+  }
+  .step-back:hover{color:var(--text-heading)}
+
+  /* ═══════════════════════════════════════════
+     LOADING STATE
+     ═══════════════════════════════════════════ */
+  .loading-state{
+    display:none;text-align:center;padding:80px 0;
+  }
+  .loading-state.active{display:block}
+
+  .loading-step{
+    display:flex;align-items:center;justify-content:center;gap:16px;
+    opacity:0;transform:translateY(12px);
+    transition:opacity .5s ease,transform .5s ease;
+    margin-bottom:20px;
+  }
+  .loading-step.visible{opacity:1;transform:translateY(0)}
+  .loading-step .loading-num{
+    font-family:'Playfair Display',serif;font-size:28px;font-weight:600;
+    color:var(--pillar-num);min-width:36px;text-align:right;
+  }
+  .loading-step .loading-text{
+    font-size:14px;color:var(--muted);font-weight:300;
+    text-align:left;
+  }
+
+  /* ═══════════════════════════════════════════
+     RESULT DISPLAY
+     ═══════════════════════════════════════════ */
+  .result{
+    display:none;max-width:800px;margin:0 auto;
+    padding:0 72px 80px;position:relative;z-index:1;
+  }
+  .result.active{display:block;animation:fu .6s ease forwards}
+
+  .result-header{text-align:center;margin-bottom:56px}
+  .result-name{
+    font-family:'Playfair Display',serif;font-size:42px;font-weight:500;
+    color:var(--text-heading);margin-bottom:12px;letter-spacing:-0.02em;
+  }
+  .result-tagline{
+    font-size:15px;color:var(--muted);font-weight:300;
+    font-style:italic;margin-bottom:24px;
+  }
+  .result-rationale{
+    font-size:15px;color:var(--muted);font-weight:300;
+    line-height:1.9;max-width:600px;margin:0 auto;
+  }
+
+  /* Compound list */
+  .result-compounds{margin-bottom:48px}
+  .result-compound{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:32px 28px;margin-bottom:12px;
+    transition:all .4s cubic-bezier(0.4,0,0.2,1);
+    position:relative;overflow:hidden;
+  }
+  .result-compound::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
+    transform:scaleX(0);transition:transform .5s;opacity:0.6;
+  }
+  .result-compound:hover{
+    border-color:var(--line-strong);background:var(--bg-card-hover);
+  }
+  .result-compound:hover::before{transform:scaleX(1)}
+
+  .result-compound-header{
+    display:flex;align-items:center;gap:16px;margin-bottom:12px;
+    flex-wrap:wrap;
+  }
+  .result-compound-num{
+    font-family:'Playfair Display',serif;font-size:36px;font-weight:600;
+    color:var(--pillar-num);line-height:1;letter-spacing:-0.03em;
+  }
+  .result-compound-name{
+    font-family:'Space Mono',monospace;font-size:16px;font-weight:700;
+    color:var(--text-heading);letter-spacing:0.5px;text-transform:uppercase;
+  }
+  .result-compound-pillar{
+    font-size:9px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--tag-text);padding:5px 12px;
+    background:var(--tag-bg);border:1px solid var(--line);
+  }
+  .result-compound-mechanism{
+    font-size:13px;color:var(--muted);font-weight:300;
+    line-height:1.75;margin-bottom:12px;
+  }
+  .result-compound-meta{
+    display:flex;gap:24px;flex-wrap:wrap;
+  }
+  .result-compound-meta span{
+    font-size:11px;letter-spacing:1px;text-transform:uppercase;
+    color:var(--faint);
+  }
+  .result-compound-meta strong{
+    color:var(--text-heading);font-weight:500;
+  }
+
+  /* Weekly structure & synergy */
+  .result-notes{
+    display:grid;grid-template-columns:1fr 1fr;gap:12px;
+    margin-bottom:48px;
+  }
+  .result-note-card{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:28px 24px;
+  }
+  .result-note-label{
+    font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--faint);margin-bottom:12px;
+  }
+  .result-note-text{
+    font-size:14px;color:var(--muted);font-weight:300;line-height:1.8;
+  }
+
+  /* Cost callout */
+  .result-cost{
+    text-align:center;margin-bottom:48px;
+    padding:40px 24px;
+    background:var(--bg-card);border:1px solid var(--line);
+  }
+  .result-cost-label{
+    font-size:9px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--faint);margin-bottom:8px;
+  }
+  .result-cost-value{
+    font-family:'Playfair Display',serif;font-size:48px;font-weight:500;
+    color:var(--stat-num);
+  }
+  .result-cost-value span{
+    font-size:16px;color:var(--faint);font-family:'DM Sans',sans-serif;font-weight:300;
+  }
+
+  /* Result actions */
+  .result-actions{
+    display:flex;gap:16px;justify-content:center;
+    flex-wrap:wrap;margin-bottom:40px;
+  }
+
+  /* Disclaimer inside result */
+  .result-disclaimer{
+    text-align:center;font-size:11px;color:var(--faint);
+    font-weight:300;letter-spacing:0.5px;line-height:1.8;
+    max-width:560px;margin:0 auto;
+    padding-top:32px;border-top:1px solid var(--line);
+  }
+
+  /* ═══════════════════════════════════════════
+     CART DRAWER
+     ═══════════════════════════════════════════ */
+  .cart-drawer{
+    position:fixed;top:0;right:0;width:100%;max-width:380px;height:100vh;
+    background:var(--bg);border-left:1px solid var(--line);
+    z-index:200;transform:translateX(100%);
+    transition:transform .4s cubic-bezier(0.4,0,0.2,1);
+    padding:32px;overflow-y:auto;
+  }
+  .cart-drawer.open{transform:translateX(0)}
+  .cart-drawer-header{
+    display:flex;justify-content:space-between;align-items:center;
+    margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--line);
+  }
+  .cart-drawer-title{
+    font-family:'Playfair Display',serif;font-size:20px;font-weight:500;
+    color:var(--text-heading);
+  }
+  .cart-close{
+    background:none;border:1px solid var(--line);
+    width:32px;height:32px;cursor:pointer;color:var(--muted);
+    display:flex;align-items:center;justify-content:center;font-size:14px;
+    transition:all .3s;
+  }
+  .cart-close:hover{border-color:var(--text-heading);color:var(--text-heading)}
+  .cart-item{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 0;border-bottom:1px solid var(--line);
+  }
+  .cart-item-name{
+    font-family:'Space Mono',monospace;font-size:13px;
+    color:var(--text-heading);font-weight:400;
+  }
+  .cart-item-qty{font-size:12px;color:var(--faint)}
+  .cart-item-price{font-size:14px;color:var(--text-heading);font-weight:400}
+  .cart-item button{
+    background:none;border:1px solid var(--line);
+    width:24px;height:24px;cursor:pointer;color:var(--faint);
+    font-size:11px;display:flex;align-items:center;justify-content:center;
+    transition:all .3s;
+  }
+  .cart-item button:hover{border-color:var(--text-heading);color:var(--text-heading)}
+  .cart-total{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:24px 0;margin-top:16px;border-top:1px solid var(--line-strong);
+  }
+  .cart-total-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
+  .cart-total-value{
+    font-family:'Playfair Display',serif;font-size:28px;font-weight:500;color:var(--stat-num);
+  }
+  .cart-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:190;
+    opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;
+    backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
+  }
+  .cart-overlay.open{opacity:1;visibility:visible}
+
+  /* ═══════════════════════════════════════════
+     NAV CART BUTTON
+     ═══════════════════════════════════════════ */
+  .nav-cart-btn{
+    padding:11px 20px;background:transparent;
+    border:1px solid var(--cta-border);cursor:pointer;
+    font-size:10px;letter-spacing:2.2px;text-transform:uppercase;
+    color:var(--cta-text);font-weight:400;font-family:'DM Sans',sans-serif;
+    transition:all .3s;position:relative;
+  }
+  .nav-cart-btn:hover{background:var(--cta-hover);border-color:var(--btn-hover-border)}
+  #cart-count{
+    font-size:9px;background:var(--accent-solid);color:var(--bg);
+    padding:2px 6px;border-radius:8px;margin-left:6px;
+    font-family:'DM Sans',sans-serif;
+  }
+
+  /* ═══════════════════════════════════════════
+     DISCLAIMER
+     ═══════════════════════════════════════════ */
+  .us-disclaimer{
+    text-align:center;padding:32px 24px;
+    font-size:11px;color:var(--faint);font-weight:300;
+    letter-spacing:0.5px;line-height:1.8;
+    border-top:1px solid var(--line);
+    max-width:1140px;margin:0 auto;
+    position:relative;z-index:1;
+  }
+
+  /* ═══════════════════════════════════════════
+     ERROR STATE
+     ═══════════════════════════════════════════ */
+  .error-msg{
+    text-align:center;padding:24px;margin-bottom:24px;
+    background:var(--bg-card);border:1px solid var(--line);
+    font-size:13px;color:var(--muted);font-weight:300;
+    display:none;
+  }
+  .error-msg.active{display:block;animation:fu .4s ease forwards}
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE — TABLET
+     ═══════════════════════════════════════════ */
+  @media(max-width:1024px){
+    .advisor-hero{padding:160px 40px 60px}
+    .advisor-hero .section-title{font-size:44px}
+    .assessment{padding:0 40px 80px}
+    .result{padding:0 40px 80px}
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE — MOBILE
+     ═══════════════════════════════════════════ */
+  @media(max-width:768px){
+    .advisor-hero{padding:120px 24px 48px}
+    .advisor-hero .section-title{font-size:32px}
+    .advisor-hero .section-body{font-size:14px;line-height:1.8}
+    .assessment{padding:0 24px 64px}
+    .result{padding:0 24px 64px}
+    .option-grid{grid-template-columns:1fr}
+    .option-grid.cols-3{grid-template-columns:1fr}
+    .step-num{font-size:48px}
+    .step-question{font-size:22px}
+    .result-name{font-size:30px}
+    .result-notes{grid-template-columns:1fr}
+    .result-cost-value{font-size:36px}
+    .result-compound-header{gap:10px}
+    .result-compound-num{font-size:28px}
+    .result-compound-name{font-size:14px}
+    .result-actions{flex-direction:column;align-items:center}
+    .nav-cart-btn{display:none}
+  }
+
+  @media(max-width:480px){
+    .advisor-hero .section-title{font-size:26px}
+    .result-name{font-size:24px}
+    .result-cost-value{font-size:28px}
+  }
+</style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<nav>
+  <a href="/us/" class="logo">Engineered Adherence</a>
+  <ul class="nav-center">
+    <li><a href="/us/shop.html">Shop</a></li>
+    <li><a href="/us/protocols.html">Protocols</a></li>
+    <li><a href="/us/advisor.html" class="active">Stack Advisor</a></li>
+    <li><a href="/us/about.html">About</a></li>
+  </ul>
+  <div class="nav-right">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
+    <button class="nav-cart-btn" id="cart-toggle" aria-label="Open cart">Stack <span id="cart-count" style="display:none">0</span></button>
+    <a href="/us/advisor.html" class="nav-cta">Build My Stack</a>
+    <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-nav-overlay" aria-hidden="true"></div>
+<div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
+  <ul class="mobile-nav-links">
+    <li><a href="/us/shop.html">Shop</a></li>
+    <li><a href="/us/protocols.html">Protocols</a></li>
+    <li><a href="/us/advisor.html">Stack Advisor</a></li>
+    <li><a href="/us/about.html">About</a></li>
+  </ul>
+  <a href="/us/advisor.html" class="mobile-nav-cta">Build My Stack</a>
+  <div class="mobile-nav-footer">
+    <div class="mobile-theme-switch">
+      <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+      </svg>
+      <button class="theme-toggle-track" id="mobileThemeToggle" aria-label="Toggle theme">
+        <span class="theme-toggle-knob"></span>
+      </button>
+      <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<div class="cart-overlay" id="cart-overlay"></div>
+<div class="cart-drawer" id="cart-drawer">
+  <div class="cart-drawer-header">
+    <div class="cart-drawer-title">Your Stack</div>
+    <button class="cart-close" id="cart-close" aria-label="Close cart">&#10005;</button>
+  </div>
+  <div id="cart-items"></div>
+  <div class="cart-total">
+    <span class="cart-total-label">Subtotal</span>
+    <span class="cart-total-value">$<span id="cart-total">0</span></span>
+  </div>
+  <a href="mailto:orders@engineeredadherence.com?subject=Stack%20Order%20Request" class="btn btn-lg" style="width:100%;text-align:center;margin-top:24px">Request Order</a>
+</div>
+
+<main id="main-content">
+
+<!-- 01 — Hero -->
+<section class="advisor-hero">
+  <p class="section-label">AI Protocol Advisor</p>
+  <h1 class="section-title">Your protocol. <em style="font-style:italic;font-weight:400;color:var(--muted)">Engineered.</em></h1>
+  <p class="section-body">Five questions. One precision stack. AI-matched to your goals.</p>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+<!-- 02 — Assessment -->
+<section class="assessment" id="assessment">
+
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progress-bar">
+    <div class="progress-dot active" data-step="1"></div>
+    <div class="progress-dot" data-step="2"></div>
+    <div class="progress-dot" data-step="3"></div>
+    <div class="progress-dot" data-step="4"></div>
+    <div class="progress-dot" data-step="5"></div>
+  </div>
+
+  <!-- Step 01 — Primary Goal -->
+  <div class="step active" id="step-1" data-step="1">
+    <div class="step-header">
+      <div class="step-num">01</div>
+      <h2 class="step-question">Primary Goal</h2>
+      <p class="step-hint">Select the outcome that matters most</p>
+    </div>
+    <div class="option-grid">
+      <button class="option-card" data-value="Fat Loss">
+        <div class="option-label">Fat Loss</div>
+      </button>
+      <button class="option-card" data-value="Muscle & Recomposition">
+        <div class="option-label">Muscle &amp; Recomposition</div>
+      </button>
+      <button class="option-card" data-value="Longevity & Anti-Aging">
+        <div class="option-label">Longevity &amp; Anti-Aging</div>
+      </button>
+      <button class="option-card" data-value="Cognitive Performance">
+        <div class="option-label">Cognitive Performance</div>
+      </button>
+      <button class="option-card" data-value="Injury Recovery">
+        <div class="option-label">Injury Recovery</div>
+      </button>
+      <button class="option-card" data-value="Hormonal Optimization">
+        <div class="option-label">Hormonal Optimization</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 02 — Experience Level -->
+  <div class="step" id="step-2" data-step="2">
+    <div class="step-header">
+      <div class="step-num">02</div>
+      <h2 class="step-question">Experience Level</h2>
+      <p class="step-hint">Your background with peptide protocols</p>
+    </div>
+    <button class="step-back" id="back-2" aria-label="Go back to step 1">&larr; Back</button>
+    <div class="option-grid">
+      <button class="option-card" data-value="Beginner — First Cycle">
+        <div class="option-label">Beginner</div>
+        <div class="option-sub">First Cycle</div>
+      </button>
+      <button class="option-card" data-value="Intermediate — 1–3 Cycles">
+        <div class="option-label">Intermediate</div>
+        <div class="option-sub">1&ndash;3 Cycles</div>
+      </button>
+      <button class="option-card" data-value="Advanced — 4+ Cycles">
+        <div class="option-label">Advanced</div>
+        <div class="option-sub">4+ Cycles</div>
+      </button>
+      <button class="option-card" data-value="Researcher / Professional">
+        <div class="option-label">Researcher / Professional</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 03 — Monthly Budget -->
+  <div class="step" id="step-3" data-step="3">
+    <div class="step-header">
+      <div class="step-num">03</div>
+      <h2 class="step-question">Monthly Budget</h2>
+      <p class="step-hint">Investment range for your protocol</p>
+    </div>
+    <button class="step-back" id="back-3" aria-label="Go back to step 2">&larr; Back</button>
+    <div class="option-grid cols-3">
+      <button class="option-card" data-value="$100 – $300">
+        <div class="option-label">$100 &ndash; $300</div>
+      </button>
+      <button class="option-card" data-value="$300 – $600">
+        <div class="option-label">$300 &ndash; $600</div>
+      </button>
+      <button class="option-card" data-value="$600+">
+        <div class="option-label">$600+</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 04 — Cycle Duration -->
+  <div class="step" id="step-4" data-step="4">
+    <div class="step-header">
+      <div class="step-num">04</div>
+      <h2 class="step-question">Cycle Duration</h2>
+      <p class="step-hint">How long you plan to run this protocol</p>
+    </div>
+    <button class="step-back" id="back-4" aria-label="Go back to step 3">&larr; Back</button>
+    <div class="option-grid">
+      <button class="option-card" data-value="4 Weeks">
+        <div class="option-label">4 Weeks</div>
+      </button>
+      <button class="option-card" data-value="8 Weeks">
+        <div class="option-label">8 Weeks</div>
+      </button>
+      <button class="option-card" data-value="12 Weeks">
+        <div class="option-label">12 Weeks</div>
+      </button>
+      <button class="option-card" data-value="Ongoing Maintenance">
+        <div class="option-label">Ongoing Maintenance</div>
+      </button>
+    </div>
+  </div>
+
+  <!-- Step 05 — Health Notes -->
+  <div class="step" id="step-5" data-step="5">
+    <div class="step-header">
+      <div class="step-num">05</div>
+      <h2 class="step-question">Health Notes</h2>
+      <p class="step-hint">Optional — anything the AI should consider</p>
+    </div>
+    <button class="step-back" id="back-5" aria-label="Go back to step 4">&larr; Back</button>
+    <textarea class="notes-textarea" id="health-notes" placeholder="Joint issues, sleep concerns, prior protocols, medications..."></textarea>
+    <div class="submit-row">
+      <button class="btn btn-lg" id="generate-btn">Generate Protocol &rarr;</button>
+    </div>
+  </div>
+
+  <!-- Loading State -->
+  <div class="loading-state" id="loading-state">
+    <div class="loading-step" id="load-1">
+      <span class="loading-num">01</span>
+      <span class="loading-text">Analyzing parameters...</span>
+    </div>
+    <div class="loading-step" id="load-2">
+      <span class="loading-num">02</span>
+      <span class="loading-text">Matching compounds to profile...</span>
+    </div>
+    <div class="loading-step" id="load-3">
+      <span class="loading-num">03</span>
+      <span class="loading-text">Optimizing stack synergy...</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- 03 — Result Display -->
+<section class="result" id="result-section">
+  <div class="result-header">
+    <h2 class="result-name" id="result-name"></h2>
+    <p class="result-tagline" id="result-tagline"></p>
+    <p class="result-rationale" id="result-rationale"></p>
+  </div>
+
+  <div class="divider" style="margin-bottom:48px"><div class="divider-line"></div></div>
+
+  <div class="result-compounds" id="result-compounds"></div>
+
+  <div class="result-notes" id="result-notes">
+    <div class="result-note-card">
+      <div class="result-note-label">Weekly Structure</div>
+      <p class="result-note-text" id="result-weekly"></p>
+    </div>
+    <div class="result-note-card">
+      <div class="result-note-label">Synergy Note</div>
+      <p class="result-note-text" id="result-synergy"></p>
+    </div>
+  </div>
+
+  <div class="result-cost">
+    <div class="result-cost-label">Estimated Monthly Cost</div>
+    <div class="result-cost-value" id="result-cost"></div>
+  </div>
+
+  <div class="result-actions">
+    <button class="btn btn-lg" id="shop-protocol-btn">Shop This Protocol</button>
+    <button class="btn" id="start-over-btn">Start Over</button>
+  </div>
+
+  <div class="error-msg" id="error-msg"></div>
+
+  <div class="result-disclaimer">
+    For research purposes only. Not intended for human consumption. AI-generated protocols are informational and do not constitute medical advice. Always consult a qualified healthcare professional.
+  </div>
+</section>
+
+<div class="divider"><div class="divider-line"></div></div>
+
+</main>
+
+<footer>
+  <div class="footer-bar">
+    <a href="/us/" class="logo">Engineered Adherence</a>
+    <nav class="footer-nav" aria-label="Footer">
+      <a href="/us/shop.html">Shop</a>
+      <a href="/us/protocols.html">Protocols</a>
+      <a href="/us/advisor.html">Advisor</a>
+      <a href="/us/about.html">About</a>
+      <a href="/qa/">QA Site</a>
+    </nav>
+    <span class="footer-copy">&copy; 2026 Engineered Adherence &middot; United States</span>
+  </div>
+</footer>
+
+<div class="us-disclaimer">
+  For research purposes only. Not intended for human consumption. These products are sold strictly for laboratory and scientific research.
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  /* ═══════════════════════════════════════════
+     STATE
+     ═══════════════════════════════════════════ */
+  const state = {
+    currentStep: 1,
+    goal: '',
+    experience: '',
+    budget: '',
+    cycle: '',
+    notes: ''
+  };
+
+  /* Compound slug lookup for cart integration */
+  const slugMap = {
+    'BPC-157': 'bpc-157',
+    'IPAMORELIN': 'ipamorelin',
+    'SEMAX': 'semax',
+    'EPITHALON': 'epithalon',
+    'TB-500': 'tb-500',
+    'AOD-9604': 'aod-9604',
+    'CJC-1295': 'cjc-1295',
+    'GHK-CU': 'ghk-cu',
+    'SELANK': 'selank',
+    'HEXARELIN': 'hexarelin',
+    'RETATRUTIDE': 'retatrutide',
+    'MK-677': 'mk-677'
+  };
+
+  /* Price lookup for cart integration */
+  const priceMap = {
+    'BPC-157': 89,
+    'IPAMORELIN': 112,
+    'SEMAX': 97,
+    'EPITHALON': 145,
+    'TB-500': 134,
+    'AOD-9604': 118,
+    'CJC-1295': 108,
+    'GHK-CU': 76,
+    'SELANK': 88,
+    'HEXARELIN': 129,
+    'RETATRUTIDE': 189,
+    'MK-677': 94
+  };
+
+  /* ═══════════════════════════════════════════
+     DOM REFERENCES
+     ═══════════════════════════════════════════ */
+  const steps = document.querySelectorAll('.step');
+  const dots = document.querySelectorAll('.progress-dot');
+  const loadingState = document.getElementById('loading-state');
+  const assessmentSection = document.getElementById('assessment');
+  const resultSection = document.getElementById('result-section');
+
+  /* ═══════════════════════════════════════════
+     STEP NAVIGATION
+     ═══════════════════════════════════════════ */
+  function goToStep(num) {
+    state.currentStep = num;
+
+    /* Update step visibility */
+    steps.forEach(function(step) {
+      step.classList.remove('active');
+    });
+    var target = document.getElementById('step-' + num);
+    if (target) target.classList.add('active');
+
+    /* Update progress dots */
+    dots.forEach(function(dot) {
+      var dotStep = parseInt(dot.getAttribute('data-step'), 10);
+      dot.classList.remove('active', 'done');
+      if (dotStep === num) {
+        dot.classList.add('active');
+      } else if (dotStep < num) {
+        dot.classList.add('done');
+      }
+    });
+
+    /* Hide loading and result */
+    loadingState.classList.remove('active');
+
+    /* Scroll to assessment top */
+    assessmentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  /* ═══════════════════════════════════════════
+     OPTION CARD CLICK HANDLERS (Steps 1-4)
+     ═══════════════════════════════════════════ */
+  var stateKeys = ['', 'goal', 'experience', 'budget', 'cycle'];
+
+  for (var s = 1; s <= 4; s++) {
+    (function(stepNum) {
+      var stepEl = document.getElementById('step-' + stepNum);
+      var cards = stepEl.querySelectorAll('.option-card');
+      cards.forEach(function(card) {
+        card.addEventListener('click', function() {
+          /* Mark selected */
+          cards.forEach(function(c) { c.classList.remove('selected'); });
+          card.classList.add('selected');
+
+          /* Save value */
+          state[stateKeys[stepNum]] = card.getAttribute('data-value');
+
+          /* Advance after short delay for visual feedback */
+          setTimeout(function() {
+            goToStep(stepNum + 1);
+          }, 250);
+        });
+      });
+    })(s);
+  }
+
+  /* ═══════════════════════════════════════════
+     BACK BUTTONS
+     ═══════════════════════════════════════════ */
+  for (var b = 2; b <= 5; b++) {
+    (function(stepNum) {
+      var backBtn = document.getElementById('back-' + stepNum);
+      if (backBtn) {
+        backBtn.addEventListener('click', function() {
+          goToStep(stepNum - 1);
+        });
+      }
+    })(b);
+  }
+
+  /* ═══════════════════════════════════════════
+     GENERATE PROTOCOL
+     ═══════════════════════════════════════════ */
+  var generateBtn = document.getElementById('generate-btn');
+  generateBtn.addEventListener('click', function() {
+    state.notes = document.getElementById('health-notes').value.trim();
+    generateProtocol();
+  });
+
+  /* ═══════════════════════════════════════════
+     FALLBACK PROTOCOL
+     ═══════════════════════════════════════════ */
+  var fallback = {
+    protocolName: 'The Foundation Protocol',
+    tagline: 'A balanced starting point for systematic optimization.',
+    rationale: 'BPC-157 provides systemic recovery support, Ipamorelin delivers clean GH pulsation for recomposition, and TB-500 accelerates tissue repair. Together they create a synergistic foundation across Recovery and Performance pillars.',
+    peptides: [
+      { name: 'BPC-157', pillar: 'Recovery', pillarNum: 'II', mechanism: 'Systemic tissue repair via growth factor modulation', dosing: '250mcg \u00b7 2x/day', timing: 'Morning + evening subcutaneous' },
+      { name: 'IPAMORELIN', pillar: 'Performance', pillarNum: 'V', mechanism: 'Selective GH secretagogue without cortisol or prolactin elevation', dosing: '200mcg \u00b7 1x/day', timing: 'Evening pre-sleep' },
+      { name: 'TB-500', pillar: 'Recovery', pillarNum: 'II', mechanism: 'Thymosin beta-4 analog for accelerated healing and angiogenesis', dosing: '2.5mg \u00b7 2x/week', timing: 'Monday/Thursday subcutaneous' }
+    ],
+    weeklyStructure: 'Daily BPC-157 and Ipamorelin, with TB-500 on Monday and Thursday. Rest days align with reduced injection volume.',
+    synergyNote: 'BPC-157 and TB-500 share overlapping recovery pathways while Ipamorelin supports anabolic conditions for tissue remodeling.',
+    estimatedCost: '$335/month'
+  };
+
+  /* ═══════════════════════════════════════════
+     API CALL
+     ═══════════════════════════════════════════ */
+  async function generateProtocol() {
+    /* Hide steps, show loading */
+    steps.forEach(function(step) { step.classList.remove('active'); });
+    document.querySelector('.progress-bar').style.display = 'none';
+    loadingState.classList.add('active');
+
+    /* Stagger loading step reveals */
+    var loadSteps = loadingState.querySelectorAll('.loading-step');
+    loadSteps.forEach(function(ls, i) {
+      ls.classList.remove('visible');
+      setTimeout(function() {
+        ls.classList.add('visible');
+      }, i * 600);
+    });
+
+    var goal = state.goal;
+    var experience = state.experience;
+    var budget = state.budget;
+    var cycle = state.cycle;
+    var notes = state.notes;
+
+    /* Get API key from meta tag */
+    var apiKey = document.querySelector('meta[name="ea-api-key"]').content;
+
+    var promptText = 'You are the Engineered Adherence Protocol AI. Design a precise research peptide protocol.\n\nUser profile:\n- Goal: ' + goal + '\n- Experience: ' + experience + '\n- Budget: ' + budget + '/month\n- Cycle: ' + cycle + '\n- Notes: ' + (notes || 'None') + '\n\nReturn ONLY valid JSON, no markdown:\n{\n  "protocolName": "The [X] Protocol",\n  "tagline": "One sentence",\n  "rationale": "2-3 sentences on compound selection logic",\n  "peptides": [\n    {\n      "name": "COMPOUND NAME",\n      "pillar": "Pillar name",\n      "pillarNum": "I/II/III/IV/V",\n      "mechanism": "One sentence mechanism",\n      "dosing": "Xmcg · Xd/week",\n      "timing": "e.g. Morning fasted"\n    }\n  ],\n  "weeklyStructure": "Brief weekly schedule description",\n  "synergyNote": "One sentence on how these compounds interact",\n  "estimatedCost": "$XXX/month"\n}';
+
+    try {
+      /* If key is placeholder, use fallback directly */
+      if (!apiKey || apiKey === 'YOUR_KEY_HERE') {
+        throw new Error('No API key configured');
+      }
+
+      var response = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': apiKey,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          messages: [{
+            role: 'user',
+            content: promptText
+          }]
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('API returned ' + response.status);
+      }
+
+      var data = await response.json();
+      var text = data.content[0].text;
+      var protocol = JSON.parse(text);
+      displayResult(protocol);
+
+    } catch (err) {
+      /* Use fallback protocol on any error */
+      displayResult(fallback);
+    }
+  }
+
+  /* ═══════════════════════════════════════════
+     DISPLAY RESULT
+     ═══════════════════════════════════════════ */
+  var currentProtocol = null;
+
+  function displayResult(protocol) {
+    currentProtocol = protocol;
+
+    /* Wait for loading animation to complete */
+    setTimeout(function() {
+      /* Hide loading and assessment */
+      loadingState.classList.remove('active');
+      assessmentSection.style.display = 'none';
+
+      /* Populate result */
+      document.getElementById('result-name').textContent = protocol.protocolName;
+      document.getElementById('result-tagline').textContent = protocol.tagline;
+      document.getElementById('result-rationale').textContent = protocol.rationale;
+
+      /* Render compounds */
+      var compoundsHtml = protocol.peptides.map(function(p, i) {
+        var numStr = String(i + 1).padStart(2, '0');
+        return '<div class="result-compound">' +
+          '<div class="result-compound-header">' +
+            '<span class="result-compound-num">' + numStr + '</span>' +
+            '<span class="result-compound-name">' + p.name + '</span>' +
+            '<span class="result-compound-pillar">Pillar ' + p.pillarNum + ' \u00b7 ' + p.pillar + '</span>' +
+          '</div>' +
+          '<p class="result-compound-mechanism">' + p.mechanism + '</p>' +
+          '<div class="result-compound-meta">' +
+            '<span>Dosing: <strong>' + p.dosing + '</strong></span>' +
+            '<span>Timing: <strong>' + p.timing + '</strong></span>' +
+          '</div>' +
+        '</div>';
+      }).join('');
+      document.getElementById('result-compounds').innerHTML = compoundsHtml;
+
+      /* Notes */
+      document.getElementById('result-weekly').textContent = protocol.weeklyStructure;
+      document.getElementById('result-synergy').textContent = protocol.synergyNote;
+
+      /* Cost */
+      document.getElementById('result-cost').innerHTML = protocol.estimatedCost.replace('/month', ' <span>/ month</span>');
+
+      /* Show result */
+      resultSection.classList.add('active');
+
+      /* Scroll to result */
+      resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 2200);
+  }
+
+  /* ═══════════════════════════════════════════
+     SHOP THIS PROTOCOL
+     ═══════════════════════════════════════════ */
+  document.getElementById('shop-protocol-btn').addEventListener('click', function() {
+    if (!currentProtocol || typeof Cart === 'undefined') return;
+
+    currentProtocol.peptides.forEach(function(p) {
+      var name = p.name.toUpperCase();
+      var slug = slugMap[name] || name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      var price = priceMap[name] || 99;
+
+      Cart.add({
+        name: name,
+        slug: slug,
+        price: price,
+        pillar: p.pillar
+      });
+    });
+  });
+
+  /* ═══════════════════════════════════════════
+     START OVER
+     ═══════════════════════════════════════════ */
+  document.getElementById('start-over-btn').addEventListener('click', function() {
+    /* Reset state */
+    state.currentStep = 1;
+    state.goal = '';
+    state.experience = '';
+    state.budget = '';
+    state.cycle = '';
+    state.notes = '';
+
+    /* Clear selections */
+    document.querySelectorAll('.option-card').forEach(function(c) {
+      c.classList.remove('selected');
+    });
+    document.getElementById('health-notes').value = '';
+
+    /* Reset loading steps */
+    document.querySelectorAll('.loading-step').forEach(function(ls) {
+      ls.classList.remove('visible');
+    });
+
+    /* Hide result, show assessment */
+    resultSection.classList.remove('active');
+    assessmentSection.style.display = '';
+    document.querySelector('.progress-bar').style.display = '';
+
+    /* Go to step 1 */
+    goToStep(1);
+
+    /* Scroll to top of assessment */
+    document.querySelector('.advisor-hero').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+})();
+</script>
+<script src="/us/cart.js"></script>
+<script src="/qa/js/main.js"></script>
+<script src="/qa/js/mobile.js"></script>
+</body>
+</html>
