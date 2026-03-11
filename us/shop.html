@@ -18,13 +18,13 @@
 </script>
 <link rel="stylesheet" href="/qa/css/style.css">
 <link rel="stylesheet" href="/qa/css/mobile.css">
+<link rel="stylesheet" href="/us/us.css">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  /* ═══════════════════════════════════════════
-     NAV ENTRANCE
-     ═══════════════════════════════════════════ */
   nav{opacity:0;animation:fadeDown .8s ease .3s forwards}
   @keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes panelIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+  @keyframes panelOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-20px)}}
 
   /* ═══════════════════════════════════════════
      PAGE HERO
@@ -45,231 +45,342 @@
   }
 
   /* ═══════════════════════════════════════════
-     FILTER BAR
+     PILLAR NAV — sticky filter
      ═══════════════════════════════════════════ */
-  .filter-bar{
-    display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
-    padding:0 72px 0;max-width:1140px;margin:48px auto 0;
-    position:relative;z-index:1;
+  .pillar-nav{
+    display:flex;gap:8px;justify-content:center;
+    position:sticky;top:80px;z-index:50;
+    background:var(--bg);
+    padding:20px 72px;
+    max-width:1140px;margin:0 auto;
+    transition:background .5s;
   }
-  .filter-btn{
-    padding:11px 24px;background:transparent;
-    border:1px solid var(--btn-border);cursor:pointer;
-    font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
-    color:var(--btn-text);font-weight:400;font-family:'DM Sans',sans-serif;
-    transition:all .3s cubic-bezier(0.4,0,0.2,1);
+  .pillar-nav-btn{
+    display:flex;align-items:center;gap:12px;
+    padding:14px 24px;
+    background:transparent;
+    border:1px solid var(--line);
+    cursor:pointer;
+    font-family:'DM Sans',sans-serif;
+    transition:all .3s ease;
   }
-  .filter-btn:hover{
-    background:var(--btn-hover-bg);border-color:var(--btn-hover-border);
+  .pillar-nav-btn:hover{
+    border-color:var(--line-strong);
+    background:var(--bg-card);
   }
-  .filter-btn.active{
-    background:var(--bg-card);border-color:var(--accent-solid);
-    color:var(--text-heading);
+  .pillar-nav-btn.active{
+    background:var(--bg-card);
+    border-color:var(--accent-solid);
   }
+  .pn-num{
+    font-family:'Playfair Display',serif;
+    font-size:20px;font-weight:600;
+    color:var(--accent-solid);transition:color .3s;
+  }
+  .pillar-nav-btn.active .pn-num{color:var(--text-heading)}
+  .pn-label{
+    font-size:11px;letter-spacing:1px;text-transform:uppercase;
+    color:var(--muted);transition:color .3s;
+  }
+  .pillar-nav-btn.active .pn-label{color:var(--text-heading)}
 
   /* ═══════════════════════════════════════════
-     PRODUCT GRID
+     EXPLORER LAYOUT — two columns
      ═══════════════════════════════════════════ */
-  .product-grid{
-    display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+  .explorer{
+    display:grid;grid-template-columns:1fr 1fr;gap:40px;
     padding:0 72px;max-width:1140px;margin:48px auto 0;
     position:relative;z-index:1;
+    min-height:600px;
   }
 
   /* ═══════════════════════════════════════════
-     PRODUCT CARD
+     COMPOUND LIST (left)
      ═══════════════════════════════════════════ */
-  .product-card{
-    background:var(--bg-card);border:1px solid var(--line);
-    padding:40px 28px;position:relative;overflow:hidden;
-    transition:all .5s cubic-bezier(0.4,0,0.2,1);
-  }
-  .product-card::before{
-    content:'';position:absolute;top:0;left:0;right:0;height:1px;
-    background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
-    transform:scaleX(0);transition:transform .5s;opacity:0.6;
-  }
-  .product-card:hover{
-    transform:translateY(-5px);box-shadow:var(--shadow-card-subtle);
-    border-color:var(--line-strong);background:var(--bg-card-hover);
-  }
-  .product-card:hover::before{transform:scaleX(1)}
-
-  .product-pillar-num{
-    font-family:'Playfair Display',serif;font-size:64px;font-weight:600;
-    color:var(--pillar-num);line-height:1;margin-bottom:12px;
-    letter-spacing:-0.03em;transition:color .5s;
-  }
-  .product-name{
-    font-family:'Space Mono',monospace;
-    font-size:18px;font-weight:700;
-    color:var(--text-heading);margin-bottom:8px;
-    letter-spacing:0.5px;text-transform:uppercase;
-  }
-  .product-pillar-tag{
-    display:inline-block;font-size:9px;
-    letter-spacing:2px;text-transform:uppercase;
-    color:var(--tag-text);padding:5px 12px;
-    background:var(--tag-bg);border:1px solid var(--line);
-    margin-bottom:14px;transition:all .5s;
-  }
-  .product-tagline{
-    font-size:13px;color:var(--muted);line-height:1.75;font-weight:300;
-    margin-bottom:16px;transition:color .5s;
-  }
-  .product-badges{
-    display:flex;gap:8px;margin-bottom:20px;
-  }
-  .product-badge{
-    font-size:9px;letter-spacing:1.5px;text-transform:uppercase;
-    color:var(--faint);padding:4px 10px;
-    background:var(--accent);border:1px solid var(--line);
-    transition:all .5s;
-  }
-  .product-price{
-    font-family:'Playfair Display',serif;
-    font-size:28px;font-weight:500;color:var(--stat-num);
-    margin-bottom:20px;transition:color .5s;
-  }
-  .product-price span{
-    font-size:14px;color:var(--faint);font-family:'DM Sans',sans-serif;font-weight:300;
-  }
-  .product-card .btn{width:100%;text-align:center}
-
-  /* ═══════════════════════════════════════════
-     EMPTY STATE
-     ═══════════════════════════════════════════ */
-  .grid-empty{
-    grid-column:1/-1;text-align:center;padding:80px 24px;
-  }
-  .grid-empty p{
-    font-size:15px;color:var(--faint);font-weight:300;
+  .compound-list{display:flex;flex-direction:column}
+  .compound-list h4{
+    font-size:9px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--faint);margin:0 0 12px;padding:0 16px;
   }
 
-  /* ═══════════════════════════════════════════
-     CART DRAWER
-     ═══════════════════════════════════════════ */
-  .cart-drawer{
-    position:fixed;top:0;right:0;width:100%;max-width:380px;height:100vh;
-    background:var(--bg);border-left:1px solid var(--line);
-    z-index:200;transform:translateX(100%);
-    transition:transform .4s cubic-bezier(0.4,0,0.2,1);
-    padding:32px;overflow-y:auto;
-  }
-  .cart-drawer.open{transform:translateX(0)}
-  .cart-drawer-header{
-    display:flex;justify-content:space-between;align-items:center;
-    margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--line);
-  }
-  .cart-drawer-title{
-    font-family:'Playfair Display',serif;font-size:20px;font-weight:500;
-    color:var(--text-heading);
-  }
-  .cart-close{
-    background:none;border:1px solid var(--line);
-    width:32px;height:32px;cursor:pointer;color:var(--muted);
-    display:flex;align-items:center;justify-content:center;font-size:14px;
-    transition:all .3s;
-  }
-  .cart-close:hover{border-color:var(--text-heading);color:var(--text-heading)}
-  .cart-item{
+  .compound-row{
     display:flex;align-items:center;justify-content:space-between;
-    padding:16px 0;border-bottom:1px solid var(--line);
+    padding:18px 16px;margin:0 -16px;
+    border-bottom:1px solid var(--line);
+    cursor:pointer;transition:all .25s ease;
+    position:relative;
   }
-  .cart-item-name{
-    font-family:'Space Mono',monospace;font-size:13px;
-    color:var(--text-heading);font-weight:400;
+  .compound-row::before{
+    content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
+    background:var(--p-accent,var(--accent-solid));
+    transform:scaleY(0);transition:transform .25s ease;
+    transform-origin:top;
   }
-  .cart-item-qty{font-size:12px;color:var(--faint)}
-  .cart-item-price{font-size:14px;color:var(--text-heading);font-weight:400}
-  .cart-item button{
-    background:none;border:1px solid var(--line);
-    width:24px;height:24px;cursor:pointer;color:var(--faint);
-    font-size:11px;display:flex;align-items:center;justify-content:center;
-    transition:all .3s;
+  .compound-row:hover{background:var(--bg-card)}
+  .compound-row:hover .cr-name{color:var(--p-accent,var(--text-heading))}
+  .compound-row.selected{background:var(--bg-card)}
+  .compound-row.selected::before{transform:scaleY(1)}
+  .compound-row.selected .cr-name{color:var(--p-accent,var(--text-heading))}
+  .compound-row.selected .cr-role{
+    background:var(--p-accent,var(--accent-solid));
+    border-color:var(--p-accent,var(--accent-solid));
+    color:var(--bg);
   }
-  .cart-item button:hover{border-color:var(--text-heading);color:var(--text-heading)}
-  .cart-total{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:24px 0;margin-top:16px;border-top:1px solid var(--line-strong);
-  }
-  .cart-total-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
-  .cart-total-value{
-    font-family:'Playfair Display',serif;font-size:28px;font-weight:500;color:var(--stat-num);
-  }
-  .cart-overlay{
-    position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:190;
-    opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;
-    backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-  }
-  .cart-overlay.open{opacity:1;visibility:visible}
 
-  /* ═══════════════════════════════════════════
-     NAV CART BUTTON
-     ═══════════════════════════════════════════ */
-  .nav-cart-btn{
-    padding:11px 20px;background:transparent;
-    border:1px solid var(--cta-border);cursor:pointer;
-    font-size:10px;letter-spacing:2.2px;text-transform:uppercase;
-    color:var(--cta-text);font-weight:400;font-family:'DM Sans',sans-serif;
-    transition:all .3s;position:relative;
-  }
-  .nav-cart-btn:hover{background:var(--cta-hover);border-color:var(--btn-hover-border)}
-  #cart-count{
-    font-size:9px;background:var(--accent-solid);color:var(--bg);
-    padding:2px 6px;border-radius:8px;margin-left:6px;
+  .cr-left{display:flex;align-items:center;gap:16px}
+  .cr-name{
+    font-size:16px;color:var(--text-heading);font-weight:400;
+    transition:color .2s;
     font-family:'DM Sans',sans-serif;
   }
-
-  /* ═══════════════════════════════════════════
-     DISCLAIMER
-     ═══════════════════════════════════════════ */
-  .us-disclaimer{
-    text-align:center;padding:32px 24px;
-    font-size:11px;color:var(--faint);font-weight:300;
-    letter-spacing:0.5px;line-height:1.8;
-    border-top:1px solid var(--line);
-    max-width:1140px;margin:0 auto;
-    position:relative;z-index:1;
+  .cr-role{
+    font-size:10px;color:var(--muted);letter-spacing:1px;text-transform:uppercase;
+    padding:5px 12px;
+    background:var(--bg);border:1px solid var(--line);
+    transition:all .2s;white-space:nowrap;
+  }
+  .cr-right{display:flex;align-items:center;gap:16px}
+  .cr-price{
+    font-family:'Playfair Display',serif;
+    font-size:18px;font-weight:500;color:var(--stat-num);
+    transition:color .2s;
+  }
+  .cr-size{
+    font-size:10px;color:var(--faint);letter-spacing:0.5px;
   }
 
   /* ═══════════════════════════════════════════
-     RESPONSIVE — TABLET
+     DETAIL PANEL (right) — cross-fade
+     ═══════════════════════════════════════════ */
+  .detail-panel{
+    position:sticky;top:140px;align-self:start;
+    min-height:520px;
+  }
+
+  /* Default: catalog overview card */
+  .catalog-card{
+    background:var(--bg-card);border:1px solid var(--line);
+    padding:40px 32px;
+    transition:opacity .3s ease,transform .3s ease;
+  }
+  .catalog-card h4{
+    font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--faint);margin:0 0 24px;
+  }
+  .catalog-card p{
+    font-size:15px;color:var(--muted);line-height:1.9;font-weight:300;
+    margin:0 0 32px;
+  }
+  .catalog-stats{
+    display:grid;grid-template-columns:1fr 1fr;gap:16px;
+    padding-top:24px;border-top:1px solid var(--line);
+  }
+  .catalog-stat{text-align:center}
+  .catalog-stat-val{
+    font-size:28px;font-weight:300;
+    color:var(--accent-solid);
+    font-family:'Playfair Display',serif;
+  }
+  .catalog-stat-label{
+    font-size:10px;color:var(--faint);letter-spacing:1px;
+    text-transform:uppercase;margin-top:4px;
+  }
+
+  /* Active compound detail card */
+  .compound-detail{
+    background:var(--bg-card);border:1px solid var(--line);
+    position:absolute;inset:0;
+    opacity:0;transform:translateX(20px);
+    pointer-events:none;overflow:hidden;
+    transition:opacity .3s ease,transform .3s ease;
+  }
+
+  /* Cross-fade states */
+  .detail-panel.showing .catalog-card{
+    opacity:0;transform:translateX(-20px);
+    position:absolute;inset:0;pointer-events:none;
+  }
+  .detail-panel.showing .compound-detail{
+    opacity:1;transform:translateX(0);
+    position:relative;pointer-events:auto;
+  }
+
+  /* Detail header */
+  .cd-header{
+    padding:28px 28px 20px;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .cd-close{
+    position:absolute;top:20px;right:20px;
+    width:32px;height:32px;
+    display:flex;align-items:center;justify-content:center;
+    background:transparent;border:1px solid var(--line);
+    cursor:pointer;color:var(--muted);font-size:13px;
+    transition:all .2s;
+  }
+  .cd-close:hover{border-color:var(--text-heading);color:var(--text-heading)}
+  .cd-badge{
+    display:inline-block;font-size:9px;letter-spacing:1.5px;
+    text-transform:uppercase;color:var(--p-accent,var(--accent-solid));
+    margin-bottom:10px;
+  }
+  .cd-title{
+    font-family:'Space Mono',monospace;
+    font-size:24px;font-weight:700;letter-spacing:1px;
+    color:var(--text-heading);text-transform:uppercase;
+    margin:0 0 4px;
+  }
+  .cd-subtitle{
+    font-size:13px;color:var(--muted);font-weight:300;font-style:italic;
+  }
+
+  /* Detail body */
+  .cd-body{padding:24px 28px 28px}
+  .cd-desc{
+    font-size:14px;color:var(--muted);line-height:1.85;font-weight:300;
+    margin:0 0 24px;
+  }
+
+  /* Mechanism callout */
+  .cd-mech{
+    padding:16px 20px;margin-bottom:24px;
+    background:var(--bg);border:1px solid var(--line);
+    border-left:3px solid var(--p-accent,var(--accent-solid));
+  }
+  .cd-mech-label{
+    font-size:8px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--p-accent,var(--faint));margin-bottom:8px;
+  }
+  .cd-mech-text{
+    font-size:12px;color:var(--muted);line-height:1.8;font-weight:300;margin:0;
+  }
+
+  /* Stats row */
+  .cd-stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+    margin-bottom:24px;
+  }
+  .cd-stat{
+    text-align:center;padding:16px 12px;
+    background:var(--bg);border:1px solid var(--line);
+  }
+  .cd-stat-label{
+    font-size:8px;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--faint);margin-bottom:4px;
+  }
+  .cd-stat-val{
+    font-size:15px;font-weight:500;
+    color:var(--p-accent,var(--accent-solid));
+    font-family:'Space Mono',monospace;
+  }
+
+  /* Benefits */
+  .cd-benefits{
+    display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;
+  }
+  .cd-benefit{
+    font-size:10px;letter-spacing:0.3px;
+    padding:7px 14px 7px 22px;
+    background:var(--bg);border:1px solid var(--line);
+    color:var(--muted);position:relative;
+  }
+  .cd-benefit::before{
+    content:'';position:absolute;left:9px;top:50%;
+    width:5px;height:5px;border-radius:50%;
+    background:var(--p-accent,var(--accent-solid));
+    transform:translateY(-50%);
+  }
+
+  /* Synergies */
+  .cd-syn{margin-bottom:28px}
+  .cd-syn-label{
+    font-size:8px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--faint);margin-bottom:8px;
+  }
+  .cd-syn-list{display:flex;gap:8px}
+  .cd-syn-pill{
+    font-family:'Space Mono',monospace;
+    font-size:10px;letter-spacing:0.5px;
+    padding:6px 12px;cursor:pointer;
+    background:var(--accent);border:1px solid var(--line);
+    color:var(--text-heading);transition:all .3s;
+  }
+  .cd-syn-pill:hover{
+    border-color:var(--line-strong);transform:translateY(-2px);
+  }
+
+  /* Footer: price + add to cart */
+  .cd-footer{
+    display:flex;gap:16px;align-items:center;
+    padding-top:24px;border-top:1px solid var(--line);
+  }
+  .cd-price{
+    font-family:'Playfair Display',serif;
+    font-size:32px;font-weight:500;color:var(--stat-num);
+  }
+  .cd-price span{
+    font-size:14px;color:var(--faint);font-family:'DM Sans',sans-serif;font-weight:300;
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE
      ═══════════════════════════════════════════ */
   @media(max-width:1024px){
     .shop-hero{padding:160px 40px 60px}
     .shop-hero .section-title{font-size:44px}
-    .filter-bar{padding:0 40px}
-    .product-grid{grid-template-columns:1fr 1fr;padding:0 40px}
+    .pillar-nav{padding:16px 40px}
+    .explorer{padding:0 40px;gap:24px}
   }
-
-  /* ═══════════════════════════════════════════
-     RESPONSIVE — MOBILE
-     ═══════════════════════════════════════════ */
   @media(max-width:768px){
     .shop-hero{padding:120px 24px 48px}
     .shop-hero .section-title{font-size:32px}
     .shop-hero .section-body{font-size:14px;line-height:1.8}
-    .filter-bar{
-      padding:0 24px;flex-wrap:nowrap;justify-content:flex-start;
+    .pillar-nav{
+      padding:16px 24px;
+      flex-wrap:nowrap;justify-content:flex-start;
       overflow-x:auto;-webkit-overflow-scrolling:touch;
-      scrollbar-width:none;gap:8px;
-      margin-left:0;margin-right:0;
+      scrollbar-width:none;top:60px;
     }
-    .filter-bar::-webkit-scrollbar{display:none}
-    .filter-btn{flex-shrink:0;padding:10px 18px;font-size:9px}
-    .product-grid{grid-template-columns:1fr;padding:0 24px;gap:12px}
-    .product-card{padding:32px 24px}
-    .product-pillar-num{font-size:48px}
-    .product-name{font-size:16px}
-    .product-price{font-size:24px}
+    .pillar-nav::-webkit-scrollbar{display:none}
+    .pillar-nav-btn{flex-shrink:0;padding:12px 14px;min-height:44px}
+    .pn-label{display:none}
+    .explorer{
+      grid-template-columns:1fr;padding:0 24px;gap:0;
+      min-height:auto;
+    }
+    .detail-panel{position:relative;top:0;min-height:auto;margin-top:24px}
+    .compound-detail{position:relative;inset:auto}
+    .detail-panel.showing .catalog-card{
+      position:relative;display:none;
+    }
+    /* Compound rows: ensure 44px min touch target */
+    .compound-row{padding:14px 16px;min-height:44px}
+    .cr-role{display:none}
+    .cr-name{font-size:15px}
+    .cr-price{font-size:16px}
+    .cd-title{font-size:20px}
+    .cd-desc{font-size:13px}
+    .cd-stats{grid-template-columns:1fr}
+    .cd-footer{flex-direction:column;align-items:stretch;text-align:center}
+    .cd-footer .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+    .cd-price{order:-1;text-align:center}
+    .cd-benefits{flex-direction:column}
+    .cd-benefit{min-height:44px;display:flex;align-items:center;padding:10px 14px 10px 24px}
+    /* Synergy pills: wrap and touch-friendly */
+    .cd-syn-list{flex-wrap:wrap}
+    .cd-syn-pill{min-height:44px;display:inline-flex;align-items:center;padding:10px 14px}
+    /* Close button: touch-friendly */
+    .cd-close{width:44px;height:44px}
     .nav-cart-btn{display:none}
+    /* Catalog card stats: ensure no overflow */
+    .catalog-stats{grid-template-columns:1fr 1fr;gap:12px}
   }
-
   @media(max-width:480px){
     .shop-hero .section-title{font-size:26px}
-    .product-pillar-num{font-size:40px}
-    .product-name{font-size:15px}
+    .cd-title{font-size:18px}
+    .cd-price{font-size:28px}
+    .catalog-stats{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -334,27 +445,98 @@
 
 <main id="main-content">
 
-<!-- 01 — Page Hero -->
+<!-- 01 — Hero -->
 <section class="shop-hero">
   <p class="section-label">Compound Library</p>
   <h1 class="section-title">The Arsenal</h1>
-  <p class="section-body">Research-grade peptide compounds. Certificate of analysis on every batch.</p>
+  <p class="section-body">Individual vials or complete stacks. Every compound ships with a certificate of analysis. 99.9% purity, 48-hour dispatch.</p>
 </section>
 
 <div class="divider"><div class="divider-line"></div></div>
 
-<!-- 02 — Filter Bar -->
-<div class="filter-bar" role="toolbar" aria-label="Filter compounds by pillar">
-  <button class="filter-btn active" data-filter="All">All</button>
-  <button class="filter-btn" data-filter="Longevity">Longevity</button>
-  <button class="filter-btn" data-filter="Recovery">Recovery</button>
-  <button class="filter-btn" data-filter="Metabolic">Metabolic</button>
-  <button class="filter-btn" data-filter="Cognitive">Cognitive</button>
-  <button class="filter-btn" data-filter="Performance">Performance</button>
+<!-- 02 — Pillar Nav -->
+<div class="pillar-nav" role="tablist" aria-label="Filter compounds by pillar">
+  <button class="pillar-nav-btn active" role="tab" aria-selected="true" data-filter="All">
+    <span class="pn-num">12</span>
+    <span class="pn-label">All</span>
+  </button>
+  <button class="pillar-nav-btn" role="tab" aria-selected="false" data-filter="Longevity">
+    <span class="pn-num">I</span>
+    <span class="pn-label">Longevity</span>
+  </button>
+  <button class="pillar-nav-btn" role="tab" aria-selected="false" data-filter="Recovery">
+    <span class="pn-num">II</span>
+    <span class="pn-label">Recovery</span>
+  </button>
+  <button class="pillar-nav-btn" role="tab" aria-selected="false" data-filter="Metabolic">
+    <span class="pn-num">III</span>
+    <span class="pn-label">Metabolic</span>
+  </button>
+  <button class="pillar-nav-btn" role="tab" aria-selected="false" data-filter="Cognitive">
+    <span class="pn-num">IV</span>
+    <span class="pn-label">Cognitive</span>
+  </button>
+  <button class="pillar-nav-btn" role="tab" aria-selected="false" data-filter="Performance">
+    <span class="pn-num">V</span>
+    <span class="pn-label">Performance</span>
+  </button>
 </div>
 
-<!-- 03 — Product Grid (rendered via JS) -->
-<div class="product-grid" id="product-grid"></div>
+<!-- 03 — Explorer: compound list + detail panel -->
+<div class="explorer">
+  <div class="compound-list" id="compound-list"></div>
+  <div class="detail-panel" id="detail-panel">
+    <!-- Default: catalog overview -->
+    <div class="catalog-card">
+      <h4>Compound Catalog</h4>
+      <p>Select any compound to explore its mechanism, dosing protocol, benefits, and synergistic pairings. Every vial ships with full certificate of analysis.</p>
+      <div class="catalog-stats">
+        <div class="catalog-stat">
+          <div class="catalog-stat-val">12</div>
+          <div class="catalog-stat-label">Compounds</div>
+        </div>
+        <div class="catalog-stat">
+          <div class="catalog-stat-val">5</div>
+          <div class="catalog-stat-label">Pillars</div>
+        </div>
+        <div class="catalog-stat">
+          <div class="catalog-stat-val">99.9%</div>
+          <div class="catalog-stat-label">Purity</div>
+        </div>
+        <div class="catalog-stat">
+          <div class="catalog-stat-val">48hr</div>
+          <div class="catalog-stat-label">Dispatch</div>
+        </div>
+      </div>
+    </div>
+    <!-- Compound detail (hidden, cross-fades in) -->
+    <div class="compound-detail" id="compound-detail">
+      <div class="cd-header">
+        <button class="cd-close" id="cd-close" aria-label="Close detail">&#10005;</button>
+        <div class="cd-badge" id="cd-badge"></div>
+        <h3 class="cd-title" id="cd-title"></h3>
+        <div class="cd-subtitle" id="cd-subtitle"></div>
+      </div>
+      <div class="cd-body">
+        <p class="cd-desc" id="cd-desc"></p>
+        <div class="cd-mech">
+          <div class="cd-mech-label">Mechanism of Action</div>
+          <p class="cd-mech-text" id="cd-mech"></p>
+        </div>
+        <div class="cd-stats" id="cd-stats"></div>
+        <div class="cd-benefits" id="cd-benefits"></div>
+        <div class="cd-syn" id="cd-syn-wrap">
+          <div class="cd-syn-label">Synergistic Compounds</div>
+          <div class="cd-syn-list" id="cd-syn"></div>
+        </div>
+        <div class="cd-footer">
+          <div class="cd-price" id="cd-price"></div>
+          <button class="btn" id="cd-add">Add to Stack</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="divider" style="margin-top:80px"><div class="divider-line"></div></div>
 
@@ -379,92 +561,238 @@
 </div>
 
 <script src="/us/cart.js"></script>
+<script src="/us/compounds.js"></script>
 <script>
 (function(){
   'use strict';
 
-  /* ═══════════════════════════════════════════
-     COMPOUND DATA
-     ═══════════════════════════════════════════ */
-  const compounds = [
-    { name: 'BPC-157', pillar: 'Recovery', pillarNum: 'II', price: 89, tagline: 'Tissue repair. Anti-inflammatory. Tendon healing.', size: '5mg', purity: '99.9%', slug: 'bpc-157' },
-    { name: 'IPAMORELIN', pillar: 'Performance', pillarNum: 'V', price: 112, tagline: 'Clean GH pulse. Recomposition. Recovery.', size: '2mg', purity: '99.9%', slug: 'ipamorelin' },
-    { name: 'SEMAX', pillar: 'Cognitive', pillarNum: 'IV', price: 97, tagline: 'BDNF upregulation. Focus. Neuroprotection.', size: '30mg', purity: '99.9%', slug: 'semax' },
-    { name: 'EPITHALON', pillar: 'Longevity', pillarNum: 'I', price: 145, tagline: 'Telomerase activation. Cellular repair. Circadian reset.', size: '10mg', purity: '99.9%', slug: 'epithalon' },
-    { name: 'TB-500', pillar: 'Recovery', pillarNum: 'II', price: 134, tagline: 'Systemic healing. Angiogenesis. Mobility.', size: '5mg', purity: '99.9%', slug: 'tb-500' },
-    { name: 'AOD-9604', pillar: 'Metabolic', pillarNum: 'III', price: 118, tagline: 'Targeted lipolysis. No hyperglycemia.', size: '5mg', purity: '99.9%', slug: 'aod-9604' },
-    { name: 'CJC-1295', pillar: 'Performance', pillarNum: 'V', price: 108, tagline: 'Sustained GH elevation. Lean mass. Fat metabolism.', size: '2mg', purity: '99.9%', slug: 'cjc-1295' },
-    { name: 'GHK-CU', pillar: 'Longevity', pillarNum: 'I', price: 76, tagline: 'Collagen synthesis. Wound healing. Antioxidant.', size: '50mg', purity: '99.9%', slug: 'ghk-cu' },
-    { name: 'SELANK', pillar: 'Cognitive', pillarNum: 'IV', price: 88, tagline: 'Anxiolytic. BDNF modulation. Calm focus.', size: '5mg', purity: '99.9%', slug: 'selank' },
-    { name: 'HEXARELIN', pillar: 'Performance', pillarNum: 'V', price: 129, tagline: 'Most potent GH secretagogue. Cardiac support.', size: '2mg', purity: '99.9%', slug: 'hexarelin' },
-    { name: 'RETATRUTIDE', pillar: 'Metabolic', pillarNum: 'III', price: 189, tagline: '24% body weight reduction. Phase 2 validated.', size: '10mg', purity: '99.9%', slug: 'retatrutide' },
-    { name: 'MK-677', pillar: 'Performance', pillarNum: 'V', price: 94, tagline: 'Oral GH secretagogue. Deep sleep. Lean mass.', size: '10mg', purity: '99.9%', slug: 'mk-677' }
+  var pillarIndex = {Longevity:1,Recovery:2,Metabolic:3,Cognitive:4,Performance:5};
+
+  /* Compound list for rendering rows */
+  var compounds = [
+    {slug:'epithalon',name:'EPITHALON',pillar:'Longevity',pillarNum:'I',price:145,size:'10mg',role:'Telomerase activation'},
+    {slug:'ghk-cu',name:'GHK-CU',pillar:'Longevity',pillarNum:'I',price:76,size:'50mg',role:'Collagen synthesis'},
+    {slug:'bpc-157',name:'BPC-157',pillar:'Recovery',pillarNum:'II',price:89,size:'5mg',role:'Tissue repair'},
+    {slug:'tb-500',name:'TB-500',pillar:'Recovery',pillarNum:'II',price:134,size:'5mg',role:'Systemic healing'},
+    {slug:'aod-9604',name:'AOD-9604',pillar:'Metabolic',pillarNum:'III',price:118,size:'5mg',role:'Targeted lipolysis'},
+    {slug:'retatrutide',name:'RETATRUTIDE',pillar:'Metabolic',pillarNum:'III',price:189,size:'10mg',role:'Triple agonist'},
+    {slug:'semax',name:'SEMAX',pillar:'Cognitive',pillarNum:'IV',price:97,size:'30mg',role:'BDNF upregulation'},
+    {slug:'selank',name:'SELANK',pillar:'Cognitive',pillarNum:'IV',price:88,size:'5mg',role:'Anxiolytic'},
+    {slug:'ipamorelin',name:'IPAMORELIN',pillar:'Performance',pillarNum:'V',price:112,size:'2mg',role:'Clean GH pulse'},
+    {slug:'cjc-1295',name:'CJC-1295',pillar:'Performance',pillarNum:'V',price:108,size:'2mg',role:'Sustained GH'},
+    {slug:'hexarelin',name:'HEXARELIN',pillar:'Performance',pillarNum:'V',price:129,size:'2mg',role:'Max GH release'},
+    {slug:'mk-677',name:'MK-677',pillar:'Performance',pillarNum:'V',price:94,size:'10mg',role:'Oral secretagogue'}
   ];
 
-  const grid = document.getElementById('product-grid');
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  let activeFilter = 'All';
+  var listEl = document.getElementById('compound-list');
+  var detailPanel = document.getElementById('detail-panel');
+  var currentSlug = null;
+  var activeFilter = 'All';
 
   /* ═══════════════════════════════════════════
-     RENDER GRID
+     RENDER COMPOUND LIST
      ═══════════════════════════════════════════ */
-  function renderGrid(filter) {
-    const filtered = filter === 'All'
+  function renderList(filter){
+    var filtered = filter === 'All'
       ? compounds
       : compounds.filter(function(c){ return c.pillar === filter; });
 
-    if (filtered.length === 0) {
-      grid.innerHTML = '<div class="grid-empty"><p>No compounds found for this pillar.</p></div>';
-      return;
+    /* Group by pillar */
+    var groups = {};
+    filtered.forEach(function(c){
+      if(!groups[c.pillar]) groups[c.pillar] = [];
+      groups[c.pillar].push(c);
+    });
+
+    var html = '';
+    var pillarOrder = ['Longevity','Recovery','Metabolic','Cognitive','Performance'];
+
+    pillarOrder.forEach(function(pillar){
+      if(!groups[pillar]) return;
+      if(filter === 'All'){
+        html += '<h4>Pillar ' + groups[pillar][0].pillarNum + ' \u00b7 ' + pillar + '</h4>';
+      }
+      groups[pillar].forEach(function(c){
+        var sel = c.slug === currentSlug ? ' selected' : '';
+        html +=
+          '<div class="compound-row' + sel + '" data-slug="' + c.slug + '" data-pillar="' + (pillarIndex[c.pillar]||0) + '">' +
+            '<div class="cr-left">' +
+              '<span class="cr-name">' + c.name + '</span>' +
+              '<span class="cr-role">' + c.role + '</span>' +
+            '</div>' +
+            '<div class="cr-right">' +
+              '<span class="cr-size">' + c.size + '</span>' +
+              '<span class="cr-price">$' + c.price + '</span>' +
+            '</div>' +
+          '</div>';
+      });
+    });
+
+    if(filtered.length === 0){
+      html = '<div style="text-align:center;padding:80px 24px"><p style="font-size:15px;color:var(--faint);font-weight:300">No compounds found for this pillar.</p></div>';
     }
 
-    grid.innerHTML = filtered.map(function(c) {
-      return '<div class="product-card">' +
-        '<div class="product-pillar-num">' + c.pillarNum + '</div>' +
-        '<div class="product-name">' + c.name + '</div>' +
-        '<span class="product-pillar-tag">Pillar ' + c.pillarNum + ' &middot; ' + c.pillar + '</span>' +
-        '<p class="product-tagline">' + c.tagline + '</p>' +
-        '<div class="product-badges">' +
-          '<span class="product-badge">' + c.size + '</span>' +
-          '<span class="product-badge">' + c.purity + ' purity</span>' +
-        '</div>' +
-        '<div class="product-price">$' + c.price + ' <span>/ ' + c.size + '</span></div>' +
-        '<button class="btn" data-slug="' + c.slug + '" data-name="' + c.name + '" data-price="' + c.price + '" data-pillar="' + c.pillar + '">Add to Stack</button>' +
-      '</div>';
-    }).join('');
+    listEl.innerHTML = html;
+    attachRowListeners();
+  }
 
-    /* Attach add-to-cart listeners */
-    grid.querySelectorAll('.btn[data-slug]').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        if (typeof Cart !== 'undefined' && Cart.add) {
-          Cart.add({
-            name: btn.getAttribute('data-name'),
-            slug: btn.getAttribute('data-slug'),
-            price: parseInt(btn.getAttribute('data-price'), 10),
-            pillar: btn.getAttribute('data-pillar')
-          });
+  /* ═══════════════════════════════════════════
+     ROW CLICK → SHOW DETAIL
+     ═══════════════════════════════════════════ */
+  function attachRowListeners(){
+    listEl.querySelectorAll('.compound-row').forEach(function(row){
+      row.addEventListener('click', function(){
+        var slug = row.getAttribute('data-slug');
+
+        /* Toggle: if already selected, deselect */
+        if(slug === currentSlug){
+          deselectAll();
+          return;
         }
+
+        selectCompound(slug);
       });
     });
   }
 
+  function selectCompound(slug){
+    var c = CompoundDB[slug];
+    if(!c) return;
+
+    currentSlug = slug;
+
+    /* Highlight row */
+    listEl.querySelectorAll('.compound-row').forEach(function(r){ r.classList.remove('selected'); });
+    var activeRow = listEl.querySelector('.compound-row[data-slug="' + slug + '"]');
+    if(activeRow) activeRow.classList.add('selected');
+
+    /* Set pillar color */
+    var detailEl = document.getElementById('compound-detail');
+    detailEl.setAttribute('data-pillar', String(c.pillarIndex));
+
+    /* Populate */
+    document.getElementById('cd-badge').textContent = 'Pillar ' + c.pillarNum + ' \u00b7 ' + c.pillar;
+    document.getElementById('cd-title').textContent = c.name;
+    document.getElementById('cd-subtitle').textContent = c.fullName;
+    document.getElementById('cd-desc').textContent = c.description;
+    document.getElementById('cd-mech').textContent = c.mechanism;
+    document.getElementById('cd-price').innerHTML = '$' + c.price + ' <span>/ ' + c.size + '</span>';
+
+    document.getElementById('cd-stats').innerHTML =
+      '<div class="cd-stat"><div class="cd-stat-label">Route</div><div class="cd-stat-val">' + c.route + '</div></div>' +
+      '<div class="cd-stat"><div class="cd-stat-label">Dosing</div><div class="cd-stat-val">' + c.dosing + '</div></div>' +
+      '<div class="cd-stat"><div class="cd-stat-label">Frequency</div><div class="cd-stat-val">' + c.frequency + '</div></div>';
+
+    document.getElementById('cd-benefits').innerHTML = c.benefits.map(function(b){
+      return '<span class="cd-benefit">' + b + '</span>';
+    }).join('');
+
+    document.getElementById('cd-syn').innerHTML = c.synergies.map(function(s){
+      var synSlug = s.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+      return '<button class="cd-syn-pill" data-syn="' + synSlug + '">' + s + '</button>';
+    }).join('');
+
+    /* Synergy pill clicks */
+    document.getElementById('cd-syn').querySelectorAll('.cd-syn-pill').forEach(function(pill){
+      pill.addEventListener('click', function(e){
+        e.stopPropagation();
+        var synSlug = pill.getAttribute('data-syn');
+        if(CompoundDB[synSlug]){
+          /* Switch filter to All so the compound is visible */
+          if(activeFilter !== 'All'){
+            setFilter('All');
+          }
+          selectCompound(synSlug);
+          /* Scroll the selected row into view */
+          var row = listEl.querySelector('.compound-row[data-slug="' + synSlug + '"]');
+          if(row) row.scrollIntoView({behavior:'smooth',block:'nearest'});
+        }
+      });
+    });
+
+    /* Show detail panel */
+    detailPanel.classList.add('showing');
+
+    /* Focus close button for accessibility */
+    document.getElementById('cd-close').focus();
+  }
+
+  function deselectAll(){
+    currentSlug = null;
+    listEl.querySelectorAll('.compound-row').forEach(function(r){ r.classList.remove('selected'); });
+    detailPanel.classList.remove('showing');
+  }
+
   /* ═══════════════════════════════════════════
-     FILTER HANDLING
+     CLOSE DETAIL
      ═══════════════════════════════════════════ */
-  filterBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      activeFilter = btn.getAttribute('data-filter');
+  document.getElementById('cd-close').addEventListener('click', function(e){
+    e.stopPropagation();
+    deselectAll();
+  });
 
-      /* Update active states */
-      filterBtns.forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
+  /* ═══════════════════════════════════════════
+     ADD TO CART FROM DETAIL
+     ═══════════════════════════════════════════ */
+  document.getElementById('cd-add').addEventListener('click', function(){
+    if(!currentSlug) return;
+    var c = CompoundDB[currentSlug];
+    if(c && typeof Cart !== 'undefined' && Cart.add){
+      Cart.add({name:c.name, slug:currentSlug, price:c.price, pillar:c.pillar});
+    }
+  });
 
-      renderGrid(activeFilter);
+  /* ═══════════════════════════════════════════
+     PILLAR NAV FILTERING
+     ═══════════════════════════════════════════ */
+  var navBtns = document.querySelectorAll('.pillar-nav-btn');
+
+  function setFilter(filter){
+    activeFilter = filter;
+    navBtns.forEach(function(b){
+      b.classList.remove('active');
+      b.setAttribute('aria-selected','false');
+    });
+    var activeBtn = document.querySelector('.pillar-nav-btn[data-filter="' + filter + '"]');
+    if(activeBtn){
+      activeBtn.classList.add('active');
+      activeBtn.setAttribute('aria-selected','true');
+    }
+    renderList(filter);
+  }
+
+  navBtns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var filter = btn.getAttribute('data-filter');
+      /* Deselect compound when switching pillars */
+      deselectAll();
+      setFilter(filter);
     });
   });
 
+  /* ═══════════════════════════════════════════
+     HASH SUPPORT — deep-link to compound
+     ═══════════════════════════════════════════ */
+  function checkHash(){
+    var hash = window.location.hash;
+    if(hash && hash.length > 1){
+      var slug = hash.substring(1);
+      if(CompoundDB[slug]){
+        renderList('All');
+        selectCompound(slug);
+        setTimeout(function(){
+          var row = listEl.querySelector('.compound-row[data-slug="' + slug + '"]');
+          if(row) row.scrollIntoView({behavior:'smooth',block:'center'});
+        }, 200);
+        return;
+      }
+    }
+  }
+
   /* Initial render */
-  renderGrid('All');
+  renderList('All');
+  checkHash();
+  window.addEventListener('hashchange', checkHash);
 
 })();
 </script>

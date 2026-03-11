@@ -18,6 +18,7 @@
 </script>
 <link rel="stylesheet" href="/qa/css/style.css">
 <link rel="stylesheet" href="/qa/css/mobile.css">
+<link rel="stylesheet" href="/us/us.css">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   /* ═══════════════════════════════════════════
@@ -107,6 +108,12 @@
     background:var(--bg);border:1px solid var(--line);
     color:var(--text-heading);
     transition:all .3s;
+    cursor:pointer;
+  }
+  .protocol-compound-pill:hover{
+    border-color:var(--p-accent,var(--line-strong));
+    color:var(--p-accent,var(--text-heading));
+    transform:translateY(-2px);
   }
   .protocol-desc{
     font-size:13px;color:var(--muted);line-height:1.75;font-weight:300;
@@ -123,6 +130,52 @@
   .protocol-card .btn{width:100%;text-align:center}
 
   /* ═══════════════════════════════════════════
+     PROTOCOL EXPAND SECTION
+     ═══════════════════════════════════════════ */
+  .proto-expand{margin-bottom:24px}
+  .proto-expand-toggle{
+    display:flex;align-items:center;justify-content:space-between;
+    width:100%;padding:14px 0;
+    background:none;border:none;border-top:1px solid var(--line);
+    cursor:pointer;color:var(--faint);font-family:'DM Sans',sans-serif;
+    font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+    transition:color .3s;
+  }
+  .proto-expand-toggle:hover{color:var(--text-heading)}
+  .proto-expand-arrow{
+    transition:transform .3s;font-size:14px;
+  }
+  .proto-expand.open .proto-expand-arrow{transform:rotate(180deg)}
+  .proto-expand-body{
+    max-height:0;overflow:hidden;
+    transition:max-height .5s cubic-bezier(0.4,0,0.2,1),opacity .3s;
+    opacity:0;
+  }
+  .proto-expand.open .proto-expand-body{
+    max-height:300px;opacity:1;
+  }
+  .proto-detail-row{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+    margin:16px 0;
+  }
+  .proto-detail-item{
+    background:var(--bg);border:1px solid var(--line);
+    padding:14px 12px;text-align:center;
+  }
+  .proto-detail-label{
+    font-size:9px;letter-spacing:2px;text-transform:uppercase;
+    color:var(--faint);margin-bottom:6px;
+  }
+  .proto-detail-val{
+    font-family:'Space Mono',monospace;
+    font-size:13px;font-weight:700;color:var(--text-heading);
+  }
+  .proto-detail-text{
+    font-size:13px;color:var(--muted);line-height:1.8;font-weight:300;
+    padding-bottom:8px;
+  }
+
+  /* ═══════════════════════════════════════════
      CTA BAND
      ═══════════════════════════════════════════ */
   .advisor-cta{
@@ -137,93 +190,6 @@
   .advisor-cta .section-label{justify-content:center}
   .advisor-cta .section-label::before{display:none}
   .advisor-cta .section-body{max-width:480px;margin:0 auto 40px}
-
-  /* ═══════════════════════════════════════════
-     CART DRAWER
-     ═══════════════════════════════════════════ */
-  .cart-drawer{
-    position:fixed;top:0;right:0;width:100%;max-width:380px;height:100vh;
-    background:var(--bg);border-left:1px solid var(--line);
-    z-index:200;transform:translateX(100%);
-    transition:transform .4s cubic-bezier(0.4,0,0.2,1);
-    padding:32px;overflow-y:auto;
-  }
-  .cart-drawer.open{transform:translateX(0)}
-  .cart-drawer-header{
-    display:flex;justify-content:space-between;align-items:center;
-    margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--line);
-  }
-  .cart-drawer-title{
-    font-family:'Playfair Display',serif;font-size:20px;font-weight:500;
-    color:var(--text-heading);
-  }
-  .cart-close{
-    background:none;border:1px solid var(--line);
-    width:32px;height:32px;cursor:pointer;color:var(--muted);
-    display:flex;align-items:center;justify-content:center;font-size:14px;
-    transition:all .3s;
-  }
-  .cart-close:hover{border-color:var(--text-heading);color:var(--text-heading)}
-  .cart-item{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:16px 0;border-bottom:1px solid var(--line);
-  }
-  .cart-item-name{
-    font-family:'Space Mono',monospace;font-size:13px;
-    color:var(--text-heading);font-weight:400;
-  }
-  .cart-item-qty{font-size:12px;color:var(--faint)}
-  .cart-item-price{font-size:14px;color:var(--text-heading);font-weight:400}
-  .cart-item button{
-    background:none;border:1px solid var(--line);
-    width:24px;height:24px;cursor:pointer;color:var(--faint);
-    font-size:11px;display:flex;align-items:center;justify-content:center;
-    transition:all .3s;
-  }
-  .cart-item button:hover{border-color:var(--text-heading);color:var(--text-heading)}
-  .cart-total{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:24px 0;margin-top:16px;border-top:1px solid var(--line-strong);
-  }
-  .cart-total-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
-  .cart-total-value{
-    font-family:'Playfair Display',serif;font-size:28px;font-weight:500;color:var(--stat-num);
-  }
-  .cart-overlay{
-    position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:190;
-    opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;
-    backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-  }
-  .cart-overlay.open{opacity:1;visibility:visible}
-
-  /* ═══════════════════════════════════════════
-     NAV CART BUTTON
-     ═══════════════════════════════════════════ */
-  .nav-cart-btn{
-    padding:11px 20px;background:transparent;
-    border:1px solid var(--cta-border);cursor:pointer;
-    font-size:10px;letter-spacing:2.2px;text-transform:uppercase;
-    color:var(--cta-text);font-weight:400;font-family:'DM Sans',sans-serif;
-    transition:all .3s;position:relative;
-  }
-  .nav-cart-btn:hover{background:var(--cta-hover);border-color:var(--btn-hover-border)}
-  #cart-count{
-    font-size:9px;background:var(--accent-solid);color:var(--bg);
-    padding:2px 6px;border-radius:8px;margin-left:6px;
-    font-family:'DM Sans',sans-serif;
-  }
-
-  /* ═══════════════════════════════════════════
-     DISCLAIMER
-     ═══════════════════════════════════════════ */
-  .us-disclaimer{
-    text-align:center;padding:32px 24px;
-    font-size:11px;color:var(--faint);font-weight:300;
-    letter-spacing:0.5px;line-height:1.8;
-    border-top:1px solid var(--line);
-    max-width:1140px;margin:0 auto;
-    position:relative;z-index:1;
-  }
 
   /* ═══════════════════════════════════════════
      RESPONSIVE — TABLET
@@ -249,13 +215,25 @@
     .protocol-price{font-size:24px}
     .advisor-cta{padding:64px 24px}
     .nav-cart-btn{display:none}
+    /* Compound pills: ensure 44px min touch target */
+    .protocol-compound-pill{min-height:44px;display:inline-flex;align-items:center;padding:10px 14px}
+    /* Expand toggle: tappable touch target */
+    .proto-expand-toggle{min-height:44px;padding:12px 0}
+    /* Detail row: stack to avoid overflow */
+    .proto-detail-row{grid-template-columns:1fr 1fr;gap:8px}
+    /* Protocol tags: adequate touch target */
+    .protocol-tag{min-height:32px;display:inline-flex;align-items:center}
+    /* CTA button: full width and touch-friendly */
+    .protocol-card .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
   }
 
   @media(max-width:480px){
     .proto-hero .section-title{font-size:24px}
     .protocol-num{font-size:48px}
     .protocol-name{font-size:18px}
-    .protocol-compound-pill{font-size:11px;padding:6px 10px}
+    .protocol-compound-pill{font-size:11px;padding:8px 10px}
+    /* Stack detail row fully on small screens */
+    .proto-detail-row{grid-template-columns:1fr}
   }
 </style>
 </head>
@@ -333,7 +311,8 @@
 <section class="protocol-grid" aria-label="Protocol cards">
 
   <!-- Protocol 01 -->
-  <article class="protocol-card" data-protocol="recomp">
+  <article class="protocol-card" data-protocol="recomp" data-pillar="5">
+    <div class="p-bar"></div>
     <div class="protocol-num">01</div>
     <h2 class="protocol-name">The Recomposition Protocol</h2>
     <div class="protocol-meta">
@@ -344,18 +323,42 @@
     <div class="protocol-compounds">
       <p class="protocol-compounds-label">Compounds</p>
       <div class="protocol-compound-list">
-        <span class="protocol-compound-pill">IPAMORELIN</span>
-        <span class="protocol-compound-pill">AOD-9604</span>
-        <span class="protocol-compound-pill">BPC-157</span>
+        <button class="protocol-compound-pill" data-detail="ipamorelin">IPAMORELIN</button>
+        <button class="protocol-compound-pill" data-detail="aod-9604">AOD-9604</button>
+        <button class="protocol-compound-pill" data-detail="bpc-157">BPC-157</button>
       </div>
     </div>
     <p class="protocol-desc">Simultaneous fat loss and lean mass retention through lipolytic, anabolic, and recovery pathway activation.</p>
+    <div class="proto-expand" data-expand="recomp">
+      <button class="proto-expand-toggle">
+        <span>Protocol Details</span>
+        <span class="proto-expand-arrow">&darr;</span>
+      </button>
+      <div class="proto-expand-body">
+        <div class="proto-detail-row">
+          <div class="proto-detail-item">
+            <div class="proto-detail-label">Duration</div>
+            <div class="proto-detail-val">12 Weeks</div>
+          </div>
+          <div class="proto-detail-item">
+            <div class="proto-detail-label">Level</div>
+            <div class="proto-detail-val">Intermediate</div>
+          </div>
+          <div class="proto-detail-item">
+            <div class="proto-detail-label">Injections</div>
+            <div class="proto-detail-val">Daily SubQ</div>
+          </div>
+        </div>
+        <p class="proto-detail-text">Week 1-4: Foundation phase with BPC-157 and AOD-9604 to establish recovery and metabolic pathways. Week 5-12: Add Ipamorelin for GH pulsation and anabolic support. Maintain BPC-157 throughout for systemic healing.</p>
+      </div>
+    </div>
     <div class="protocol-price">~$340 <span>/ mo</span></div>
     <button class="btn" data-protocol-btn="recomp">Shop This Protocol</button>
   </article>
 
   <!-- Protocol 02 -->
-  <article class="protocol-card" data-protocol="longevity">
+  <article class="protocol-card" data-protocol="longevity" data-pillar="1">
+    <div class="p-bar"></div>
     <div class="protocol-num">02</div>
     <h2 class="protocol-name">The Longevity Protocol</h2>
     <div class="protocol-meta">
@@ -366,18 +369,42 @@
     <div class="protocol-compounds">
       <p class="protocol-compounds-label">Compounds</p>
       <div class="protocol-compound-list">
-        <span class="protocol-compound-pill">EPITHALON</span>
-        <span class="protocol-compound-pill">GHK-CU</span>
-        <span class="protocol-compound-pill">BPC-157</span>
+        <button class="protocol-compound-pill" data-detail="epithalon">EPITHALON</button>
+        <button class="protocol-compound-pill" data-detail="ghk-cu">GHK-CU</button>
+        <button class="protocol-compound-pill" data-detail="bpc-157">BPC-157</button>
       </div>
     </div>
     <p class="protocol-desc">Telomere support, collagen synthesis, and systemic healing for long-term cellular optimization.</p>
+    <div class="proto-expand" data-expand="longevity">
+      <button class="proto-expand-toggle">
+        <span>Protocol Details</span>
+        <span class="proto-expand-arrow">&darr;</span>
+      </button>
+      <div class="proto-expand-body">
+        <div class="proto-detail-row">
+          <div class="proto-detail-item">
+            <div class="proto-detail-label">Duration</div>
+            <div class="proto-detail-val">Ongoing</div>
+          </div>
+          <div class="proto-detail-item">
+            <div class="proto-detail-label">Level</div>
+            <div class="proto-detail-val">All Levels</div>
+          </div>
+          <div class="proto-detail-item">
+            <div class="proto-detail-label">Injections</div>
+            <div class="proto-detail-val">Daily SubQ</div>
+          </div>
+        </div>
+        <p class="proto-detail-text">10-20 day Epithalon cycles every 4-6 months for telomerase activation. GHK-Cu administered daily for continuous collagen synthesis and gene expression support. BPC-157 provides systemic recovery throughout.</p>
+      </div>
+    </div>
     <div class="protocol-price">~$310 <span>/ mo</span></div>
     <button class="btn" data-protocol-btn="longevity">Shop This Protocol</button>
   </article>
 
   <!-- Protocol 03 -->
-  <article class="protocol-card" data-protocol="cognitive">
+  <article class="protocol-card" data-protocol="cognitive" data-pillar="4">
+    <div class="p-bar"></div>
     <div class="protocol-num">03</div>
     <h2 class="protocol-name">The Cognitive Edge</h2>
     <div class="protocol-meta">
@@ -388,18 +415,42 @@
     <div class="protocol-compounds">
       <p class="protocol-compounds-label">Compounds</p>
       <div class="protocol-compound-list">
-        <span class="protocol-compound-pill">SEMAX</span>
-        <span class="protocol-compound-pill">SELANK</span>
-        <span class="protocol-compound-pill">BPC-157</span>
+        <button class="protocol-compound-pill" data-detail="semax">SEMAX</button>
+        <button class="protocol-compound-pill" data-detail="selank">SELANK</button>
+        <button class="protocol-compound-pill" data-detail="bpc-157">BPC-157</button>
       </div>
     </div>
     <p class="protocol-desc">BDNF upregulation, anxiolytic stabilization, and neuroprotection for sustained performance under pressure.</p>
+    <div class="proto-expand" data-expand="cognitive">
+      <button class="proto-expand-toggle">
+        <span>Protocol Details</span>
+        <span class="proto-expand-arrow">&darr;</span>
+      </button>
+      <div class="proto-expand-body">
+        <div class="proto-detail-row">
+          <div class="proto-detail-item">
+            <div class="proto-detail-label">Duration</div>
+            <div class="proto-detail-val">8 Weeks</div>
+          </div>
+          <div class="proto-detail-item">
+            <div class="proto-detail-label">Level</div>
+            <div class="proto-detail-val">Beginner Friendly</div>
+          </div>
+          <div class="proto-detail-item">
+            <div class="proto-detail-label">Injections</div>
+            <div class="proto-detail-val">Intranasal + SubQ</div>
+          </div>
+        </div>
+        <p class="proto-detail-text">Daily intranasal Semax and Selank for BDNF upregulation and anxiolytic support. BPC-157 subcutaneous to provide neuroprotective systemic effects. Assess at 4 weeks and adjust dosing as needed.</p>
+      </div>
+    </div>
     <div class="protocol-price">~$274 <span>/ mo</span></div>
     <button class="btn" data-protocol-btn="cognitive">Shop This Protocol</button>
   </article>
 
   <!-- Protocol 04 -->
-  <article class="protocol-card" data-protocol="repair">
+  <article class="protocol-card" data-protocol="repair" data-pillar="2">
+    <div class="p-bar"></div>
     <div class="protocol-num">04</div>
     <h2 class="protocol-name">The Injury Repair Stack</h2>
     <div class="protocol-meta">
@@ -410,12 +461,35 @@
     <div class="protocol-compounds">
       <p class="protocol-compounds-label">Compounds</p>
       <div class="protocol-compound-list">
-        <span class="protocol-compound-pill">BPC-157</span>
-        <span class="protocol-compound-pill">TB-500</span>
-        <span class="protocol-compound-pill">GHK-CU</span>
+        <button class="protocol-compound-pill" data-detail="bpc-157">BPC-157</button>
+        <button class="protocol-compound-pill" data-detail="tb-500">TB-500</button>
+        <button class="protocol-compound-pill" data-detail="ghk-cu">GHK-CU</button>
       </div>
     </div>
     <p class="protocol-desc">Accelerated tissue repair, tendon healing, angiogenesis, and systemic anti-inflammatory support.</p>
+    <div class="proto-expand" data-expand="repair">
+      <button class="proto-expand-toggle">
+        <span>Protocol Details</span>
+        <span class="proto-expand-arrow">&darr;</span>
+      </button>
+      <div class="proto-expand-body">
+        <div class="proto-detail-row">
+          <div class="proto-detail-item">
+            <div class="proto-detail-label">Duration</div>
+            <div class="proto-detail-val">6-8 Weeks</div>
+          </div>
+          <div class="proto-detail-item">
+            <div class="proto-detail-label">Level</div>
+            <div class="proto-detail-val">All Levels</div>
+          </div>
+          <div class="proto-detail-item">
+            <div class="proto-detail-label">Injections</div>
+            <div class="proto-detail-val">SubQ 2-5x/week</div>
+          </div>
+        </div>
+        <p class="proto-detail-text">Loading phase: TB-500 at 5mg 2x/week for first 2 weeks. Maintenance: TB-500 at 2.5mg weekly with daily BPC-157 and GHK-Cu. Target the injury site with proximal subcutaneous injection where possible.</p>
+      </div>
+    </div>
     <div class="protocol-price">~$299 <span>/ mo</span></div>
     <button class="btn" data-protocol-btn="repair">Shop This Protocol</button>
   </article>
@@ -455,6 +529,7 @@
 </div>
 
 <script src="/us/cart.js"></script>
+<script src="/us/compounds.js"></script>
 <script>
 (function(){
   'use strict';
@@ -497,6 +572,24 @@
           Cart.add(compound);
         });
       }
+    });
+  });
+
+  /* ═══════════════════════════════════════════
+     EXPAND TOGGLE HANDLERS
+     ═══════════════════════════════════════════ */
+  document.querySelectorAll('.proto-expand-toggle').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      btn.closest('.proto-expand').classList.toggle('open');
+    });
+  });
+
+  /* ═══════════════════════════════════════════
+     COMPOUND PILL DETAIL OPENERS
+     ═══════════════════════════════════════════ */
+  document.querySelectorAll('.protocol-compound-pill[data-detail]').forEach(function(pill) {
+    pill.addEventListener('click', function() {
+      CompoundModal.open(pill.getAttribute('data-detail'));
     });
   });
 

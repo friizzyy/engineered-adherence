@@ -1,5 +1,5 @@
 const Cart = {
-  items: JSON.parse(sessionStorage.getItem('ea_cart') || '[]'),
+  items: JSON.parse(localStorage.getItem('ea_cart') || '[]'),
 
   add(compound) {
     const existing = this.items.find(i => i.slug === compound.slug);
@@ -20,7 +20,7 @@ const Cart = {
   },
 
   save() {
-    sessionStorage.setItem('ea_cart', JSON.stringify(this.items));
+    localStorage.setItem('ea_cart', JSON.stringify(this.items));
   },
 
   total() {
@@ -49,14 +49,21 @@ const Cart = {
           <div class="cart-item">
             <div>
               <div class="cart-item-name">${item.name}</div>
-              <div class="cart-item-qty">× ${item.qty}</div>
+              <div class="cart-item-qty">\u00d7 ${item.qty}</div>
             </div>
             <div style="display:flex;align-items:center;gap:12px">
               <span class="cart-item-price">$${item.price * item.qty}</span>
-              <button onclick="Cart.remove('${item.slug}')" aria-label="Remove ${item.name}">×</button>
+              <button class="cart-remove-btn" data-remove="${item.slug}" aria-label="Remove ${item.name}">\u00d7</button>
             </div>
           </div>
         `).join('');
+
+        // Attach remove listeners (no inline onclick)
+        list.querySelectorAll('.cart-remove-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            Cart.remove(btn.getAttribute('data-remove'));
+          });
+        });
       }
     }
 
@@ -70,7 +77,7 @@ const Cart = {
     const overlay = document.getElementById('cart-overlay');
     if (drawer) drawer.classList.add('open');
     if (overlay) overlay.classList.add('open');
-    document.body.classList.add('menu-open');
+    if (typeof lockBody === 'function') lockBody(); else document.body.classList.add('menu-open');
   },
 
   hideDrawer() {
@@ -78,7 +85,7 @@ const Cart = {
     const overlay = document.getElementById('cart-overlay');
     if (drawer) drawer.classList.remove('open');
     if (overlay) overlay.classList.remove('open');
-    document.body.classList.remove('menu-open');
+    if (typeof unlockBody === 'function') unlockBody(); else document.body.classList.remove('menu-open');
   }
 };
 

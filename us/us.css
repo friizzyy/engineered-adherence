@@ -1,0 +1,250 @@
+/* ═══════════════════════════════════════════
+   ENGINEERED ADHERENCE — US SHARED STYLES
+   Pillar colors, compound modal, toast, cart
+   ═══════════════════════════════════════════ */
+
+/* ═══════════════════════════════════════════
+   PILLAR COLOR SYSTEM
+   ═══════════════════════════════════════════ */
+:root{
+  --pillar-1:#7A8A98;
+  --pillar-2:#C9B99A;
+  --pillar-3:#A8B4A0;
+  --pillar-4:#B8A8B8;
+  --pillar-5:#c4a962;
+}
+[data-pillar="1"]{--p-accent:var(--pillar-1)}
+[data-pillar="2"]{--p-accent:var(--pillar-2)}
+[data-pillar="3"]{--p-accent:var(--pillar-3)}
+[data-pillar="4"]{--p-accent:var(--pillar-4)}
+[data-pillar="5"]{--p-accent:var(--pillar-5)}
+
+/* Override generic gradient with pillar color
+   Doubled attribute selector raises specificity (0,2,0)
+   to beat inline .compound-card::before etc. (0,1,0) */
+[data-pillar][data-pillar]::before{
+  background:linear-gradient(90deg,transparent,var(--p-accent),transparent);
+}
+
+/* Left pillar accent bar */
+.p-bar{
+  position:absolute;top:0;left:0;width:3px;height:100%;
+  background:var(--p-accent,var(--accent-solid));
+  transform:scaleY(0);transition:transform .4s cubic-bezier(0.4,0,0.2,1);
+  transform-origin:top;
+}
+[data-pillar]:hover .p-bar{transform:scaleY(1)}
+
+/* Pillar-tinted tags */
+.ptag{
+  display:inline-block;font-size:9px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  padding:5px 12px;border:1px solid;transition:all .3s;
+}
+[data-pillar="1"] .ptag{background:rgba(122,138,152,0.08);color:var(--pillar-1);border-color:rgba(122,138,152,0.15)}
+[data-pillar="2"] .ptag{background:rgba(201,185,154,0.08);color:var(--pillar-2);border-color:rgba(201,185,154,0.15)}
+[data-pillar="3"] .ptag{background:rgba(168,180,160,0.08);color:var(--pillar-3);border-color:rgba(168,180,160,0.15)}
+[data-pillar="4"] .ptag{background:rgba(184,168,184,0.08);color:var(--pillar-4);border-color:rgba(184,168,184,0.15)}
+[data-pillar="5"] .ptag{background:rgba(196,169,98,0.08);color:var(--pillar-5);border-color:rgba(196,169,98,0.15)}
+
+/* ═══════════════════════════════════════════
+   VIEW DETAILS LINK
+   ═══════════════════════════════════════════ */
+.view-details{
+  font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--faint);cursor:pointer;
+  background:none;border:none;padding:0;
+  font-family:'DM Sans',sans-serif;font-weight:400;
+  transition:color .3s;display:inline-flex;align-items:center;gap:6px;
+  margin-top:12px;
+}
+.view-details:hover{color:var(--p-accent,var(--text-heading))}
+.view-details::after{content:'\2192';transition:transform .3s}
+.view-details:hover::after{transform:translateX(4px)}
+
+/* ═══════════════════════════════════════════
+   TOAST NOTIFICATION
+   ═══════════════════════════════════════════ */
+.ea-toast{
+  position:fixed;top:84px;left:50%;transform:translateX(-50%) translateY(-16px);
+  background:var(--bg-card);border:1px solid var(--line-strong);
+  padding:14px 28px;z-index:300;
+  font-size:12px;letter-spacing:0.5px;color:var(--text-heading);
+  font-family:'DM Sans',sans-serif;
+  opacity:0;transition:opacity .3s ease,transform .3s ease;
+  pointer-events:none;white-space:nowrap;
+  box-shadow:var(--shadow-card-subtle);
+}
+.ea-toast.visible{
+  opacity:1;transform:translateX(-50%) translateY(0);
+}
+.ea-toast-check{margin-right:8px;color:var(--pillar-2)}
+
+/* ═══════════════════════════════════════════
+   COMPOUND DETAIL MODAL — OVERLAY
+   ═══════════════════════════════════════════ */
+.cmodal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:250;
+  opacity:0;visibility:hidden;
+  transition:opacity .35s,visibility .35s;
+  backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+}
+.cmodal-overlay.open{opacity:1;visibility:visible}
+
+/* ═══════════════════════════════════════════
+   COMPOUND DETAIL MODAL — PANEL
+   ═══════════════════════════════════════════ */
+.cmodal{
+  position:fixed;bottom:0;left:0;right:0;
+  max-height:85vh;
+  background:var(--bg);
+  border-top:1px solid var(--line);
+  z-index:260;
+  transform:translateY(100%);
+  transition:transform .5s cubic-bezier(0.4,0,0.2,1);
+  overflow-y:auto;
+}
+.cmodal.open{transform:translateY(0)}
+
+.cmodal-bar{
+  height:3px;width:100%;
+  background:linear-gradient(90deg,transparent,var(--p-accent,var(--accent-solid)),transparent);
+}
+
+.cmodal-inner{
+  max-width:760px;margin:0 auto;
+  padding:44px 56px 56px;position:relative;
+}
+
+.cmodal-close{
+  position:absolute;top:16px;right:16px;
+  background:none;border:1px solid var(--line);
+  width:36px;height:36px;cursor:pointer;color:var(--muted);
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;transition:all .3s;
+}
+.cmodal-close:hover{border-color:var(--text-heading);color:var(--text-heading)}
+
+/* Top row: tag + pillar num */
+.cmodal-head{
+  display:flex;align-items:center;gap:16px;margin-bottom:20px;
+  flex-wrap:wrap;
+}
+.cmodal-pillar-num{
+  font-family:'Playfair Display',serif;font-size:48px;font-weight:600;
+  color:var(--p-accent,var(--pillar-num));line-height:1;opacity:0.3;
+}
+.cmodal-name{
+  font-family:'Space Mono',monospace;
+  font-size:28px;font-weight:700;
+  color:var(--text-heading);letter-spacing:1px;
+  text-transform:uppercase;margin-bottom:2px;
+}
+.cmodal-fullname{
+  font-size:13px;color:var(--faint);font-weight:300;
+  font-style:italic;margin-bottom:24px;
+}
+
+.cmodal-desc{
+  font-size:15px;color:var(--muted);line-height:1.9;font-weight:300;
+  margin-bottom:28px;
+}
+
+/* Mechanism callout */
+.cmodal-mech{
+  padding:20px 24px;margin-bottom:28px;
+  background:var(--bg-card);border:1px solid var(--line);
+  border-left:3px solid var(--p-accent,var(--accent-solid));
+}
+.cmodal-mech-label{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--faint);margin-bottom:8px;
+}
+.cmodal-mech-text{
+  font-size:13px;color:var(--muted);line-height:1.8;font-weight:300;
+}
+
+/* Stats row */
+.cmodal-stats{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+  margin-bottom:28px;
+}
+.cmodal-stat{
+  background:var(--bg-card);border:1px solid var(--line);
+  padding:20px 16px;text-align:center;
+}
+.cmodal-stat-label{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--faint);margin-bottom:8px;
+}
+.cmodal-stat-val{
+  font-family:'Space Mono',monospace;
+  font-size:14px;font-weight:700;color:var(--text-heading);
+}
+
+/* Benefits */
+.cmodal-benefits{
+  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;
+}
+.cmodal-benefit{
+  font-size:11px;letter-spacing:0.3px;
+  padding:8px 16px 8px 24px;
+  background:var(--bg-card);border:1px solid var(--line);
+  color:var(--muted);position:relative;
+}
+.cmodal-benefit::before{
+  content:'';position:absolute;left:10px;top:50%;
+  width:6px;height:6px;border-radius:50%;
+  background:var(--p-accent,var(--accent-solid));
+  transform:translateY(-50%);
+}
+
+/* Synergies */
+.cmodal-syn{margin-bottom:32px}
+.cmodal-syn-label{
+  font-size:9px;letter-spacing:2px;text-transform:uppercase;
+  color:var(--faint);margin-bottom:10px;
+}
+.cmodal-syn-list{display:flex;gap:8px}
+.cmodal-syn-pill{
+  font-family:'Space Mono',monospace;
+  font-size:11px;letter-spacing:0.5px;
+  padding:7px 14px;cursor:pointer;
+  background:var(--accent);border:1px solid var(--line);
+  color:var(--text-heading);transition:all .3s;
+}
+.cmodal-syn-pill:hover{
+  border-color:var(--line-strong);transform:translateY(-2px);
+}
+
+/* Footer */
+.cmodal-footer{
+  display:flex;gap:16px;align-items:center;
+  padding-top:24px;border-top:1px solid var(--line);
+}
+.cmodal-price{
+  font-family:'Playfair Display',serif;
+  font-size:32px;font-weight:500;color:var(--stat-num);
+}
+.cmodal-price span{
+  font-size:14px;color:var(--faint);font-family:'DM Sans',sans-serif;font-weight:300;
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — MODAL
+   ═══════════════════════════════════════════ */
+@media(max-width:768px){
+  .cmodal{max-height:92vh}
+  .cmodal-inner{padding:32px 24px 40px}
+  .cmodal-name{font-size:22px}
+  .cmodal-pillar-num{font-size:36px}
+  .cmodal-stats{grid-template-columns:1fr}
+  .cmodal-footer{flex-direction:column;align-items:stretch;text-align:center}
+  .cmodal-price{order:-1;text-align:center}
+  .cmodal-benefits{flex-direction:column}
+}
+@media(max-width:480px){
+  .cmodal-name{font-size:18px}
+  .cmodal-head{gap:10px}
+  .cmodal-pillar-num{font-size:28px}
+}

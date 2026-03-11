@@ -18,6 +18,7 @@
 </script>
 <link rel="stylesheet" href="/qa/css/style.css">
 <link rel="stylesheet" href="/qa/css/mobile.css">
+<link rel="stylesheet" href="/us/us.css">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   /* ═══════════════════════════════════════════
@@ -85,6 +86,11 @@
   .stat-bar-value{
     font-family:'Playfair Display',serif;
     font-size:28px;font-weight:500;color:var(--stat-num);
+    opacity:0;transform:translateX(10px);
+    transition:opacity .6s ease,transform .6s ease;
+  }
+  .stat-bar.visible .stat-bar-value{
+    opacity:1;transform:translateX(0);
   }
 
   /* ═══════════════════════════════════════════
@@ -144,6 +150,8 @@
     content:'';position:absolute;top:0;left:0;
     width:3px;height:100%;background:var(--line-strong);opacity:1;
   }
+  .card-positive::before{background:rgba(76,175,80,0.6)}
+  .card-negative::before{background:rgba(211,84,84,0.6)}
   .content-card:hover{border-color:var(--line-strong)}
   .content-tag{
     display:inline-block;font-size:9px;
@@ -231,93 +239,6 @@
   .advisor-teaser .section-body{max-width:480px;margin:0 auto 40px}
 
   /* ═══════════════════════════════════════════
-     CART DRAWER
-     ═══════════════════════════════════════════ */
-  .cart-drawer{
-    position:fixed;top:0;right:0;width:100%;max-width:380px;height:100vh;
-    background:var(--bg);border-left:1px solid var(--line);
-    z-index:200;transform:translateX(100%);
-    transition:transform .4s cubic-bezier(0.4,0,0.2,1);
-    padding:32px;overflow-y:auto;
-  }
-  .cart-drawer.open{transform:translateX(0)}
-  .cart-drawer-header{
-    display:flex;justify-content:space-between;align-items:center;
-    margin-bottom:32px;padding-bottom:16px;border-bottom:1px solid var(--line);
-  }
-  .cart-drawer-title{
-    font-family:'Playfair Display',serif;font-size:20px;font-weight:500;
-    color:var(--text-heading);
-  }
-  .cart-close{
-    background:none;border:1px solid var(--line);
-    width:32px;height:32px;cursor:pointer;color:var(--muted);
-    display:flex;align-items:center;justify-content:center;font-size:14px;
-    transition:all .3s;
-  }
-  .cart-close:hover{border-color:var(--text-heading);color:var(--text-heading)}
-  .cart-item{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:16px 0;border-bottom:1px solid var(--line);
-  }
-  .cart-item-name{
-    font-family:'Space Mono',monospace;font-size:13px;
-    color:var(--text-heading);font-weight:400;
-  }
-  .cart-item-qty{font-size:12px;color:var(--faint)}
-  .cart-item-price{font-size:14px;color:var(--text-heading);font-weight:400}
-  .cart-item button{
-    background:none;border:1px solid var(--line);
-    width:24px;height:24px;cursor:pointer;color:var(--faint);
-    font-size:11px;display:flex;align-items:center;justify-content:center;
-    transition:all .3s;
-  }
-  .cart-item button:hover{border-color:var(--text-heading);color:var(--text-heading)}
-  .cart-total{
-    display:flex;justify-content:space-between;align-items:center;
-    padding:24px 0;margin-top:16px;border-top:1px solid var(--line-strong);
-  }
-  .cart-total-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--faint)}
-  .cart-total-value{
-    font-family:'Playfair Display',serif;font-size:28px;font-weight:500;color:var(--stat-num);
-  }
-  .cart-overlay{
-    position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:190;
-    opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s;
-    backdrop-filter:blur(4px);-webkit-backdrop-filter:blur(4px);
-  }
-  .cart-overlay.open{opacity:1;visibility:visible}
-
-  /* ═══════════════════════════════════════════
-     NAV CART BUTTON
-     ═══════════════════════════════════════════ */
-  .nav-cart-btn{
-    padding:11px 20px;background:transparent;
-    border:1px solid var(--cta-border);cursor:pointer;
-    font-size:10px;letter-spacing:2.2px;text-transform:uppercase;
-    color:var(--cta-text);font-weight:400;font-family:'DM Sans',sans-serif;
-    transition:all .3s;position:relative;
-  }
-  .nav-cart-btn:hover{background:var(--cta-hover);border-color:var(--btn-hover-border)}
-  #cart-count{
-    font-size:9px;background:var(--accent-solid);color:var(--bg);
-    padding:2px 6px;border-radius:8px;margin-left:6px;
-    font-family:'DM Sans',sans-serif;
-  }
-
-  /* ═══════════════════════════════════════════
-     DISCLAIMER
-     ═══════════════════════════════════════════ */
-  .us-disclaimer{
-    text-align:center;padding:32px 24px;
-    font-size:11px;color:var(--faint);font-weight:300;
-    letter-spacing:0.5px;line-height:1.8;
-    border-top:1px solid var(--line);
-    max-width:1140px;margin:0 auto;
-    position:relative;z-index:1;
-  }
-
-  /* ═══════════════════════════════════════════
      RESPONSIVE — TABLET
      ═══════════════════════════════════════════ */
   @media(max-width:1024px){
@@ -338,16 +259,42 @@
     .about-hero .section-title{font-size:32px}
     .hero-content .panel-num{font-size:60px;margin-bottom:-12px}
     .hero-content h3{font-size:24px}
-    .stat-bar{padding:20px 24px}
+    /* Stat bars: touch-friendly, prevent hover padding shift on mobile */
+    .stat-bar{padding:20px 24px;min-height:44px}
+    .stat-bar:hover{padding-left:24px}
     .stat-bar-value{font-size:24px}
-    .pillar-grid{grid-template-columns:1fr 1fr}
+    .stat-bar-label{font-size:12px}
+    /* Pillar grid: override the shared mobile.css horizontal swipe for about page.
+       The about page pillar cards include paragraph text so stacking works better.
+       Using body prefix to match specificity of shared mobile.css (0,1,1). */
+    body .pillar-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      overflow-x:visible;overflow-y:visible;
+      scroll-snap-type:none;
+      margin-left:0;margin-right:0;
+      padding-left:0;padding-right:0;
+    }
+    body .pillar-card{flex:none;scroll-snap-align:none}
     .advisor-teaser{padding:64px 24px}
     .nav-cart-btn{display:none}
+    /* Content cards: tighter padding on mobile */
+    .content-card{padding:32px 24px}
+    .content-item h4{font-size:14px}
+    .content-item p{font-size:12px}
+    /* Info cards: adequate padding */
+    .info-card{padding:24px}
+    .info-card p{font-size:12px}
+    /* Stagger animations: remove transform to prevent layout issues */
+    .stagger-item{transform:none}
   }
 
   @media(max-width:480px){
     .about-hero .section-title{font-size:26px}
-    .pillar-grid{grid-template-columns:1fr}
+    body .pillar-grid{grid-template-columns:1fr}
+    body .pillar-card{flex:none}
+    .hero-content .panel-num{font-size:48px}
+    .hero-content h3{font-size:20px}
   }
 </style>
 </head>
@@ -453,18 +400,18 @@
   <p class="section-label">The Standard</p>
   <h2 class="section-title">Purity is non-negotiable.</h2>
   <p class="section-body">Every compound undergoes third-party mass spectrometry analysis. Every batch ships with a Certificate of Analysis. Every protocol is validated against peer-reviewed research.</p>
-  <div class="info-cards">
-    <div class="info-card">
+  <div class="info-cards stagger-children">
+    <div class="info-card stagger-item">
       <div class="info-card-num">01</div>
       <h4>Third-Party Testing</h4>
       <p>Independent laboratory verification via HPLC and mass spectrometry on every production batch.</p>
     </div>
-    <div class="info-card">
+    <div class="info-card stagger-item">
       <div class="info-card-num">02</div>
       <h4>Certificate of Analysis</h4>
       <p>Full CoA documentation including purity percentage, molecular identity, and residual solvent analysis.</p>
     </div>
-    <div class="info-card">
+    <div class="info-card stagger-item">
       <div class="info-card-num">03</div>
       <h4>Research Validation</h4>
       <p>Protocol design informed by peer-reviewed literature and clinical dosing frameworks.</p>
@@ -519,11 +466,11 @@
     <h2 class="section-title">Five pillars. One system.</h2>
   </div>
   <div class="pillar-grid">
-    <div class="pillar-card stagger-item"><div class="pillar-num">I</div><h3>Longevity</h3><p>Telomerase activation, collagen synthesis, and cellular repair for sustained vitality.</p></div>
-    <div class="pillar-card stagger-item"><div class="pillar-num">II</div><h3>Recovery</h3><p>Tissue repair peptides that reduce recovery time by up to 40% in research models.</p></div>
-    <div class="pillar-card stagger-item"><div class="pillar-num">III</div><h3>Metabolic</h3><p>Targeted lipolysis and metabolic optimization validated in clinical research.</p></div>
-    <div class="pillar-card stagger-item"><div class="pillar-num">IV</div><h3>Cognitive</h3><p>BDNF upregulation, anxiolytic stabilization, and neuroprotection compounds.</p></div>
-    <div class="pillar-card stagger-item"><div class="pillar-num">V</div><h3>Performance</h3><p>GH secretagogues supporting lean mass, recovery, and deep restorative sleep.</p></div>
+    <div class="pillar-card stagger-item" data-pillar="1"><div class="p-bar"></div><div class="pillar-num">I</div><h3>Longevity</h3><p>Telomerase activation, collagen synthesis, and cellular repair for sustained vitality.</p></div>
+    <div class="pillar-card stagger-item" data-pillar="2"><div class="p-bar"></div><div class="pillar-num">II</div><h3>Recovery</h3><p>Tissue repair peptides that reduce recovery time by up to 40% in research models.</p></div>
+    <div class="pillar-card stagger-item" data-pillar="3"><div class="p-bar"></div><div class="pillar-num">III</div><h3>Metabolic</h3><p>Targeted lipolysis and metabolic optimization validated in clinical research.</p></div>
+    <div class="pillar-card stagger-item" data-pillar="4"><div class="p-bar"></div><div class="pillar-num">IV</div><h3>Cognitive</h3><p>BDNF upregulation, anxiolytic stabilization, and neuroprotection compounds.</p></div>
+    <div class="pillar-card stagger-item" data-pillar="5"><div class="p-bar"></div><div class="pillar-num">V</div><h3>Performance</h3><p>GH secretagogues supporting lean mass, recovery, and deep restorative sleep.</p></div>
   </div>
 </section>
 
@@ -560,6 +507,18 @@
 </div>
 
 <script src="/us/cart.js"></script>
+<script src="/us/compounds.js"></script>
+<script>
+(function(){
+  var bars = document.querySelectorAll('.stat-bar');
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) e.target.classList.add('visible');
+    });
+  }, {threshold: 0.3});
+  bars.forEach(function(b) { obs.observe(b); });
+})();
+</script>
 <script src="/qa/js/main.js"></script>
 <script src="/qa/js/mobile.js"></script>
 </body>
