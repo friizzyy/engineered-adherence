@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compound Library — Engineered Adherence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================================
+       THEME VARIABLES
+       ========================================================= */
+    [data-theme="dark"] {
+      --bg:#161616; --bg-warm:#1a1a1a; --bg-card:#1e1e1e; --bg-card-hover:#232323;
+      --text:#e8e4de; --text-heading:#f0ece6; --muted:#9a9590; --faint:#8a857e;
+      --line:rgba(232,228,222,0.06); --line-strong:rgba(232,228,222,0.12);
+      --btn-border:rgba(232,228,222,0.2); --btn-hover-border:rgba(232,228,222,0.4);
+      --accent:rgba(232,228,222,0.08); --accent-solid:#7a756f;
+      --shadow-card-subtle:0 8px 24px rgba(0,0,0,0.15);
+      --stat-num:#f0ece6; --nav-bg:rgba(22,22,22,0.92);
+    }
+    [data-theme="light"] {
+      --bg:#f2f3f5; --bg-warm:#f5f6f8; --bg-card:rgba(255,255,255,0.8); --bg-card-hover:rgba(255,255,255,0.95);
+      --text:#1a1c22; --text-heading:#0a0b0d; --muted:#4a4e58; --faint:#6e7280;
+      --line:rgba(0,0,0,0.07); --line-strong:rgba(0,0,0,0.12);
+      --btn-border:rgba(26,28,34,0.25); --btn-hover-border:rgba(26,28,34,0.5);
+      --accent:rgba(26,28,34,0.05); --accent-solid:#50545e;
+      --shadow-card-subtle:0 8px 24px rgba(0,0,0,0.05);
+      --stat-num:#0f1014; --nav-bg:rgba(242,243,245,0.94);
+    }
+
+    :root {
+      --pillar-1:#7A8A98;
+      --pillar-2:#C9B99A;
+      --pillar-3:#A8B4A0;
+      --pillar-4:#B8A8B8;
+      --pillar-5:#c4a962;
+      --ease: cubic-bezier(0.4,0,0.2,1);
+      --max-w: 1140px;
+    }
+
+    /* =========================================================
+       RESET & BASE
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.5s var(--ease), color 0.4s var(--ease);
+      min-height: 100vh;
+    }
+
+    /* =========================================================
+       UTILITY
+       ========================================================= */
+    .font-mono { font-family: 'Space Mono', monospace; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-sans { font-family: 'DM Sans', sans-serif; }
+
+    /* =========================================================
+       THEME TOGGLE — top-right circle
+       ========================================================= */
+    .theme-toggle {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 200;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--btn-border);
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      transition: border-color 0.3s var(--ease), color 0.3s var(--ease), background 0.3s var(--ease);
+    }
+    .theme-toggle:hover {
+      border-color: var(--btn-hover-border);
+      color: var(--text);
+      background: var(--accent);
+    }
+    .theme-toggle svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .theme-toggle .icon-moon,
+    [data-theme="light"] .theme-toggle .icon-sun {
+      display: none;
+    }
+    [data-theme="light"] .theme-toggle .icon-moon {
+      display: block;
+    }
+
+    /* =========================================================
+       PAGE CONTAINER
+       ========================================================= */
+    .page {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 80px 48px 120px;
+    }
+
+    /* =========================================================
+       PAGE HEADER — "Compound Library"
+       ========================================================= */
+    .page-header {
+      text-align: center;
+      padding-bottom: 48px;
+      margin-bottom: 8px;
+    }
+
+    .page-title {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 0.75rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .page-rule {
+      width: 64px;
+      height: 1px;
+      background: var(--line-strong);
+      margin: 0 auto;
+    }
+
+    /* =========================================================
+       PILLAR FILTER
+       ========================================================= */
+    .pillar-filter {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      margin-bottom: 64px;
+    }
+
+    .pillar-filter-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.9375rem;
+      font-weight: 400;
+      color: var(--faint);
+      letter-spacing: 0.05em;
+      padding: 4px 0;
+      position: relative;
+      transition: color 0.3s var(--ease);
+    }
+    .pillar-filter-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transition: transform 0.3s var(--ease);
+    }
+    .pillar-filter-btn:hover {
+      color: var(--text);
+    }
+    .pillar-filter-btn.active {
+      color: var(--text-heading);
+    }
+    .pillar-filter-btn.active::after {
+      transform: scaleX(1);
+    }
+
+    /* Per-pillar active colors */
+    .pillar-filter-btn[data-pillar="1"].active { color: var(--pillar-1); }
+    .pillar-filter-btn[data-pillar="2"].active { color: var(--pillar-2); }
+    .pillar-filter-btn[data-pillar="3"].active { color: var(--pillar-3); }
+    .pillar-filter-btn[data-pillar="4"].active { color: var(--pillar-4); }
+    .pillar-filter-btn[data-pillar="5"].active { color: var(--pillar-5); }
+
+    /* =========================================================
+       CATALOG CONTAINER
+       ========================================================= */
+    .catalog {
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* =========================================================
+       SPECIMEN BLOCK
+       ========================================================= */
+    .specimen {
+      display: grid;
+      grid-template-columns: 40% 60%;
+      gap: 48px;
+      padding: 80px 0;
+      position: relative;
+      border-left: 4px solid transparent;
+      padding-left: 32px;
+      margin-left: -36px;
+      transition: border-color 0.4s var(--ease);
+    }
+
+    .specimen.pillar-1:hover { border-left-color: rgba(122,138,152,0.35); }
+    .specimen.pillar-2:hover { border-left-color: rgba(201,185,154,0.35); }
+    .specimen.pillar-3:hover { border-left-color: rgba(168,180,160,0.35); }
+    .specimen.pillar-4:hover { border-left-color: rgba(184,168,184,0.35); }
+    .specimen.pillar-5:hover { border-left-color: rgba(196,169,98,0.35); }
+
+    /* Specimen divider — pillar-colored gradient rule */
+    .specimen-divider {
+      height: 1px;
+      border: none;
+      margin: 0;
+      margin-left: -36px;
+      padding-left: 36px;
+    }
+    .specimen-divider.pillar-1 { background: linear-gradient(to right, var(--pillar-1), transparent 80%); opacity: 0.2; }
+    .specimen-divider.pillar-2 { background: linear-gradient(to right, var(--pillar-2), transparent 80%); opacity: 0.2; }
+    .specimen-divider.pillar-3 { background: linear-gradient(to right, var(--pillar-3), transparent 80%); opacity: 0.2; }
+    .specimen-divider.pillar-4 { background: linear-gradient(to right, var(--pillar-4), transparent 80%); opacity: 0.2; }
+    .specimen-divider.pillar-5 { background: linear-gradient(to right, var(--pillar-5), transparent 80%); opacity: 0.2; }
+
+    /* Fade in/out for filtering */
+    .specimen,
+    .specimen-divider {
+      transition: opacity 0.35s var(--ease), border-color 0.4s var(--ease);
+    }
+    .specimen.hidden,
+    .specimen-divider.hidden {
+      display: none;
+    }
+
+    /* =========================================================
+       LEFT COLUMN — Identity
+       ========================================================= */
+    .specimen-identity {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .specimen-numeral {
+      position: absolute;
+      top: 50%;
+      left: -8px;
+      transform: translateY(-50%);
+      font-family: 'Playfair Display', serif;
+      font-size: 120px;
+      font-weight: 400;
+      line-height: 1;
+      opacity: 0.05;
+      color: var(--text-heading);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .specimen-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 44px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      color: var(--text-heading);
+      position: relative;
+      z-index: 1;
+    }
+
+    .specimen-role {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: var(--muted);
+      margin-top: 12px;
+      letter-spacing: 0.02em;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .specimen-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .pillar-1 .specimen-dot { background: var(--pillar-1); }
+    .pillar-2 .specimen-dot { background: var(--pillar-2); }
+    .pillar-3 .specimen-dot { background: var(--pillar-3); }
+    .pillar-4 .specimen-dot { background: var(--pillar-4); }
+    .pillar-5 .specimen-dot { background: var(--pillar-5); }
+
+    .specimen-pillar-label {
+      font-size: 0.6875rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    /* =========================================================
+       RIGHT COLUMN — Detail
+       ========================================================= */
+    .specimen-detail {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .specimen-fullname {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 16px;
+    }
+
+    .specimen-mech {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9375rem;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--text);
+      max-width: 540px;
+      margin-bottom: 32px;
+    }
+
+    /* Stats grid — 3 equal columns */
+    .specimen-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 32px;
+    }
+
+    .specimen-stat {
+      padding: 16px 0;
+      border-right: 1px solid var(--line);
+    }
+    .specimen-stat:last-child {
+      border-right: none;
+    }
+    .specimen-stat:not(:first-child) {
+      padding-left: 24px;
+    }
+
+    .specimen-stat-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.625rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 4px;
+    }
+
+    .specimen-stat-value {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: var(--stat-num);
+      letter-spacing: 0.01em;
+    }
+
+    /* Price + CTA row */
+    .specimen-action {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .specimen-price {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .specimen-price-amount {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-heading);
+    }
+
+    .specimen-price-size {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--faint);
+      letter-spacing: 0.04em;
+    }
+
+    .btn-add {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text);
+      background: transparent;
+      border: 1px solid var(--btn-border);
+      padding: 10px 28px;
+      cursor: pointer;
+      transition: border-color 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease);
+    }
+    .btn-add:hover {
+      border-color: var(--btn-hover-border);
+      background: var(--accent);
+    }
+
+    /* Pillar-specific button hover tints */
+    .pillar-1 .btn-add:hover { border-color: rgba(122,138,152,0.5); }
+    .pillar-2 .btn-add:hover { border-color: rgba(201,185,154,0.5); }
+    .pillar-3 .btn-add:hover { border-color: rgba(168,180,160,0.5); }
+    .pillar-4 .btn-add:hover { border-color: rgba(184,168,184,0.5); }
+    .pillar-5 .btn-add:hover { border-color: rgba(196,169,98,0.5); }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    .page-footer {
+      text-align: center;
+      padding: 80px 0 40px;
+    }
+
+    .page-footer-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    /* =========================================================
+       RESPONSIVE — TABLET (768px)
+       ========================================================= */
+    @media (max-width: 768px) {
+      .page {
+        padding: 64px 32px 80px;
+      }
+
+      .pillar-filter {
+        gap: 28px;
+        margin-bottom: 48px;
+      }
+
+      .specimen {
+        grid-template-columns: 35% 65%;
+        gap: 32px;
+        padding: 56px 0;
+        padding-left: 24px;
+        margin-left: -28px;
+      }
+
+      .specimen-numeral {
+        font-size: 90px;
+      }
+
+      .specimen-name {
+        font-size: 32px;
+      }
+
+      .specimen-mech {
+        font-size: 0.875rem;
+      }
+
+      .specimen-stat:not(:first-child) {
+        padding-left: 16px;
+      }
+    }
+
+    /* =========================================================
+       RESPONSIVE — MOBILE (max 600px)
+       ========================================================= */
+    @media (max-width: 600px) {
+      .page {
+        padding: 48px 20px 64px;
+      }
+
+      .page-header {
+        padding-bottom: 32px;
+      }
+
+      .pillar-filter {
+        gap: 20px;
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .pillar-filter-btn {
+        font-size: 0.8125rem;
+      }
+
+      .specimen {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        padding: 48px 0;
+        padding-left: 20px;
+        margin-left: -24px;
+      }
+
+      .specimen-numeral {
+        font-size: 80px;
+        top: 0;
+        transform: translateY(0);
+      }
+
+      .specimen-name {
+        font-size: 28px;
+      }
+
+      .specimen-stats {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .specimen-stat:not(:first-child) {
+        padding-left: 12px;
+      }
+
+      .specimen-stat-label {
+        font-size: 0.5625rem;
+      }
+
+      .specimen-stat-value {
+        font-size: 0.75rem;
+      }
+
+      .specimen-action {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .btn-add {
+        width: 100%;
+        text-align: center;
+      }
+
+      .theme-toggle {
+        top: 16px;
+        right: 16px;
+        width: 36px;
+        height: 36px;
+      }
+    }
+
+    /* =========================================================
+       SCROLL ENTRANCE ANIMATION
+       ========================================================= */
+    .specimen {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    .specimen.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), border-color 0.4s var(--ease);
+    }
+    /* Stagger delay handled in JS via transitionDelay */
+  </style>
+</head>
+<body>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg class="icon-moon" viewBox="0 0 24 24">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <main class="page">
+
+    <!-- Page Header -->
+    <header class="page-header">
+      <h1 class="page-title">Compound Library</h1>
+      <div class="page-rule"></div>
+    </header>
+
+    <!-- Pillar Filter -->
+    <nav class="pillar-filter" aria-label="Filter by pillar">
+      <button class="pillar-filter-btn active" data-pillar="all">All</button>
+      <button class="pillar-filter-btn" data-pillar="1">I</button>
+      <button class="pillar-filter-btn" data-pillar="2">II</button>
+      <button class="pillar-filter-btn" data-pillar="3">III</button>
+      <button class="pillar-filter-btn" data-pillar="4">IV</button>
+      <button class="pillar-filter-btn" data-pillar="5">V</button>
+    </nav>
+
+    <!-- Catalog — rendered by JS -->
+    <section class="catalog" aria-label="Compound catalog"></section>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+      <p class="page-footer-text">Engineered Adherence &mdash; Research Use Only</p>
+    </footer>
+
+  </main>
+
+  <script>
+    /* =============================================================
+       COMPOUND DATA
+       ============================================================= */
+    const compounds = [
+      {slug:'epithalon',name:'EPITHALON',fullName:'Epithalon (Epitalon)',pillar:'Longevity',pillarNum:'I',pillarIndex:1,price:145,size:'10mg',role:'Telomerase activation',route:'SubQ',dosing:'100mcg',freq:'Daily x 20d',mech:'Activates telomerase to extend telomere length, supporting cellular longevity and DNA stability through targeted enzyme activation.'},
+      {slug:'ghk-cu',name:'GHK-CU',fullName:'GHK-Cu (Copper Peptide)',pillar:'Longevity',pillarIndex:1,pillarNum:'I',price:76,size:'50mg',role:'Collagen synthesis',route:'SubQ/Topical',dosing:'1-2mg',freq:'Daily',mech:'Copper peptide complex that stimulates collagen production, tissue remodeling, and wound healing.'},
+      {slug:'bpc-157',name:'BPC-157',fullName:'Body Protection Compound-157',pillar:'Recovery',pillarIndex:2,pillarNum:'II',price:89,size:'5mg',role:'Tissue repair',route:'SubQ',dosing:'250-500mcg',freq:'2x daily',mech:'Gastric pentadecapeptide that accelerates wound healing, tendon repair, and reduces inflammation systemically.'},
+      {slug:'tb-500',name:'TB-500',fullName:'Thymosin Beta-4 Fragment',pillar:'Recovery',pillarIndex:2,pillarNum:'II',price:134,size:'5mg',role:'Systemic healing',route:'SubQ',dosing:'2.5mg',freq:'2x week',mech:'Thymosin beta-4 fragment promoting cell migration, angiogenesis, and systemic tissue healing.'},
+      {slug:'aod-9604',name:'AOD-9604',fullName:'Advanced Obesity Drug 9604',pillar:'Metabolic',pillarIndex:3,pillarNum:'III',price:118,size:'5mg',role:'Targeted lipolysis',route:'SubQ',dosing:'300mcg',freq:'Daily',mech:'Modified GH fragment targeting fat metabolism and lipolysis without systemic GH effects.'},
+      {slug:'retatrutide',name:'RETATRUTIDE',fullName:'Retatrutide (LY-3437943)',pillar:'Metabolic',pillarIndex:3,pillarNum:'III',price:189,size:'10mg',role:'Triple agonist',route:'SubQ',dosing:'Titrate',freq:'Weekly',mech:'Triple incretin receptor agonist (GIP/GLP-1/Glucagon) for comprehensive metabolic optimization.'},
+      {slug:'semax',name:'SEMAX',fullName:'Semax (MEHFPGP)',pillar:'Cognitive',pillarIndex:4,pillarNum:'IV',price:97,size:'30mg',role:'BDNF upregulation',route:'Intranasal',dosing:'200-600mcg',freq:'Daily',mech:'Synthetic ACTH(4-10) analogue that upregulates BDNF, enhancing neuroplasticity and cognitive function.'},
+      {slug:'selank',name:'SELANK',fullName:'Selank (TP-7)',pillar:'Cognitive',pillarIndex:4,pillarNum:'IV',price:88,size:'5mg',role:'Anxiolytic',route:'Intranasal',dosing:'250-500mcg',freq:'Daily',mech:'Tuftsin analogue with anxiolytic and nootropic properties via GABA modulation.'},
+      {slug:'ipamorelin',name:'IPAMORELIN',fullName:'Ipamorelin Acetate',pillar:'Performance',pillarIndex:5,pillarNum:'V',price:112,size:'2mg',role:'Clean GH pulse',route:'SubQ',dosing:'200-300mcg',freq:'2-3x daily',mech:'Highly selective GH secretagogue producing clean GH pulses without cortisol or prolactin elevation.'},
+      {slug:'cjc-1295',name:'CJC-1295',fullName:'CJC-1295 (DAC)',pillar:'Performance',pillarIndex:5,pillarNum:'V',price:108,size:'2mg',role:'Sustained GH',route:'SubQ',dosing:'100mcg',freq:'2-3x week',mech:'GHRH analogue with Drug Affinity Complex providing sustained GH elevation over extended half-life.'},
+      {slug:'hexarelin',name:'HEXARELIN',fullName:'Hexarelin (Examorelin)',pillar:'Performance',pillarIndex:5,pillarNum:'V',price:129,size:'2mg',role:'Max GH release',route:'SubQ',dosing:'100-200mcg',freq:'2x daily',mech:'Potent hexapeptide GH secretagogue for maximum growth hormone release from the pituitary.'},
+      {slug:'mk-677',name:'MK-677',fullName:'Ibutamoren Mesylate',pillar:'Performance',pillarIndex:5,pillarNum:'V',price:94,size:'10mg',role:'Oral secretagogue',route:'Oral',dosing:'10-25mg',freq:'Daily',mech:'Non-peptide oral GH secretagogue mimicking ghrelin for sustained IGF-1 elevation and improved sleep quality.'}
+    ];
+
+    /* =============================================================
+       RENDER CATALOG
+       ============================================================= */
+    const catalog = document.querySelector('.catalog');
+
+    function renderCatalog(filterPillar) {
+      catalog.innerHTML = '';
+
+      const filtered = filterPillar === 'all'
+        ? compounds
+        : compounds.filter(c => String(c.pillarIndex) === String(filterPillar));
+
+      filtered.forEach((compound, i) => {
+        /* Divider before each specimen (except the first) */
+        if (i > 0) {
+          const hr = document.createElement('hr');
+          hr.className = 'specimen-divider pillar-' + compound.pillarIndex;
+          hr.setAttribute('aria-hidden', 'true');
+          catalog.appendChild(hr);
+        }
+
+        const block = document.createElement('article');
+        block.className = 'specimen pillar-' + compound.pillarIndex;
+        block.setAttribute('data-pillar', compound.pillarIndex);
+        block.setAttribute('data-slug', compound.slug);
+
+        block.innerHTML = `
+          <div class="specimen-identity">
+            <span class="specimen-numeral font-serif" aria-hidden="true">${compound.pillarNum}</span>
+            <h2 class="specimen-name">${compound.name}</h2>
+            <div class="specimen-role">
+              <span class="specimen-dot"></span>
+              <span>${compound.role}</span>
+              <span class="specimen-pillar-label">${compound.pillar} &middot; Pillar ${compound.pillarNum}</span>
+            </div>
+          </div>
+          <div class="specimen-detail">
+            <p class="specimen-fullname">${compound.fullName}</p>
+            <p class="specimen-mech">${compound.mech}</p>
+            <div class="specimen-stats">
+              <div class="specimen-stat">
+                <div class="specimen-stat-label">Route</div>
+                <div class="specimen-stat-value">${compound.route}</div>
+              </div>
+              <div class="specimen-stat">
+                <div class="specimen-stat-label">Dosing</div>
+                <div class="specimen-stat-value">${compound.dosing}</div>
+              </div>
+              <div class="specimen-stat">
+                <div class="specimen-stat-label">Frequency</div>
+                <div class="specimen-stat-value">${compound.freq}</div>
+              </div>
+            </div>
+            <div class="specimen-action">
+              <div class="specimen-price">
+                <span class="specimen-price-amount">$${compound.price}</span>
+                <span class="specimen-price-size">/ ${compound.size}</span>
+              </div>
+              <button class="btn-add" aria-label="Add ${compound.fullName} to stack">Add to Stack</button>
+            </div>
+          </div>
+        `;
+
+        catalog.appendChild(block);
+      });
+
+      /* Trigger scroll-entrance on all specimens */
+      requestAnimationFrame(() => {
+        observeSpecimens();
+      });
+    }
+
+    /* =============================================================
+       SCROLL ENTRANCE — IntersectionObserver
+       ============================================================= */
+    let observer = null;
+
+    function observeSpecimens() {
+      if (observer) observer.disconnect();
+
+      const specimens = document.querySelectorAll('.specimen');
+
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -40px 0px'
+      });
+
+      specimens.forEach((el, i) => {
+        /* Small stagger for items visible on initial load */
+        el.style.transitionDelay = (i * 0.06) + 's';
+        observer.observe(el);
+      });
+    }
+
+    /* =============================================================
+       PILLAR FILTER
+       ============================================================= */
+    const filterBtns = document.querySelectorAll('.pillar-filter-btn');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        renderCatalog(btn.getAttribute('data-pillar'));
+      });
+    });
+
+    /* =============================================================
+       THEME TOGGLE
+       ============================================================= */
+    const themeToggle = document.querySelector('.theme-toggle');
+    const root = document.documentElement;
+
+    /* Restore saved theme */
+    const savedTheme = localStorage.getItem('ea-theme');
+    if (savedTheme) {
+      root.setAttribute('data-theme', savedTheme);
+    }
+
+    themeToggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('ea-theme', next);
+    });
+
+    /* =============================================================
+       INITIAL RENDER
+       ============================================================= */
+    renderCatalog('all');
+  </script>
+
+</body>
+</html>

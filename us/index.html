@@ -246,9 +246,55 @@
   }
   .proto-card p{font-size:13px;color:var(--muted);line-height:1.75;font-weight:300}
 
+  /* ═══════════════════════════════════════════
+     FIVE PILLARS — columnar panels
+     ═══════════════════════════════════════════ */
+  .pillars-header{text-align:center;margin-bottom:56px}
+  .pillars-header .section-label{justify-content:center}
+  .pillars-header .section-label::before{display:none}
+
+  .us-pillars{
+    display:grid;grid-template-columns:repeat(5,1fr);
+    border:1px solid var(--line);
+  }
+  .us-pillar{
+    padding:48px 24px;text-align:center;
+    position:relative;
+    border-right:1px solid var(--line);
+    transition:background .5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .us-pillar:last-child{border-right:none}
+  .us-pillar::after{
+    content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+    background:var(--p-accent);
+    transform:scaleX(0);transition:transform .5s cubic-bezier(0.4,0,0.2,1);
+  }
+  .us-pillar:hover::after{transform:scaleX(1)}
+  .us-pillar:hover{background:var(--bg-card)}
+  .us-pillar-num{
+    font-family:'Playfair Display',serif;
+    font-size:52px;font-weight:600;
+    color:var(--p-accent);opacity:0.2;
+    line-height:1;margin-bottom:20px;
+    transition:opacity .5s;
+  }
+  .us-pillar:hover .us-pillar-num{opacity:0.5}
+  .us-pillar h3{
+    font-family:'Playfair Display',serif;
+    font-size:18px;font-weight:500;
+    color:var(--text-heading);margin-bottom:12px;
+    letter-spacing:0.5px;
+  }
+  .us-pillar p{
+    font-size:13px;color:var(--muted);line-height:1.75;
+    font-weight:300;
+  }
+
   @media(max-width:1024px){
     .featured-grid{grid-template-columns:1fr 1fr}
     .philosophy{padding:100px 40px}
+    .us-pillar{padding:36px 16px}
+    .us-pillar-num{font-size:40px}
   }
   @media(max-width:768px){
     /* Reduce nav animation delay on mobile so users can navigate sooner */
@@ -278,8 +324,19 @@
     .compound-card .compound-price{font-size:24px}
     .compound-card .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
     .view-details{min-height:44px;display:inline-flex;align-items:center}
-    /* Proto cards: adequate padding */
     .proto-card{padding:32px 24px}
+    /* Pillars: horizontal scroll strip */
+    .us-pillars{
+      display:flex;overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      scrollbar-width:none;
+    }
+    .us-pillars::-webkit-scrollbar{display:none}
+    .us-pillar{
+      min-width:220px;flex-shrink:0;
+      scroll-snap-align:start;padding:36px 24px;
+    }
   }
   @media(max-width:480px){
     .us-hero-title{font-size:28px}
@@ -289,6 +346,8 @@
     .vial-detail{font-size:7px;letter-spacing:2px}
     .vial-price{font-size:11px}
     .circle-2{display:none}
+    .us-pillar{min-width:180px}
+    .us-pillar-num{font-size:36px}
   }
   @media(max-width:375px){
     body .vials-stage{gap:6px;padding:0}
@@ -526,17 +585,37 @@
 <div class="divider"><div class="divider-line"></div></div>
 
 <!-- 03 — Five Pillars -->
-<section class="section reveal stagger-children">
+<section class="section reveal">
   <div class="pillars-header">
     <p class="section-label">Five Pillars</p>
     <h2 class="section-title">One framework.<br>Five pathways.</h2>
   </div>
-  <div class="pillar-grid">
-    <div class="pillar-card stagger-item"><div class="pillar-num">I</div><h3>Longevity</h3><p>Telomerase activation, collagen synthesis, and cellular repair for sustained vitality.</p></div>
-    <div class="pillar-card stagger-item"><div class="pillar-num">II</div><h3>Recovery</h3><p>Tissue repair peptides that reduce recovery time by up to 40% in research models.</p></div>
-    <div class="pillar-card stagger-item"><div class="pillar-num">III</div><h3>Metabolic</h3><p>Targeted lipolysis and metabolic optimization validated in clinical research.</p></div>
-    <div class="pillar-card stagger-item"><div class="pillar-num">IV</div><h3>Cognitive</h3><p>BDNF upregulation, anxiolytic stabilization, and neuroprotection compounds.</p></div>
-    <div class="pillar-card stagger-item"><div class="pillar-num">V</div><h3>Performance</h3><p>GH secretagogues supporting lean mass, recovery, and deep restorative sleep.</p></div>
+  <div class="us-pillars">
+    <div class="us-pillar" data-pillar="1">
+      <div class="us-pillar-num">I</div>
+      <h3>Longevity</h3>
+      <p>Telomerase activation, collagen synthesis, and cellular repair for sustained vitality.</p>
+    </div>
+    <div class="us-pillar" data-pillar="2">
+      <div class="us-pillar-num">II</div>
+      <h3>Recovery</h3>
+      <p>Tissue repair peptides that reduce recovery time by up to 40% in research models.</p>
+    </div>
+    <div class="us-pillar" data-pillar="3">
+      <div class="us-pillar-num">III</div>
+      <h3>Metabolic</h3>
+      <p>Targeted lipolysis and metabolic optimization validated in clinical research.</p>
+    </div>
+    <div class="us-pillar" data-pillar="4">
+      <div class="us-pillar-num">IV</div>
+      <h3>Cognitive</h3>
+      <p>BDNF upregulation, anxiolytic stabilization, and neuroprotection compounds.</p>
+    </div>
+    <div class="us-pillar" data-pillar="5">
+      <div class="us-pillar-num">V</div>
+      <h3>Performance</h3>
+      <p>GH secretagogues supporting lean mass, recovery, and deep restorative sleep.</p>
+    </div>
   </div>
 </section>
 

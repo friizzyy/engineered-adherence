@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vial Concept B — Luxury Noir | Engineered Adherence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ===== RESET ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ===== THEME VARIABLES ===== */
+[data-theme="dark"] {
+  --bg: #0e0e0e;
+  --bg-warm: #141414;
+  --bg-card: #1e1e1e;
+  --bg-card-hover: #232323;
+  --text: #e8e4de;
+  --text-heading: #f0ece6;
+  --muted: #9a9590;
+  --faint: #8a857e;
+  --line: rgba(232,228,222,0.06);
+  --line-strong: rgba(232,228,222,0.12);
+  --btn-border: rgba(232,228,222,0.2);
+  --btn-hover-border: rgba(232,228,222,0.4);
+  --accent: rgba(232,228,222,0.08);
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.3);
+  --pillar-1: #7A8A98;
+  --pillar-2: #C9B99A;
+  --pillar-3: #A8B4A0;
+  --pillar-4: #B8A8B8;
+  --pillar-5: #c4a962;
+}
+
+[data-theme="light"] {
+  --bg: #f2f3f5;
+  --bg-warm: #f5f6f8;
+  --bg-card: rgba(255,255,255,0.8);
+  --bg-card-hover: rgba(255,255,255,0.95);
+  --text: #1a1c22;
+  --text-heading: #0a0b0d;
+  --muted: #4a4e58;
+  --faint: #6e7280;
+  --line: rgba(0,0,0,0.07);
+  --line-strong: rgba(0,0,0,0.12);
+  --btn-border: rgba(26,28,34,0.25);
+  --btn-hover-border: rgba(26,28,34,0.5);
+  --accent: rgba(26,28,34,0.05);
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.08);
+  --pillar-1: #5a6a78;
+  --pillar-2: #a99a7a;
+  --pillar-3: #7a9470;
+  --pillar-4: #987898;
+  --pillar-5: #a48942;
+}
+
+/* ===== BASE ===== */
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  transition: background 0.5s cubic-bezier(0.4,0,0.2,1), color 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ===== THEME TOGGLE ===== */
+.theme-toggle {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--btn-border);
+  background: var(--bg-card);
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s, background 0.3s;
+}
+
+.theme-toggle:hover {
+  border-color: var(--btn-hover-border);
+}
+
+.theme-toggle svg {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+[data-theme="light"] .theme-toggle .icon-sun { display: none; }
+[data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+/* ===== BACK LINK ===== */
+.back-link {
+  position: fixed;
+  top: 28px;
+  left: 24px;
+  z-index: 100;
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--faint);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.back-link:hover {
+  color: var(--text);
+}
+
+/* ===== PAGE LAYOUT ===== */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 32px 120px;
+}
+
+/* ===== HEADER ===== */
+.header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.header__eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 16px;
+}
+
+.header__title {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(32px, 5vw, 52px);
+  color: var(--text-heading);
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin-bottom: 16px;
+}
+
+.header__subtitle {
+  font-size: 15px;
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto;
+  line-height: 1.65;
+}
+
+/* ===== SECTION LABELS ===== */
+.section-label {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.section-label::before,
+.section-label::after {
+  content: '';
+  display: inline-block;
+  width: 32px;
+  height: 1px;
+  background: var(--line-strong);
+  vertical-align: middle;
+  margin: 0 16px;
+}
+
+/* ===== SHOWCASE ROW ===== */
+.showcase {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 48px;
+  flex-wrap: wrap;
+  margin-bottom: 100px;
+  padding: 48px 0;
+}
+
+.vial-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  cursor: default;
+}
+
+.vial-card__svg-wrap {
+  transition: filter 0.4s cubic-bezier(0.4,0,0.2,1), transform 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+
+.vial-card:hover .vial-card__svg-wrap {
+  transform: translateY(-4px);
+  filter: brightness(1.08);
+}
+
+.vial-card__label {
+  text-align: center;
+}
+
+.vial-card__compound {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-heading);
+  margin-bottom: 4px;
+}
+
+.vial-card__pillar {
+  font-size: 12px;
+  color: var(--faint);
+}
+
+.vial-card__pillar-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* ===== DIVIDER ===== */
+.divider {
+  width: 100%;
+  max-width: 800px;
+  height: 1px;
+  background: var(--line);
+  margin: 0 auto 80px;
+}
+
+/* ===== DOSSIER PREVIEW ===== */
+.dossier-preview {
+  max-width: 720px;
+  margin: 0 auto 80px;
+}
+
+.dossier-card {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 40px 48px;
+  box-shadow: var(--shadow-card);
+  transition: background 0.4s, border-color 0.4s;
+}
+
+.dossier-card:hover {
+  border-color: var(--line-strong);
+}
+
+.dossier-card__vial {
+  flex-shrink: 0;
+}
+
+.dossier-card__info {
+  flex: 1;
+}
+
+.dossier-card__eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 8px;
+}
+
+.dossier-card__name {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 28px;
+  color: var(--text-heading);
+  margin-bottom: 4px;
+}
+
+.dossier-card__dose {
+  font-family: 'Space Mono', monospace;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 16px;
+}
+
+.dossier-card__desc {
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.dossier-card__meta {
+  display: flex;
+  gap: 24px;
+}
+
+.dossier-card__meta-item {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--faint);
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+}
+
+/* ===== NOTES SECTION ===== */
+.design-notes {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 48px 0;
+}
+
+.design-notes__title {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--faint);
+  margin-bottom: 24px;
+}
+
+.design-notes__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.design-notes__list li {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.design-notes__list li::before {
+  content: '\2014';
+  margin-right: 8px;
+  color: var(--faint);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .page { padding: 64px 20px 80px; }
+  .showcase { gap: 32px; }
+  .dossier-card { flex-direction: column; text-align: center; padding: 32px 24px; gap: 24px; }
+  .dossier-card__meta { justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle" aria-label="Toggle theme">
+  <svg class="icon-sun" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="5"/>
+    <line x1="12" y1="1" x2="12" y2="3"/>
+    <line x1="12" y1="21" x2="12" y2="23"/>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+    <line x1="1" y1="12" x2="3" y2="12"/>
+    <line x1="21" y1="12" x2="23" y2="12"/>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+  </svg>
+  <svg class="icon-moon" viewBox="0 0 24 24">
+    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+  </svg>
+</button>
+
+<!-- Back Link -->
+<a href="../index.html" class="back-link">Back</a>
+
+<div class="page">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header__eyebrow">Vial Design Exploration</div>
+    <h1 class="header__title">Vial Concept B &mdash; Luxury Noir</h1>
+    <p class="header__subtitle">Dark smoked glass with metallic foil labeling. Inspired by Tom Ford fragrance and Aesop skincare. Premium, aspirational, minimal.</p>
+  </header>
+
+  <!-- Showcase Label -->
+  <div class="section-label">Five Pillars &mdash; Showcase Scale</div>
+
+  <!-- Showcase Row: 5 Large Vials -->
+  <div class="showcase" id="showcase">
+    <!-- Vials injected by JS -->
+  </div>
+
+  <!-- Divider -->
+  <div class="divider"></div>
+
+  <!-- Dossier Preview Label -->
+  <div class="section-label">Product Dossier Context</div>
+
+  <!-- Dossier Preview Card -->
+  <div class="dossier-preview">
+    <div class="dossier-card">
+      <div class="dossier-card__vial" id="dossier-vial">
+        <!-- Small vial injected by JS -->
+      </div>
+      <div class="dossier-card__info">
+        <div class="dossier-card__eyebrow">Pillar V &mdash; Performance</div>
+        <div class="dossier-card__name">Ipamorelin</div>
+        <div class="dossier-card__dose">2mg / vial &middot; Lyophilized</div>
+        <p class="dossier-card__desc">Growth hormone secretagogue peptide targeting the pituitary for lean tissue synthesis, recovery acceleration, and age-related decline mitigation. Selective GH release without cortisol or prolactin elevation.</p>
+        <div class="dossier-card__meta">
+          <span class="dossier-card__meta-item">Subcutaneous</span>
+          <span class="dossier-card__meta-item">30-day cycle</span>
+          <span class="dossier-card__meta-item">Rx required</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Design Notes -->
+  <div class="design-notes">
+    <div class="design-notes__title">Design Notes</div>
+    <ul class="design-notes__list">
+      <li>Dark smoked glass body with warm amber gradient</li>
+      <li>Oversized matte black cap, no crimp ring</li>
+      <li>Metallic gold foil label text (no background fill)</li>
+      <li>Pillar color visible at low opacity through dark glass</li>
+      <li>Subtle shadow/glow in pillar color beneath each vial</li>
+      <li>Hover state brightens gold text and lifts vial</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  /* ===== COMPOUND DATA ===== */
+  const compounds = [
+    { name: 'Epithalon',   dose: '10mg', pillar: 'I',  pillarName: 'Longevity',   color: '#7A8A98' },
+    { name: 'BPC-157',     dose: '5mg',  pillar: 'II', pillarName: 'Recovery',    color: '#C9B99A' },
+    { name: 'AOD-9604',    dose: '5mg',  pillar: 'III',pillarName: 'Metabolic',   color: '#A8B4A0' },
+    { name: 'Semax',       dose: '30mg', pillar: 'IV', pillarName: 'Cognitive',   color: '#B8A8B8' },
+    { name: 'Ipamorelin',  dose: '2mg',  pillar: 'V',  pillarName: 'Performance', color: '#c4a962' }
+  ];
+
+  /* ===== SVG VIAL GENERATOR ===== */
+  function createVialSVG(compound, height) {
+    // Scale factor: base design is 200px tall
+    const scale = height / 200;
+    const w = Math.round(80 * scale);
+    const h = height;
+    const uid = 'vial-' + compound.name.toLowerCase().replace(/[^a-z0-9]/g, '') + '-' + h;
+
+    // All dimensions scaled
+    const capW = 26 * scale;
+    const capH = 52 * scale;
+    const capX = (80 * scale - capW) / 2;
+    const capY = 8 * scale;
+    const capR = 4 * scale;
+    const highlightY = capY + 2 * scale;
+
+    const neckW = 14 * scale;
+    const neckH = 8 * scale;
+    const neckX = (80 * scale - neckW) / 2;
+    const neckY = capY + capH;
+
+    const bodyW = 42 * scale;
+    const bodyH = 115 * scale;
+    const bodyX = (80 * scale - bodyW) / 2;
+    const bodyY = neckY + neckH;
+    const bodyR = 11 * scale;
+
+    const liquidTop = bodyY + 18 * scale;
+    const liquidH = bodyH - 18 * scale;
+
+    // Label positioning
+    const labelCenterX = 80 * scale / 2;
+    const brandY = bodyY + 34 * scale;
+    const lineY = brandY + 6 * scale;
+    const nameY = lineY + 14 * scale;
+    const doseY = nameY + 10 * scale;
+    const lineW = 20 * scale;
+
+    // Font sizes
+    const brandFS = 3.5 * scale;
+    const nameFS = 7 * scale;
+    const doseFS = 3.5 * scale;
+    const brandSpacing = 2 * scale;
+    const doseSpacing = 1.5 * scale;
+
+    // Reflection
+    const reflY = bodyY + bodyH + 4 * scale;
+    const reflH = 40 * scale;
+
+    // Shadow ellipse
+    const shadowCY = bodyY + bodyH + 6 * scale;
+    const shadowRX = 24 * scale;
+    const shadowRY = 6 * scale;
+
+    // Frame around label area
+    const frameX = labelCenterX - 18 * scale;
+    const frameY = brandY - 8 * scale;
+    const frameW = 36 * scale;
+    const frameH = (doseY + 6 * scale) - frameY;
+
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${w} ${h + 50 * scale}" width="${w}" height="${h + 50 * scale}" role="img" aria-label="${compound.name} ${compound.dose} luxury vial">
+  <defs>
+    <!-- Dark smoked glass gradient -->
+    <linearGradient id="${uid}-glass" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#2a2520"/>
+      <stop offset="40%" stop-color="#1a1714"/>
+      <stop offset="100%" stop-color="#252018"/>
+    </linearGradient>
+
+    <!-- Liquid tint (pillar color, very low opacity through dark glass) -->
+    <linearGradient id="${uid}-liquid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="${compound.color}" stop-opacity="0.08"/>
+      <stop offset="50%" stop-color="${compound.color}" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="${compound.color}" stop-opacity="0.12"/>
+    </linearGradient>
+
+    <!-- Subtle full-width sheen -->
+    <linearGradient id="${uid}-sheen" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="rgba(255,255,255,0)" stop-opacity="0"/>
+      <stop offset="30%" stop-color="rgba(255,255,255,0.04)" stop-opacity="0.04"/>
+      <stop offset="50%" stop-color="rgba(255,255,255,0.07)" stop-opacity="0.07"/>
+      <stop offset="70%" stop-color="rgba(255,255,255,0.04)" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Gold metallic text gradient -->
+    <linearGradient id="${uid}-gold" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c4a962"/>
+      <stop offset="35%" stop-color="#d4c5a0"/>
+      <stop offset="65%" stop-color="#d4c5a0"/>
+      <stop offset="100%" stop-color="#c4a962"/>
+    </linearGradient>
+
+    <!-- Gold for decorative line -->
+    <linearGradient id="${uid}-gold-line" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#c4a962" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#d4c5a0" stop-opacity="0.6"/>
+      <stop offset="50%" stop-color="#d4c5a0" stop-opacity="0.8"/>
+      <stop offset="70%" stop-color="#d4c5a0" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#c4a962" stop-opacity="0"/>
+    </linearGradient>
+
+    <!-- Matte black cap gradient -->
+    <linearGradient id="${uid}-cap" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="40%" stop-color="#222222"/>
+      <stop offset="60%" stop-color="#222222"/>
+      <stop offset="100%" stop-color="#181818"/>
+    </linearGradient>
+
+    <!-- Shadow glow (pillar color) -->
+    <radialGradient id="${uid}-shadow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="${compound.color}" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="${compound.color}" stop-opacity="0"/>
+    </radialGradient>
+
+    <!-- Reflection mask -->
+    <linearGradient id="${uid}-refl-fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="white" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="white" stop-opacity="0"/>
+    </linearGradient>
+    <mask id="${uid}-refl-mask">
+      <rect x="0" y="0" width="${w}" height="${reflH}" fill="url(#${uid}-refl-fade)"/>
+    </mask>
+
+    <!-- Label frame border gradient -->
+    <linearGradient id="${uid}-frame" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#c4a962" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#c4a962" stop-opacity="0.15"/>
+      <stop offset="50%" stop-color="#d4c5a0" stop-opacity="0.2"/>
+      <stop offset="75%" stop-color="#c4a962" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#c4a962" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Shadow/glow beneath vial -->
+  <ellipse cx="${w / 2}" cy="${shadowCY}" rx="${shadowRX}" ry="${shadowRY}" fill="url(#${uid}-shadow)"/>
+
+  <!-- Reflection (flipped, blurred, low opacity) -->
+  <g transform="translate(0, ${reflY})" mask="url(#${uid}-refl-mask)" opacity="0.15" filter="blur(1.5px)">
+    <rect x="${bodyX}" y="0" width="${bodyW}" height="${reflH}" rx="${bodyR}" fill="url(#${uid}-glass)"/>
+  </g>
+
+  <!-- VIAL BODY: Dark smoked glass -->
+  <rect x="${bodyX}" y="${bodyY}" width="${bodyW}" height="${bodyH}" rx="${bodyR}" fill="url(#${uid}-glass)"/>
+
+  <!-- Liquid inside (barely visible through dark glass) -->
+  <rect x="${bodyX + 1.5 * scale}" y="${liquidTop}" width="${bodyW - 3 * scale}" height="${liquidH - 2 * scale}" rx="${(bodyR - 1) > 0 ? bodyR - 1 : 0}" fill="url(#${uid}-liquid)"/>
+
+  <!-- Subtle sheen across body -->
+  <rect x="${bodyX}" y="${bodyY}" width="${bodyW}" height="${bodyH}" rx="${bodyR}" fill="url(#${uid}-sheen)"/>
+
+  <!-- Label frame (faint gold border, no fill) -->
+  <rect x="${frameX}" y="${frameY}" width="${frameW}" height="${frameH}" rx="${2 * scale}" fill="none" stroke="url(#${uid}-frame)" stroke-width="${0.5 * scale}"/>
+
+  <!-- Label text: Brand -->
+  <text x="${labelCenterX}" y="${brandY}" text-anchor="middle"
+    font-family="'DM Sans', sans-serif" font-size="${brandFS}" font-weight="500"
+    letter-spacing="${brandSpacing}" fill="url(#${uid}-gold)"
+    style="text-transform:uppercase">ENGINEERED ADHERENCE</text>
+
+  <!-- Decorative line below brand -->
+  <line x1="${labelCenterX - lineW / 2}" y1="${lineY}" x2="${labelCenterX + lineW / 2}" y2="${lineY}"
+    stroke="url(#${uid}-gold-line)" stroke-width="${0.5 * scale}"/>
+
+  <!-- Compound name -->
+  <text x="${labelCenterX}" y="${nameY}" text-anchor="middle"
+    font-family="'Space Mono', monospace" font-size="${nameFS}" font-weight="400"
+    fill="url(#${uid}-gold)">${compound.name}</text>
+
+  <!-- Dosage -->
+  <text x="${labelCenterX}" y="${doseY}" text-anchor="middle"
+    font-family="'DM Sans', sans-serif" font-size="${doseFS}" font-weight="400"
+    letter-spacing="${doseSpacing}" fill="url(#${uid}-gold)"
+    opacity="0.75">${compound.dose}</text>
+
+  <!-- NECK -->
+  <rect x="${neckX}" y="${neckY}" width="${neckW}" height="${neckH}" rx="${2 * scale}" fill="#1e1c18"/>
+
+  <!-- CAP: Tall, sleek, matte black -->
+  <rect x="${capX}" y="${capY}" width="${capW}" height="${capH}" rx="${capR}" fill="url(#${uid}-cap)"/>
+
+  <!-- Cap top highlight -->
+  <line x1="${capX + 5 * scale}" y1="${highlightY}" x2="${capX + capW - 5 * scale}" y2="${highlightY}"
+    stroke="rgba(255,255,255,0.12)" stroke-width="${0.7 * scale}" stroke-linecap="round"/>
+</svg>`;
+  }
+
+  /* ===== RENDER SHOWCASE ===== */
+  const showcase = document.getElementById('showcase');
+  compounds.forEach(function(compound) {
+    const card = document.createElement('div');
+    card.className = 'vial-card';
+    card.innerHTML = `
+      <div class="vial-card__svg-wrap">
+        ${createVialSVG(compound, 220)}
+      </div>
+      <div class="vial-card__label">
+        <div class="vial-card__compound">${compound.name}</div>
+        <div class="vial-card__pillar">
+          <span class="vial-card__pillar-dot" style="background:${compound.color}"></span>
+          Pillar ${compound.pillar} &mdash; ${compound.pillarName}
+        </div>
+      </div>
+    `;
+    showcase.appendChild(card);
+  });
+
+  /* ===== RENDER DOSSIER VIAL ===== */
+  const dossierVial = document.getElementById('dossier-vial');
+  const ipamorelin = compounds[4];
+  dossierVial.innerHTML = createVialSVG(ipamorelin, 150);
+
+  /* ===== THEME TOGGLE ===== */
+  const toggleBtn = document.querySelector('.theme-toggle');
+  const html = document.documentElement;
+
+  function getStoredTheme() {
+    try { return localStorage.getItem('ea-vial-theme'); }
+    catch(e) { return null; }
+  }
+
+  function setTheme(theme) {
+    html.setAttribute('data-theme', theme);
+    try { localStorage.setItem('ea-vial-theme', theme); }
+    catch(e) { /* storage unavailable */ }
+  }
+
+  // Initialize from storage or system preference
+  const stored = getStoredTheme();
+  if (stored) {
+    setTheme(stored);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+    setTheme('light');
+  }
+
+  toggleBtn.addEventListener('click', function() {
+    const current = html.getAttribute('data-theme');
+    setTheme(current === 'dark' ? 'light' : 'dark');
+  });
+
+})();
+</script>
+</body>
+</html>

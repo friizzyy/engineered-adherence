@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Arsenal — Engineered Adherence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Playfair+Display:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   THEME VARIABLES
+   ========================================================= */
+[data-theme="dark"] {
+  --bg:#161616; --bg-warm:#1a1a1a; --bg-card:#1e1e1e; --bg-card-hover:#232323;
+  --text:#e8e4de; --text-heading:#f0ece6; --muted:#9a9590; --faint:#8a857e;
+  --line:rgba(232,228,222,0.06); --line-strong:rgba(232,228,222,0.12);
+  --btn-border:rgba(232,228,222,0.2); --btn-hover-border:rgba(232,228,222,0.4);
+  --accent:rgba(232,228,222,0.08); --accent-solid:#7a756f;
+  --shadow-card-subtle:0 8px 24px rgba(0,0,0,0.15);
+  --stat-num:#f0ece6; --nav-bg:rgba(22,22,22,0.92);
+  --scanline-opacity:0.018;
+  --expand-bg:#1b1b1b;
+  --tag-bg:rgba(232,228,222,0.06);
+  --tag-border:rgba(232,228,222,0.08);
+  --stack-bg:rgba(22,22,22,0.96);
+}
+[data-theme="light"] {
+  --bg:#f2f3f5; --bg-warm:#f5f6f8; --bg-card:rgba(255,255,255,0.8); --bg-card-hover:rgba(255,255,255,0.95);
+  --text:#1a1c22; --text-heading:#0a0b0d; --muted:#4a4e58; --faint:#6e7280;
+  --line:rgba(0,0,0,0.07); --line-strong:rgba(0,0,0,0.12);
+  --btn-border:rgba(26,28,34,0.25); --btn-hover-border:rgba(26,28,34,0.5);
+  --accent:rgba(26,28,34,0.05); --accent-solid:#50545e;
+  --shadow-card-subtle:0 8px 24px rgba(0,0,0,0.05);
+  --stat-num:#0f1014; --nav-bg:rgba(242,243,245,0.94);
+  --scanline-opacity:0.025;
+  --expand-bg:#ecedef;
+  --tag-bg:rgba(26,28,34,0.05);
+  --tag-border:rgba(26,28,34,0.08);
+  --stack-bg:rgba(242,243,245,0.97);
+}
+
+/* Pillar Colors */
+:root {
+  --pillar-1:#7A8A98;
+  --pillar-2:#C9B99A;
+  --pillar-3:#A8B4A0;
+  --pillar-4:#B8A8B8;
+  --pillar-5:#c4a962;
+  --ease-out-expo:cubic-bezier(0.4,0,0.2,1);
+}
+
+/* =========================================================
+   RESET & BASE
+   ========================================================= */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+html {
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+
+body {
+  font-family:'DM Sans', sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  position:relative;
+  transition:background 0.4s var(--ease-out-expo), color 0.4s var(--ease-out-expo);
+  padding-bottom:72px;
+}
+
+/* Scanline texture overlay */
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9999;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(128,128,128,var(--scanline-opacity)) 2px,
+      rgba(128,128,128,var(--scanline-opacity)) 3px
+    );
+}
+
+/* Subtle grid texture */
+body::after {
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9998;
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size:48px 48px;
+  opacity:0.5;
+}
+
+::selection {
+  background:var(--accent-solid);
+  color:var(--text-heading);
+}
+
+a { color:inherit; text-decoration:none; }
+
+/* =========================================================
+   TYPOGRAPHY UTILITIES
+   ========================================================= */
+.mono { font-family:'Space Mono', monospace; }
+.serif { font-family:'Playfair Display', serif; }
+.sans { font-family:'DM Sans', sans-serif; }
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+.top-bar {
+  position:sticky;
+  top:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:12px 24px;
+  background:var(--nav-bg);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line-strong);
+}
+
+.top-bar__brand {
+  font-family:'Space Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+
+.top-bar__brand span {
+  color:var(--text-heading);
+  font-weight:700;
+}
+
+.theme-toggle {
+  appearance:none;
+  border:1px solid var(--btn-border);
+  background:transparent;
+  color:var(--muted);
+  font-family:'Space Mono', monospace;
+  font-size:10px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:6px 14px;
+  cursor:pointer;
+  transition:all 0.25s var(--ease-out-expo);
+  border-radius:2px;
+}
+
+.theme-toggle:hover {
+  border-color:var(--btn-hover-border);
+  color:var(--text-heading);
+}
+
+.theme-toggle:focus-visible {
+  outline:2px solid var(--accent-solid);
+  outline-offset:2px;
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero {
+  padding:56px 24px 32px;
+  text-align:center;
+  position:relative;
+}
+
+.hero__title {
+  font-family:'Space Mono', monospace;
+  font-size:clamp(28px, 5vw, 48px);
+  font-weight:700;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--text-heading);
+  line-height:1.1;
+  margin-bottom:12px;
+}
+
+.hero__subtitle {
+  font-family:'Space Mono', monospace;
+  font-size:clamp(11px, 1.5vw, 13px);
+  color:var(--muted);
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+}
+
+.hero__rule {
+  width:48px;
+  height:1px;
+  background:var(--line-strong);
+  margin:24px auto 0;
+}
+
+/* =========================================================
+   PILLAR FILTER STRIP
+   ========================================================= */
+.filter-strip {
+  position:sticky;
+  top:45px;
+  z-index:90;
+  background:var(--nav-bg);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line);
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;
+}
+
+.filter-strip::-webkit-scrollbar { display:none; }
+
+.filter-strip__inner {
+  display:flex;
+  max-width:1140px;
+  margin:0 auto;
+  padding:0 24px;
+}
+
+.filter-tab {
+  appearance:none;
+  background:transparent;
+  border:none;
+  border-bottom:2px solid transparent;
+  font-family:'Space Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.08em;
+  text-transform:uppercase;
+  color:var(--faint);
+  padding:12px 20px;
+  cursor:pointer;
+  white-space:nowrap;
+  transition:all 0.25s var(--ease-out-expo);
+  position:relative;
+}
+
+.filter-tab:hover {
+  color:var(--text);
+}
+
+.filter-tab:focus-visible {
+  outline:2px solid var(--accent-solid);
+  outline-offset:-2px;
+}
+
+.filter-tab--active {
+  color:var(--text-heading);
+  font-weight:700;
+}
+
+.filter-tab--active[data-pillar="all"] { border-bottom-color:var(--accent-solid); }
+.filter-tab--active[data-pillar="Longevity"] { border-bottom-color:var(--pillar-1); }
+.filter-tab--active[data-pillar="Recovery"] { border-bottom-color:var(--pillar-2); }
+.filter-tab--active[data-pillar="Metabolic"] { border-bottom-color:var(--pillar-3); }
+.filter-tab--active[data-pillar="Cognitive"] { border-bottom-color:var(--pillar-4); }
+.filter-tab--active[data-pillar="Performance"] { border-bottom-color:var(--pillar-5); }
+
+.filter-tab__num {
+  color:var(--faint);
+  margin-right:6px;
+  font-weight:400;
+}
+
+.filter-tab--active .filter-tab__num {
+  color:var(--muted);
+}
+
+/* =========================================================
+   COLUMN HEADER ROW
+   ========================================================= */
+.col-header {
+  max-width:1140px;
+  margin:0 auto;
+  padding:16px 24px 8px;
+  display:grid;
+  grid-template-columns:48px 1fr 140px 100px 80px 80px;
+  gap:8px;
+  align-items:center;
+  font-family:'Space Mono', monospace;
+  font-size:9px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--faint);
+  border-bottom:1px solid var(--line);
+}
+
+/* =========================================================
+   COMPOUND STRIPS
+   ========================================================= */
+.strip-list {
+  max-width:1140px;
+  margin:0 auto;
+  padding:0 24px 24px;
+}
+
+.strip {
+  border-bottom:1px solid var(--line);
+  transition:background 0.25s var(--ease-out-expo);
+}
+
+.strip--hidden {
+  display:none;
+}
+
+/* Strip header row (always visible) */
+.strip__row {
+  display:grid;
+  grid-template-columns:48px 1fr 140px 100px 80px 80px;
+  gap:8px;
+  align-items:center;
+  padding:14px 0;
+  cursor:pointer;
+  position:relative;
+  border-left:3px solid transparent;
+  padding-left:16px;
+  margin-left:-19px;
+  transition:all 0.25s var(--ease-out-expo);
+}
+
+.strip__row:hover {
+  background:var(--accent);
+}
+
+.strip__row:focus-visible {
+  outline:2px solid var(--accent-solid);
+  outline-offset:-2px;
+}
+
+/* Pillar border colors */
+.strip[data-pillar="Longevity"] .strip__row { border-left-color:var(--pillar-1); }
+.strip[data-pillar="Recovery"] .strip__row { border-left-color:var(--pillar-2); }
+.strip[data-pillar="Metabolic"] .strip__row { border-left-color:var(--pillar-3); }
+.strip[data-pillar="Cognitive"] .strip__row { border-left-color:var(--pillar-4); }
+.strip[data-pillar="Performance"] .strip__row { border-left-color:var(--pillar-5); }
+
+/* Pillar numeral */
+.strip__pillar-num {
+  font-family:'Space Mono', monospace;
+  font-size:12px;
+  font-weight:700;
+  color:var(--faint);
+  text-align:center;
+}
+
+.strip[data-pillar="Longevity"] .strip__pillar-num { color:var(--pillar-1); }
+.strip[data-pillar="Recovery"] .strip__pillar-num { color:var(--pillar-2); }
+.strip[data-pillar="Metabolic"] .strip__pillar-num { color:var(--pillar-3); }
+.strip[data-pillar="Cognitive"] .strip__pillar-num { color:var(--pillar-4); }
+.strip[data-pillar="Performance"] .strip__pillar-num { color:var(--pillar-5); }
+
+/* Compound name */
+.strip__name {
+  font-family:'Space Mono', monospace;
+  font-size:13px;
+  font-weight:700;
+  color:var(--text-heading);
+  letter-spacing:0.04em;
+}
+
+/* Role tag */
+.strip__role {
+  font-family:'Space Mono', monospace;
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:0.02em;
+  padding:3px 8px;
+  background:var(--tag-bg);
+  border:1px solid var(--tag-border);
+  border-radius:2px;
+  text-align:center;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* Dose */
+.strip__dose {
+  font-family:'Space Mono', monospace;
+  font-size:11px;
+  color:var(--muted);
+  text-align:center;
+}
+
+/* Size */
+.strip__size {
+  font-family:'Space Mono', monospace;
+  font-size:11px;
+  color:var(--faint);
+  text-align:center;
+}
+
+/* Price */
+.strip__price {
+  font-family:'Playfair Display', serif;
+  font-size:15px;
+  font-weight:500;
+  color:var(--stat-num);
+  text-align:right;
+}
+
+/* Expand chevron indicator */
+.strip__name::after {
+  content:'';
+  display:inline-block;
+  width:0;
+  height:0;
+  border-left:4px solid transparent;
+  border-right:4px solid transparent;
+  border-top:5px solid var(--faint);
+  margin-left:10px;
+  vertical-align:middle;
+  transition:transform 0.3s var(--ease-out-expo);
+}
+
+.strip--expanded .strip__name::after {
+  transform:rotate(180deg);
+}
+
+/* =========================================================
+   DETAIL PANEL (expanded)
+   ========================================================= */
+.strip__detail {
+  max-height:0;
+  overflow:hidden;
+  transition:max-height 0.4s var(--ease-out-expo), opacity 0.3s var(--ease-out-expo);
+  opacity:0;
+}
+
+.strip--expanded .strip__detail {
+  max-height:300px;
+  opacity:1;
+}
+
+.strip__detail-inner {
+  background:var(--expand-bg);
+  border:1px solid var(--line);
+  border-left:3px solid transparent;
+  margin:0 0 16px -19px;
+  padding:20px 20px 20px 36px;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr auto;
+  gap:24px;
+  align-items:start;
+}
+
+.strip[data-pillar="Longevity"] .strip__detail-inner { border-left-color:var(--pillar-1); }
+.strip[data-pillar="Recovery"] .strip__detail-inner { border-left-color:var(--pillar-2); }
+.strip[data-pillar="Metabolic"] .strip__detail-inner { border-left-color:var(--pillar-3); }
+.strip[data-pillar="Cognitive"] .strip__detail-inner { border-left-color:var(--pillar-4); }
+.strip[data-pillar="Performance"] .strip__detail-inner { border-left-color:var(--pillar-5); }
+
+.detail__block-label {
+  font-family:'Space Mono', monospace;
+  font-size:9px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--faint);
+  margin-bottom:6px;
+}
+
+.detail__block-value {
+  font-family:'DM Sans', sans-serif;
+  font-size:13px;
+  color:var(--text);
+  line-height:1.55;
+}
+
+.detail__block-value--mono {
+  font-family:'Space Mono', monospace;
+  font-size:12px;
+}
+
+/* Add to Stack button */
+.btn-add {
+  appearance:none;
+  background:transparent;
+  border:1px solid var(--btn-border);
+  color:var(--text);
+  font-family:'Space Mono', monospace;
+  font-size:11px;
+  letter-spacing:0.06em;
+  text-transform:uppercase;
+  padding:10px 20px;
+  cursor:pointer;
+  transition:all 0.25s var(--ease-out-expo);
+  border-radius:2px;
+  white-space:nowrap;
+  align-self:center;
+}
+
+.btn-add:hover {
+  border-color:var(--btn-hover-border);
+  background:var(--accent);
+  color:var(--text-heading);
+}
+
+.btn-add:focus-visible {
+  outline:2px solid var(--accent-solid);
+  outline-offset:2px;
+}
+
+.btn-add--added {
+  border-color:var(--accent-solid);
+  color:var(--accent-solid);
+}
+
+.btn-add--added::before {
+  content:'\2713\0020';
+}
+
+/* =========================================================
+   STACK SUMMARY BAR
+   ========================================================= */
+.stack-bar {
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  z-index:200;
+  background:var(--stack-bg);
+  backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  border-top:1px solid var(--line-strong);
+  padding:0 24px;
+  transition:transform 0.35s var(--ease-out-expo);
+}
+
+.stack-bar__inner {
+  max-width:1140px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:60px;
+}
+
+.stack-bar__left {
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+
+.stack-bar__label {
+  font-family:'Space Mono', monospace;
+  font-size:10px;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  color:var(--faint);
+}
+
+.stack-bar__count {
+  font-family:'Space Mono', monospace;
+  font-size:13px;
+  font-weight:700;
+  color:var(--text-heading);
+}
+
+.stack-bar__items {
+  font-family:'Space Mono', monospace;
+  font-size:10px;
+  color:var(--muted);
+  letter-spacing:0.02em;
+  max-width:400px;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.stack-bar__right {
+  display:flex;
+  align-items:center;
+  gap:20px;
+}
+
+.stack-bar__total {
+  font-family:'Playfair Display', serif;
+  font-size:20px;
+  font-weight:500;
+  color:var(--stat-num);
+}
+
+.stack-bar__clear {
+  appearance:none;
+  background:transparent;
+  border:1px solid var(--line-strong);
+  color:var(--faint);
+  font-family:'Space Mono', monospace;
+  font-size:9px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  padding:5px 12px;
+  cursor:pointer;
+  transition:all 0.25s var(--ease-out-expo);
+  border-radius:2px;
+}
+
+.stack-bar__clear:hover {
+  border-color:var(--btn-hover-border);
+  color:var(--text);
+}
+
+.stack-bar__clear:focus-visible {
+  outline:2px solid var(--accent-solid);
+  outline-offset:2px;
+}
+
+/* =========================================================
+   EMPTY STATE
+   ========================================================= */
+.empty-state {
+  text-align:center;
+  padding:64px 24px;
+  display:none;
+}
+
+.empty-state--visible {
+  display:block;
+}
+
+.empty-state__text {
+  font-family:'Space Mono', monospace;
+  font-size:12px;
+  color:var(--faint);
+  letter-spacing:0.06em;
+}
+
+/* =========================================================
+   RESPONSIVE: TABLET (768px)
+   ========================================================= */
+@media (max-width:900px) {
+  .col-header {
+    grid-template-columns:40px 1fr 120px 80px 70px;
+    font-size:8px;
+  }
+  .col-header__size { display:none; }
+
+  .strip__row {
+    grid-template-columns:40px 1fr 120px 80px 70px;
+  }
+  .strip__size { display:none; }
+
+  .strip__detail-inner {
+    grid-template-columns:1fr 1fr auto;
+  }
+  .detail__block--route { display:none; }
+
+  .strip__role {
+    font-size:9px;
+    padding:2px 6px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE: MOBILE (576px)
+   ========================================================= */
+@media (max-width:576px) {
+  .top-bar { padding:10px 16px; }
+  .top-bar__brand { font-size:10px; }
+
+  .hero { padding:40px 16px 24px; }
+
+  .filter-strip__inner { padding:0 8px; }
+  .filter-tab { padding:10px 12px; font-size:10px; }
+  .filter-tab__num { display:none; }
+
+  .col-header { display:none; }
+
+  .strip-list { padding:0 16px 24px; }
+
+  .strip__row {
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px 12px;
+    padding:14px 0 14px 14px;
+    margin-left:-17px;
+    border-left-width:3px;
+  }
+
+  .strip__pillar-num {
+    width:32px;
+    font-size:11px;
+    flex-shrink:0;
+  }
+
+  .strip__name {
+    flex:1;
+    font-size:12px;
+    min-width:0;
+  }
+
+  .strip__role {
+    order:5;
+    font-size:9px;
+    margin-left:44px;
+  }
+
+  .strip__dose { display:none; }
+  .strip__size { display:none; }
+
+  .strip__price {
+    font-size:14px;
+    flex-shrink:0;
+  }
+
+  .strip__detail-inner {
+    grid-template-columns:1fr;
+    gap:14px;
+    padding:16px 16px 16px 28px;
+    margin-left:-17px;
+  }
+
+  .detail__block--route { display:block; }
+
+  .btn-add {
+    width:100%;
+    text-align:center;
+    padding:12px 20px;
+  }
+
+  .stack-bar__items { display:none; }
+  .stack-bar__inner { height:52px; }
+  .stack-bar__total { font-size:17px; }
+  body { padding-bottom:56px; }
+}
+
+/* =========================================================
+   MICRO-ANIMATIONS
+   ========================================================= */
+@keyframes fade-in {
+  from { opacity:0; transform:translateY(6px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+.strip {
+  animation:fade-in 0.35s var(--ease-out-expo) both;
+}
+
+.strip:nth-child(2) { animation-delay:0.03s; }
+.strip:nth-child(3) { animation-delay:0.06s; }
+.strip:nth-child(4) { animation-delay:0.09s; }
+.strip:nth-child(5) { animation-delay:0.12s; }
+.strip:nth-child(6) { animation-delay:0.15s; }
+.strip:nth-child(7) { animation-delay:0.18s; }
+.strip:nth-child(8) { animation-delay:0.21s; }
+.strip:nth-child(9) { animation-delay:0.24s; }
+.strip:nth-child(10) { animation-delay:0.27s; }
+.strip:nth-child(11) { animation-delay:0.30s; }
+.strip:nth-child(12) { animation-delay:0.33s; }
+
+/* Visually hidden utility for a11y */
+.sr-only {
+  position:absolute;
+  width:1px;
+  height:1px;
+  padding:0;
+  margin:-1px;
+  overflow:hidden;
+  clip:rect(0,0,0,0);
+  white-space:nowrap;
+  border-width:0;
+}
+</style>
+</head>
+
+<body>
+<!-- ====== TOP BAR ====== -->
+<header class="top-bar" role="banner">
+  <div class="top-bar__brand"><span>Engineered</span> Adherence</div>
+  <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light and dark theme">
+    <span id="themeLabel">Light</span>
+  </button>
+</header>
+
+<!-- ====== HERO ====== -->
+<section class="hero" aria-labelledby="hero-title">
+  <h1 class="hero__title" id="hero-title">The Arsenal</h1>
+  <p class="hero__subtitle">Compound inventory // Pharmaceutical-grade peptides</p>
+  <div class="hero__rule" aria-hidden="true"></div>
+</section>
+
+<!-- ====== PILLAR FILTER STRIP ====== -->
+<nav class="filter-strip" role="tablist" aria-label="Filter compounds by pillar">
+  <div class="filter-strip__inner" id="filterTabs">
+    <!-- Tabs injected by JS -->
+  </div>
+</nav>
+
+<!-- ====== COLUMN HEADERS ====== -->
+<div class="col-header" aria-hidden="true">
+  <span>Pillar</span>
+  <span>Compound</span>
+  <span>Role</span>
+  <span>Dosing</span>
+  <span class="col-header__size">Size</span>
+  <span style="text-align:right">Price</span>
+</div>
+
+<!-- ====== COMPOUND STRIPS ====== -->
+<main class="strip-list" id="stripList" role="list" aria-label="Compound inventory">
+  <!-- Strips injected by JS -->
+</main>
+
+<div class="empty-state" id="emptyState">
+  <p class="empty-state__text">No compounds match current filter.</p>
+</div>
+
+<!-- ====== STACK SUMMARY BAR ====== -->
+<aside class="stack-bar" id="stackBar" role="complementary" aria-label="Stack summary">
+  <div class="stack-bar__inner">
+    <div class="stack-bar__left">
+      <span class="stack-bar__label">Stack</span>
+      <span class="stack-bar__count" id="stackCount">0 items</span>
+      <span class="stack-bar__items" id="stackItems">--</span>
+    </div>
+    <div class="stack-bar__right">
+      <span class="stack-bar__total" id="stackTotal">$0</span>
+      <button class="stack-bar__clear" id="stackClear" type="button" aria-label="Clear stack">Clear</button>
+    </div>
+  </div>
+</aside>
+
+<script>
+/* =============================================================
+   DATA
+   ============================================================= */
+const COMPOUNDS = [
+  {slug:'epithalon',name:'EPITHALON',pillar:'Longevity',pillarNum:'I',price:145,size:'10mg',role:'Telomerase activation',route:'SubQ',dosing:'100mcg',freq:'Daily x 20d',mech:'Activates telomerase to extend telomere length, supporting cellular longevity.'},
+  {slug:'ghk-cu',name:'GHK-CU',pillar:'Longevity',pillarNum:'I',price:76,size:'50mg',role:'Collagen synthesis',route:'SubQ/Topical',dosing:'1-2mg',freq:'Daily',mech:'Copper peptide complex that stimulates collagen production and tissue remodeling.'},
+  {slug:'bpc-157',name:'BPC-157',pillar:'Recovery',pillarNum:'II',price:89,size:'5mg',role:'Tissue repair',route:'SubQ',dosing:'250-500mcg',freq:'2x daily',mech:'Gastric pentadecapeptide that accelerates wound healing and tissue repair.'},
+  {slug:'tb-500',name:'TB-500',pillar:'Recovery',pillarNum:'II',price:134,size:'5mg',role:'Systemic healing',route:'SubQ',dosing:'2.5mg',freq:'2x week',mech:'Thymosin beta-4 fragment promoting cell migration and systemic healing.'},
+  {slug:'aod-9604',name:'AOD-9604',pillar:'Metabolic',pillarNum:'III',price:118,size:'5mg',role:'Targeted lipolysis',route:'SubQ',dosing:'300mcg',freq:'Daily',mech:'Modified GH fragment targeting fat metabolism without systemic GH effects.'},
+  {slug:'retatrutide',name:'RETATRUTIDE',pillar:'Metabolic',pillarNum:'III',price:189,size:'10mg',role:'Triple agonist',route:'SubQ',dosing:'Titrate',freq:'Weekly',mech:'Triple incretin receptor agonist for comprehensive metabolic optimization.'},
+  {slug:'semax',name:'SEMAX',pillar:'Cognitive',pillarNum:'IV',price:97,size:'30mg',role:'BDNF upregulation',route:'Intranasal',dosing:'200-600mcg',freq:'Daily',mech:'Synthetic ACTH analogue that upregulates BDNF for cognitive enhancement.'},
+  {slug:'selank',name:'SELANK',pillar:'Cognitive',pillarNum:'IV',price:88,size:'5mg',role:'Anxiolytic',route:'Intranasal',dosing:'250-500mcg',freq:'Daily',mech:'Tuftsin analogue with anxiolytic and nootropic properties.'},
+  {slug:'ipamorelin',name:'IPAMORELIN',pillar:'Performance',pillarNum:'V',price:112,size:'2mg',role:'Clean GH pulse',route:'SubQ',dosing:'200-300mcg',freq:'2-3x daily',mech:'Selective GH secretagogue producing clean GH pulses without cortisol elevation.'},
+  {slug:'cjc-1295',name:'CJC-1295',pillar:'Performance',pillarNum:'V',price:108,size:'2mg',role:'Sustained GH',route:'SubQ',dosing:'100mcg',freq:'2-3x week',mech:'GHRH analogue providing sustained GH elevation over extended periods.'},
+  {slug:'hexarelin',name:'HEXARELIN',pillar:'Performance',pillarNum:'V',price:129,size:'2mg',role:'Max GH release',route:'SubQ',dosing:'100-200mcg',freq:'2x daily',mech:'Potent GH secretagogue for maximum growth hormone release.'},
+  {slug:'mk-677',name:'MK-677',pillar:'Performance',pillarNum:'V',price:94,size:'10mg',role:'Oral secretagogue',route:'Oral',dosing:'10-25mg',freq:'Daily',mech:'Oral GH secretagogue mimicking ghrelin for sustained IGF-1 elevation.'}
+];
+
+const PILLARS = [
+  {name:'all', label:'All', num:''},
+  {name:'Longevity', label:'Longevity', num:'I'},
+  {name:'Recovery', label:'Recovery', num:'II'},
+  {name:'Metabolic', label:'Metabolic', num:'III'},
+  {name:'Cognitive', label:'Cognitive', num:'IV'},
+  {name:'Performance', label:'Performance', num:'V'}
+];
+
+const STORAGE_KEY = 'ea_stack_v2';
+
+/* =============================================================
+   STATE
+   ============================================================= */
+let activePillar = 'all';
+let expandedSlug = null;
+let stack = loadStack();
+
+/* =============================================================
+   THEME TOGGLE
+   ============================================================= */
+const themeToggle = document.getElementById('themeToggle');
+const themeLabel = document.getElementById('themeLabel');
+const root = document.documentElement;
+
+function getStoredTheme() {
+  try { return localStorage.getItem('ea_theme_v2'); } catch(e) { return null; }
+}
+
+function setTheme(theme) {
+  root.setAttribute('data-theme', theme);
+  themeLabel.textContent = theme === 'dark' ? 'Light' : 'Dark';
+  try { localStorage.setItem('ea_theme_v2', theme); } catch(e) { /* silent */ }
+}
+
+(function initTheme() {
+  const stored = getStoredTheme();
+  if (stored) { setTheme(stored); }
+  else if (window.matchMedia && window.matchMedia('(prefers-color-scheme:light)').matches) { setTheme('light'); }
+})();
+
+themeToggle.addEventListener('click', function() {
+  const current = root.getAttribute('data-theme');
+  setTheme(current === 'dark' ? 'light' : 'dark');
+});
+
+/* =============================================================
+   STACK (localStorage)
+   ============================================================= */
+function loadStack() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch(e) { return []; }
+}
+
+function saveStack() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(stack)); } catch(e) { /* silent */ }
+}
+
+function isInStack(slug) {
+  return stack.indexOf(slug) !== -1;
+}
+
+function toggleStackItem(slug) {
+  const idx = stack.indexOf(slug);
+  if (idx === -1) { stack.push(slug); }
+  else { stack.splice(idx, 1); }
+  saveStack();
+  updateStackBar();
+  updateAddButtons();
+}
+
+function clearStack() {
+  stack = [];
+  saveStack();
+  updateStackBar();
+  updateAddButtons();
+}
+
+function updateStackBar() {
+  const countEl = document.getElementById('stackCount');
+  const itemsEl = document.getElementById('stackItems');
+  const totalEl = document.getElementById('stackTotal');
+  const len = stack.length;
+  countEl.textContent = len + (len === 1 ? ' item' : ' items');
+
+  if (len === 0) {
+    itemsEl.textContent = '--';
+    totalEl.textContent = '$0';
+    return;
+  }
+
+  const names = [];
+  let total = 0;
+  stack.forEach(function(slug) {
+    const c = COMPOUNDS.find(function(x) { return x.slug === slug; });
+    if (c) { names.push(c.name); total += c.price; }
+  });
+  itemsEl.textContent = names.join(' / ');
+  totalEl.textContent = '$' + total;
+}
+
+function updateAddButtons() {
+  const buttons = document.querySelectorAll('.btn-add');
+  buttons.forEach(function(btn) {
+    const slug = btn.getAttribute('data-slug');
+    if (isInStack(slug)) {
+      btn.classList.add('btn-add--added');
+      btn.textContent = 'In Stack';
+    } else {
+      btn.classList.remove('btn-add--added');
+      btn.textContent = 'Add to Stack';
+    }
+  });
+}
+
+/* =============================================================
+   FILTER TABS
+   ============================================================= */
+function buildFilterTabs() {
+  const container = document.getElementById('filterTabs');
+  PILLARS.forEach(function(p) {
+    const btn = document.createElement('button');
+    btn.className = 'filter-tab' + (p.name === 'all' ? ' filter-tab--active' : '');
+    btn.setAttribute('data-pillar', p.name);
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('aria-selected', p.name === 'all' ? 'true' : 'false');
+    btn.type = 'button';
+
+    if (p.num) {
+      const numSpan = document.createElement('span');
+      numSpan.className = 'filter-tab__num';
+      numSpan.textContent = p.num;
+      btn.appendChild(numSpan);
+    }
+    btn.appendChild(document.createTextNode(p.label));
+
+    btn.addEventListener('click', function() {
+      activePillar = p.name;
+      expandedSlug = null;
+      updateFilterTabs();
+      filterStrips();
+    });
+
+    container.appendChild(btn);
+  });
+}
+
+function updateFilterTabs() {
+  const tabs = document.querySelectorAll('.filter-tab');
+  tabs.forEach(function(tab) {
+    const p = tab.getAttribute('data-pillar');
+    if (p === activePillar) {
+      tab.classList.add('filter-tab--active');
+      tab.setAttribute('aria-selected', 'true');
+    } else {
+      tab.classList.remove('filter-tab--active');
+      tab.setAttribute('aria-selected', 'false');
+    }
+  });
+}
+
+/* =============================================================
+   COMPOUND STRIPS
+   ============================================================= */
+function buildStrips() {
+  const list = document.getElementById('stripList');
+  list.innerHTML = '';
+
+  COMPOUNDS.forEach(function(c) {
+    const strip = document.createElement('div');
+    strip.className = 'strip';
+    strip.setAttribute('data-pillar', c.pillar);
+    strip.setAttribute('data-slug', c.slug);
+    strip.setAttribute('role', 'listitem');
+
+    /* --- Row (always visible) --- */
+    const row = document.createElement('div');
+    row.className = 'strip__row';
+    row.setAttribute('tabindex', '0');
+    row.setAttribute('role', 'button');
+    row.setAttribute('aria-expanded', 'false');
+    row.setAttribute('aria-label', 'Expand details for ' + c.name);
+
+    row.innerHTML =
+      '<span class="strip__pillar-num">' + c.pillarNum + '</span>' +
+      '<span class="strip__name">' + c.name + '</span>' +
+      '<span class="strip__role">' + c.role + '</span>' +
+      '<span class="strip__dose">' + c.dosing + '</span>' +
+      '<span class="strip__size">' + c.size + '</span>' +
+      '<span class="strip__price">$' + c.price + '</span>';
+
+    row.addEventListener('click', function() { toggleExpand(c.slug); });
+    row.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleExpand(c.slug); }
+    });
+
+    /* --- Detail panel --- */
+    const detail = document.createElement('div');
+    detail.className = 'strip__detail';
+
+    const inStack = isInStack(c.slug);
+    detail.innerHTML =
+      '<div class="strip__detail-inner">' +
+        '<div>' +
+          '<div class="detail__block-label">Mechanism</div>' +
+          '<div class="detail__block-value">' + c.mech + '</div>' +
+        '</div>' +
+        '<div>' +
+          '<div class="detail__block-label">Frequency</div>' +
+          '<div class="detail__block-value detail__block-value--mono">' + c.freq + '</div>' +
+        '</div>' +
+        '<div class="detail__block--route">' +
+          '<div class="detail__block-label">Route</div>' +
+          '<div class="detail__block-value detail__block-value--mono">' + c.route + '</div>' +
+        '</div>' +
+        '<button class="btn-add' + (inStack ? ' btn-add--added' : '') + '" data-slug="' + c.slug + '" type="button">' +
+          (inStack ? 'In Stack' : 'Add to Stack') +
+        '</button>' +
+      '</div>';
+
+    const addBtn = detail.querySelector('.btn-add');
+    addBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      toggleStackItem(c.slug);
+    });
+
+    strip.appendChild(row);
+    strip.appendChild(detail);
+    list.appendChild(strip);
+  });
+}
+
+function toggleExpand(slug) {
+  const wasExpanded = expandedSlug === slug;
+  expandedSlug = wasExpanded ? null : slug;
+
+  const strips = document.querySelectorAll('.strip');
+  strips.forEach(function(s) {
+    const sSlug = s.getAttribute('data-slug');
+    const row = s.querySelector('.strip__row');
+    if (sSlug === expandedSlug) {
+      s.classList.add('strip--expanded');
+      row.setAttribute('aria-expanded', 'true');
+    } else {
+      s.classList.remove('strip--expanded');
+      row.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+function filterStrips() {
+  const strips = document.querySelectorAll('.strip');
+  let visibleCount = 0;
+  strips.forEach(function(s) {
+    const pillar = s.getAttribute('data-pillar');
+    if (activePillar === 'all' || pillar === activePillar) {
+      s.classList.remove('strip--hidden');
+      s.classList.remove('strip--expanded');
+      visibleCount++;
+    } else {
+      s.classList.add('strip--hidden');
+      s.classList.remove('strip--expanded');
+    }
+  });
+
+  const emptyState = document.getElementById('emptyState');
+  if (visibleCount === 0) {
+    emptyState.classList.add('empty-state--visible');
+  } else {
+    emptyState.classList.remove('empty-state--visible');
+  }
+}
+
+/* =============================================================
+   INIT
+   ============================================================= */
+buildFilterTabs();
+buildStrips();
+updateStackBar();
+
+document.getElementById('stackClear').addEventListener('click', clearStack);
+</script>
+</body>
+</html>

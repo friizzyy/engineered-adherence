@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Arsenal — Engineered Adherence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================================
+       THEME VARIABLES
+       ========================================================= */
+    [data-theme="dark"] {
+      --bg:#161616; --bg-warm:#1a1a1a; --bg-card:#1e1e1e; --bg-card-hover:#232323;
+      --text:#e8e4de; --text-heading:#f0ece6; --muted:#9a9590; --faint:#8a857e;
+      --line:rgba(232,228,222,0.06); --line-strong:rgba(232,228,222,0.12);
+      --btn-border:rgba(232,228,222,0.2); --btn-hover-border:rgba(232,228,222,0.4);
+      --accent:rgba(232,228,222,0.08); --accent-solid:#7a756f;
+      --shadow-card-subtle:0 8px 24px rgba(0,0,0,0.15);
+      --stat-num:#f0ece6; --nav-bg:rgba(22,22,22,0.92);
+      --popover-bg:#1e1e1e; --popover-border:rgba(232,228,222,0.1);
+      --overlay:rgba(0,0,0,0.5);
+    }
+    [data-theme="light"] {
+      --bg:#f2f3f5; --bg-warm:#f5f6f8; --bg-card:rgba(255,255,255,0.8); --bg-card-hover:rgba(255,255,255,0.95);
+      --text:#1a1c22; --text-heading:#0a0b0d; --muted:#4a4e58; --faint:#6e7280;
+      --line:rgba(0,0,0,0.07); --line-strong:rgba(0,0,0,0.12);
+      --btn-border:rgba(26,28,34,0.25); --btn-hover-border:rgba(26,28,34,0.5);
+      --accent:rgba(26,28,34,0.05); --accent-solid:#50545e;
+      --shadow-card-subtle:0 8px 24px rgba(0,0,0,0.05);
+      --stat-num:#0f1014; --nav-bg:rgba(242,243,245,0.94);
+      --popover-bg:rgba(255,255,255,0.97); --popover-border:rgba(0,0,0,0.1);
+      --overlay:rgba(0,0,0,0.25);
+    }
+
+    :root {
+      --pillar-1:#7A8A98;
+      --pillar-2:#C9B99A;
+      --pillar-3:#A8B4A0;
+      --pillar-4:#B8A8B8;
+      --pillar-5:#c4a962;
+      --ease-out: cubic-bezier(0.4,0,0.2,1);
+      --max-w: 960px;
+    }
+
+    /* =========================================================
+       RESET & BASE
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.5s var(--ease-out), color 0.4s var(--ease-out);
+      min-height: 100vh;
+    }
+
+    /* =========================================================
+       TOP NAV
+       ========================================================= */
+    .topnav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--line);
+      padding: 0 32px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topnav-brand {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.8125rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .topnav-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--btn-border);
+      color: var(--muted);
+      width: 36px; height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s var(--ease-out);
+      font-size: 14px;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--btn-hover-border);
+      color: var(--text);
+    }
+
+    /* =========================================================
+       PAGE LAYOUT
+       ========================================================= */
+    .page {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 96px 32px 64px;
+    }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+    .page-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 500;
+      color: var(--text-heading);
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+      transition: color 0.4s var(--ease-out);
+    }
+
+    .page-header .subtitle {
+      font-size: 0.8125rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--faint);
+      font-weight: 300;
+    }
+
+    /* =========================================================
+       STATS BAR
+       ========================================================= */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 32px;
+      padding: 16px 0;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--stat-num);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: 0.6875rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-top: 2px;
+    }
+
+    /* =========================================================
+       LEGEND
+       ========================================================= */
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .legend-swatch {
+      width: 10px;
+      height: 10px;
+      border-radius: 2px;
+    }
+
+    .legend-label {
+      font-size: 0.6875rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .legend-numeral {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.625rem;
+      color: var(--faint);
+      margin-right: 2px;
+    }
+
+    /* =========================================================
+       PERIODIC TABLE GRID
+       ========================================================= */
+    .periodic-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      margin-bottom: 64px;
+    }
+
+    /* Pillar header cells */
+    .pillar-header {
+      text-align: center;
+      padding: 16px 8px 12px;
+      border: 1px solid var(--line);
+      background: var(--bg-warm);
+      position: relative;
+      transition: background 0.4s var(--ease-out), border-color 0.4s var(--ease-out);
+    }
+
+    .pillar-header-num {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.625rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .pillar-header-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .pillar-header::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 20%;
+      right: 20%;
+      height: 2px;
+    }
+
+    /* Compound cells */
+    .element-cell {
+      aspect-ratio: 1;
+      border: 1px solid var(--line);
+      background: var(--bg-card);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.35s var(--ease-out);
+      overflow: hidden;
+      opacity: 0;
+      transform: translateY(12px) scale(0.95);
+    }
+
+    .element-cell.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .element-cell::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.35s var(--ease-out);
+      pointer-events: none;
+    }
+
+    .element-cell:hover {
+      transform: scale(1.06);
+      z-index: 5;
+      border-color: var(--cell-pillar-color);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+      background: var(--bg-card-hover);
+    }
+
+    .element-cell:hover::before {
+      opacity: 1;
+    }
+
+    .element-cell.active {
+      transform: scale(1.06);
+      z-index: 10;
+      border-color: var(--cell-pillar-color);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    }
+
+    /* Cell inner elements */
+    .cell-pillar-num {
+      position: absolute;
+      top: 6px;
+      left: 7px;
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      font-weight: 400;
+      color: var(--faint);
+      letter-spacing: 0.05em;
+      line-height: 1;
+    }
+
+    .cell-price {
+      position: absolute;
+      top: 6px;
+      right: 7px;
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      font-weight: 400;
+      color: var(--faint);
+      line-height: 1;
+    }
+
+    .cell-abbr {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.75rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 6px;
+      transition: color 0.35s var(--ease-out);
+    }
+
+    .cell-name {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.5625rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.2;
+      padding: 0 6px;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .cell-role {
+      font-size: 0.5rem;
+      color: var(--faint);
+      margin-top: 3px;
+      letter-spacing: 0.04em;
+      text-align: center;
+      padding: 0 4px;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Pillar-specific tints */
+    .element-cell[data-pillar="1"] { --cell-pillar-color: var(--pillar-1); }
+    .element-cell[data-pillar="2"] { --cell-pillar-color: var(--pillar-2); }
+    .element-cell[data-pillar="3"] { --cell-pillar-color: var(--pillar-3); }
+    .element-cell[data-pillar="4"] { --cell-pillar-color: var(--pillar-4); }
+    .element-cell[data-pillar="5"] { --cell-pillar-color: var(--pillar-5); }
+
+    .element-cell[data-pillar="1"]::before { background: var(--pillar-1); }
+    .element-cell[data-pillar="2"]::before { background: var(--pillar-2); }
+    .element-cell[data-pillar="3"]::before { background: var(--pillar-3); }
+    .element-cell[data-pillar="4"]::before { background: var(--pillar-4); }
+    .element-cell[data-pillar="5"]::before { background: var(--pillar-5); }
+
+    [data-theme="dark"] .element-cell::before { opacity: 0.05; }
+    [data-theme="dark"] .element-cell:hover::before { opacity: 0.1; }
+    [data-theme="light"] .element-cell::before { opacity: 0.06; }
+    [data-theme="light"] .element-cell:hover::before { opacity: 0.12; }
+
+    .element-cell .cell-abbr {
+      color: var(--cell-pillar-color);
+    }
+
+    /* =========================================================
+       POPOVER / DETAIL CARD
+       ========================================================= */
+    .popover-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 49;
+      background: var(--overlay);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s var(--ease-out);
+    }
+
+    .popover-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .popover {
+      position: fixed;
+      z-index: 50;
+      width: 380px;
+      max-width: calc(100vw - 32px);
+      background: var(--popover-bg);
+      border: 1px solid var(--popover-border);
+      box-shadow: 0 24px 64px rgba(0,0,0,0.3);
+      padding: 0;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px) scale(0.97);
+      transition: opacity 0.3s var(--ease-out), transform 0.3s var(--ease-out);
+    }
+
+    .popover.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+
+    .popover-accent {
+      height: 3px;
+      width: 100%;
+    }
+
+    .popover-body {
+      padding: 24px;
+    }
+
+    .popover-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .popover-header-left {
+      flex: 1;
+    }
+
+    .popover-abbr {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .popover-fullname {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 500;
+      color: var(--text-heading);
+      margin-bottom: 2px;
+    }
+
+    .popover-pillar-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.6875rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .popover-pillar-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 1px;
+    }
+
+    .popover-close {
+      background: none;
+      border: none;
+      color: var(--faint);
+      font-size: 18px;
+      cursor: pointer;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+      flex-shrink: 0;
+      margin-top: -4px;
+      margin-right: -4px;
+    }
+
+    .popover-close:hover { color: var(--text); }
+
+    .popover-mech {
+      font-size: 0.8125rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .popover-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .spec-label {
+      font-size: 0.625rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 2px;
+    }
+
+    .spec-value {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.8125rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .popover-price-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+    }
+
+    .popover-price {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--stat-num);
+    }
+
+    .popover-price-size {
+      font-size: 0.75rem;
+      color: var(--faint);
+      margin-left: 6px;
+      font-weight: 400;
+    }
+
+    .btn-add-stack {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border: 1px solid var(--btn-border);
+      background: transparent;
+      color: var(--text);
+      cursor: pointer;
+      transition: all 0.3s var(--ease-out);
+    }
+
+    .btn-add-stack:hover {
+      border-color: var(--btn-hover-border);
+      background: var(--accent);
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    .page-footer {
+      text-align: center;
+      padding: 32px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .page-footer p {
+      font-size: 0.6875rem;
+      color: var(--faint);
+      letter-spacing: 0.06em;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (max-width: 900px) {
+      .periodic-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5px;
+      }
+
+      .page-header h1 {
+        font-size: 2rem;
+      }
+
+      .stats-bar {
+        gap: 20px;
+      }
+
+      .cell-abbr {
+        font-size: 1.4rem;
+      }
+
+      .cell-name {
+        font-size: 0.5rem;
+      }
+
+      .cell-role {
+        display: none;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 80px 16px 48px;
+      }
+
+      .periodic-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 4px;
+      }
+
+      .element-cell {
+        aspect-ratio: auto;
+        min-height: 100px;
+        padding: 8px 4px;
+      }
+
+      .page-header h1 {
+        font-size: 1.6rem;
+      }
+
+      .page-header .subtitle {
+        font-size: 0.6875rem;
+        letter-spacing: 0.12em;
+      }
+
+      .stats-bar {
+        gap: 16px;
+      }
+
+      .stat-num {
+        font-size: 1rem;
+      }
+
+      .legend {
+        gap: 12px;
+      }
+
+      .legend-label {
+        font-size: 0.625rem;
+      }
+
+      .cell-abbr {
+        font-size: 1.25rem;
+      }
+
+      .cell-name {
+        font-size: 0.5rem;
+      }
+
+      .cell-price {
+        font-size: 7px;
+      }
+
+      .cell-pillar-num {
+        font-size: 7px;
+      }
+
+      .popover {
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) scale(0.97);
+        width: calc(100vw - 32px);
+      }
+
+      .popover.show {
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .pillar-header {
+        padding: 10px 4px 8px;
+      }
+
+      .pillar-header-name {
+        font-size: 0.5625rem;
+        letter-spacing: 0.08em;
+      }
+
+      .pillar-header-num {
+        font-size: 0.5625rem;
+      }
+    }
+
+    /* =========================================================
+       STAGGER ANIMATION KEYFRAMES
+       ========================================================= */
+    @keyframes cellEnter {
+      from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* =========================================================
+       MOCKUP LABEL
+       ========================================================= */
+    .mockup-label {
+      position: fixed;
+      bottom: 16px;
+      left: 16px;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.625rem;
+      letter-spacing: 0.08em;
+      color: var(--faint);
+      opacity: 0.5;
+      z-index: 200;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP NAV -->
+  <nav class="topnav">
+    <span class="topnav-brand">Engineered Adherence</span>
+    <div class="topnav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2">
+          <circle cx="8" cy="8" r="3.5"/>
+          <line x1="8" y1="1" x2="8" y2="3"/>
+          <line x1="8" y1="13" x2="8" y2="15"/>
+          <line x1="1" y1="8" x2="3" y2="8"/>
+          <line x1="13" y1="8" x2="15" y2="8"/>
+          <line x1="3.05" y1="3.05" x2="4.46" y2="4.46"/>
+          <line x1="11.54" y1="11.54" x2="12.95" y2="12.95"/>
+          <line x1="3.05" y1="12.95" x2="4.46" y2="11.54"/>
+          <line x1="11.54" y1="4.46" x2="12.95" y2="3.05"/>
+        </svg>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MAIN -->
+  <main class="page">
+
+    <!-- HEADER -->
+    <header class="page-header">
+      <h1>The Arsenal</h1>
+      <p class="subtitle">Periodic Table of Compounds</p>
+    </header>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar" id="statsBar"></div>
+
+    <!-- LEGEND -->
+    <div class="legend" id="legend"></div>
+
+    <!-- PERIODIC GRID -->
+    <div class="periodic-grid" id="periodicGrid"></div>
+
+    <!-- FOOTER -->
+    <footer class="page-footer">
+      <p>Engineered Adherence &mdash; Research compounds for investigational use only</p>
+    </footer>
+
+  </main>
+
+  <!-- POPOVER OVERLAY -->
+  <div class="popover-overlay" id="popoverOverlay"></div>
+
+  <!-- POPOVER DETAIL CARD -->
+  <div class="popover" id="popover">
+    <div class="popover-accent" id="popoverAccent"></div>
+    <div class="popover-body">
+      <div class="popover-header">
+        <div class="popover-header-left">
+          <div class="popover-abbr" id="popoverAbbr"></div>
+          <div class="popover-fullname" id="popoverFullName"></div>
+          <div class="popover-pillar-badge">
+            <span class="popover-pillar-dot" id="popoverPillarDot"></span>
+            <span id="popoverPillarLabel"></span>
+          </div>
+        </div>
+        <button class="popover-close" id="popoverClose" aria-label="Close detail">&times;</button>
+      </div>
+      <p class="popover-mech" id="popoverMech"></p>
+      <div class="popover-specs" id="popoverSpecs"></div>
+      <div class="popover-price-row">
+        <div>
+          <span class="popover-price" id="popoverPrice"></span>
+          <span class="popover-price-size" id="popoverSize"></span>
+        </div>
+        <button class="btn-add-stack">Add to Stack</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOCKUP LABEL -->
+  <div class="mockup-label">MOCKUP E &mdash; PERIODIC TABLE v5</div>
+
+  <script>
+    /* ==========================================================
+       DATA
+       ========================================================== */
+    const PILLARS = [
+      { index: 1, num: 'I',   name: 'Longevity',   color: 'var(--pillar-1)' },
+      { index: 2, num: 'II',  name: 'Recovery',    color: 'var(--pillar-2)' },
+      { index: 3, num: 'III', name: 'Metabolic',   color: 'var(--pillar-3)' },
+      { index: 4, num: 'IV',  name: 'Cognitive',   color: 'var(--pillar-4)' },
+      { index: 5, num: 'V',   name: 'Performance', color: 'var(--pillar-5)' }
+    ];
+
+    const COMPOUNDS = [
+      { slug:'epithalon', abbr:'EPT', name:'EPITHALON', fullName:'Epithalon (Epitalon)', pillar:'Longevity', pillarNum:'I', pillarIndex:1, price:145, size:'10mg', role:'Telomerase activation', route:'SubQ', dosing:'100mcg', freq:'Daily x 20d', mech:'Activates telomerase to extend telomere length, supporting cellular longevity.' },
+      { slug:'ghk-cu', abbr:'GHK', name:'GHK-CU', fullName:'GHK-Cu (Copper Peptide)', pillar:'Longevity', pillarIndex:1, pillarNum:'I', price:76, size:'50mg', role:'Collagen synthesis', route:'SubQ/Topical', dosing:'1-2mg', freq:'Daily', mech:'Copper peptide complex that stimulates collagen production and tissue remodeling.' },
+      { slug:'bpc-157', abbr:'BPC', name:'BPC-157', fullName:'Body Protection Compound-157', pillar:'Recovery', pillarIndex:2, pillarNum:'II', price:89, size:'5mg', role:'Tissue repair', route:'SubQ', dosing:'250-500mcg', freq:'2x daily', mech:'Gastric pentadecapeptide that accelerates wound healing and tissue repair.' },
+      { slug:'tb-500', abbr:'TB5', name:'TB-500', fullName:'Thymosin Beta-4 Fragment', pillar:'Recovery', pillarIndex:2, pillarNum:'II', price:134, size:'5mg', role:'Systemic healing', route:'SubQ', dosing:'2.5mg', freq:'2x week', mech:'Thymosin beta-4 fragment promoting cell migration and systemic tissue healing.' },
+      { slug:'aod-9604', abbr:'AOD', name:'AOD-9604', fullName:'Advanced Obesity Drug 9604', pillar:'Metabolic', pillarIndex:3, pillarNum:'III', price:118, size:'5mg', role:'Targeted lipolysis', route:'SubQ', dosing:'300mcg', freq:'Daily', mech:'Modified GH fragment targeting fat metabolism without systemic GH effects.' },
+      { slug:'retatrutide', abbr:'RTT', name:'RETATRUTIDE', fullName:'Retatrutide (LY-3437943)', pillar:'Metabolic', pillarIndex:3, pillarNum:'III', price:189, size:'10mg', role:'Triple agonist', route:'SubQ', dosing:'Titrate', freq:'Weekly', mech:'Triple incretin receptor agonist for comprehensive metabolic optimization.' },
+      { slug:'semax', abbr:'SMX', name:'SEMAX', fullName:'Semax (MEHFPGP)', pillar:'Cognitive', pillarIndex:4, pillarNum:'IV', price:97, size:'30mg', role:'BDNF upregulation', route:'Intranasal', dosing:'200-600mcg', freq:'Daily', mech:'Synthetic ACTH analogue that upregulates BDNF for cognitive enhancement.' },
+      { slug:'selank', abbr:'SLK', name:'SELANK', fullName:'Selank (TP-7)', pillar:'Cognitive', pillarIndex:4, pillarNum:'IV', price:88, size:'5mg', role:'Anxiolytic', route:'Intranasal', dosing:'250-500mcg', freq:'Daily', mech:'Tuftsin analogue with anxiolytic and nootropic properties via GABA modulation.' },
+      { slug:'ipamorelin', abbr:'IPA', name:'IPAMORELIN', fullName:'Ipamorelin Acetate', pillar:'Performance', pillarIndex:5, pillarNum:'V', price:112, size:'2mg', role:'Clean GH pulse', route:'SubQ', dosing:'200-300mcg', freq:'2-3x daily', mech:'Selective GH secretagogue producing clean GH pulses without cortisol elevation.' },
+      { slug:'cjc-1295', abbr:'CJC', name:'CJC-1295', fullName:'CJC-1295 (DAC)', pillar:'Performance', pillarIndex:5, pillarNum:'V', price:108, size:'2mg', role:'Sustained GH', route:'SubQ', dosing:'100mcg', freq:'2-3x week', mech:'GHRH analogue providing sustained GH elevation over extended periods.' },
+      { slug:'hexarelin', abbr:'HEX', name:'HEXARELIN', fullName:'Hexarelin (Examorelin)', pillar:'Performance', pillarIndex:5, pillarNum:'V', price:129, size:'2mg', role:'Max GH release', route:'SubQ', dosing:'100-200mcg', freq:'2x daily', mech:'Potent GH secretagogue for maximum growth hormone release.' },
+      { slug:'mk-677', abbr:'MK6', name:'MK-677', fullName:'Ibutamoren Mesylate', pillar:'Performance', pillarIndex:5, pillarNum:'V', price:94, size:'10mg', role:'Oral secretagogue', route:'Oral', dosing:'10-25mg', freq:'Daily', mech:'Non-peptide oral GH secretagogue mimicking ghrelin for sustained IGF-1 elevation.' }
+    ];
+
+    /* ==========================================================
+       THEME TOGGLE
+       ========================================================== */
+    const themeToggle = document.getElementById('themeToggle');
+
+    themeToggle.addEventListener('click', () => {
+      const html = document.documentElement;
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      try { localStorage.setItem('ea-theme', next); } catch (e) { /* no-op */ }
+    });
+
+    // Restore saved theme
+    (function restoreTheme() {
+      try {
+        const saved = localStorage.getItem('ea-theme');
+        if (saved) document.documentElement.setAttribute('data-theme', saved);
+      } catch (e) { /* no-op */ }
+    })();
+
+    /* ==========================================================
+       BUILD STATS BAR
+       ========================================================== */
+    (function buildStats() {
+      const bar = document.getElementById('statsBar');
+      const total = COMPOUNDS.length;
+
+      // Total compounds stat
+      let html = `<div class="stat-item">
+        <div class="stat-num">${total}</div>
+        <div class="stat-label">Compounds</div>
+      </div>`;
+
+      // Per-pillar counts
+      PILLARS.forEach(p => {
+        const count = COMPOUNDS.filter(c => c.pillarIndex === p.index).length;
+        html += `<div class="stat-item">
+          <div class="stat-num" style="color:${p.color}">${count}</div>
+          <div class="stat-label">${p.name}</div>
+        </div>`;
+      });
+
+      bar.innerHTML = html;
+    })();
+
+    /* ==========================================================
+       BUILD LEGEND
+       ========================================================== */
+    (function buildLegend() {
+      const legend = document.getElementById('legend');
+      let html = '';
+      PILLARS.forEach(p => {
+        html += `<div class="legend-item">
+          <span class="legend-swatch" style="background:${p.color}"></span>
+          <span class="legend-numeral">${p.num}</span>
+          <span class="legend-label">${p.name}</span>
+        </div>`;
+      });
+      legend.innerHTML = html;
+    })();
+
+    /* ==========================================================
+       BUILD PERIODIC GRID
+       ========================================================== */
+    (function buildGrid() {
+      const grid = document.getElementById('periodicGrid');
+
+      // Group compounds by pillar
+      const byPillar = {};
+      PILLARS.forEach(p => { byPillar[p.index] = []; });
+      COMPOUNDS.forEach(c => { byPillar[c.pillarIndex].push(c); });
+
+      // Find max column height
+      const maxRows = Math.max(...Object.values(byPillar).map(arr => arr.length));
+
+      let html = '';
+
+      // Row 0: Pillar headers
+      PILLARS.forEach(p => {
+        html += `<div class="pillar-header" style="--ph-color:${p.color}">
+          <span class="pillar-header-num" style="color:${p.color}">${p.num}</span>
+          <span class="pillar-header-name">${p.name}</span>
+          <style>.pillar-header[style*="--ph-color:${p.color}"]::after{background:${p.color};opacity:0.4;}</style>
+        </div>`;
+      });
+
+      // Rows 1..maxRows: Compound cells (column-by-column, row-by-row)
+      for (let row = 0; row < maxRows; row++) {
+        PILLARS.forEach((p, colIdx) => {
+          const compounds = byPillar[p.index];
+          if (row < compounds.length) {
+            const c = compounds[row];
+            const delay = (colIdx * 60) + (row * 100);
+            html += `<div class="element-cell" data-pillar="${c.pillarIndex}" data-slug="${c.slug}" style="animation-delay:${delay}ms">
+              <span class="cell-pillar-num">${c.pillarNum}</span>
+              <span class="cell-price">$${c.price}</span>
+              <span class="cell-abbr">${c.abbr}</span>
+              <span class="cell-name">${c.fullName.split('(')[0].trim()}</span>
+              <span class="cell-role">${c.role}</span>
+            </div>`;
+          } else {
+            // Empty cell placeholder to maintain grid
+            html += `<div style="visibility:hidden;aspect-ratio:1"></div>`;
+          }
+        });
+      }
+
+      grid.innerHTML = html;
+
+      // Staggered entrance animation via IntersectionObserver
+      const cells = grid.querySelectorAll('.element-cell');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const delay = parseInt(entry.target.style.animationDelay) || 0;
+            setTimeout(() => {
+              entry.target.classList.add('visible');
+            }, delay);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      cells.forEach(cell => observer.observe(cell));
+    })();
+
+    /* ==========================================================
+       POPOVER LOGIC
+       ========================================================== */
+    const popover = document.getElementById('popover');
+    const popoverOverlay = document.getElementById('popoverOverlay');
+    const popoverClose = document.getElementById('popoverClose');
+    let activeCell = null;
+
+    function openPopover(slug, cellEl) {
+      const c = COMPOUNDS.find(x => x.slug === slug);
+      if (!c) return;
+
+      const pillar = PILLARS.find(p => p.index === c.pillarIndex);
+
+      // Fill popover content
+      document.getElementById('popoverAccent').style.background = `linear-gradient(90deg, ${pillar.color}, transparent)`;
+      document.getElementById('popoverAbbr').textContent = c.abbr;
+      document.getElementById('popoverAbbr').style.color = pillar.color;
+      document.getElementById('popoverFullName').textContent = c.fullName;
+      document.getElementById('popoverPillarDot').style.background = pillar.color;
+      document.getElementById('popoverPillarLabel').textContent = `${pillar.num} \u2014 ${pillar.name}`;
+      document.getElementById('popoverMech').textContent = c.mech;
+      document.getElementById('popoverPrice').textContent = `$${c.price}`;
+      document.getElementById('popoverSize').textContent = `/ ${c.size}`;
+
+      // Specs
+      const specsHtml = [
+        { label: 'Route', value: c.route },
+        { label: 'Dosing', value: c.dosing },
+        { label: 'Frequency', value: c.freq },
+        { label: 'Role', value: c.role }
+      ].map(s => `<div class="spec-item">
+        <span class="spec-label">${s.label}</span>
+        <span class="spec-value">${s.value}</span>
+      </div>`).join('');
+      document.getElementById('popoverSpecs').innerHTML = specsHtml;
+
+      // Position popover near the cell
+      positionPopover(cellEl);
+
+      // Mark active
+      if (activeCell) activeCell.classList.remove('active');
+      activeCell = cellEl;
+      cellEl.classList.add('active');
+
+      // Show
+      popoverOverlay.classList.add('show');
+      popover.classList.add('show');
+    }
+
+    function positionPopover(cellEl) {
+      const rect = cellEl.getBoundingClientRect();
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+
+      // On small screens, center the popover (handled by CSS)
+      if (vw <= 600) return;
+
+      const popoverW = 380;
+      const popoverH = 420; // approximate
+
+      // Try to place to the right of the cell
+      let left = rect.right + 12;
+      let top = rect.top;
+
+      // If overflows right, place to the left
+      if (left + popoverW > vw - 16) {
+        left = rect.left - popoverW - 12;
+      }
+
+      // If overflows left, center horizontally on cell
+      if (left < 16) {
+        left = Math.max(16, rect.left + (rect.width / 2) - (popoverW / 2));
+      }
+
+      // Vertical bounds
+      if (top + popoverH > vh - 16) {
+        top = Math.max(16, vh - popoverH - 16);
+      }
+
+      popover.style.top = top + 'px';
+      popover.style.left = left + 'px';
+    }
+
+    function closePopover() {
+      popoverOverlay.classList.remove('show');
+      popover.classList.remove('show');
+      if (activeCell) {
+        activeCell.classList.remove('active');
+        activeCell = null;
+      }
+    }
+
+    // Cell click handler (delegated)
+    document.getElementById('periodicGrid').addEventListener('click', (e) => {
+      const cell = e.target.closest('.element-cell');
+      if (!cell) return;
+
+      const slug = cell.dataset.slug;
+      if (activeCell === cell) {
+        closePopover();
+      } else {
+        openPopover(slug, cell);
+      }
+    });
+
+    // Close handlers
+    popoverOverlay.addEventListener('click', closePopover);
+    popoverClose.addEventListener('click', closePopover);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closePopover();
+    });
+  </script>
+</body>
+</html>

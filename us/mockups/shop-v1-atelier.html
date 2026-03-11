@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Arsenal — Engineered Adherence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* ========================================
+       THEME VARIABLES
+       ======================================== */
+    [data-theme="dark"] {
+      --bg:#161616; --bg-warm:#1a1a1a; --bg-card:#1e1e1e; --bg-card-hover:#232323;
+      --text:#e8e4de; --text-heading:#f0ece6; --muted:#9a9590; --faint:#8a857e;
+      --line:rgba(232,228,222,0.06); --line-strong:rgba(232,228,222,0.12);
+      --btn-border:rgba(232,228,222,0.2); --btn-hover-border:rgba(232,228,222,0.4);
+      --accent:rgba(232,228,222,0.08); --accent-solid:#7a756f;
+      --shadow-card-subtle:0 8px 24px rgba(0,0,0,0.15);
+      --stat-num:#f0ece6; --nav-bg:rgba(22,22,22,0.92);
+      --overlay-bg:rgba(22,22,22,0.94);
+      --toggle-icon-rotation:0deg;
+    }
+    [data-theme="light"] {
+      --bg:#f2f3f5; --bg-warm:#f5f6f8; --bg-card:rgba(255,255,255,0.8); --bg-card-hover:rgba(255,255,255,0.95);
+      --text:#1a1c22; --text-heading:#0a0b0d; --muted:#4a4e58; --faint:#6e7280;
+      --line:rgba(0,0,0,0.07); --line-strong:rgba(0,0,0,0.12);
+      --btn-border:rgba(26,28,34,0.25); --btn-hover-border:rgba(26,28,34,0.5);
+      --accent:rgba(26,28,34,0.05); --accent-solid:#50545e;
+      --shadow-card-subtle:0 8px 24px rgba(0,0,0,0.05);
+      --stat-num:#0f1014; --nav-bg:rgba(242,243,245,0.94);
+      --overlay-bg:rgba(255,255,255,0.96);
+      --toggle-icon-rotation:180deg;
+    }
+
+    :root {
+      --pillar-1:#7A8A98;
+      --pillar-2:#C9B99A;
+      --pillar-3:#A8B4A0;
+      --pillar-4:#B8A8B8;
+      --pillar-5:#c4a962;
+
+      --ease-smooth: cubic-bezier(0.4,0,0.2,1);
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'Space Mono', 'SF Mono', Consolas, monospace;
+    }
+
+    /* ========================================
+       RESET & BASE
+       ======================================== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background-color 0.5s var(--ease-smooth), color 0.4s var(--ease-smooth);
+      overflow-x: hidden;
+    }
+
+    /* ========================================
+       THEME TOGGLE
+       ======================================== */
+    .theme-toggle {
+      position: fixed;
+      top: 32px;
+      right: 32px;
+      z-index: 100;
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--btn-border);
+      border-radius: 50%;
+      background: var(--bg-card);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s var(--ease-smooth),
+                  background-color 0.3s var(--ease-smooth),
+                  transform 0.3s var(--ease-smooth);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--btn-hover-border);
+      transform: scale(1.05);
+    }
+
+    .theme-toggle svg {
+      width: 20px;
+      height: 20px;
+      fill: none;
+      stroke: var(--text);
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: transform 0.5s var(--ease-smooth), opacity 0.3s var(--ease-smooth);
+    }
+
+    .theme-toggle .icon-sun { display: none; }
+    .theme-toggle .icon-moon { display: block; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: block; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: none; }
+
+    /* ========================================
+       HERO SECTION
+       ======================================== */
+    .hero {
+      padding: 160px 72px 80px;
+      max-width: 1140px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: 56px;
+      font-weight: 400;
+      color: var(--text-heading);
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 24px;
+      transition: color 0.4s var(--ease-smooth);
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--muted);
+      max-width: 540px;
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-rule {
+      width: 64px;
+      height: 1px;
+      background: var(--line-strong);
+      margin-top: 48px;
+      border: none;
+    }
+
+    /* ========================================
+       FILTER BAR
+       ======================================== */
+    .filter-bar {
+      padding: 0 72px;
+      max-width: 1140px;
+      margin: 0 auto 64px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .filter-btn {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--faint);
+      background: none;
+      border: none;
+      padding: 16px 24px;
+      cursor: pointer;
+      position: relative;
+      transition: color 0.3s var(--ease-smooth);
+    }
+
+    .filter-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 24px;
+      right: 24px;
+      height: 1.5px;
+      background: var(--text-heading);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.35s var(--ease-smooth);
+    }
+
+    .filter-btn:hover {
+      color: var(--text);
+    }
+
+    .filter-btn.active {
+      color: var(--text-heading);
+      font-weight: 500;
+    }
+
+    .filter-btn.active::after {
+      transform: scaleX(1);
+    }
+
+    .filter-count {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--faint);
+      margin-left: auto;
+      padding: 16px 0;
+      letter-spacing: 0.05em;
+    }
+
+    /* ========================================
+       MASONRY GRID
+       ======================================== */
+    .grid-container {
+      padding: 0 72px 120px;
+      max-width: 1140px;
+      margin: 0 auto;
+    }
+
+    .compound-grid {
+      columns: 2;
+      column-gap: 32px;
+    }
+
+    /* ========================================
+       COMPOUND CARDS
+       ======================================== */
+    .compound-card {
+      break-inside: avoid;
+      margin-bottom: 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.45s var(--ease-smooth),
+                  box-shadow 0.45s var(--ease-smooth),
+                  border-color 0.3s var(--ease-smooth),
+                  background-color 0.3s var(--ease-smooth);
+    }
+
+    .compound-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card-subtle);
+      border-color: var(--line-strong);
+      background: var(--bg-card-hover);
+    }
+
+    /* Gradient wash at top edge */
+    .card-gradient {
+      height: 3px;
+      width: 100%;
+      opacity: 0.7;
+      transition: opacity 0.4s var(--ease-smooth), height 0.4s var(--ease-smooth);
+    }
+
+    .compound-card:hover .card-gradient {
+      opacity: 1;
+      height: 4px;
+    }
+
+    .card-body {
+      padding: 40px 36px 48px;
+    }
+
+    .card-pillar-tag {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pillar-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .card-name {
+      font-family: var(--font-mono);
+      font-size: 30px;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      transition: color 0.3s var(--ease-smooth);
+    }
+
+    .card-role {
+      font-family: var(--font-body);
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 24px;
+      letter-spacing: 0.01em;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+
+    .card-price {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--text-heading);
+      letter-spacing: -0.01em;
+    }
+
+    .card-size {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--faint);
+      letter-spacing: 0.08em;
+    }
+
+    /* ========================================
+       HOVER OVERLAY
+       ======================================== */
+    .card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--overlay-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 32px 36px;
+      border-top: 1px solid var(--line);
+      transform: translateY(100%);
+      transition: transform 0.45s var(--ease-smooth);
+    }
+
+    .compound-card:hover .card-overlay {
+      transform: translateY(0);
+    }
+
+    .overlay-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 10px;
+    }
+
+    .overlay-mech {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .overlay-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .overlay-dose {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--faint);
+      letter-spacing: 0.06em;
+    }
+
+    .btn-add-stack {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-heading);
+      background: none;
+      border: 1px solid var(--btn-border);
+      border-radius: 2px;
+      padding: 10px 20px;
+      cursor: pointer;
+      transition: border-color 0.3s var(--ease-smooth),
+                  background-color 0.3s var(--ease-smooth),
+                  color 0.25s var(--ease-smooth);
+    }
+
+    .btn-add-stack:hover {
+      border-color: var(--btn-hover-border);
+      background: var(--accent);
+    }
+
+    /* ========================================
+       CARD HEIGHT VARIATIONS (stagger)
+       ======================================== */
+    .compound-card.card-tall .card-body {
+      padding: 52px 36px 60px;
+    }
+
+    .compound-card.card-tall .card-name {
+      font-size: 32px;
+      margin-bottom: 16px;
+    }
+
+    .compound-card.card-short .card-body {
+      padding: 32px 36px 40px;
+    }
+
+    .compound-card.card-short .card-name {
+      font-size: 28px;
+    }
+
+    /* ========================================
+       CARD ENTER ANIMATION
+       ======================================== */
+    .compound-card {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    .compound-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s var(--ease-smooth),
+                  transform 0.6s var(--ease-smooth);
+    }
+
+    .compound-card.visible:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card-subtle);
+    }
+
+    /* ========================================
+       FOOTER
+       ======================================== */
+    .shop-footer {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 72px 72px;
+    }
+
+    .footer-inner {
+      border-top: 1px solid var(--line);
+      padding-top: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-text {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    .footer-note {
+      font-family: var(--font-body);
+      font-size: 12px;
+      color: var(--faint);
+      font-weight: 300;
+    }
+
+    /* ========================================
+       EMPTY STATE
+       ======================================== */
+    .empty-state {
+      text-align: center;
+      padding: 96px 24px;
+    }
+
+    .empty-state p {
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--faint);
+      font-weight: 300;
+    }
+
+    /* ========================================
+       RESPONSIVE — TABLET
+       ======================================== */
+    @media (max-width: 960px) {
+      .hero {
+        padding: 140px 48px 64px;
+      }
+      .hero h1 {
+        font-size: 44px;
+      }
+      .filter-bar {
+        padding: 0 48px;
+      }
+      .grid-container {
+        padding: 0 48px 96px;
+      }
+      .compound-grid {
+        column-gap: 24px;
+      }
+      .card-body {
+        padding: 32px 28px 40px;
+      }
+      .card-name {
+        font-size: 26px;
+      }
+      .shop-footer {
+        padding: 0 48px 48px;
+      }
+    }
+
+    /* ========================================
+       RESPONSIVE — MOBILE
+       ======================================== */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 120px 24px 56px;
+      }
+      .hero h1 {
+        font-size: 36px;
+      }
+      .hero-subtitle {
+        font-size: 15px;
+      }
+      .hero-rule {
+        margin-top: 32px;
+      }
+      .filter-bar {
+        padding: 0 24px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        margin-bottom: 40px;
+      }
+      .filter-bar::-webkit-scrollbar { display: none; }
+      .filter-btn {
+        padding: 14px 16px;
+        font-size: 12px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .filter-count {
+        display: none;
+      }
+      .grid-container {
+        padding: 0 24px 80px;
+      }
+      .compound-grid {
+        columns: 1;
+      }
+      .compound-card.card-tall .card-body,
+      .compound-card.card-short .card-body {
+        padding: 28px 24px 36px;
+      }
+      .compound-card.card-tall .card-name,
+      .compound-card.card-short .card-name,
+      .card-name {
+        font-size: 24px;
+      }
+      .card-price {
+        font-size: 20px;
+      }
+      .card-overlay {
+        padding: 24px;
+      }
+      /* On touch devices, tap to reveal */
+      .compound-card.tapped .card-overlay {
+        transform: translateY(0);
+      }
+      .shop-footer {
+        padding: 0 24px 40px;
+      }
+      .footer-inner {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .theme-toggle {
+        top: 20px;
+        right: 20px;
+        width: 42px;
+        height: 42px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .hero h1 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" aria-label="Toggle theme" id="themeToggle">
+    <svg class="icon-moon" viewBox="0 0 24 24" width="20" height="20">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24" width="20" height="20">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+  </button>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="hero-eyebrow">Engineered Adherence</p>
+    <h1>The Arsenal</h1>
+    <p class="hero-subtitle">Individual vials or complete stacks. Every compound ships with a certificate of analysis.</p>
+    <hr class="hero-rule">
+  </section>
+
+  <!-- Filter Bar -->
+  <nav class="filter-bar" id="filterBar" aria-label="Filter compounds by pillar">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="I">I &middot; Longevity</button>
+    <button class="filter-btn" data-filter="II">II &middot; Recovery</button>
+    <button class="filter-btn" data-filter="III">III &middot; Metabolic</button>
+    <button class="filter-btn" data-filter="IV">IV &middot; Cognitive</button>
+    <button class="filter-btn" data-filter="V">V &middot; Performance</button>
+    <span class="filter-count" id="filterCount">12 compounds</span>
+  </nav>
+
+  <!-- Compound Grid -->
+  <section class="grid-container">
+    <div class="compound-grid" id="compoundGrid"></div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="shop-footer">
+    <div class="footer-inner">
+      <span class="footer-text">Engineered Adherence &mdash; 2026</span>
+      <span class="footer-note">Research compounds. Not for human consumption. For laboratory use only.</span>
+    </div>
+  </footer>
+
+  <script>
+    /* ========================================
+       DATA
+       ======================================== */
+    const COMPOUNDS = [
+      {slug:'epithalon',name:'EPITHALON',pillar:'Longevity',pillarNum:'I',price:145,size:'10mg',role:'Telomerase activation',mech:'Activates telomerase to extend telomere length, supporting cellular longevity.'},
+      {slug:'ghk-cu',name:'GHK-CU',pillar:'Longevity',pillarNum:'I',price:76,size:'50mg',role:'Collagen synthesis',mech:'Copper peptide complex that stimulates collagen production and tissue remodeling.'},
+      {slug:'bpc-157',name:'BPC-157',pillar:'Recovery',pillarNum:'II',price:89,size:'5mg',role:'Tissue repair',mech:'Gastric pentadecapeptide that accelerates wound healing and tissue repair.'},
+      {slug:'tb-500',name:'TB-500',pillar:'Recovery',pillarNum:'II',price:134,size:'5mg',role:'Systemic healing',mech:'Thymosin beta-4 fragment promoting cell migration and systemic healing.'},
+      {slug:'aod-9604',name:'AOD-9604',pillar:'Metabolic',pillarNum:'III',price:118,size:'5mg',role:'Targeted lipolysis',mech:'Modified GH fragment targeting fat metabolism without systemic GH effects.'},
+      {slug:'retatrutide',name:'RETATRUTIDE',pillar:'Metabolic',pillarNum:'III',price:189,size:'10mg',role:'Triple agonist',mech:'Triple incretin receptor agonist for comprehensive metabolic optimization.'},
+      {slug:'semax',name:'SEMAX',pillar:'Cognitive',pillarNum:'IV',price:97,size:'30mg',role:'BDNF upregulation',mech:'Synthetic ACTH analogue that upregulates BDNF for cognitive enhancement.'},
+      {slug:'selank',name:'SELANK',pillar:'Cognitive',pillarNum:'IV',price:88,size:'5mg',role:'Anxiolytic',mech:'Tuftsin analogue with anxiolytic and nootropic properties.'},
+      {slug:'ipamorelin',name:'IPAMORELIN',pillar:'Performance',pillarNum:'V',price:112,size:'2mg',role:'Clean GH pulse',mech:'Selective GH secretagogue producing clean GH pulses without cortisol elevation.'},
+      {slug:'cjc-1295',name:'CJC-1295',pillar:'Performance',pillarNum:'V',price:108,size:'2mg',role:'Sustained GH',mech:'GHRH analogue providing sustained GH elevation over extended periods.'},
+      {slug:'hexarelin',name:'HEXARELIN',pillar:'Performance',pillarNum:'V',price:129,size:'2mg',role:'Max GH release',mech:'Potent GH secretagogue for maximum growth hormone release.'},
+      {slug:'mk-677',name:'MK-677',pillar:'Performance',pillarNum:'V',price:94,size:'10mg',role:'Oral secretagogue',mech:'Oral GH secretagogue mimicking ghrelin for sustained IGF-1 elevation.'}
+    ];
+
+    const PILLAR_COLORS = {
+      'I': 'var(--pillar-1)',
+      'II': 'var(--pillar-2)',
+      'III': 'var(--pillar-3)',
+      'IV': 'var(--pillar-4)',
+      'V': 'var(--pillar-5)'
+    };
+
+    /* ========================================
+       THEME TOGGLE
+       ======================================== */
+    const themeToggle = document.getElementById('themeToggle');
+    const htmlEl = document.documentElement;
+
+    // Restore saved theme or default to dark
+    const savedTheme = localStorage.getItem('ea-shop-theme');
+    if (savedTheme) {
+      htmlEl.setAttribute('data-theme', savedTheme);
+    }
+
+    themeToggle.addEventListener('click', function() {
+      const current = htmlEl.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      htmlEl.setAttribute('data-theme', next);
+      localStorage.setItem('ea-shop-theme', next);
+    });
+
+    /* ========================================
+       CARD RENDERING
+       ======================================== */
+    const grid = document.getElementById('compoundGrid');
+    const filterCount = document.getElementById('filterCount');
+    let currentFilter = 'all';
+
+    // Height variation pattern: tall, short, short, tall, tall, short ...
+    const HEIGHT_PATTERN = ['card-tall','card-short','card-short','card-tall','card-tall','card-short'];
+
+    function getPillarColor(pillarNum) {
+      return PILLAR_COLORS[pillarNum] || 'var(--muted)';
+    }
+
+    function renderCards(filter) {
+      const filtered = filter === 'all'
+        ? COMPOUNDS
+        : COMPOUNDS.filter(function(c) { return c.pillarNum === filter; });
+
+      grid.innerHTML = '';
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="empty-state"><p>No compounds in this pillar.</p></div>';
+        filterCount.textContent = '0 compounds';
+        return;
+      }
+
+      filterCount.textContent = filtered.length + ' compound' + (filtered.length !== 1 ? 's' : '');
+
+      filtered.forEach(function(compound, i) {
+        const heightClass = HEIGHT_PATTERN[i % HEIGHT_PATTERN.length];
+        const pillarColor = getPillarColor(compound.pillarNum);
+
+        const card = document.createElement('article');
+        card.className = 'compound-card ' + heightClass;
+        card.setAttribute('data-pillar', compound.pillarNum);
+        card.setAttribute('data-slug', compound.slug);
+
+        card.innerHTML =
+          '<div class="card-gradient" style="background:linear-gradient(90deg,' + pillarColor + ',' + pillarColor + ' 40%,transparent)"></div>' +
+          '<div class="card-body">' +
+            '<div class="card-pillar-tag">' +
+              '<span class="pillar-dot" style="background:' + pillarColor + '"></span>' +
+              'Pillar ' + compound.pillarNum + ' &mdash; ' + compound.pillar +
+            '</div>' +
+            '<h2 class="card-name">' + compound.name + '</h2>' +
+            '<p class="card-role">' + compound.role + '</p>' +
+            '<div class="card-meta">' +
+              '<span class="card-price">$' + compound.price + '</span>' +
+              '<span class="card-size">' + compound.size + ' / vial</span>' +
+            '</div>' +
+          '</div>' +
+          '<div class="card-overlay">' +
+            '<p class="overlay-label">Mechanism</p>' +
+            '<p class="overlay-mech">' + compound.mech + '</p>' +
+            '<div class="overlay-row">' +
+              '<span class="overlay-dose">' + compound.size + ' lyophilized</span>' +
+              '<button class="btn-add-stack" aria-label="Add ' + compound.name + ' to stack">Add to Stack</button>' +
+            '</div>' +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+
+      // Stagger entrance animation
+      requestAnimationFrame(function() {
+        const cards = grid.querySelectorAll('.compound-card');
+        cards.forEach(function(card, idx) {
+          setTimeout(function() {
+            card.classList.add('visible');
+          }, idx * 80);
+        });
+      });
+    }
+
+    /* ========================================
+       FILTER BUTTONS
+       ======================================== */
+    const filterBar = document.getElementById('filterBar');
+    const filterBtns = filterBar.querySelectorAll('.filter-btn');
+
+    filterBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        filterBtns.forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentFilter = btn.getAttribute('data-filter');
+        renderCards(currentFilter);
+      });
+    });
+
+    /* ========================================
+       MOBILE TAP SUPPORT
+       ======================================== */
+    document.addEventListener('click', function(e) {
+      // Only on narrow viewports where hover is not available
+      if (window.innerWidth > 768) return;
+
+      const card = e.target.closest('.compound-card');
+
+      // Close all other tapped cards
+      document.querySelectorAll('.compound-card.tapped').forEach(function(c) {
+        if (c !== card) c.classList.remove('tapped');
+      });
+
+      if (card) {
+        // If clicking the Add to Stack button, don't toggle
+        if (e.target.closest('.btn-add-stack')) return;
+        card.classList.toggle('tapped');
+      }
+    });
+
+    /* ========================================
+       INIT
+       ======================================== */
+    renderCards('all');
+  </script>
+
+</body>
+</html>

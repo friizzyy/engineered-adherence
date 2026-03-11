@@ -220,7 +220,10 @@ nav{
 }
 .logo:hover{opacity:.7}
 
-.nav-center{display:flex;gap:48px;list-style:none;align-items:center}
+.nav-center{
+  display:flex;gap:48px;list-style:none;align-items:center;
+  position:absolute;left:50%;transform:translateX(-50%);
+}
 .nav-center a{
   color:var(--faint);
   font-size:11px;letter-spacing:2px;font-weight:400;

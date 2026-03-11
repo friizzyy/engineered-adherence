@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vial Concept C — Technical Blueprint</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================================
+       THEME VARIABLES
+       ========================================================= */
+    [data-theme="dark"] {
+      --bg: #161616;
+      --bg-card: #1e1e1e;
+      --bg-card-hover: #232323;
+      --text: #e8e4de;
+      --text-heading: #f0ece6;
+      --muted: #9a9590;
+      --faint: #8a857e;
+      --line: rgba(232,228,222,0.06);
+      --line-strong: rgba(232,228,222,0.12);
+      --grid-color: rgba(232,228,222,0.02);
+      --grid-color-strong: rgba(232,228,222,0.035);
+      --annotation-bg: rgba(22,22,22,0.85);
+      --nav-bg: rgba(22,22,22,0.92);
+      --leader-opacity: 0.3;
+    }
+
+    [data-theme="light"] {
+      --bg: #f2f3f5;
+      --bg-card: rgba(255,255,255,0.8);
+      --bg-card-hover: rgba(255,255,255,0.95);
+      --text: #1a1c22;
+      --text-heading: #0a0b0d;
+      --muted: #4a4e58;
+      --faint: #6e7280;
+      --line: rgba(0,0,0,0.07);
+      --line-strong: rgba(0,0,0,0.12);
+      --grid-color: rgba(0,0,0,0.02);
+      --grid-color-strong: rgba(0,0,0,0.035);
+      --annotation-bg: rgba(255,255,255,0.85);
+      --nav-bg: rgba(242,243,245,0.94);
+      --leader-opacity: 0.25;
+    }
+
+    :root {
+      --pillar-1: #7A8A98;
+      --pillar-2: #C9B99A;
+      --pillar-3: #A8B4A0;
+      --pillar-4: #B8A8B8;
+      --pillar-5: #c4a962;
+      --ease: cubic-bezier(0.4, 0, 0.2, 1);
+      --max-w: 1440px;
+    }
+
+    /* =========================================================
+       RESET & BASE
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.5s var(--ease), color 0.4s var(--ease);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* =========================================================
+       BLUEPRINT GRID BACKGROUND
+       ========================================================= */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background:
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
+        linear-gradient(var(--grid-color-strong) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color-strong) 1px, transparent 1px);
+      background-size:
+        20px 20px,
+        20px 20px,
+        100px 100px,
+        100px 100px;
+    }
+
+    /* =========================================================
+       UTILITY
+       ========================================================= */
+    .font-mono { font-family: 'Space Mono', monospace; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-sans { font-family: 'DM Sans', sans-serif; }
+
+    /* =========================================================
+       THEME TOGGLE
+       ========================================================= */
+    .theme-toggle {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      z-index: 200;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--line-strong);
+      background: var(--bg-card);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s var(--ease);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--muted);
+      transform: scale(1.05);
+    }
+
+    .theme-toggle:focus-visible {
+      outline: 2px solid var(--muted);
+      outline-offset: 2px;
+    }
+
+    .theme-toggle svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: var(--muted);
+      stroke-width: 1.5;
+      transition: stroke 0.3s var(--ease);
+    }
+
+    [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+    [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+    [data-theme="light"] .theme-toggle .icon-sun { display: none; }
+    [data-theme="light"] .theme-toggle .icon-moon { display: block; }
+
+    /* =========================================================
+       PAGE LAYOUT
+       ========================================================= */
+    .page-wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 80px 48px 120px;
+    }
+
+    /* =========================================================
+       HEADER
+       ========================================================= */
+    .page-header {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .page-header .overline {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .page-header h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--text-heading);
+      letter-spacing: 0.5px;
+      margin-bottom: 12px;
+    }
+
+    .page-header .subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .section-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 48px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    /* =========================================================
+       VIAL SHOWCASE ROW
+       ========================================================= */
+    .vial-showcase {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 120px;
+    }
+
+    .vial-unit {
+      display: flex;
+      align-items: flex-start;
+      position: relative;
+      padding: 16px 8px;
+    }
+
+    .vial-svg-wrap {
+      flex-shrink: 0;
+      transition: filter 0.4s var(--ease);
+    }
+
+    /* SVG glow on dark theme */
+    [data-theme="dark"] .vial-unit .vial-svg-wrap svg {
+      filter: drop-shadow(0 0 8px var(--pillar-glow));
+    }
+
+    [data-theme="light"] .vial-unit .vial-svg-wrap svg {
+      filter: none;
+    }
+
+    /* =========================================================
+       LEADER LINE (connects vial to annotation)
+       ========================================================= */
+    .leader-line {
+      flex-shrink: 0;
+      width: 32px;
+      height: 1px;
+      align-self: center;
+      position: relative;
+      margin-top: 20px;
+    }
+
+    .leader-line::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--pillar-color);
+      opacity: var(--leader-opacity);
+    }
+
+    .leader-line::after {
+      content: '';
+      position: absolute;
+      top: -2px;
+      right: 0;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--pillar-color);
+      opacity: var(--leader-opacity);
+    }
+
+    /* =========================================================
+       ANNOTATION PANEL (right of each vial)
+       ========================================================= */
+    .vial-annotation {
+      padding: 16px 0 0 0;
+      min-width: 120px;
+      max-width: 140px;
+    }
+
+    .annotation-brand {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 6.5px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-bottom: 8px;
+      opacity: 0.6;
+    }
+
+    .annotation-compound {
+      font-family: 'Space Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .annotation-dosage {
+      font-family: 'Space Mono', monospace;
+      font-size: 9.5px;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+
+    .annotation-pillar {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 8.5px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-top: 2px;
+    }
+
+    .annotation-pillar .pillar-numeral {
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       DOSSIER CONTEXT SECTION
+       ========================================================= */
+    .dossier-section {
+      margin-top: 40px;
+    }
+
+    .dossier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 960px;
+    }
+
+    .dossier-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      padding: 24px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      transition: all 0.3s var(--ease);
+      position: relative;
+    }
+
+    .dossier-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--line-strong);
+    }
+
+    .dossier-card .dossier-vial {
+      flex-shrink: 0;
+    }
+
+    [data-theme="dark"] .dossier-card .dossier-vial svg {
+      filter: drop-shadow(0 0 4px var(--pillar-glow));
+    }
+
+    [data-theme="light"] .dossier-card .dossier-vial svg {
+      filter: none;
+    }
+
+    .dossier-card .dossier-info {
+      flex: 1;
+      min-width: 0;
+      padding-top: 4px;
+    }
+
+    .dossier-info .dossier-specimen {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 2px;
+      color: var(--faint);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .dossier-info .dossier-compound {
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .dossier-info .dossier-dosage {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .dossier-info .dossier-pillar-tag {
+      display: inline-block;
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border: 1px solid var(--line-strong);
+      border-radius: 2px;
+      color: var(--muted);
+    }
+
+    /* =========================================================
+       FOOTER NOTE
+       ========================================================= */
+    .footer-note {
+      text-align: center;
+      margin-top: 100px;
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-note p {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    /* =========================================================
+       RESPONSIVE
+       ========================================================= */
+    @media (max-width: 1280px) {
+      .vial-showcase {
+        gap: 4px;
+      }
+      .vial-annotation {
+        min-width: 100px;
+        max-width: 120px;
+      }
+      .leader-line {
+        width: 20px;
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .vial-showcase {
+        flex-wrap: wrap;
+        gap: 32px 16px;
+        justify-content: center;
+      }
+      .page-wrapper {
+        padding: 60px 24px 80px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .vial-showcase {
+        flex-direction: column;
+        align-items: center;
+      }
+      .page-header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Theme Toggle -->
+  <button class="theme-toggle" aria-label="Toggle theme">
+    <svg class="icon-sun" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg class="icon-moon" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <div class="page-wrapper">
+
+    <!-- Header -->
+    <header class="page-header">
+      <span class="overline">Internal Design Review &mdash; Vial Rendering</span>
+      <h1 class="font-serif">Vial Concept C &mdash; Technical Blueprint</h1>
+      <p class="subtitle">Pharmaceutical patent illustration meets scientific journal figure. Precise technical line drawings with callout annotations, measurement marks, and a deliberately diagrammatic, clinical schematic quality.</p>
+    </header>
+
+    <!-- Showcase Section -->
+    <div class="section-label">Showcase &mdash; Full Specimens</div>
+
+    <div class="vial-showcase" id="vialShowcase">
+      <!-- Vials injected by JS -->
+    </div>
+
+    <!-- Dossier Context Section -->
+    <div class="dossier-section">
+      <div class="section-label">Dossier Context &mdash; Product Card Scale</div>
+      <div class="dossier-grid" id="dossierGrid">
+        <!-- Dossier cards injected by JS -->
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-note">
+      <p>Engineered Adherence &mdash; Concept C &mdash; Technical Blueprint &mdash; Internal Review Only</p>
+    </footer>
+
+  </div>
+
+  <script>
+    /* =========================================================
+       DATA
+       ========================================================= */
+    const compounds = [
+      { id: 'EA-001', compound: 'Epithalon',  dosage: '10mg', pillar: 'I',   pillarName: 'Longevity',   color: '#7A8A98', fill: 0.65 },
+      { id: 'EA-002', compound: 'BPC-157',    dosage: '5mg',  pillar: 'II',  pillarName: 'Recovery',    color: '#C9B99A', fill: 0.60 },
+      { id: 'EA-003', compound: 'AOD-9604',   dosage: '5mg',  pillar: 'III', pillarName: 'Metabolic',   color: '#A8B4A0', fill: 0.70 },
+      { id: 'EA-004', compound: 'Semax',      dosage: '30mg', pillar: 'IV',  pillarName: 'Cognitive',   color: '#B8A8B8', fill: 0.62 },
+      { id: 'EA-005', compound: 'Ipamorelin', dosage: '2mg',  pillar: 'V',   pillarName: 'Performance', color: '#c4a962', fill: 0.68 }
+    ];
+
+    /* =========================================================
+       SVG VIAL GENERATOR — SHOWCASE SIZE (wide viewBox)
+       Uses viewBox "0 0 180 210" to accommodate dimension
+       annotations on the left and volume labels on the right.
+       ========================================================= */
+    function createShowcaseVial(data) {
+      const c = data.color;
+
+      // Vial anatomy coordinates (centered at x=90 in a 180-wide viewBox)
+      const capLeft = 77;
+      const capRight = 103;
+      const capWidth = capRight - capLeft;
+      const capTop = 22;
+      const capHeight = 16;
+
+      const neckLeft = 82;
+      const neckRight = 98;
+      const neckTop = 38;
+      const neckHeight = 14;
+
+      const bodyLeft = 73;
+      const bodyRight = 107;
+      const bodyWidth = bodyRight - bodyLeft;
+      const bodyTop = 72;
+      const bodyBottom = 178;
+      const bodyHeight = bodyBottom - bodyTop;
+
+      const liquidTop = bodyBottom - (data.fill * bodyHeight);
+
+      // Measurement line positions (25%, 50%, 75% of body)
+      const m25 = bodyBottom - (0.25 * bodyHeight);
+      const m50 = bodyBottom - (0.50 * bodyHeight);
+      const m75 = bodyBottom - (0.75 * bodyHeight);
+
+      // Minor tick positions (12.5%, 37.5%, 62.5%, 87.5%)
+      const t1 = bodyBottom - (0.125 * bodyHeight);
+      const t2 = bodyBottom - (0.375 * bodyHeight);
+      const t3 = bodyBottom - (0.625 * bodyHeight);
+      const t4 = bodyBottom - (0.875 * bodyHeight);
+
+      // Dimension line positions
+      const dimLeftX = 56;    // Vertical dimension line x
+      const dimBottomY = 192; // Horizontal dimension line y
+
+      return `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 210" width="140" height="210">
+        <defs>
+          <!-- Cross-hatch pattern for cap -->
+          <pattern id="hatch-${data.id}" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="4" stroke="${c}" stroke-width="0.4" opacity="0.5"/>
+          </pattern>
+        </defs>
+
+        <!-- ========== SECTION ANNOTATION (top) ========== -->
+        <text x="90" y="10" text-anchor="middle"
+              font-family="'Space Mono', monospace" font-size="5.5"
+              fill="${c}" opacity="0.45" letter-spacing="1.5">SECTION A-A</text>
+        <line x1="42" y1="12" x2="72" y2="12" stroke="${c}" stroke-width="0.3" opacity="0.3"/>
+        <line x1="108" y1="12" x2="138" y2="12" stroke="${c}" stroke-width="0.3" opacity="0.3"/>
+        <!-- Center-line symbol dashes -->
+        <line x1="72" y1="12" x2="75" y2="12" stroke="${c}" stroke-width="0.6" opacity="0.4"/>
+        <line x1="105" y1="12" x2="108" y2="12" stroke="${c}" stroke-width="0.6" opacity="0.4"/>
+
+        <!-- ========== SPECIMEN NUMBER (top right) ========== -->
+        <text x="148" y="10" text-anchor="end"
+              font-family="'Space Mono', monospace" font-size="5.5"
+              fill="${c}" opacity="0.4" letter-spacing="0.5">${data.id}</text>
+
+        <!-- ========== CAP ========== -->
+        <!-- Cap body with cross-hatching -->
+        <rect x="${capLeft}" y="${capTop}" width="${capWidth}" height="${capHeight}" rx="2" ry="2"
+              fill="url(#hatch-${data.id})" stroke="${c}" stroke-width="0.8" opacity="0.65"/>
+        <!-- Cap lip detail -->
+        <line x1="${capLeft + 2}" y1="${capTop + 2}" x2="${capRight - 2}" y2="${capTop + 2}"
+              stroke="${c}" stroke-width="0.35" opacity="0.35"/>
+        <!-- Cap base detail -->
+        <line x1="${capLeft + 1}" y1="${capTop + capHeight - 1}" x2="${capRight - 1}" y2="${capTop + capHeight - 1}"
+              stroke="${c}" stroke-width="0.35" opacity="0.35"/>
+
+        <!-- ========== NECK / CRIMP JUNCTION ========== -->
+        <rect x="${neckLeft}" y="${neckTop}" width="${neckRight - neckLeft}" height="${neckHeight}" rx="1"
+              fill="none" stroke="${c}" stroke-width="0.6" stroke-dasharray="2 1.5" opacity="0.5"/>
+        <!-- Crimp ring indicators -->
+        <line x1="${capLeft - 1}" y1="${neckTop + 2}" x2="${capRight + 1}" y2="${neckTop + 2}"
+              stroke="${c}" stroke-width="0.25" opacity="0.3"/>
+        <line x1="${capLeft - 1}" y1="${neckTop + neckHeight - 2}" x2="${capRight + 1}" y2="${neckTop + neckHeight - 2}"
+              stroke="${c}" stroke-width="0.25" opacity="0.3"/>
+
+        <!-- ========== SHOULDER TAPER ========== -->
+        <line x1="${neckLeft}" y1="${neckTop + neckHeight}" x2="${bodyLeft}" y2="${bodyTop}"
+              stroke="${c}" stroke-width="0.7" opacity="0.45"/>
+        <line x1="${neckRight}" y1="${neckTop + neckHeight}" x2="${bodyRight}" y2="${bodyTop}"
+              stroke="${c}" stroke-width="0.7" opacity="0.45"/>
+
+        <!-- ========== GLASS BODY (outline only) ========== -->
+        <rect x="${bodyLeft}" y="${bodyTop}" width="${bodyWidth}" height="${bodyHeight}" rx="3" ry="4"
+              fill="none" stroke="${c}" stroke-width="1" opacity="0.4"/>
+
+        <!-- ========== LIQUID FILL (ghostly) ========== -->
+        <rect x="${bodyLeft + 1}" y="${liquidTop}" width="${bodyWidth - 2}" height="${bodyBottom - liquidTop - 1}" rx="2" ry="3"
+              fill="${c}" opacity="0.08"/>
+
+        <!-- Liquid surface line -->
+        <line x1="${bodyLeft + 2}" y1="${liquidTop}" x2="${bodyRight - 2}" y2="${liquidTop}"
+              stroke="${c}" stroke-width="0.8" opacity="0.35" stroke-dasharray="1.5 1"/>
+
+        <!-- Meniscus curve hint -->
+        <path d="M${bodyLeft + 3},${liquidTop + 0.5} Q${90},${liquidTop - 2} ${bodyRight - 3},${liquidTop + 0.5}"
+              fill="none" stroke="${c}" stroke-width="0.35" opacity="0.25"/>
+
+        <!-- ========== GRADUATED MEASUREMENT LINES ========== -->
+
+        <!-- 25% mark -->
+        <line x1="${bodyLeft + 2}" y1="${m25}" x2="${bodyRight - 2}" y2="${m25}"
+              stroke="${c}" stroke-width="0.3" stroke-dasharray="3 2" opacity="0.2"/>
+        <line x1="${bodyLeft}" y1="${m25}" x2="${bodyLeft - 3}" y2="${m25}"
+              stroke="${c}" stroke-width="0.4" opacity="0.3"/>
+        <text x="${bodyRight + 4}" y="${m25 + 1.5}"
+              font-family="'Space Mono', monospace" font-size="4.5"
+              fill="${c}" opacity="0.3">1ml</text>
+
+        <!-- 50% mark -->
+        <line x1="${bodyLeft + 2}" y1="${m50}" x2="${bodyRight - 2}" y2="${m50}"
+              stroke="${c}" stroke-width="0.3" stroke-dasharray="3 2" opacity="0.2"/>
+        <line x1="${bodyLeft}" y1="${m50}" x2="${bodyLeft - 3}" y2="${m50}"
+              stroke="${c}" stroke-width="0.4" opacity="0.3"/>
+        <text x="${bodyRight + 4}" y="${m50 + 1.5}"
+              font-family="'Space Mono', monospace" font-size="4.5"
+              fill="${c}" opacity="0.3">2ml</text>
+
+        <!-- 75% mark -->
+        <line x1="${bodyLeft + 2}" y1="${m75}" x2="${bodyRight - 2}" y2="${m75}"
+              stroke="${c}" stroke-width="0.3" stroke-dasharray="3 2" opacity="0.2"/>
+        <line x1="${bodyLeft}" y1="${m75}" x2="${bodyLeft - 3}" y2="${m75}"
+              stroke="${c}" stroke-width="0.4" opacity="0.3"/>
+        <text x="${bodyRight + 4}" y="${m75 + 1.5}"
+              font-family="'Space Mono', monospace" font-size="4.5"
+              fill="${c}" opacity="0.3">3ml</text>
+
+        <!-- Minor ticks (no labels) -->
+        <line x1="${bodyLeft}" y1="${t1}" x2="${bodyLeft + 2}" y2="${t1}"
+              stroke="${c}" stroke-width="0.25" opacity="0.18"/>
+        <line x1="${bodyLeft}" y1="${t2}" x2="${bodyLeft + 2}" y2="${t2}"
+              stroke="${c}" stroke-width="0.25" opacity="0.18"/>
+        <line x1="${bodyLeft}" y1="${t3}" x2="${bodyLeft + 2}" y2="${t3}"
+              stroke="${c}" stroke-width="0.25" opacity="0.18"/>
+        <line x1="${bodyLeft}" y1="${t4}" x2="${bodyLeft + 2}" y2="${t4}"
+              stroke="${c}" stroke-width="0.25" opacity="0.18"/>
+
+        <!-- ========== CENTER LINE (dashed, engineering style) ========== -->
+        <line x1="90" y1="${capTop - 2}" x2="90" y2="${bodyBottom + 4}"
+              stroke="${c}" stroke-width="0.2" stroke-dasharray="8 3 1 3" opacity="0.12"/>
+
+        <!-- ========== BASE ELLIPSE ========== -->
+        <ellipse cx="90" cy="${bodyBottom}" rx="${bodyWidth / 2 - 2}" ry="2"
+                 fill="none" stroke="${c}" stroke-width="0.3" opacity="0.2"/>
+
+        <!-- ========== DIMENSION: HEIGHT (left side) ========== -->
+        <!-- Vertical dimension line -->
+        <line x1="${dimLeftX}" y1="${capTop}" x2="${dimLeftX}" y2="${bodyBottom}"
+              stroke="${c}" stroke-width="0.3" opacity="0.25"/>
+        <!-- Top serif -->
+        <line x1="${dimLeftX - 2.5}" y1="${capTop}" x2="${dimLeftX + 2.5}" y2="${capTop}"
+              stroke="${c}" stroke-width="0.3" opacity="0.25"/>
+        <!-- Bottom serif -->
+        <line x1="${dimLeftX - 2.5}" y1="${bodyBottom}" x2="${dimLeftX + 2.5}" y2="${bodyBottom}"
+              stroke="${c}" stroke-width="0.3" opacity="0.25"/>
+        <!-- Extension lines from vial to dimension -->
+        <line x1="${capLeft}" y1="${capTop}" x2="${dimLeftX + 3}" y2="${capTop}"
+              stroke="${c}" stroke-width="0.15" opacity="0.15" stroke-dasharray="1 2"/>
+        <line x1="${bodyLeft}" y1="${bodyBottom}" x2="${dimLeftX + 3}" y2="${bodyBottom}"
+              stroke="${c}" stroke-width="0.15" opacity="0.15" stroke-dasharray="1 2"/>
+        <!-- Height label (rotated) -->
+        <text x="${dimLeftX - 3}" y="${(capTop + bodyBottom) / 2}" text-anchor="middle"
+              font-family="'DM Sans', sans-serif" font-size="5"
+              fill="${c}" opacity="0.35"
+              transform="rotate(-90, ${dimLeftX - 3}, ${(capTop + bodyBottom) / 2})">52mm</text>
+
+        <!-- ========== DIMENSION: WIDTH (bottom) ========== -->
+        <!-- Horizontal dimension line -->
+        <line x1="${bodyLeft}" y1="${dimBottomY}" x2="${bodyRight}" y2="${dimBottomY}"
+              stroke="${c}" stroke-width="0.3" opacity="0.25"/>
+        <!-- Left serif -->
+        <line x1="${bodyLeft}" y1="${dimBottomY - 2.5}" x2="${bodyLeft}" y2="${dimBottomY + 2.5}"
+              stroke="${c}" stroke-width="0.3" opacity="0.25"/>
+        <!-- Right serif -->
+        <line x1="${bodyRight}" y1="${dimBottomY - 2.5}" x2="${bodyRight}" y2="${dimBottomY + 2.5}"
+              stroke="${c}" stroke-width="0.3" opacity="0.25"/>
+        <!-- Extension lines -->
+        <line x1="${bodyLeft}" y1="${bodyBottom}" x2="${bodyLeft}" y2="${dimBottomY + 3}"
+              stroke="${c}" stroke-width="0.15" opacity="0.15" stroke-dasharray="1 2"/>
+        <line x1="${bodyRight}" y1="${bodyBottom}" x2="${bodyRight}" y2="${dimBottomY + 3}"
+              stroke="${c}" stroke-width="0.15" opacity="0.15" stroke-dasharray="1 2"/>
+        <!-- Width label -->
+        <text x="90" y="${dimBottomY + 8}" text-anchor="middle"
+              font-family="'DM Sans', sans-serif" font-size="5"
+              fill="${c}" opacity="0.35">22mm</text>
+
+        <!-- ========== LEADER LINE (extends right from label area to annotation) ========== -->
+        <!-- Horizontal leader from mid-body to right edge of SVG -->
+        <line x1="${bodyRight}" y1="${bodyTop + bodyHeight * 0.35}"
+              x2="175" y2="${bodyTop + bodyHeight * 0.35}"
+              stroke="${c}" stroke-width="0.4" opacity="0.2"/>
+        <!-- Small dot at endpoint -->
+        <circle cx="${bodyRight}" cy="${bodyTop + bodyHeight * 0.35}" r="1"
+                fill="${c}" opacity="0.3"/>
+      </svg>`;
+    }
+
+    /* =========================================================
+       SVG VIAL GENERATOR — DOSSIER (SMALL) SIZE
+       Simplified version without dimension annotations.
+       ========================================================= */
+    function createDossierVial(data) {
+      const c = data.color;
+      const bodyTop = 68;
+      const bodyBottom = 170;
+      const bodyHeight = bodyBottom - bodyTop;
+      const liquidTop = bodyBottom - (data.fill * bodyHeight);
+      const m25 = bodyBottom - (0.25 * bodyHeight);
+      const m50 = bodyBottom - (0.50 * bodyHeight);
+      const m75 = bodyBottom - (0.75 * bodyHeight);
+
+      return `
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="20 10 60 170" width="44" height="88">
+        <defs>
+          <pattern id="hatch-sm-${data.id}" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(45)">
+            <line x1="0" y1="0" x2="0" y2="4" stroke="${c}" stroke-width="0.5" opacity="0.45"/>
+          </pattern>
+        </defs>
+
+        <!-- Cap -->
+        <rect x="37" y="16" width="26" height="16" rx="2" ry="2"
+              fill="url(#hatch-sm-${data.id})" stroke="${c}" stroke-width="1" opacity="0.65"/>
+
+        <!-- Neck (dashed) -->
+        <rect x="42" y="32" width="16" height="14" rx="1"
+              fill="none" stroke="${c}" stroke-width="0.8" stroke-dasharray="2 1.5" opacity="0.5"/>
+
+        <!-- Shoulder -->
+        <line x1="42" y1="46" x2="33" y2="68" stroke="${c}" stroke-width="0.8" opacity="0.45"/>
+        <line x1="58" y1="46" x2="67" y2="68" stroke="${c}" stroke-width="0.8" opacity="0.45"/>
+
+        <!-- Body -->
+        <rect x="33" y="68" width="34" height="102" rx="3" ry="4"
+              fill="none" stroke="${c}" stroke-width="1.2" opacity="0.4"/>
+
+        <!-- Liquid fill -->
+        <rect x="34" y="${liquidTop}" width="32" height="${bodyBottom - liquidTop}" rx="2" ry="3"
+              fill="${c}" opacity="0.08"/>
+
+        <!-- Liquid surface -->
+        <line x1="35" y1="${liquidTop}" x2="65" y2="${liquidTop}"
+              stroke="${c}" stroke-width="1" opacity="0.35" stroke-dasharray="1.5 1"/>
+
+        <!-- Graduated lines -->
+        <line x1="35" y1="${m25}" x2="65" y2="${m25}" stroke="${c}" stroke-width="0.4" stroke-dasharray="3 2" opacity="0.18"/>
+        <line x1="35" y1="${m50}" x2="65" y2="${m50}" stroke="${c}" stroke-width="0.4" stroke-dasharray="3 2" opacity="0.18"/>
+        <line x1="35" y1="${m75}" x2="65" y2="${m75}" stroke="${c}" stroke-width="0.4" stroke-dasharray="3 2" opacity="0.18"/>
+
+        <!-- Ticks -->
+        <line x1="33" y1="${m25}" x2="30" y2="${m25}" stroke="${c}" stroke-width="0.5" opacity="0.25"/>
+        <line x1="33" y1="${m50}" x2="30" y2="${m50}" stroke="${c}" stroke-width="0.5" opacity="0.25"/>
+        <line x1="33" y1="${m75}" x2="30" y2="${m75}" stroke="${c}" stroke-width="0.5" opacity="0.25"/>
+
+        <!-- Base ellipse -->
+        <ellipse cx="50" cy="170" rx="15" ry="2" fill="none" stroke="${c}" stroke-width="0.4" opacity="0.2"/>
+      </svg>`;
+    }
+
+    /* =========================================================
+       BUILD SHOWCASE
+       ========================================================= */
+    function buildShowcase() {
+      const container = document.getElementById('vialShowcase');
+      container.innerHTML = '';
+
+      compounds.forEach(function(data) {
+        const unit = document.createElement('div');
+        unit.className = 'vial-unit';
+        unit.style.setProperty('--pillar-glow', data.color + '40');
+
+        // SVG wrapper
+        const svgWrap = document.createElement('div');
+        svgWrap.className = 'vial-svg-wrap';
+        svgWrap.innerHTML = createShowcaseVial(data);
+
+        // Leader line element (CSS-rendered)
+        const leader = document.createElement('div');
+        leader.className = 'leader-line';
+        leader.style.setProperty('--pillar-color', data.color);
+
+        // Annotation panel
+        const annotation = document.createElement('div');
+        annotation.className = 'vial-annotation';
+        annotation.innerHTML =
+          '<div class="annotation-brand">Engineered Adherence</div>' +
+          '<div class="annotation-compound" style="color: ' + data.color + '">' + data.compound + '</div>' +
+          '<div class="annotation-dosage">' + data.dosage + ' &middot; Lyophilized</div>' +
+          '<div class="annotation-pillar">Pillar <span class="pillar-numeral">' + data.pillar + '</span> &mdash; ' + data.pillarName + '</div>';
+
+        unit.appendChild(svgWrap);
+        unit.appendChild(leader);
+        unit.appendChild(annotation);
+        container.appendChild(unit);
+      });
+    }
+
+    /* =========================================================
+       BUILD DOSSIER CARDS
+       ========================================================= */
+    function buildDossier() {
+      const grid = document.getElementById('dossierGrid');
+      grid.innerHTML = '';
+
+      compounds.forEach(function(data) {
+        const card = document.createElement('div');
+        card.className = 'dossier-card';
+        card.style.setProperty('--pillar-glow', data.color + '30');
+
+        card.innerHTML =
+          '<div class="dossier-vial">' + createDossierVial(data) + '</div>' +
+          '<div class="dossier-info">' +
+            '<div class="dossier-specimen">' + data.id + '</div>' +
+            '<div class="dossier-compound" style="color: ' + data.color + '">' + data.compound + '</div>' +
+            '<div class="dossier-dosage">' + data.dosage + ' &middot; Pillar ' + data.pillar + ' ' + data.pillarName + '</div>' +
+            '<span class="dossier-pillar-tag" style="border-color: ' + data.color + '25; color: ' + data.color + '">Pillar ' + data.pillar + '</span>' +
+          '</div>';
+
+        grid.appendChild(card);
+      });
+    }
+
+    /* =========================================================
+       THEME TOGGLE
+       ========================================================= */
+    function initThemeToggle() {
+      const toggle = document.querySelector('.theme-toggle');
+      const html = document.documentElement;
+
+      // Restore saved preference
+      const saved = localStorage.getItem('ea-blueprint-theme');
+      if (saved) {
+        html.setAttribute('data-theme', saved);
+      }
+
+      toggle.addEventListener('click', function() {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('ea-blueprint-theme', next);
+      });
+    }
+
+    /* =========================================================
+       INIT
+       ========================================================= */
+    document.addEventListener('DOMContentLoaded', function() {
+      buildShowcase();
+      buildDossier();
+      initThemeToggle();
+    });
+  </script>
+</body>
+</html>

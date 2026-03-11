@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compound Library — Engineered Adherence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* =========================================================
+       THEME VARIABLES
+       ========================================================= */
+    [data-theme="dark"] {
+      --bg:#161616; --bg-warm:#1a1a1a; --bg-card:#1e1e1e; --bg-card-hover:#232323;
+      --text:#e8e4de; --text-heading:#f0ece6; --muted:#9a9590; --faint:#8a857e;
+      --line:rgba(232,228,222,0.06); --line-strong:rgba(232,228,222,0.12);
+      --btn-border:rgba(232,228,222,0.2); --btn-hover-border:rgba(232,228,222,0.4);
+      --accent:rgba(232,228,222,0.08); --accent-solid:#7a756f;
+      --shadow-card-subtle:0 8px 24px rgba(0,0,0,0.15);
+      --stat-num:#f0ece6; --nav-bg:rgba(22,22,22,0.92);
+    }
+    [data-theme="light"] {
+      --bg:#f2f3f5; --bg-warm:#f5f6f8; --bg-card:rgba(255,255,255,0.8); --bg-card-hover:rgba(255,255,255,0.95);
+      --text:#1a1c22; --text-heading:#0a0b0d; --muted:#4a4e58; --faint:#6e7280;
+      --line:rgba(0,0,0,0.07); --line-strong:rgba(0,0,0,0.12);
+      --btn-border:rgba(26,28,34,0.25); --btn-hover-border:rgba(26,28,34,0.5);
+      --accent:rgba(26,28,34,0.05); --accent-solid:#50545e;
+      --shadow-card-subtle:0 8px 24px rgba(0,0,0,0.05);
+      --stat-num:#0f1014; --nav-bg:rgba(242,243,245,0.94);
+    }
+
+    :root {
+      --pillar-1:#7A8A98;
+      --pillar-2:#C9B99A;
+      --pillar-3:#A8B4A0;
+      --pillar-4:#B8A8B8;
+      --pillar-5:#c4a962;
+      --ease-out: cubic-bezier(0.4,0,0.2,1);
+      --max-w: 1140px;
+    }
+
+    /* =========================================================
+       RESET & BASE
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      transition: background 0.5s var(--ease-out), color 0.4s var(--ease-out);
+      min-height: 100vh;
+    }
+
+    /* =========================================================
+       TYPOGRAPHY
+       ========================================================= */
+    .font-mono { font-family: 'Space Mono', monospace; }
+    .font-serif { font-family: 'Playfair Display', serif; }
+    .font-sans { font-family: 'DM Sans', sans-serif; }
+
+    /* =========================================================
+       TOP NAV
+       ========================================================= */
+    .topnav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: var(--nav-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--line);
+      padding: 0 32px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .topnav-brand {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.8125rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .topnav-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .topnav-link {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--faint);
+      text-decoration: none;
+      transition: color 0.3s var(--ease-out);
+    }
+    .topnav-link:hover { color: var(--text); }
+
+    .theme-toggle {
+      background: none;
+      border: 1px solid var(--btn-border);
+      color: var(--muted);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
+      font-size: 0.875rem;
+    }
+    .theme-toggle:hover {
+      border-color: var(--btn-hover-border);
+      color: var(--text);
+    }
+
+    /* =========================================================
+       PAGE TITLE BAR
+       ========================================================= */
+    .page-title-bar {
+      margin-top: 56px;
+      padding: 48px 32px 32px;
+      max-width: var(--max-w);
+      margin-left: auto;
+      margin-right: auto;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-heading);
+      letter-spacing: -0.01em;
+    }
+
+    .compound-count {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    /* =========================================================
+       HERO — FEATURED COMPOUND
+       ========================================================= */
+    .hero-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .hero-accent-bar {
+      height: 3px;
+      width: 100%;
+      transition: background 0.6s var(--ease-out);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 50vh;
+      padding: 80px 32px 88px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      transition: background 0.6s var(--ease-out);
+      overflow: hidden;
+    }
+
+    .hero-ambient {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0.07;
+      transition: background 0.8s var(--ease-out);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: var(--max-w);
+      width: 100%;
+      display: grid;
+      grid-template-columns: 6px 1fr;
+      gap: 0 48px;
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+    }
+
+    .hero-inner.fading-out {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+
+    .hero-border {
+      width: 6px;
+      border-radius: 3px;
+      align-self: stretch;
+      transition: background 0.6s var(--ease-out);
+    }
+
+    .hero-content {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .hero-pillar-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6875rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero-pillar-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      transition: background 0.4s var(--ease-out);
+    }
+
+    .hero-compound-name {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(2.5rem, 5vw, 3.75rem);
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+    }
+
+    .hero-full-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.125rem;
+      font-style: italic;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .hero-role {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8125rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-top: -8px;
+    }
+
+    .hero-mech {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.9375rem;
+      line-height: 1.7;
+      color: var(--text);
+      max-width: 640px;
+      opacity: 0.85;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+      padding-top: 24px;
+      border-top: 1px solid var(--line);
+    }
+
+    .hero-stat {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .hero-stat-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.625rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--faint);
+    }
+
+    .hero-stat-value {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9375rem;
+      color: var(--stat-num);
+      font-weight: 400;
+    }
+
+    .hero-bottom-row {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hero-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 500;
+      color: var(--text-heading);
+      letter-spacing: -0.02em;
+    }
+
+    .hero-price-size {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      color: var(--faint);
+      margin-left: 4px;
+      font-weight: 400;
+      letter-spacing: 0;
+    }
+
+    .btn-add-stack {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 14px 40px;
+      background: transparent;
+      border: 1px solid var(--btn-border);
+      color: var(--text);
+      cursor: pointer;
+      transition: border-color 0.3s var(--ease-out), background 0.3s var(--ease-out), color 0.3s var(--ease-out);
+    }
+    .btn-add-stack:hover {
+      border-color: var(--btn-hover-border);
+      background: var(--accent);
+    }
+
+    /* =========================================================
+       GRADIENT DIVIDER
+       ========================================================= */
+    .pillar-divider {
+      height: 1px;
+      width: 100%;
+      transition: background 0.6s var(--ease-out);
+    }
+
+    /* =========================================================
+       PILLAR FILTER
+       ========================================================= */
+    .filter-bar {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 40px 32px 8px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .filter-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.625rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--faint);
+      margin-right: 8px;
+    }
+
+    .filter-link {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8125rem;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      text-decoration: none;
+      cursor: pointer;
+      padding: 4px 0;
+      border-bottom: 1.5px solid transparent;
+      transition: color 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+    }
+    .filter-link:hover { color: var(--text); }
+    .filter-link.active {
+      color: var(--text-heading);
+      border-bottom-color: var(--text-heading);
+    }
+
+    /* =========================================================
+       COMPOUND GRID
+       ========================================================= */
+    .grid-section {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 24px 32px 64px;
+    }
+
+    .compound-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .compound-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      padding: 28px 24px;
+      cursor: pointer;
+      transition: background 0.3s var(--ease-out), border-color 0.3s var(--ease-out), transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out), opacity 0.35s var(--ease-out);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+
+    .compound-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      opacity: 0;
+      transition: opacity 0.3s var(--ease-out);
+    }
+
+    .compound-card:hover {
+      background: var(--bg-card-hover);
+      border-color: var(--line-strong);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card-subtle);
+    }
+
+    .compound-card:hover::before {
+      opacity: 1;
+    }
+
+    .compound-card.is-featured {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+
+    .compound-card.hidden-by-filter {
+      display: none;
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .card-compound-name {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.9375rem;
+      font-weight: 700;
+      color: var(--text-heading);
+      letter-spacing: -0.01em;
+      line-height: 1.2;
+    }
+
+    .card-pillar-badge {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.5625rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 2px;
+      white-space: nowrap;
+      color: var(--text-heading);
+      flex-shrink: 0;
+    }
+
+    .card-bottom {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-top: auto;
+    }
+
+    .card-role {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.75rem;
+      color: var(--faint);
+    }
+
+    .card-price {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: var(--text-heading);
+    }
+
+    /* =========================================================
+       CTA BAND
+       ========================================================= */
+    .cta-band {
+      background: var(--bg-warm);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 64px 32px;
+      text-align: center;
+    }
+
+    .cta-band-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .cta-band-heading {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.625rem;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-heading);
+      letter-spacing: -0.01em;
+    }
+
+    .cta-band-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.875rem;
+      color: var(--muted);
+      line-height: 1.6;
+      max-width: 480px;
+    }
+
+    .btn-advisor {
+      margin-top: 8px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 14px 48px;
+      background: transparent;
+      border: 1px solid var(--btn-border);
+      color: var(--text);
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.3s var(--ease-out), background 0.3s var(--ease-out);
+    }
+    .btn-advisor:hover {
+      border-color: var(--btn-hover-border);
+      background: var(--accent);
+    }
+
+    /* =========================================================
+       FOOTER
+       ========================================================= */
+    .site-footer {
+      padding: 32px;
+      text-align: center;
+    }
+
+    .footer-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.6875rem;
+      letter-spacing: 0.08em;
+      color: var(--faint);
+    }
+
+    .footer-text a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .footer-text a:hover { color: var(--text); }
+
+    /* =========================================================
+       RESPONSIVE — TABLET
+       ========================================================= */
+    @media (max-width: 900px) {
+      .compound-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .hero {
+        padding: 56px 24px 64px;
+      }
+      .hero-inner {
+        gap: 0 32px;
+      }
+    }
+
+    /* =========================================================
+       RESPONSIVE — MOBILE
+       ========================================================= */
+    @media (max-width: 640px) {
+      .topnav {
+        padding: 0 20px;
+      }
+      .topnav-link { display: none; }
+
+      .page-title-bar {
+        padding: 40px 20px 24px;
+      }
+      .page-title { font-size: 1.375rem; }
+
+      .hero {
+        min-height: 40vh;
+        padding: 40px 20px 48px;
+      }
+
+      .hero-inner {
+        grid-template-columns: 4px 1fr;
+        gap: 0 20px;
+      }
+
+      .hero-compound-name {
+        font-size: 2rem;
+      }
+
+      .hero-full-name {
+        font-size: 0.9375rem;
+      }
+
+      .hero-mech {
+        font-size: 0.875rem;
+      }
+
+      .hero-stats {
+        gap: 24px;
+      }
+
+      .hero-price {
+        font-size: 1.625rem;
+      }
+
+      .hero-bottom-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .btn-add-stack {
+        width: 100%;
+        text-align: center;
+      }
+
+      .filter-bar {
+        padding: 32px 20px 8px;
+        gap: 20px;
+      }
+
+      .grid-section {
+        padding: 16px 20px 48px;
+      }
+
+      .compound-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .cta-band {
+        padding: 48px 20px;
+      }
+
+      .cta-band-heading {
+        font-size: 1.375rem;
+      }
+
+      .btn-advisor {
+        width: 100%;
+        text-align: center;
+      }
+
+      .site-footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <nav class="topnav" role="navigation" aria-label="Primary">
+    <span class="topnav-brand">Engineered Adherence</span>
+    <div class="topnav-right">
+      <a href="#" class="topnav-link">Protocols</a>
+      <a href="#" class="topnav-link">Science</a>
+      <a href="#" class="topnav-link">About</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">
+        <span id="themeIcon">&#9789;</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Page Title Bar -->
+  <header class="page-title-bar">
+    <h1 class="page-title">Compound Library</h1>
+    <span class="compound-count" id="compoundCount">12 compounds across 5 pillars</span>
+  </header>
+
+  <!-- Hero — Featured Compound -->
+  <section class="hero-wrapper" aria-label="Featured compound">
+    <div class="hero-accent-bar" id="heroAccentBar"></div>
+    <div class="hero" id="heroSection">
+      <div class="hero-ambient" id="heroAmbient"></div>
+      <div class="hero-inner" id="heroInner">
+        <div class="hero-border" id="heroBorder"></div>
+        <div class="hero-content" id="heroContent">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gradient Divider -->
+  <div class="pillar-divider" id="pillarDivider"></div>
+
+  <!-- Pillar Filter -->
+  <div class="filter-bar" role="navigation" aria-label="Filter compounds by pillar">
+    <span class="filter-label">Pillar</span>
+    <a class="filter-link active" data-pillar="all" role="button" tabindex="0">All</a>
+    <a class="filter-link" data-pillar="1" role="button" tabindex="0">I</a>
+    <a class="filter-link" data-pillar="2" role="button" tabindex="0">II</a>
+    <a class="filter-link" data-pillar="3" role="button" tabindex="0">III</a>
+    <a class="filter-link" data-pillar="4" role="button" tabindex="0">IV</a>
+    <a class="filter-link" data-pillar="5" role="button" tabindex="0">V</a>
+  </div>
+
+  <!-- Compound Grid -->
+  <section class="grid-section" aria-label="All compounds">
+    <div class="compound-grid" id="compoundGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </section>
+
+  <!-- CTA Band -->
+  <section class="cta-band" aria-label="Consultation call to action">
+    <div class="cta-band-inner">
+      <h2 class="cta-band-heading">Complete Your Stack</h2>
+      <p class="cta-band-sub">
+        Each protocol is built around your biomarkers, goals, and clinical history.
+        Speak with an advisor to design a compound stack tailored to your biology.
+      </p>
+      <a href="#" class="btn-advisor">Book an Advisor Call</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <p class="footer-text">
+      Engineered Adherence &mdash; Research-grade compounds. Clinical protocols. No shortcuts.
+    </p>
+  </footer>
+
+  <script>
+    /* =============================================================
+       COMPOUND DATA
+       ============================================================= */
+    const COMPOUNDS = [
+      {slug:'epithalon',name:'EPITHALON',fullName:'Epithalon (Epitalon)',pillar:'Longevity',pillarNum:'I',pillarIndex:1,price:145,size:'10mg',role:'Telomerase activation',route:'SubQ',dosing:'100mcg',freq:'Daily x 20d',mech:'Activates telomerase to extend telomere length, supporting cellular longevity and DNA stability through targeted enzyme activation.'},
+      {slug:'ghk-cu',name:'GHK-CU',fullName:'GHK-Cu (Copper Peptide)',pillar:'Longevity',pillarIndex:1,pillarNum:'I',price:76,size:'50mg',role:'Collagen synthesis',route:'SubQ/Topical',dosing:'1-2mg',freq:'Daily',mech:'Copper peptide complex that stimulates collagen production, tissue remodeling, and wound healing.'},
+      {slug:'bpc-157',name:'BPC-157',fullName:'Body Protection Compound-157',pillar:'Recovery',pillarIndex:2,pillarNum:'II',price:89,size:'5mg',role:'Tissue repair',route:'SubQ',dosing:'250-500mcg',freq:'2x daily',mech:'Gastric pentadecapeptide that accelerates wound healing, tendon repair, and reduces inflammation systemically.'},
+      {slug:'tb-500',name:'TB-500',fullName:'Thymosin Beta-4 Fragment',pillar:'Recovery',pillarIndex:2,pillarNum:'II',price:134,size:'5mg',role:'Systemic healing',route:'SubQ',dosing:'2.5mg',freq:'2x week',mech:'Thymosin beta-4 fragment promoting cell migration, angiogenesis, and systemic tissue healing.'},
+      {slug:'aod-9604',name:'AOD-9604',fullName:'Advanced Obesity Drug 9604',pillar:'Metabolic',pillarIndex:3,pillarNum:'III',price:118,size:'5mg',role:'Targeted lipolysis',route:'SubQ',dosing:'300mcg',freq:'Daily',mech:'Modified GH fragment targeting fat metabolism and lipolysis without systemic GH effects or IGF-1 elevation.'},
+      {slug:'retatrutide',name:'RETATRUTIDE',fullName:'Retatrutide (LY-3437943)',pillar:'Metabolic',pillarIndex:3,pillarNum:'III',price:189,size:'10mg',role:'Triple agonist',route:'SubQ',dosing:'Titrate',freq:'Weekly',mech:'Triple incretin receptor agonist (GIP/GLP-1/Glucagon) for comprehensive metabolic optimization.'},
+      {slug:'semax',name:'SEMAX',fullName:'Semax (MEHFPGP)',pillar:'Cognitive',pillarIndex:4,pillarNum:'IV',price:97,size:'30mg',role:'BDNF upregulation',route:'Intranasal',dosing:'200-600mcg',freq:'Daily',mech:'Synthetic ACTH(4-10) analogue that upregulates BDNF, enhancing neuroplasticity and cognitive function.'},
+      {slug:'selank',name:'SELANK',fullName:'Selank (TP-7)',pillar:'Cognitive',pillarIndex:4,pillarNum:'IV',price:88,size:'5mg',role:'Anxiolytic',route:'Intranasal',dosing:'250-500mcg',freq:'Daily',mech:'Tuftsin analogue with anxiolytic and nootropic properties via GABA modulation.'},
+      {slug:'ipamorelin',name:'IPAMORELIN',fullName:'Ipamorelin Acetate',pillar:'Performance',pillarIndex:5,pillarNum:'V',price:112,size:'2mg',role:'Clean GH pulse',route:'SubQ',dosing:'200-300mcg',freq:'2-3x daily',mech:'Highly selective GH secretagogue producing clean GH pulses without cortisol or prolactin elevation.'},
+      {slug:'cjc-1295',name:'CJC-1295',fullName:'CJC-1295 (DAC)',pillar:'Performance',pillarIndex:5,pillarNum:'V',price:108,size:'2mg',role:'Sustained GH',route:'SubQ',dosing:'100mcg',freq:'2-3x week',mech:'GHRH analogue with Drug Affinity Complex providing sustained GH elevation over extended half-life.'},
+      {slug:'hexarelin',name:'HEXARELIN',fullName:'Hexarelin (Examorelin)',pillar:'Performance',pillarIndex:5,pillarNum:'V',price:129,size:'2mg',role:'Max GH release',route:'SubQ',dosing:'100-200mcg',freq:'2x daily',mech:'Potent hexapeptide GH secretagogue for maximum growth hormone release from the pituitary.'},
+      {slug:'mk-677',name:'MK-677',fullName:'Ibutamoren Mesylate',pillar:'Performance',pillarIndex:5,pillarNum:'V',price:94,size:'10mg',role:'Oral secretagogue',route:'Oral',dosing:'10-25mg',freq:'Daily',mech:'Non-peptide oral GH secretagogue mimicking ghrelin for sustained IGF-1 elevation and improved sleep quality.'}
+    ];
+
+    const PILLAR_COLORS = {
+      1: '#7A8A98',
+      2: '#C9B99A',
+      3: '#A8B4A0',
+      4: '#B8A8B8',
+      5: '#c4a962'
+    };
+
+    /* =============================================================
+       STATE
+       ============================================================= */
+    let featuredSlug = COMPOUNDS[0].slug;
+    let activeFilter = 'all';
+    let isTransitioning = false;
+
+    /* =============================================================
+       DOM REFERENCES
+       ============================================================= */
+    const heroContent = document.getElementById('heroContent');
+    const heroInner = document.getElementById('heroInner');
+    const heroBorder = document.getElementById('heroBorder');
+    const heroAccentBar = document.getElementById('heroAccentBar');
+    const heroAmbient = document.getElementById('heroAmbient');
+    const pillarDivider = document.getElementById('pillarDivider');
+    const compoundGrid = document.getElementById('compoundGrid');
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+
+    /* =============================================================
+       UTILITY
+       ============================================================= */
+    function getPillarColor(pillarIndex) {
+      return PILLAR_COLORS[pillarIndex] || '#888';
+    }
+
+    function hexToRgba(hex, alpha) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      return 'rgba(' + r + ',' + g + ',' + b + ',' + alpha + ')';
+    }
+
+    /* =============================================================
+       RENDER HERO
+       ============================================================= */
+    function renderHero(compound) {
+      const pc = getPillarColor(compound.pillarIndex);
+
+      heroContent.innerHTML =
+        '<div class="hero-pillar-tag">' +
+          '<span class="hero-pillar-dot" style="background:' + pc + '"></span>' +
+          'Pillar ' + compound.pillarNum + ' &mdash; ' + compound.pillar +
+        '</div>' +
+        '<h2 class="hero-compound-name">' + compound.name + '</h2>' +
+        '<p class="hero-full-name">' + compound.fullName + '</p>' +
+        '<p class="hero-role">' + compound.role + '</p>' +
+        '<p class="hero-mech">' + compound.mech + '</p>' +
+        '<div class="hero-stats">' +
+          '<div class="hero-stat">' +
+            '<span class="hero-stat-label">Route</span>' +
+            '<span class="hero-stat-value">' + compound.route + '</span>' +
+          '</div>' +
+          '<div class="hero-stat">' +
+            '<span class="hero-stat-label">Dosing</span>' +
+            '<span class="hero-stat-value">' + compound.dosing + '</span>' +
+          '</div>' +
+          '<div class="hero-stat">' +
+            '<span class="hero-stat-label">Frequency</span>' +
+            '<span class="hero-stat-value">' + compound.freq + '</span>' +
+          '</div>' +
+          '<div class="hero-stat">' +
+            '<span class="hero-stat-label">Vial Size</span>' +
+            '<span class="hero-stat-value">' + compound.size + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="hero-bottom-row">' +
+          '<span class="hero-price">$' + compound.price + '<span class="hero-price-size"> / ' + compound.size + '</span></span>' +
+          '<button class="btn-add-stack">Add to Stack</button>' +
+        '</div>';
+
+      heroBorder.style.background = pc;
+      heroAccentBar.style.background = 'linear-gradient(90deg, ' + pc + ', ' + hexToRgba(pc, 0.2) + ')';
+      heroAmbient.style.background = 'radial-gradient(ellipse at 20% 30%, ' + hexToRgba(pc, 0.15) + ' 0%, transparent 60%)';
+      pillarDivider.style.background = 'linear-gradient(90deg, ' + hexToRgba(pc, 0.4) + ', ' + hexToRgba(pc, 0.05) + ' 60%, transparent)';
+    }
+
+    /* =============================================================
+       RENDER GRID
+       ============================================================= */
+    function renderGrid() {
+      compoundGrid.innerHTML = '';
+
+      COMPOUNDS.forEach(function(compound) {
+        const pc = getPillarColor(compound.pillarIndex);
+        const isFeatured = compound.slug === featuredSlug;
+
+        const card = document.createElement('article');
+        card.className = 'compound-card' + (isFeatured ? ' is-featured' : '');
+        card.setAttribute('data-slug', compound.slug);
+        card.setAttribute('data-pillar', compound.pillarIndex);
+        card.setAttribute('role', 'button');
+        card.setAttribute('tabindex', '0');
+        card.setAttribute('aria-label', 'View ' + compound.fullName + ' details');
+
+        // Pillar accent on hover
+        card.style.setProperty('--card-pillar', pc);
+        card.querySelector; // force style recalc not needed
+
+        card.innerHTML =
+          '<div class="card-top">' +
+            '<span class="card-compound-name">' + compound.name + '</span>' +
+            '<span class="card-pillar-badge" style="background:' + hexToRgba(pc, 0.15) + '; color:' + pc + '">' + compound.pillarNum + ' &middot; ' + compound.pillar + '</span>' +
+          '</div>' +
+          '<div class="card-bottom">' +
+            '<span class="card-role">' + compound.role + '</span>' +
+            '<span class="card-price">$' + compound.price + '</span>' +
+          '</div>';
+
+        // Set the ::before accent bar color
+        card.style.cssText += '--card-pillar:' + pc;
+
+        card.addEventListener('click', function() { promoteTo(compound.slug); });
+        card.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            promoteTo(compound.slug);
+          }
+        });
+
+        compoundGrid.appendChild(card);
+      });
+
+      // Apply accent bar via inline style workaround (::before can't be styled inline directly)
+      // We'll use a trick: inject a tiny <style> for each card's ::before
+      updateCardAccents();
+      applyFilter();
+    }
+
+    function updateCardAccents() {
+      const cards = compoundGrid.querySelectorAll('.compound-card');
+      cards.forEach(function(card) {
+        const slug = card.getAttribute('data-slug');
+        const compound = COMPOUNDS.find(function(c) { return c.slug === slug; });
+        if (compound) {
+          const pc = getPillarColor(compound.pillarIndex);
+          // We can set a custom property on the element and use it in a sheet rule
+          card.style.setProperty('--card-accent', pc);
+        }
+      });
+    }
+
+    /* =============================================================
+       PROMOTE COMPOUND TO HERO
+       ============================================================= */
+    function promoteTo(slug) {
+      if (slug === featuredSlug || isTransitioning) return;
+      isTransitioning = true;
+
+      const compound = COMPOUNDS.find(function(c) { return c.slug === slug; });
+      if (!compound) { isTransitioning = false; return; }
+
+      // Fade out
+      heroInner.classList.add('fading-out');
+
+      setTimeout(function() {
+        featuredSlug = slug;
+        renderHero(compound);
+
+        // Update grid featured states
+        const cards = compoundGrid.querySelectorAll('.compound-card');
+        cards.forEach(function(card) {
+          if (card.getAttribute('data-slug') === slug) {
+            card.classList.add('is-featured');
+          } else {
+            card.classList.remove('is-featured');
+          }
+        });
+
+        // Fade in
+        heroInner.classList.remove('fading-out');
+        isTransitioning = false;
+
+        // Scroll hero into view
+        document.querySelector('.hero-wrapper').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 400);
+    }
+
+    /* =============================================================
+       PILLAR FILTER
+       ============================================================= */
+    function applyFilter() {
+      const cards = compoundGrid.querySelectorAll('.compound-card');
+      let visibleCount = 0;
+
+      cards.forEach(function(card) {
+        const pillar = card.getAttribute('data-pillar');
+        if (activeFilter === 'all' || pillar === activeFilter) {
+          card.classList.remove('hidden-by-filter');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden-by-filter');
+        }
+      });
+
+      // Update count text
+      const countEl = document.getElementById('compoundCount');
+      if (activeFilter === 'all') {
+        countEl.textContent = COMPOUNDS.length + ' compounds across 5 pillars';
+      } else {
+        const pillarName = COMPOUNDS.find(function(c) { return String(c.pillarIndex) === activeFilter; });
+        const name = pillarName ? pillarName.pillar : '';
+        countEl.textContent = visibleCount + ' compound' + (visibleCount !== 1 ? 's' : '') + ' in ' + name;
+      }
+    }
+
+    document.querySelectorAll('.filter-link').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        document.querySelectorAll('.filter-link').forEach(function(l) {
+          l.classList.remove('active');
+        });
+        link.classList.add('active');
+
+        activeFilter = link.getAttribute('data-pillar');
+        applyFilter();
+      });
+
+      link.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          link.click();
+        }
+      });
+    });
+
+    /* =============================================================
+       THEME TOGGLE
+       ============================================================= */
+    function getStoredTheme() {
+      try { return localStorage.getItem('ea-theme'); } catch (e) { return null; }
+    }
+
+    function setTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      themeIcon.innerHTML = theme === 'dark' ? '&#9789;' : '&#9788;';
+      try { localStorage.setItem('ea-theme', theme); } catch (e) { /* storage unavailable */ }
+    }
+
+    themeToggle.addEventListener('click', function() {
+      const current = document.documentElement.getAttribute('data-theme');
+      setTheme(current === 'dark' ? 'light' : 'dark');
+    });
+
+    // Initialize theme from storage or system preference
+    (function initTheme() {
+      const stored = getStoredTheme();
+      if (stored) {
+        setTheme(stored);
+      } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+        setTheme('light');
+      }
+    })();
+
+    /* =============================================================
+       CARD ::before ACCENT — Global style injection
+       We need this because inline styles can't target pseudo-elements.
+       ============================================================= */
+    (function injectCardAccentRule() {
+      const sheet = document.createElement('style');
+      sheet.textContent = '.compound-card::before { background: var(--card-accent, transparent); }';
+      document.head.appendChild(sheet);
+    })();
+
+    /* =============================================================
+       INIT
+       ============================================================= */
+    renderHero(COMPOUNDS[0]);
+    renderGrid();
+  </script>
+</body>
+</html>
