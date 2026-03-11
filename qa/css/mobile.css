@@ -190,8 +190,7 @@
      MOBILE SECTION SPACING
      ═══════════════════════════════════════════ */
   body .section{
-    padding-top:64px;
-    padding-bottom:64px;
+    padding:64px 24px;
   }
 
   body .page-hero{
