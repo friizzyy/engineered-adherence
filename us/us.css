@@ -343,9 +343,20 @@
 }
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE — MODAL
+   RESPONSIVE — TABLET (1024px)
+   ═══════════════════════════════════════════ */
+@media(max-width:1024px){
+  .us-disclaimer{padding:24px 40px}
+  .cmodal-inner{padding:40px 40px 48px}
+}
+
+/* ═══════════════════════════════════════════
+   RESPONSIVE — MOBILE (768px)
    ═══════════════════════════════════════════ */
 @media(max-width:768px){
+  /* Toast: align with mobile nav (60px) */
+  .ea-toast{top:68px}
+
   .cmodal{max-height:92vh}
   .cmodal-inner{padding:32px 24px 40px}
   .cmodal-name{font-size:22px}
@@ -354,14 +365,23 @@
   .cmodal-footer{flex-direction:column;align-items:stretch;text-align:center}
   .cmodal-price{order:-1;text-align:center}
   .cmodal-benefits{flex-direction:column}
-  .cart-drawer{max-width:100%;padding:24px}
+  .cmodal-syn-list{flex-wrap:wrap}
+
+  .cart-drawer{max-width:100%;padding:24px;padding-bottom:calc(24px + env(safe-area-inset-bottom,0px))}
   .cart-close{width:44px;height:44px}
   .cart-remove-btn{width:44px;height:44px}
   .cart-total-value{font-size:24px}
-  .us-disclaimer{padding:20px 24px;font-size:10px}
+
+  .us-disclaimer{padding:20px 24px;font-size:10px;padding-bottom:calc(20px + env(safe-area-inset-bottom,0px))}
+
+  /* Nav cart: hide on mobile, cart accessible via mobile nav */
+  .nav-cart-btn{display:none}
 }
 @media(max-width:480px){
   .cmodal-name{font-size:18px}
   .cmodal-head{gap:10px}
   .cmodal-pillar-num{font-size:28px}
+  .cmodal-mech-text{font-size:12px}
+  .cmodal-stat-val{font-size:12px}
+  .cmodal-benefit{font-size:10px;padding:6px 12px 6px 20px}
 }

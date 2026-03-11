@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Engineered Adherence | USA</title>
 <meta name="description" content="Research-grade peptide compounds for serious optimization. Precision protocols, clinical purity, delivered to your door.">
 <meta property="og:title" content="Engineered Adherence | USA">
@@ -318,75 +318,132 @@
     font-weight:300;
   }
 
+  /* ═══════════════════════════════════════════
+     RESPONSIVE — TABLET (1024px)
+     ═══════════════════════════════════════════ */
   @media(max-width:1024px){
     .featured-grid{grid-template-columns:1fr 1fr}
     .philosophy{padding:100px 40px}
     .us-pillar{padding:36px 16px}
     .us-pillar-num{font-size:40px}
+    .vial-price{font-size:13px}
   }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE — MOBILE (768px)
+     ═══════════════════════════════════════════ */
   @media(max-width:768px){
-    /* Reduce nav animation delay on mobile so users can navigate sooner */
     nav{animation-delay:.3s}
+
+    /* Hero */
     .us-hero{padding:100px 24px 60px;overflow:hidden}
     .us-hero-title{font-size:36px}
-    .us-hero-sub{font-size:14px}
+    .us-hero-sub{font-size:14px;max-width:360px}
     .us-hero-ctas{flex-direction:column;align-items:center;gap:12px}
-    .us-hero-ctas .btn{width:100%;max-width:280px;text-align:center}
+    .us-hero-ctas .btn{width:100%;max-width:280px;text-align:center;min-height:44px}
+
+    /* Grids: single column */
     .featured-grid{grid-template-columns:1fr}
     .proto-preview{grid-template-columns:1fr}
+
+    /* Philosophy / The Standard */
     .philosophy{padding:64px 24px}
     .philosophy .stat-row{flex-direction:row;flex-wrap:wrap;gap:0}
     .philosophy .stat{flex:1 1 45%;border-right:none;border-bottom:1px solid var(--line);padding:28px 16px}
     .philosophy .stat:nth-child(odd){border-right:1px solid var(--line)}
     .philosophy .stat-num{font-size:28px}
+
+    /* Advisor teaser */
     .advisor-teaser{padding:64px 24px}
-    .compound-ticker{margin-top:32px;max-width:100%}
-    .ticker-pill{min-height:44px;display:inline-flex;align-items:center;padding:10px 16px}
-    .nav-cart-btn{display:none}
-    body .vials-stage{gap:20px;flex-wrap:nowrap;justify-content:center;max-width:100%;padding:0 8px}
+
+    /* Vials: tighter mobile sizing */
+    body .vials-stage{gap:16px;flex-wrap:nowrap;justify-content:center;max-width:100%;padding:0 8px}
     body .vial-svg{width:50px;height:95px}
     .vial-name{font-size:10px}
     .vial-price{font-size:12px}
     .vial-reflect{display:none}
+
+    /* Circles: hide largest, contain rest */
     .circle-3{display:none}
-    /* Prevent circles from causing horizontal overflow */
     .circle{max-width:100vw;max-height:100vw}
-    /* Compound cards: tighter padding on mobile, ensure button touch targets */
+
+    /* Compound cards: touch-friendly */
     .compound-card{padding:32px 24px}
     .compound-card .compound-price{font-size:24px}
     .compound-card .btn{min-height:44px;display:inline-flex;align-items:center;justify-content:center}
     .view-details{min-height:44px;display:inline-flex;align-items:center}
     .proto-card{padding:32px 24px}
-    /* Pillars: horizontal scroll strip */
+
+    /* Five Pillars: horizontal scroll strip */
     .us-pillars{
       display:flex;overflow-x:auto;
       scroll-snap-type:x mandatory;
       -webkit-overflow-scrolling:touch;
       scrollbar-width:none;
+      border:none;
+      margin-left:-24px;margin-right:-24px;
+      padding:0 24px;
+      gap:12px;
     }
     .us-pillars::-webkit-scrollbar{display:none}
     .us-pillar{
-      min-width:220px;flex-shrink:0;
-      scroll-snap-align:start;padding:36px 24px;
+      min-width:200px;flex-shrink:0;
+      scroll-snap-align:start;padding:32px 20px;
+      border-right:none;
+      border:1px solid var(--line);
     }
+    .us-pillar:last-child{border-right:1px solid var(--line)}
+    .pillars-header{margin-bottom:32px}
   }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE — SMALL MOBILE (480px)
+     ═══════════════════════════════════════════ */
   @media(max-width:480px){
     .us-hero-title{font-size:28px}
+    .us-hero-sub{font-size:13px;max-width:300px}
+
+    /* Vials: compact */
     body .vials-stage{gap:10px;padding:0 4px}
     body .vial-svg{width:40px;height:75px}
     .vial-name{font-size:9px;white-space:nowrap}
     .vial-detail{font-size:7px;letter-spacing:2px}
     .vial-price{font-size:11px}
+
+    /* Circles: hide all but smallest */
     .circle-2{display:none}
-    .us-pillar{min-width:180px}
+
+    /* Pillars: narrower cards */
+    .us-pillar{min-width:170px;padding:28px 16px}
     .us-pillar-num{font-size:36px}
+    .us-pillar h3{font-size:16px}
+    .us-pillar p{font-size:12px}
+
+    /* Philosophy stats: single column */
+    .philosophy .stat-row{flex-direction:column}
+    .philosophy .stat{flex:none;border-right:none;border-bottom:1px solid var(--line);padding:24px 16px}
+    .philosophy .stat:nth-child(odd){border-right:none}
+    .philosophy .stat:last-child{border-bottom:none}
+    .philosophy .stat-num{font-size:24px}
+
+    /* Proto cards: tighter */
+    .proto-card{padding:24px 20px}
+    .proto-card .proto-num{font-size:36px}
+    .proto-card h3{font-size:17px}
   }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE — EXTRA SMALL (375px)
+     ═══════════════════════════════════════════ */
   @media(max-width:375px){
+    .us-hero-title{font-size:24px}
     body .vials-stage{gap:6px;padding:0}
     body .vial-svg{width:36px;height:68px}
     .vial-name{font-size:8px;letter-spacing:0.5px}
     .vial-detail{display:none}
     .vial-price{font-size:10px;margin-top:4px}
+    .us-pillar{min-width:160px}
+    .philosophy .stat-num{font-size:22px}
   }
 </style>
 </head>
@@ -418,6 +475,7 @@
     <li><a href="/us/protocols.html">Protocols</a></li>
     <li><a href="/us/advisor.html">Stack Advisor</a></li>
     <li><a href="/us/about.html">About</a></li>
+    <li><a href="#" id="mobile-cart-link" class="mobile-cart-link">Cart <span class="mobile-cart-count" id="mobile-cart-count"></span></a></li>
   </ul>
   <a href="/us/advisor.html" class="mobile-nav-cta">Build My Stack</a>
   <div class="mobile-nav-footer">
