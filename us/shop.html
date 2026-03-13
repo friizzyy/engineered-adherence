@@ -363,14 +363,16 @@
 
   /* ===== DOT NAVIGATION ===== */
   .dot-nav{
-    position:fixed;right:20px;top:50%;
+    position:fixed;right:16px;top:50%;
     transform:translateY(-50%);
-    display:flex;flex-direction:column;gap:6px;
+    display:flex;flex-direction:column;gap:3px;
     z-index:100;
+    opacity:0.5;
     transition:opacity 0.35s cubic-bezier(0.4,0,0.2,1);
   }
+  .dot-nav:hover{opacity:1}
   .dot-nav__dot{
-    width:6px;height:6px;border-radius:50%;
+    width:4px;height:4px;border-radius:50%;
     background:var(--line-strong);cursor:pointer;
     transition:all 0.35s cubic-bezier(0.4,0,0.2,1);
     border:none;padding:0;position:relative;
@@ -378,11 +380,11 @@
   .dot-nav__dot::before{
     content:'';position:absolute;inset:-4px;border-radius:50%;
   }
-  .dot-nav__dot:hover{transform:scale(1.5);background:var(--muted)}
-  .dot-nav__dot.active{width:8px;height:8px;transform:scale(1)}
+  .dot-nav__dot:hover{transform:scale(1.8);background:var(--muted)}
+  .dot-nav__dot.active{width:6px;height:6px;transform:scale(1)}
   .dot-nav__dot[data-tooltip]:hover::after{
     content:attr(data-tooltip);
-    position:absolute;right:16px;top:50%;
+    position:absolute;right:14px;top:50%;
     transform:translateY(-50%);
     font-family:'Space Mono',monospace;
     font-size:9px;letter-spacing:1px;
@@ -395,25 +397,32 @@
 
   /* ===== PILLAR FILTER ===== */
   .pillar-filter{
-    position:fixed;top:84px;left:32px;
-    display:flex;align-items:center;gap:4px;
+    position:fixed;top:84px;left:50%;
+    transform:translateX(-50%);
+    display:flex;align-items:center;gap:2px;
     z-index:100;
+    background:var(--bg-card);
+    border:1px solid var(--line);
+    border-radius:32px;
+    padding:4px 6px;
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
   }
   .pillar-filter__btn{
     font-family:'Space Mono',monospace;
-    font-size:9px;letter-spacing:1px;
+    font-size:9px;letter-spacing:0.8px;
     text-transform:uppercase;color:var(--faint);
     background:transparent;
-    border:1px solid transparent;
-    padding:5px 10px;cursor:pointer;
+    border:none;
+    padding:6px 14px;cursor:pointer;
     transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
-    border-radius:2px;white-space:nowrap;
+    border-radius:24px;white-space:nowrap;
   }
   .pillar-filter__btn:hover{
-    color:var(--text);border-color:var(--line-strong);
+    color:var(--text);background:var(--accent);
   }
   .pillar-filter__btn.active{
-    color:var(--text);border-color:var(--btn-border);
+    color:var(--text);
     background:var(--accent);
   }
 
@@ -489,13 +498,10 @@
     .dot-nav{display:none}
     .pillar-filter{
       top:auto;bottom:16px;
-      left:50%;transform:translateX(-50%);
-      background:var(--bg);
-      padding:6px 10px;
-      border:1px solid var(--line);
-      border-radius:4px;
+      border-radius:28px;
+      padding:3px 4px;
     }
-    .pillar-filter__btn{font-size:8px;padding:4px 7px}
+    .pillar-filter__btn{font-size:8px;padding:5px 10px}
     .dossier-scroll-indicator{right:24px;bottom:56px}
     .dossier-intro__title{font-size:36px}
     .dossier-intro{padding:100px 24px 60px}
@@ -512,8 +518,7 @@
     .dossier-specs{grid-template-columns:1fr}
     .dossier-spec:nth-child(even){padding-left:0;border-left:none}
     .dossier-spec:nth-child(odd){padding-right:0}
-    .pillar-filter{gap:2px}
-    .pillar-filter__btn{font-size:7px;padding:4px 5px;letter-spacing:0.3px}
+    .pillar-filter__btn{font-size:7px;padding:4px 8px;letter-spacing:0.3px}
     .dossier-intro__pillars{gap:8px}
     .dossier-intro__pillar-chip{font-size:7px}
   }
