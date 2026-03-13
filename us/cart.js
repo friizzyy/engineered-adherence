@@ -32,11 +32,17 @@ const Cart = {
   },
 
   render() {
-    // Update nav badge
+    // Update nav badge (desktop)
     const badge = document.getElementById('cart-count');
     if (badge) {
       badge.textContent = this.count();
       badge.style.display = this.count() > 0 ? 'inline' : 'none';
+    }
+
+    // Update mobile cart badge
+    const mobileBadge = document.getElementById('mobile-cart-count');
+    if (mobileBadge) {
+      mobileBadge.textContent = this.count() > 0 ? this.count() : '';
     }
 
     // Update drawer items
@@ -93,9 +99,18 @@ const Cart = {
 document.addEventListener('DOMContentLoaded', () => {
   Cart.render();
 
-  // Cart toggle button
+  // Cart toggle button (desktop)
   const toggle = document.getElementById('cart-toggle');
   if (toggle) toggle.addEventListener('click', () => Cart.showDrawer());
+
+  // Cart toggle link (mobile nav)
+  const mobileCartLink = document.getElementById('mobile-cart-link');
+  if (mobileCartLink) {
+    mobileCartLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      Cart.showDrawer();
+    });
+  }
 
   // Cart close button
   const close = document.getElementById('cart-close');
