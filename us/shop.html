@@ -21,7 +21,7 @@
 <link rel="stylesheet" href="/us/us.css">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-  nav{opacity:0;animation:fadeDown .8s ease .3s forwards}
+  body>.site-nav{opacity:0;animation:fadeDown .8s ease .3s forwards}
   @keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
 
   /* ===== DOSSIER PAGE — body overflow lock ===== */
@@ -538,7 +538,7 @@
 <body class="dossier-page">
 <a href="#main-content" class="skip-link">Skip to content</a>
 
-<nav>
+<nav class="site-nav">
   <a href="/us/" class="logo">Engineered Adherence</a>
   <ul class="nav-center">
     <li><a href="/us/shop.html" class="active">Shop</a></li>
@@ -596,10 +596,10 @@
 </div>
 
 <!-- Pillar Filter -->
-<nav class="pillar-filter" id="pillarFilter" aria-label="Filter by pillar"></nav>
+<div class="pillar-filter" id="pillarFilter" role="navigation" aria-label="Filter by pillar"></div>
 
 <!-- Dot Navigation -->
-<nav class="dot-nav" id="dotNav" aria-label="Compound navigation"></nav>
+<div class="dot-nav" id="dotNav" role="navigation" aria-label="Compound navigation"></div>
 
 <!-- Scroll Container -->
 <div class="dossier-scroll" id="scrollContainer">
