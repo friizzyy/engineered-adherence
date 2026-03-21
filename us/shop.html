@@ -1431,5 +1431,127 @@
 </footer>
 
 
+
+<!-- DECODE PANEL — Fixed button + sliding panel -->
+<button class="decode-trigger" id="decodeTrigger" aria-expanded="false" aria-controls="decodePanel">
+  <span class="decode-trigger-label">Decode</span>
+  <span class="decode-trigger-icon">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="8" cy="8" r="6.5"/>
+      <path d="M8 7v4M8 5.5v.5"/>
+    </svg>
+  </span>
+</button>
+
+<div class="decode-overlay" id="decodeOverlay"></div>
+<div class="decode-panel" id="decodePanel" role="dialog" aria-label="Compound glossary">
+  <div class="decode-header">
+    <span class="decode-title">Decode</span>
+    <button class="decode-close" id="decodeClose" aria-label="Close">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 3l10 10M13 3L3 13"/>
+      </svg>
+    </button>
+  </div>
+  <p class="decode-intro">Plain-language explanations for everything on this page.</p>
+  <div class="decode-items">
+
+    <div class="decode-item">
+      <div class="decode-term">Route</div>
+      <div class="decode-plain">How you take it. SubQ means a small injection under the skin. Oral means a capsule or liquid. Intranasal means a nasal spray.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Dosing</div>
+      <div class="decode-plain">The amount per single use. These are research reference ranges. Actual use should be guided by a qualified practitioner.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Frequency</div>
+      <div class="decode-plain">How often it is taken. Daily means every day. 2-3x week means two or three times per week. Some compounds are cycled — used for a period, then paused.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Half-Life</div>
+      <div class="decode-plain">How long the compound stays active in the body before half of it is gone. A longer half-life means less frequent dosing. A shorter one means the effect is more immediate but fades faster.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Onset</div>
+      <div class="decode-plain">When you can expect to notice effects. Some compounds work within minutes. Others take weeks of consistent use before changes become measurable.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Form</div>
+      <div class="decode-plain">The physical state of the compound. Lyophilized powder is freeze-dried. It is reconstituted with bacteriostatic water before use. This form has the longest shelf life and highest stability.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Purity</div>
+      <div class="decode-plain">The percentage of the compound that is the actual intended molecule. Everything else is impurities. 99%+ purity is the research standard. Our COA documents this for every batch.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Storage</div>
+      <div class="decode-plain">Where to keep it. 2-8°C means a standard fridge. -20°C means a freezer. Lyophilized powder can tolerate room temperature short-term. Once reconstituted, it must be refrigerated.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">COA</div>
+      <div class="decode-plain">Certificate of Analysis. A document from an independent laboratory confirming what is in the vial, at what purity, from a specific batch. This is the primary quality verification in research peptides.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Stacks With</div>
+      <div class="decode-plain">Compounds that are commonly used together because they work through different pathways that complement each other. Stacking is not required — compounds work individually too.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Mechanism of Action</div>
+      <div class="decode-plain">The biological process by which the compound works. How it interacts with receptors, cells, or signaling pathways. This is the scientific basis for the observed effects.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Contraindications</div>
+      <div class="decode-plain">Conditions or situations where the compound should not be used, or should be used with extreme caution. Always review with a physician if any of these apply to you.</div>
+    </div>
+
+  </div>
+  <div class="decode-footer">
+    <span>For research purposes only. Not medical advice.</span>
+  </div>
+</div>
+
+<script>
+(function(){
+  var trigger = document.getElementById('decodeTrigger');
+  var panel = document.getElementById('decodePanel');
+  var overlay = document.getElementById('decodeOverlay');
+  var closeBtn = document.getElementById('decodeClose');
+  if(!trigger||!panel) return;
+
+  function open(){
+    panel.classList.add('open');
+    overlay.classList.add('open');
+    trigger.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    panel.classList.remove('open');
+    overlay.classList.remove('open');
+    trigger.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
+  }
+
+  trigger.addEventListener('click', function(){
+    panel.classList.contains('open') ? close() : open();
+  });
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape') close();
+  });
+})();
+</script>
 </body>
 </html>
