@@ -116,6 +116,103 @@
     .standard-head{font-size:44px}
   }
 
+
+  /* ═══ PREMIUM STATS SECTION ═══ */
+  .standard-wrap{
+    padding:120px 0;
+    border-top:1px solid rgba(255,255,255,0.06);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .standard-header{
+    display:flex;align-items:baseline;
+    justify-content:space-between;
+    margin-bottom:80px;
+  }
+  .standard-header .section-label{margin-bottom:0}
+  .standard-header .section-label::before{display:none}
+  .standard-title{
+    font-size:clamp(22px,2vw,28px);
+    font-weight:300;letter-spacing:-0.01em;
+    color:var(--muted);
+    max-width:380px;text-align:right;
+    line-height:1.4;
+  }
+  .standard-strip{
+    display:flex;align-items:stretch;
+    border-top:1px solid rgba(255,255,255,0.06);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    margin-bottom:48px;
+  }
+  .standard-item{
+    flex:1;padding:52px 0;
+    display:flex;flex-direction:column;
+    justify-content:flex-end;
+    gap:16px;
+    transition:background .3s ease;
+    cursor:default;
+  }
+  .standard-item:first-child{padding-right:40px}
+  .standard-item:last-child{padding-left:40px}
+  .standard-item:not(:first-child):not(:last-child){padding:52px 40px}
+  .standard-item:hover{background:rgba(255,255,255,0.015)}
+  .standard-item-inner{
+    display:flex;align-items:baseline;gap:4px;
+    line-height:1;
+  }
+  .standard-figure{
+    font-size:clamp(64px,7vw,112px);
+    font-weight:100;
+    letter-spacing:-0.05em;
+    color:var(--text-heading);
+    font-variant-numeric:tabular-nums;
+    line-height:0.9;
+  }
+  .standard-suffix{
+    font-size:clamp(22px,2.5vw,36px);
+    font-weight:200;
+    color:var(--faint);
+    letter-spacing:-0.02em;
+    align-self:flex-start;
+    margin-top:8px;
+  }
+  .standard-meta{
+    display:flex;align-items:center;gap:8px;
+  }
+  .standard-name{
+    font-family:var(--font-mono);
+    font-size:10px;letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--faint);font-weight:400;
+  }
+  .standard-dot{color:rgba(255,255,255,0.15);font-size:12px}
+  .standard-detail{
+    font-size:11px;color:var(--faint);
+    font-weight:300;opacity:0.5;
+    letter-spacing:0.01em;
+  }
+  .standard-divider{
+    width:1px;
+    background:rgba(255,255,255,0.06);
+    flex-shrink:0;
+    margin:0;
+  }
+  .standard-footer-copy{
+    font-size:13px;color:var(--faint);
+    font-weight:300;line-height:1.7;
+    opacity:0.4;max-width:520px;
+  }
+  @media(max-width:768px){
+    .standard-wrap{padding:64px 0}
+    .standard-header{flex-direction:column;gap:12px;margin-bottom:48px}
+    .standard-title{text-align:left;font-size:16px;max-width:100%}
+    .standard-strip{flex-direction:column;border:none;gap:0}
+    .standard-item{padding:32px 0 !important;border-bottom:1px solid rgba(255,255,255,0.06)}
+    .standard-item:last-child{border-bottom:none}
+    .standard-divider{display:none}
+    .standard-figure{font-size:56px}
+    .standard-suffix{font-size:24px}
+  }
+
   /* OLD PHILOSOPHY - REPLACED */
   .philosophy-top{
     text-align:center;margin-bottom:80px;
@@ -885,38 +982,78 @@
 
 <!-- 02 - Philosophy -->
 <section class="philosophy reveal">
-  <div class="standard-grid">
-    <div class="standard-left">
+  <div class="standard-wrap">
+
+    <!-- Header row -->
+    <div class="standard-header">
       <p class="section-label">The Standard</p>
-      <h2 class="standard-head">Precision<br>is the<br>variable.</h2>
-      <p class="standard-body">Every compound third-party tested, COA verified, and dispatched within 48 hours.</p>
+      <h2 class="standard-title">Precision is the variable.</h2>
     </div>
-    <div class="standard-right">
-      <div class="standard-stat">
-        <div class="standard-num">99.9<span>%</span></div>
-        <div class="standard-label">Purity Standard</div>
-        <div class="standard-rule"></div>
-        <div class="standard-desc">HPLC verified, batch-specific COA on every order</div>
+
+    <!-- Full-width stat strip -->
+    <div class="standard-strip">
+
+      <div class="standard-item">
+        <div class="standard-item-inner">
+          <div class="standard-figure">99.9</div>
+          <div class="standard-suffix">%</div>
+        </div>
+        <div class="standard-meta">
+          <span class="standard-name">Purity</span>
+          <span class="standard-dot">·</span>
+          <span class="standard-detail">HPLC verified per batch</span>
+        </div>
       </div>
-      <div class="standard-stat">
-        <div class="standard-num">25<span>+</span></div>
-        <div class="standard-label">Compounds</div>
-        <div class="standard-rule"></div>
-        <div class="standard-desc">Across 5 bio-longevity pillars</div>
+
+      <div class="standard-divider"></div>
+
+      <div class="standard-item">
+        <div class="standard-item-inner">
+          <div class="standard-figure">25</div>
+          <div class="standard-suffix">+</div>
+        </div>
+        <div class="standard-meta">
+          <span class="standard-name">Compounds</span>
+          <span class="standard-dot">·</span>
+          <span class="standard-detail">5 bio-longevity pillars</span>
+        </div>
       </div>
-      <div class="standard-stat">
-        <div class="standard-num">48<span>hr</span></div>
-        <div class="standard-label">Dispatch</div>
-        <div class="standard-rule"></div>
-        <div class="standard-desc">Order to shipment</div>
+
+      <div class="standard-divider"></div>
+
+      <div class="standard-item">
+        <div class="standard-item-inner">
+          <div class="standard-figure">48</div>
+          <div class="standard-suffix">hr</div>
+        </div>
+        <div class="standard-meta">
+          <span class="standard-name">Dispatch</span>
+          <span class="standard-dot">·</span>
+          <span class="standard-detail">Order to shipment</span>
+        </div>
       </div>
-      <div class="standard-stat">
-        <div class="standard-num">100<span>%</span></div>
-        <div class="standard-label">COA Included</div>
-        <div class="standard-rule"></div>
-        <div class="standard-desc">Third-party lab verification</div>
+
+      <div class="standard-divider"></div>
+
+      <div class="standard-item">
+        <div class="standard-item-inner">
+          <div class="standard-figure">100</div>
+          <div class="standard-suffix">%</div>
+        </div>
+        <div class="standard-meta">
+          <span class="standard-name">COA Included</span>
+          <span class="standard-dot">·</span>
+          <span class="standard-detail">Third-party lab verification</span>
+        </div>
       </div>
+
     </div>
+
+    <!-- Bottom copy -->
+    <div class="standard-footer-copy">
+      Every compound is third-party tested, COA verified, and dispatched within 48 hours. Research-grade purity matched with AI-driven protocol design.
+    </div>
+
   </div>
 </section>
 
