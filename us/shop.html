@@ -1075,7 +1075,7 @@
 
   /* ===== ELEMENTS ===== */
   var scrollContainer = document.getElementById('scrollContainer');
-  var dotNav = document.getElementById('dotNav');
+  var dotNav = null; // dot nav removed
   var scrollArrow = document.getElementById('scrollArrow');
 
   /* Sidebar replaces pillar filter */
@@ -1339,7 +1339,7 @@
 
   /* ===== DOT NAVIGATION ===== */
   function renderDotNav() {
-    dotNav.innerHTML = '';
+    if(dotNav){ dotNav.innerHTML = '';
 
     var introDot = document.createElement('button');
     introDot.className = 'dot-nav__dot active';
@@ -1350,11 +1350,11 @@
     introDot.addEventListener('click', function() {
       document.getElementById('introSection').scrollIntoView({ behavior: 'smooth' });
     });
-    dotNav.appendChild(introDot);
+    dotNav.appendChild(introDot); }
 
     visibleSections.forEach(function(section) {
       var compound = compounds[parseInt(section.dataset.index)];
-      var dot = document.createElement('button');
+      if(dotNav){ var dot = document.createElement('button');
       dot.className = 'dot-nav__dot';
       dot.dataset.target = section.id;
       dot.dataset.pillar = compound.pillarIndex;
@@ -1363,12 +1363,12 @@
       dot.addEventListener('click', function() {
         section.scrollIntoView({ behavior: 'smooth' });
       });
-      dotNav.appendChild(dot);
+      dotNav.appendChild(dot); }
     });
   }
 
   function updateActiveDot(activeId) {
-    var dots = dotNav.querySelectorAll('.dot-nav__dot');
+    var dots = dotNav ? dotNav.querySelectorAll('.dot-nav__dot') : [];
     dots.forEach(function(dot) {
       var isActive = dot.dataset.target === activeId;
       dot.classList.toggle('active', isActive);
