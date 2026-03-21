@@ -31,10 +31,10 @@
    DARK MODE — VOLCANIC
    ═══════════════════════════════════════════ */
 [data-theme="dark"]{
-  --bg:#0d0d0d;
-  --bg-warm:#121212;
-  --bg-card:#181818;
-  --bg-card-hover:#1e1e1e;
+  --bg:#161616;
+  --bg-warm:#1a1a1a;
+  --bg-card:#1e1e1e;
+  --bg-card-hover:#232323;
   --text:#e8e4de;
   --text-heading:#f0ece6;
   --muted:#9a9590;
@@ -978,11 +978,7 @@ body::after{
   inset:0;
   z-index:0;
   pointer-events:none;
-  background:radial-gradient(
-    ellipse 70% 50% at 50% 0%,
-    rgba(20,30,45,0.6) 0%,
-    transparent 65%
-  );
+  background:none;
 }
 
 /* Ensure content sits above pseudo-elements */
