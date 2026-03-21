@@ -1107,6 +1107,7 @@
       var section = document.createElement('section');
       section.className = 'dossier-section';
       section.id = 'dossier-' + compound.slug;
+      section.setAttribute('data-slug', compound.slug);
       section.dataset.pillar = compound.pillarIndex;
       section.dataset.index = index;
       if (!compound.available) {
@@ -1613,7 +1614,7 @@
 </button>
 
 <script>
-var plainData = {"bpc-157": {"mech": "A peptide that mimics your body"s natural healing signals. It speeds up repair in tendons, ligaments, gut lining, and muscles by telling your cells to grow new blood vessels and tissue. Think of it as a repair signal your body already understands.", "specs": {"Route": "Injection or oral capsule", "Dosing": "250-500mcg per dose", "Frequency": "Twice daily", "Half-Life": "Active for about 4 hours", "Onset": "Noticeable in 3-7 days", "Form": "Freeze-dried powder, mixed with water before use", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "tb-500": {"mech": "Promotes whole-body healing by helping cells move to where they are needed. Reduces inflammation, builds new blood vessels, and helps tissue rebuild after injury. It travels through your body more efficiently than most peptides due to its small size.", "specs": {"Route": "Small injection under skin", "Dosing": "2.5mg per dose", "Frequency": "Twice per week", "Half-Life": "Active for about 2 hours", "Onset": "Noticeable in 1-2 weeks", "Form": "Freeze-dried powder, mixed with water", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "ghk-cu": {"mech": "A copper-binding peptide that tells your body to produce more collagen and repair tissue. Naturally found in human plasma, it triggers skin regeneration and wound healing, and gets stronger signals going to damaged areas.", "specs": {"Route": "Injection under skin or applied topically", "Dosing": "1-2mg per dose", "Frequency": "Daily", "Half-Life": "Fast-acting, about 30 minutes", "Onset": "Skin changes in 2-4 weeks", "Form": "Freeze-dried powder", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "ipamorelin": {"mech": "Signals your pituitary gland to release a clean pulse of growth hormone. Unlike some alternatives, it does not spike cortisol or affect appetite. Result: better recovery, improved body composition, deeper sleep.", "specs": {"Route": "Small injection under skin", "Dosing": "200-300mcg per dose", "Frequency": "Daily, often before bed", "Half-Life": "About 2 hours", "Onset": "Sleep improvements in 1-2 weeks, body changes in 4-8 weeks", "Form": "Freeze-dried powder", "Purity": "99%+ pure compound", "Storage": "Standard refrigerator"}}, "semax": {"mech": "A nasal spray that boosts your brain"s growth factors — the proteins that help neurons communicate and form new connections. Used for focus, memory, and brain protection. Derived from a natural brain hormone.", "specs": {"Route": "Nasal spray — no injection needed", "Dosing": "200-600mcg per use", "Frequency": "Daily", "Half-Life": "Minutes active, effects last longer", "Onset": "Mental clarity in 15-30 minutes", "Form": "Nasal solution", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "retatrutide": {"mech": "A weekly injection that acts on three different receptors controlling appetite, blood sugar, and energy use. The most potent metabolic compound in clinical research — trials showed average body weight reduction of 24% at 48 weeks.", "specs": {"Route": "Weekly injection under skin", "Dosing": "Start low, increase over weeks (1-12mg)", "Frequency": "Once per week", "Half-Life": "Stays active for about 6 days", "Onset": "Appetite changes in 1-2 weeks, weight in 4 weeks", "Form": "Freeze-dried powder", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "nad-plus": {"mech": "A coenzyme your cells use for energy production. NAD+ levels naturally decline with age. Supplementing it activates proteins linked to DNA repair and cellular longevity. Think of it as a fuel source for your cells to do their repair work.", "specs": {"Route": "Injection or IV drip", "Dosing": "50-100mg per dose", "Frequency": "2-3 times per week", "Half-Life": "1-2 hours for injections", "Onset": "Energy within days, deeper effects over weeks", "Form": "Freeze-dried powder", "Purity": "99%+ pure compound", "Storage": "Freezer (-20°C)"}}, "mots-c": {"mech": "A peptide produced inside your mitochondria that acts like an exercise signal. It activates the same pathways that fire during physical activity — improving insulin sensitivity, fat burning, and metabolic flexibility without changing your diet.", "specs": {"Route": "Injection under skin", "Dosing": "5-10mg per dose", "Frequency": "3-5 times per week", "Half-Life": "4-6 hours", "Onset": "Metabolic effects in 1-2 weeks", "Form": "Freeze-dried powder", "Purity": "97%+ pure compound", "Storage": "Freezer (-20°C)"}}, "tesamorelin": {"mech": "A synthetic version of your body"s own growth hormone releasing hormone. Produces a sustained, natural-pattern release of growth hormone rather than a spike. Used clinically for body composition and visceral fat reduction.", "specs": {"Route": "Injection under skin", "Dosing": "1-2mg per dose", "Frequency": "Daily", "Half-Life": "About 26 minutes, effects last longer", "Onset": "Body composition changes in 4-8 weeks", "Form": "Freeze-dried powder", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "cjc-1295": {"mech": "A modified version of your natural growth hormone signal that lasts 8+ days instead of minutes. Creates a steady, elevated level of growth hormone production that mimics younger hormonal patterns rather than artificial spikes.", "specs": {"Route": "Injection under skin", "Dosing": "100mcg per dose", "Frequency": "2-3 times per week", "Half-Life": "About 8 days — very long lasting", "Onset": "Results in 1-2 weeks", "Form": "Freeze-dried powder", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "selank": {"mech": "A nasal spray that reduces anxiety without sedation. Works on the same brain system as anxiety medications but without dependency or side effects. Also supports immune function and cognitive clarity.", "specs": {"Route": "Nasal spray — no injection needed", "Dosing": "250-500mcg per use", "Frequency": "Daily", "Half-Life": "Minutes, effects persist", "Onset": "Calming in 15-30 minutes", "Form": "Nasal solution", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}};
+
 
 (function(){
   var btn = document.getElementById('simplifyBtn');
@@ -1664,6 +1665,110 @@ var plainData = {"bpc-157": {"mech": "A peptide that mimics your body"s natural 
 
   btn.addEventListener('click', function(){ setMode(!isPlain); });
 })();
+</script>
+<script>
+var plainData = {
+  "bpc-157": {
+    mech: "A peptide that mimics your body's natural healing signals. It speeds up repair in tendons, ligaments, gut lining, and muscles by triggering new blood vessel growth and tissue repair. Think of it as a repair signal your body already understands.",
+    specs: { Route:"Injection or oral capsule", Dosing:"250 to 500mcg per dose", Frequency:"Twice daily", "Half-Life":"Active for about 4 hours", Onset:"Noticeable in 3 to 7 days", Form:"Freeze-dried powder, mixed with water", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
+  },
+  "tb-500": {
+    mech: "Promotes whole-body healing by helping cells move to where they are needed. Reduces inflammation, builds new blood vessels, and helps tissue rebuild after injury. Its small size lets it travel efficiently through the body.",
+    specs: { Route:"Small injection under the skin", Dosing:"2.5mg per dose", Frequency:"Twice per week", "Half-Life":"Active for about 2 hours", Onset:"Noticeable in 1 to 2 weeks", Form:"Freeze-dried powder, mixed with water", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
+  },
+  "ghk-cu": {
+    mech: "A copper-binding peptide that tells your body to produce more collagen and repair tissue. Naturally found in human plasma, it triggers skin regeneration and wound healing by sending stronger signals to damaged areas.",
+    specs: { Route:"Injection or topical application", Dosing:"1 to 2mg per dose", Frequency:"Daily", "Half-Life":"Fast-acting, about 30 minutes", Onset:"Skin changes visible in 2 to 4 weeks", Form:"Freeze-dried powder", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
+  },
+  "ipamorelin": {
+    mech: "Signals your pituitary gland to release a clean pulse of growth hormone. Does not spike cortisol or affect appetite. Results in better recovery, improved body composition, and deeper sleep.",
+    specs: { Route:"Small injection under the skin", Dosing:"200 to 300mcg per dose", Frequency:"Daily, often before bed", "Half-Life":"About 2 hours", Onset:"Sleep in 1 to 2 weeks, body changes in 4 to 8 weeks", Form:"Freeze-dried powder", Purity:"99%+ pure compound", Storage:"Standard refrigerator" }
+  },
+  "semax": {
+    mech: "A nasal spray that boosts your brain's growth factors, the proteins that help neurons communicate and form new connections. Used for focus, memory, and brain protection. Derived from a natural brain hormone.",
+    specs: { Route:"Nasal spray, no injection needed", Dosing:"200 to 600mcg per use", Frequency:"Daily", "Half-Life":"Minutes active, effects last longer", Onset:"Mental clarity in 15 to 30 minutes", Form:"Nasal solution", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
+  },
+  "retatrutide": {
+    mech: "A weekly injection acting on three receptors that control appetite, blood sugar, and energy use. The most potent metabolic compound in clinical research. Trials showed average body weight reduction of 24% at 48 weeks.",
+    specs: { Route:"Weekly injection under the skin", Dosing:"Start low, increase gradually (1 to 12mg)", Frequency:"Once per week", "Half-Life":"Active for about 6 days", Onset:"Appetite changes in 1 to 2 weeks, weight loss in 4 weeks", Form:"Freeze-dried powder", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
+  },
+  "nad-plus": {
+    mech: "A coenzyme your cells use for energy production. NAD levels decline with age. Supplementing activates proteins linked to DNA repair and cellular longevity. Think of it as fuel for your cells to do their repair work.",
+    specs: { Route:"Injection or IV drip", Dosing:"50 to 100mg per dose", Frequency:"2 to 3 times per week", "Half-Life":"1 to 2 hours for injections", Onset:"Energy within days, deeper effects over weeks", Form:"Freeze-dried powder", Purity:"99%+ pure compound", Storage:"Freezer" }
+  },
+  "mots-c": {
+    mech: "A peptide produced inside your mitochondria that mimics an exercise signal. Activates the same pathways as physical activity, improving insulin sensitivity, fat burning, and metabolic flexibility.",
+    specs: { Route:"Injection under the skin", Dosing:"5 to 10mg per dose", Frequency:"3 to 5 times per week", "Half-Life":"4 to 6 hours", Onset:"Metabolic effects in 1 to 2 weeks", Form:"Freeze-dried powder", Purity:"97%+ pure compound", Storage:"Freezer" }
+  },
+  "tesamorelin": {
+    mech: "A synthetic version of your body's own growth hormone releasing signal. Produces a sustained, natural pattern of growth hormone rather than an artificial spike. Used clinically for body composition and visceral fat reduction.",
+    specs: { Route:"Injection under the skin", Dosing:"1 to 2mg per dose", Frequency:"Daily", "Half-Life":"About 26 minutes, effects last longer", Onset:"Body composition changes in 4 to 8 weeks", Form:"Freeze-dried powder", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
+  },
+  "cjc-1295": {
+    mech: "A modified growth hormone signal that lasts 8 or more days instead of minutes. Creates a steady, elevated level of growth hormone that mimics younger hormonal patterns rather than artificial spikes.",
+    specs: { Route:"Injection under the skin", Dosing:"100mcg per dose", Frequency:"2 to 3 times per week", "Half-Life":"About 8 days, very long lasting", Onset:"Results in 1 to 2 weeks", Form:"Freeze-dried powder", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
+  },
+  "selank": {
+    mech: "A nasal spray that reduces anxiety without sedation or dependency. Works on the same brain pathways as anxiety medications but without side effects. Also supports immune function and cognitive clarity.",
+    specs: { Route:"Nasal spray, no injection needed", Dosing:"250 to 500mcg per use", Frequency:"Daily", "Half-Life":"Minutes, effects persist", Onset:"Calming in 15 to 30 minutes", Form:"Nasal solution", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
+  }
+};
+
+// Simplify toggle — runs after sections are rendered
+document.addEventListener('DOMContentLoaded', function(){
+  // Wait for dynamic render to complete
+  setTimeout(function(){
+    var btn = document.getElementById('simplifyBtn');
+    var label = document.getElementById('simplifyLabel');
+    if(!btn) return;
+    var isPlain = false;
+
+    function setMode(plain){
+      isPlain = plain;
+      btn.classList.toggle('active', plain);
+      label.textContent = plain ? 'Science' : 'Simplify';
+      document.body.classList.toggle('plain-mode', plain);
+
+      document.querySelectorAll('.dossier-section').forEach(function(sec){
+        if(sec.getAttribute('data-hidden') === 'true') return;
+        var slug = sec.getAttribute('data-slug');
+        var pd = plainData[slug];
+        if(!pd) return;
+
+        // Swap mechanism text
+        var mechEl = sec.querySelector('.dossier-mechanism');
+        if(mechEl){
+          if(plain){
+            if(!mechEl.hasAttribute('data-science')) mechEl.setAttribute('data-science', mechEl.textContent);
+            mechEl.textContent = pd.mech;
+          } else if(mechEl.hasAttribute('data-science')){
+            mechEl.textContent = mechEl.getAttribute('data-science');
+            mechEl.removeAttribute('data-science');
+          }
+        }
+
+        // Swap spec values
+        sec.querySelectorAll('.dossier-spec').forEach(function(spec){
+          var lbl = spec.querySelector('.dossier-spec-label');
+          var val = spec.querySelector('.dossier-spec-value');
+          if(!lbl || !val) return;
+          var key = lbl.textContent.trim();
+          if(pd.specs && pd.specs[key] !== undefined){
+            if(plain){
+              if(!val.hasAttribute('data-science')) val.setAttribute('data-science', val.textContent);
+              val.textContent = pd.specs[key];
+            } else if(val.hasAttribute('data-science')){
+              val.textContent = val.getAttribute('data-science');
+              val.removeAttribute('data-science');
+            }
+          }
+        });
+      });
+    }
+
+    btn.addEventListener('click', function(){ setMode(!isPlain); });
+  }, 800); // wait for dynamic render
+});
 </script>
 </body>
 </html>
