@@ -40,6 +40,60 @@
     padding:120px 24px 80px;
   }
 
+
+  /* ═══ PHILOSOPHY SECTION REDESIGN ═══ */
+  .philosophy-top{
+    text-align:center;margin-bottom:80px;
+  }
+  .philosophy-head{
+    font-size:clamp(48px,5.5vw,80px);
+    font-weight:200;letter-spacing:-0.04em;
+    color:var(--text-heading);
+    line-height:1.05;margin:16px 0 20px;
+  }
+  .philosophy-sub{
+    font-size:14px;color:var(--faint);font-weight:300;
+    letter-spacing:0.02em;max-width:440px;margin:0 auto;
+  }
+  .philosophy .stat-row{
+    display:grid;grid-template-columns:repeat(4,1fr);
+    border:none;gap:0;
+    border-top:1px solid rgba(255,255,255,0.06);
+  }
+  .philosophy .stat{
+    padding:52px 40px;
+    border-right:1px solid rgba(255,255,255,0.06);
+    position:relative;overflow:hidden;
+    transition:background .3s ease;
+  }
+  .philosophy .stat:last-child{border-right:none}
+  .philosophy .stat:hover{background:rgba(255,255,255,0.02)}
+  .philosophy .stat-num{
+    font-size:clamp(52px,5vw,80px);
+    font-weight:300;letter-spacing:-0.04em;
+    color:var(--text-heading);
+    line-height:1;margin-bottom:16px;
+    font-variant-numeric:tabular-nums;
+  }
+  .philosophy .stat-unit{
+    font-size:0.45em;font-weight:200;
+    letter-spacing:0;opacity:0.5;
+    vertical-align:super;margin-left:2px;
+  }
+  .philosophy .stat-label{
+    font-size:10px;font-family:var(--font-mono);
+    letter-spacing:2px;text-transform:uppercase;
+    color:var(--faint);margin-bottom:12px;
+    font-weight:400;
+  }
+  .philosophy .stat-desc{
+    font-size:12px;color:var(--muted);
+    font-weight:300;line-height:1.6;
+    opacity:0.5;max-width:180px;
+  }
+  /* Remove old stat-bar */
+  .philosophy .stat-bar{display:none}
+
   /* Expanding circles */
   .circle{
     position:absolute;border-radius:50%;
@@ -756,14 +810,32 @@
 
 <!-- 02 - Philosophy -->
 <section class="philosophy reveal">
-  <p class="section-label">The Standard</p>
-  <h2 class="section-title">Precision is the variable.</h2>
-  <p class="section-body">Every compound is third-party tested, CoA verified, and dispatched within 48 hours. We match research-grade purity with AI-driven protocol design. No guesswork. No filler. No compromise.</p>
+  <div class="philosophy-top">
+    <p class="section-label">The Standard</p>
+    <h2 class="philosophy-head">Precision is<br>the variable.</h2>
+    <p class="philosophy-sub">Every compound third-party tested. CoA verified. Dispatched within 48 hours.</p>
+  </div>
   <div class="stat-row">
-    <div class="stat"><div class="stat-num">99.9%</div><div class="stat-bar"></div><div class="stat-label">Purity Standard</div></div>
-    <div class="stat"><div class="stat-num">25+</div><div class="stat-bar"></div><div class="stat-label">Compounds</div></div>
-    <div class="stat"><div class="stat-num">48hr</div><div class="stat-bar"></div><div class="stat-label">Dispatch</div></div>
-    <div class="stat"><div class="stat-num">CoA</div><div class="stat-bar"></div><div class="stat-label">Verified</div></div>
+    <div class="stat">
+      <div class="stat-num">99.9<span class="stat-unit">%</span></div>
+      <div class="stat-label">Purity Standard</div>
+      <div class="stat-desc">HPLC verified, batch-specific COA on every order</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">25<span class="stat-unit">+</span></div>
+      <div class="stat-label">Compounds</div>
+      <div class="stat-desc">Across 5 bio-longevity pillars</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">48<span class="stat-unit">hr</span></div>
+      <div class="stat-label">Dispatch</div>
+      <div class="stat-desc">From order confirmation to shipment</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">100<span class="stat-unit">%</span></div>
+      <div class="stat-label">COA Included</div>
+      <div class="stat-desc">Third-party lab verification on every batch</div>
+    </div>
   </div>
 </section>
 
