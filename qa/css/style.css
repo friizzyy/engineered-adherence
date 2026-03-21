@@ -31,10 +31,10 @@
    DARK MODE — VOLCANIC
    ═══════════════════════════════════════════ */
 [data-theme="dark"]{
-  --bg:#161616;
-  --bg-warm:#1a1a1a;
-  --bg-card:#1e1e1e;
-  --bg-card-hover:#232323;
+  --bg:#111110;
+  --bg-warm:#161614;
+  --bg-card:#1b1b19;
+  --bg-card-hover:#202020;
   --text:#e8e4de;
   --text-heading:#f0ece6;
   --muted:#9a9590;
@@ -944,3 +944,41 @@ a, button, [role="button"], .compound-card, .vial-wrapper, .us-pillar, .region-c
   .footer-nav{flex-wrap:wrap;gap:12px 20px}
   .footer-tagline{display:none}
 }
+
+/* ═══════════════════════════════════════════
+   BACKGROUND — Warm void + grain texture
+   Darker than standard dark mode.
+   Subtle warmth at center, cool at edges.
+   Grain adds material depth without noise.
+   ═══════════════════════════════════════════ */
+
+/* SVG noise filter */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:0.028;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 width=%27300%27 height=%27300%27%3E%3Cfilter id=%27n%27%3E%3CfeTurbulence type=%27fractalNoise%27 baseFrequency=%270.75%27 numOctaves=%274%27 stitchTiles=%27stitch%27/%3E%3C/filter%3E%3Crect width=%27300%27 height=%27300%27 filter=%27url(%23n)%27/%3E%3C/svg%3E");
+  background-repeat:repeat;
+  background-size:200px 200px;
+}
+
+/* Radial warm glow at center — barely perceptible */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:radial-gradient(
+    ellipse 80% 60% at 50% 20%,
+    rgba(42,38,32,0.35) 0%,
+    transparent 70%
+  );
+}
+
+/* Ensure content sits above pseudo-elements */
+nav,main,footer,.site-nav{position:relative;z-index:1}
+
