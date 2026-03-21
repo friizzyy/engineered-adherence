@@ -213,6 +213,53 @@
     .standard-suffix{font-size:24px}
   }
 
+
+  /* ═══ DATA BAND — compact single strip ═══ */
+  .data-band{
+    border-top:1px solid rgba(255,255,255,0.06);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    background:rgba(255,255,255,0.01);
+  }
+  .data-band-inner{
+    display:flex;align-items:center;
+    justify-content:center;
+    gap:0;padding:0;
+    height:72px;
+  }
+  .data-item{
+    display:flex;align-items:center;gap:12px;
+    padding:0 48px;
+    flex:1;justify-content:center;
+    position:relative;
+    transition:background .2s ease;
+    height:100%;
+  }
+  .data-item:hover{background:rgba(255,255,255,0.02)}
+  .data-num{
+    font-family:var(--font-mono);
+    font-size:13px;font-weight:500;
+    letter-spacing:0.05em;
+    color:var(--text-heading);
+    font-variant-numeric:tabular-nums;
+  }
+  .data-label{
+    font-size:10px;letter-spacing:2px;
+    text-transform:uppercase;color:var(--faint);
+    font-weight:400;opacity:0.5;
+  }
+  .data-sep{
+    width:1px;height:20px;
+    background:rgba(255,255,255,0.08);
+    flex-shrink:0;
+  }
+  @media(max-width:768px){
+    .data-band-inner{flex-wrap:wrap;height:auto;padding:4px 0}
+    .data-item{flex:1 1 45%;padding:18px 20px;justify-content:flex-start}
+    .data-sep{display:none}
+    .data-item:nth-child(odd){border-right:1px solid rgba(255,255,255,0.06)}
+    .data-item:nth-child(1),.data-item:nth-child(2){border-bottom:1px solid rgba(255,255,255,0.06)}
+  }
+
   /* OLD PHILOSOPHY - REPLACED */
   .philosophy-top{
     text-align:center;margin-bottom:80px;
@@ -981,81 +1028,29 @@
 <div class="divider"><div class="divider-line"></div></div>
 
 <!-- 02 - Philosophy -->
-<section class="philosophy reveal">
-  <div class="standard-wrap">
-
-    <!-- Header row -->
-    <div class="standard-header">
-      <p class="section-label">The Standard</p>
-      <h2 class="standard-title">Precision is the variable.</h2>
+<div class="data-band">
+  <div class="data-band-inner">
+    <div class="data-item">
+      <span class="data-num">99.9%</span>
+      <span class="data-label">Purity Standard</span>
     </div>
-
-    <!-- Full-width stat strip -->
-    <div class="standard-strip">
-
-      <div class="standard-item">
-        <div class="standard-item-inner">
-          <div class="standard-figure">99.9</div>
-          <div class="standard-suffix">%</div>
-        </div>
-        <div class="standard-meta">
-          <span class="standard-name">Purity</span>
-          <span class="standard-dot">·</span>
-          <span class="standard-detail">HPLC verified per batch</span>
-        </div>
-      </div>
-
-      <div class="standard-divider"></div>
-
-      <div class="standard-item">
-        <div class="standard-item-inner">
-          <div class="standard-figure">25</div>
-          <div class="standard-suffix">+</div>
-        </div>
-        <div class="standard-meta">
-          <span class="standard-name">Compounds</span>
-          <span class="standard-dot">·</span>
-          <span class="standard-detail">5 bio-longevity pillars</span>
-        </div>
-      </div>
-
-      <div class="standard-divider"></div>
-
-      <div class="standard-item">
-        <div class="standard-item-inner">
-          <div class="standard-figure">48</div>
-          <div class="standard-suffix">hr</div>
-        </div>
-        <div class="standard-meta">
-          <span class="standard-name">Dispatch</span>
-          <span class="standard-dot">·</span>
-          <span class="standard-detail">Order to shipment</span>
-        </div>
-      </div>
-
-      <div class="standard-divider"></div>
-
-      <div class="standard-item">
-        <div class="standard-item-inner">
-          <div class="standard-figure">100</div>
-          <div class="standard-suffix">%</div>
-        </div>
-        <div class="standard-meta">
-          <span class="standard-name">COA Included</span>
-          <span class="standard-dot">·</span>
-          <span class="standard-detail">Third-party lab verification</span>
-        </div>
-      </div>
-
+    <span class="data-sep"></span>
+    <div class="data-item">
+      <span class="data-num">25+</span>
+      <span class="data-label">Compounds</span>
     </div>
-
-    <!-- Bottom copy -->
-    <div class="standard-footer-copy">
-      Every compound is third-party tested, COA verified, and dispatched within 48 hours. Research-grade purity matched with AI-driven protocol design.
+    <span class="data-sep"></span>
+    <div class="data-item">
+      <span class="data-num">48hr</span>
+      <span class="data-label">Dispatch</span>
     </div>
-
+    <span class="data-sep"></span>
+    <div class="data-item">
+      <span class="data-num">COA</span>
+      <span class="data-label">Verified</span>
+    </div>
   </div>
-</section>
+</div>
 
 <div class="divider"><div class="divider-line"></div></div>
 
