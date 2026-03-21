@@ -85,13 +85,13 @@
     padding:80px 24px 0;
   }
   .dossier-intro__label{
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:11px;letter-spacing:4px;
     text-transform:uppercase;color:var(--muted);
     margin-bottom:32px;
   }
   .dossier-intro__title{
-    font-family:'Playfair Display',serif;
+    font-family:var(--font-display);
     font-style:italic;font-weight:400;
     font-size:clamp(42px,6vw,72px);
     color:var(--text-heading);
@@ -99,7 +99,7 @@
     margin-bottom:20px;
   }
   .dossier-intro__subtitle{
-    font-family:'DM Sans',sans-serif;
+    font-family:var(--font-body);
     font-size:15px;font-weight:300;
     color:var(--muted);letter-spacing:0.5px;
     margin-bottom:16px;
@@ -110,7 +110,7 @@
   }
   .dossier-intro__pillar-chip{
     display:flex;align-items:center;gap:6px;
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:9px;letter-spacing:1.5px;
     text-transform:uppercase;color:var(--faint);
   }
@@ -126,7 +126,7 @@
     display:flex;flex-direction:column;
     align-items:center;gap:8px;
     color:var(--faint);
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:10px;letter-spacing:2px;
     text-transform:uppercase;
     animation:bounceDown 2s cubic-bezier(0.4,0,0.2,1) infinite;
@@ -164,7 +164,7 @@
   .dossier-ghost{
     position:absolute;left:40px;top:50%;
     transform:translateY(-50%);
-    font-family:'Playfair Display',serif;
+    font-family:var(--font-display);
     font-size:180px;font-weight:700;
     color:var(--text-heading);opacity:0.03;
     line-height:1;pointer-events:none;user-select:none;
@@ -190,21 +190,21 @@
     justify-content:center;
   }
   .dossier-compound-name{
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:clamp(28px,3.2vw,48px);
     font-weight:700;color:var(--text-heading);
     letter-spacing:2px;line-height:1.1;
     margin-bottom:6px;
   }
   .dossier-scientific-name{
-    font-family:'DM Sans',sans-serif;
+    font-family:var(--font-body);
     font-style:italic;font-weight:300;
     font-size:14px;color:var(--muted);
     margin-bottom:20px;
   }
   .dossier-pillar-tag{
     display:inline-flex;align-items:center;gap:8px;
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:10px;letter-spacing:2px;
     text-transform:uppercase;color:var(--faint);
     padding:5px 12px;
@@ -215,13 +215,13 @@
     width:7px;height:7px;border-radius:50%;flex-shrink:0;
   }
   .dossier-role{
-    font-family:'DM Sans',sans-serif;
+    font-family:var(--font-body);
     font-size:12px;font-weight:500;
     color:var(--muted);text-transform:uppercase;
     letter-spacing:1.5px;margin-bottom:6px;
   }
   .dossier-size{
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:11px;color:var(--faint);
   }
 
@@ -242,13 +242,13 @@
   .dossier-right::-webkit-scrollbar{display:none}
 
   .dossier-mech-label{
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:9px;letter-spacing:2.5px;
     text-transform:uppercase;color:var(--faint);
     margin-bottom:8px;
   }
   .dossier-mechanism{
-    font-family:'DM Sans',sans-serif;
+    font-family:var(--font-body);
     font-size:13px;font-weight:300;
     line-height:1.75;color:var(--text);
     margin-bottom:24px;max-width:520px;opacity:0.85;
@@ -263,20 +263,20 @@
   .dossier-spec:nth-child(odd){padding-right:16px}
   .dossier-spec:nth-child(even){padding-left:16px;border-left:1px solid var(--line)}
   .dossier-spec-label{
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:9px;letter-spacing:1.5px;
     text-transform:uppercase;color:var(--faint);
     margin-bottom:2px;display:block;
   }
   .dossier-spec-value{
-    font-family:'DM Sans',sans-serif;
+    font-family:var(--font-body);
     font-size:13px;font-weight:500;
     color:var(--stat-num);display:block;
   }
 
   /* Benefits pills */
   .dossier-benefits-label{
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:9px;letter-spacing:2.5px;
     text-transform:uppercase;color:var(--faint);
     margin-bottom:8px;
@@ -285,7 +285,7 @@
     display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;
   }
   .dossier-benefit{
-    font-family:'DM Sans',sans-serif;
+    font-family:var(--font-body);
     font-size:10px;font-weight:400;
     color:var(--muted);padding:4px 10px;
     border:1px solid var(--line-strong);
@@ -294,7 +294,7 @@
 
   /* Stacking */
   .dossier-stacking-label{
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:9px;letter-spacing:2.5px;
     text-transform:uppercase;color:var(--faint);
     margin-bottom:6px;
@@ -303,7 +303,7 @@
     display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;
   }
   .dossier-stack-pill{
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:9px;font-weight:400;
     letter-spacing:0.5px;padding:3px 10px;
     border-radius:2px;border:1px solid;opacity:0.8;
@@ -315,13 +315,13 @@
   }
   .dossier-footnote{flex:1}
   .dossier-footnote-label{
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:8px;letter-spacing:2px;
     text-transform:uppercase;color:var(--faint);
     margin-bottom:4px;display:block;
   }
   .dossier-footnote-value{
-    font-family:'DM Sans',sans-serif;
+    font-family:var(--font-body);
     font-size:11px;font-style:italic;font-weight:300;
     color:var(--muted);line-height:1.5;
   }
@@ -343,7 +343,7 @@
     display:flex;align-items:center;gap:20px;padding-top:4px;
   }
   .dossier-price{
-    font-family:'Playfair Display',serif;
+    font-family:var(--font-display);
     font-size:32px;font-weight:400;
     color:var(--text-heading);letter-spacing:-0.5px;
   }
@@ -352,7 +352,7 @@
     vertical-align:super;margin-right:2px;opacity:0.7;
   }
   .dossier-add-btn{
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:10px;letter-spacing:2px;
     text-transform:uppercase;color:var(--text);
     background:transparent;
@@ -369,7 +369,7 @@
   /* Scroll indicator */
   .dossier-scroll-indicator{
     position:absolute;bottom:32px;right:48px;
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:10px;letter-spacing:1.5px;
     color:var(--faint);opacity:0.5;
   }
@@ -399,7 +399,7 @@
     content:attr(data-tooltip);
     position:absolute;right:14px;top:50%;
     transform:translateY(-50%);
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:9px;letter-spacing:1px;
     white-space:nowrap;color:var(--text);
     background:var(--bg-card);
@@ -422,7 +422,7 @@
     -webkit-backdrop-filter:blur(12px);
   }
   .pillar-filter__btn{
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:9px;letter-spacing:0.8px;
     text-transform:uppercase;color:var(--faint);
     background:transparent;
@@ -809,7 +809,7 @@
           '<div class="dossier-left">' +
             '<div class="dossier-vial">' + buildVialSVG(compound, index) + '</div>' +
             '<div class="dossier-left-text">' +
-              '<div class="dossier-compound-name">' + compound.name + '</div>' +
+              '<div class="dossier-compound-name copy-trigger" data-copy="' + compound.name + '">' + compound.name + '<svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></div>' +
               '<div class="dossier-scientific-name">' + compound.fullName + '</div>' +
               '<div class="dossier-pillar-tag">' +
                 '<span class="dossier-pillar-dot" style="background:' + color + '"></span>' +

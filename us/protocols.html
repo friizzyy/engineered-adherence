@@ -74,12 +74,12 @@
   .protocol-card:hover::before{transform:scaleX(1)}
 
   .protocol-num{
-    font-family:'Playfair Display',serif;font-size:100px;font-weight:600;
+    font-family:var(--font-display);font-size:100px;font-weight:600;
     color:var(--pillar-num);line-height:1;margin-bottom:8px;
     letter-spacing:-0.03em;
   }
   .protocol-name{
-    font-family:'Playfair Display',serif;
+    font-family:var(--font-display);
     font-size:24px;font-weight:500;
     color:var(--text-heading);margin-bottom:12px;
   }
@@ -102,7 +102,7 @@
     display:flex;gap:8px;flex-wrap:wrap;
   }
   .protocol-compound-pill{
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:12px;letter-spacing:0.5px;font-weight:400;
     padding:7px 14px;
     background:var(--bg);border:1px solid var(--line);
@@ -120,12 +120,12 @@
     margin-bottom:24px;
   }
   .protocol-price{
-    font-family:'Playfair Display',serif;
+    font-family:var(--font-display);
     font-size:28px;font-weight:500;color:var(--stat-num);
     margin-bottom:24px;
   }
   .protocol-price span{
-    font-size:14px;color:var(--faint);font-family:'DM Sans',sans-serif;font-weight:300;
+    font-size:14px;color:var(--faint);font-family:var(--font-body);font-weight:300;
   }
   .protocol-card .btn{width:100%;text-align:center}
 
@@ -137,7 +137,7 @@
     display:flex;align-items:center;justify-content:space-between;
     width:100%;padding:14px 0;
     background:none;border:none;border-top:1px solid var(--line);
-    cursor:pointer;color:var(--faint);font-family:'DM Sans',sans-serif;
+    cursor:pointer;color:var(--faint);font-family:var(--font-body);
     font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
     transition:color .3s;
   }
@@ -167,7 +167,7 @@
     color:var(--faint);margin-bottom:6px;
   }
   .proto-detail-val{
-    font-family:'Space Mono',monospace;
+    font-family:var(--font-mono);
     font-size:13px;font-weight:700;color:var(--text-heading);
   }
   .proto-detail-text{

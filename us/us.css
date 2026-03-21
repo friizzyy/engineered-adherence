@@ -54,7 +54,7 @@
   font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
   color:var(--faint);cursor:pointer;
   background:none;border:none;padding:0;
-  font-family:'DM Sans',sans-serif;font-weight:400;
+  font-family:var(--font-body);font-weight:400;
   transition:color .3s;display:inline-flex;align-items:center;gap:6px;
   margin-top:12px;
 }
@@ -70,7 +70,7 @@
   background:var(--bg-card);border:1px solid var(--line-strong);
   padding:14px 28px;z-index:300;
   font-size:12px;letter-spacing:0.5px;color:var(--text-heading);
-  font-family:'DM Sans',sans-serif;
+  font-family:var(--font-body);
   opacity:0;transition:opacity .3s ease,transform .3s ease;
   pointer-events:none;white-space:nowrap;
   box-shadow:var(--shadow-card-subtle);
@@ -131,11 +131,11 @@
   flex-wrap:wrap;
 }
 .cmodal-pillar-num{
-  font-family:'Playfair Display',serif;font-size:48px;font-weight:600;
+  font-family:var(--font-display);font-size:48px;font-weight:600;
   color:var(--p-accent,var(--pillar-num));line-height:1;opacity:0.3;
 }
 .cmodal-name{
-  font-family:'Space Mono',monospace;
+  font-family:var(--font-mono);
   font-size:28px;font-weight:700;
   color:var(--text-heading);letter-spacing:1px;
   text-transform:uppercase;margin-bottom:2px;
@@ -178,7 +178,7 @@
   color:var(--faint);margin-bottom:8px;
 }
 .cmodal-stat-val{
-  font-family:'Space Mono',monospace;
+  font-family:var(--font-mono);
   font-size:14px;font-weight:700;color:var(--text-heading);
 }
 
@@ -207,7 +207,7 @@
 }
 .cmodal-syn-list{display:flex;gap:8px}
 .cmodal-syn-pill{
-  font-family:'Space Mono',monospace;
+  font-family:var(--font-mono);
   font-size:11px;letter-spacing:0.5px;
   padding:7px 14px;cursor:pointer;
   background:var(--accent);border:1px solid var(--line);
@@ -223,11 +223,11 @@
   padding-top:24px;border-top:1px solid var(--line);
 }
 .cmodal-price{
-  font-family:'Playfair Display',serif;
+  font-family:var(--font-display);
   font-size:32px;font-weight:500;color:var(--stat-num);
 }
 .cmodal-price span{
-  font-size:14px;color:var(--faint);font-family:'DM Sans',sans-serif;font-weight:300;
+  font-size:14px;color:var(--faint);font-family:var(--font-body);font-weight:300;
 }
 
 /* ═══════════════════════════════════════════
@@ -235,11 +235,15 @@
    ═══════════════════════════════════════════ */
 .nav-cart-btn{
   padding:11px 24px;
-  background:var(--cta-bg);border:1px solid var(--cta-border);
+  background:transparent;border:1px solid rgba(255,255,255,0.2);
   color:var(--cta-text);font-size:10px;
   letter-spacing:2.2px;text-transform:uppercase;font-weight:400;
-  font-family:'DM Sans',sans-serif;
+  font-family:var(--font-body);
   cursor:pointer;transition:all .3s cubic-bezier(0.4,0,0.2,1);
+  border-radius:100px;
+}
+[data-theme="light"] .nav-cart-btn{
+  border-color:rgba(0,0,0,0.2);
 }
 .nav-cart-btn:hover{background:var(--cta-hover);border-color:var(--btn-hover-border)}
 .nav-cart-btn #cart-count{
@@ -278,7 +282,7 @@
   border-bottom:1px solid var(--line);
 }
 .cart-drawer-title{
-  font-family:'Playfair Display',serif;
+  font-family:var(--font-display);
   font-size:24px;font-weight:500;color:var(--text-heading);
 }
 .cart-close{
@@ -303,7 +307,7 @@
   font-size:11px;color:var(--faint);margin-top:4px;
 }
 .cart-item-price{
-  font-family:'Playfair Display',serif;
+  font-family:var(--font-display);
   font-size:16px;font-weight:500;color:var(--stat-num);
 }
 .cart-remove-btn{
@@ -326,7 +330,7 @@
   color:var(--faint);
 }
 .cart-total-value{
-  font-family:'Playfair Display',serif;
+  font-family:var(--font-display);
   font-size:28px;font-weight:500;color:var(--stat-num);
 }
 

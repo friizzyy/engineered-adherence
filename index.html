@@ -10,8 +10,17 @@
 <meta property="og:type" content="website">
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <script>window.location.replace('/us/');</script>
+<script>
+(function(){
+  var t = localStorage.getItem('ea-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
 <link rel="stylesheet" href="/qa/css/style.css">
 <style>
+  @keyframes gateIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes sweepLine{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
+
   .gate{
     min-height:100vh;
     display:flex;flex-direction:column;
@@ -20,17 +29,22 @@
     position:relative;z-index:1;
   }
   .gate-wordmark{
-    font-family:'Playfair Display',serif;
-    font-size:24px;font-weight:500;letter-spacing:0.02em;
+    font-family:var(--font-body);
+    font-size:14px;font-weight:500;letter-spacing:0.08em;
+    text-transform:uppercase;
     color:var(--text-heading);
     margin-bottom:12px;
     transition:color .5s;
+    opacity:0;animation:gateIn .8s ease .2s forwards;
   }
   .gate-tagline{
-    font-size:12px;letter-spacing:3px;text-transform:uppercase;
-    color:var(--faint);font-weight:300;
+    font-size:11px;letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;
+    color:var(--faint);font-weight:400;
     margin-bottom:64px;
     transition:color .5s;
+    opacity:0.4;
+    animation:gateIn .8s ease .3s forwards;
+    animation-fill-mode:both;
   }
   .region-cards{
     display:flex;gap:24px;
@@ -39,37 +53,65 @@
   .region-card{
     flex:1;
     background:var(--bg-card);
-    border:1px solid var(--line);
-    padding:48px 32px;
+    border:1px solid rgba(255,255,255,0.06);
+    padding:56px 32px;
     text-align:center;
     text-decoration:none;
-    transition:all .5s cubic-bezier(0.4,0,0.2,1);
+    transition:all .35s cubic-bezier(0.22,1,0.36,1);
     position:relative;overflow:hidden;
+    opacity:0;
   }
+  [data-theme="light"] .region-card{
+    border-color:rgba(0,0,0,0.06);
+  }
+  .region-card:nth-child(1){animation:gateIn .6s ease .4s forwards}
+  .region-card:nth-child(2){animation:gateIn .6s ease .7s forwards}
   .region-card::before{
     content:'';position:absolute;top:0;left:0;right:0;height:1px;
     background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
     transform:scaleX(0);transition:transform .5s cubic-bezier(0.4,0,0.2,1);
     opacity:0.6;
   }
+  /* Sweep line on hover */
+  .region-card::after{
+    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,0.3),transparent);
+    transform:translateX(-100%);
+    transition:none;opacity:0;
+  }
+  .region-card:hover::after{
+    animation:sweepLine .6s ease forwards;opacity:1;
+  }
   .region-card:hover{
-    transform:translateY(-5px);
-    border-color:var(--line-strong);
+    transform:translateY(-5px) scale(1.01);
+    border-color:rgba(255,255,255,0.12);
     background:var(--bg-card-hover);
     box-shadow:var(--shadow-card-subtle);
   }
+  [data-theme="light"] .region-card:hover{
+    border-color:rgba(0,0,0,0.12);
+  }
   .region-card:hover::before{transform:scaleX(1)}
   .region-flag{
-    font-size:24px;
-    margin-bottom:20px;
-    opacity:0.7;
+    margin-bottom:24px;
+    opacity:0.5;
+  }
+  .region-flag svg{
+    width:32px;height:24px;
+    stroke:var(--muted);fill:none;stroke-width:1;
   }
   .region-name{
-    font-family:'Playfair Display',serif;
-    font-size:22px;font-weight:500;
+    font-family:var(--font-display);
+    font-size:22px;font-weight:400;
     color:var(--text-heading);
-    margin-bottom:12px;
+    margin-bottom:8px;
     transition:color .5s;
+    letter-spacing:var(--tracking-display);
+  }
+  .region-sub{
+    font-size:11px;color:var(--faint);
+    letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;
+    opacity:0.4;margin-bottom:20px;
   }
   .region-desc{
     font-size:12px;color:var(--muted);
@@ -87,17 +129,20 @@
   }
   .gate-footer{
     margin-top:64px;
-    font-size:12px;color:var(--faint);
+    font-size:11px;color:var(--faint);
     font-weight:300;letter-spacing:.5px;
     transition:color .5s;
+    opacity:0.2;
+    animation:gateIn .8s ease 1s forwards;
+    animation-fill-mode:both;
   }
   .gate-theme{
     position:fixed;top:24px;right:24px;z-index:100;
   }
   @media(max-width:600px){
     .region-cards{flex-direction:column;gap:16px}
-    .region-card{padding:36px 24px}
-    .gate-wordmark{font-size:20px}
+    .region-card{padding:40px 24px}
+    .gate-wordmark{font-size:13px}
     .gate-tagline{margin-bottom:48px}
   }
 </style>
@@ -114,15 +159,32 @@
 
   <div class="region-cards">
     <a href="/us/" class="region-card">
-      <div class="region-flag">&#127482;&#127480;</div>
+      <div class="region-flag">
+        <svg viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1">
+          <rect x="0.5" y="0.5" width="31" height="23" rx="2"/>
+          <line x1="0" y1="4" x2="32" y2="4"/>
+          <line x1="0" y1="8" x2="32" y2="8"/>
+          <line x1="0" y1="12" x2="32" y2="12"/>
+          <line x1="0" y1="16" x2="32" y2="16"/>
+          <line x1="0" y1="20" x2="32" y2="20"/>
+        </svg>
+      </div>
       <div class="region-name">United States</div>
+      <div class="region-sub">North America</div>
       <div class="region-desc">Research compounds · Shop online · AI protocol advisor</div>
       <div class="region-cta">Enter →</div>
     </a>
 
     <a href="/qa/" class="region-card">
-      <div class="region-flag">&#127478;&#127462;</div>
+      <div class="region-flag">
+        <svg viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1">
+          <rect x="0.5" y="0.5" width="31" height="23" rx="2"/>
+          <line x1="10" y1="0" x2="10" y2="24"/>
+          <path d="M10 8 L22 12 L10 16"/>
+        </svg>
+      </div>
       <div class="region-name">Qatar</div>
+      <div class="region-sub">Middle East</div>
       <div class="region-desc">Therapeutic protocols · Clinical consultation · Doha</div>
       <div class="region-cta">Enter →</div>
     </a>

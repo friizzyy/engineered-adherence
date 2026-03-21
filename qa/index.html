@@ -102,7 +102,7 @@
   }
   .vial-name{
     margin-top:18px;
-    font-family:'Playfair Display',serif;
+    font-family:var(--font-display);
     font-size:14px;font-weight:500;letter-spacing:.5px;
     color:var(--text-heading);
     opacity:0;animation:fi .6s ease 2.2s forwards;
@@ -129,7 +129,7 @@
     background:var(--faint);opacity:.4;
   }
   .hero-title{
-    font-family:'Playfair Display',serif;
+    font-family:var(--font-display);
     font-size:60px;font-weight:500;line-height:1.1;
     margin-top:20px;letter-spacing:-0.02em;
     opacity:0;animation:fu .8s ease 1.6s forwards;
@@ -188,13 +188,13 @@
   }
   .pillar-card:hover::before{transform:scaleX(1)}
   .pillar-num{
-    font-family:'Playfair Display',serif;
+    font-family:var(--font-display);
     font-size:60px;font-weight:600;
     color:var(--pillar-num);line-height:1;
     margin-bottom:16px;transition:color .5s;
   }
   .pillar-card h3{
-    font-family:'Playfair Display',serif;
+    font-family:var(--font-display);
     font-size:17px;font-weight:500;
     margin-bottom:12px;color:var(--text-heading);
     transition:color .5s;
@@ -455,16 +455,22 @@
 
 <footer>
   <div class="footer-bar">
-    <a href="/qa/" class="logo">Engineered Adherence</a>
+    <div class="footer-logo-col">
+      <a href="/qa/" class="logo">Engineered Adherence</a>
+      <p class="footer-tagline">Therapeutic peptide protocols. Clinical consultation. Doha, Qatar.</p>
+    </div>
     <nav class="footer-nav" aria-label="Footer">
       <a href="/qa/science.html">Science</a>
       <a href="/qa/protocols.html">Protocols</a>
       <a href="/qa/about.html">About</a>
       <a href="/qa/market.html">Market</a>
       <a href="/qa/contact.html">Contact</a>
+      <a href="/">Region Select</a>
     </nav>
-    <a href="/" style="font-size:12px;color:var(--faint);font-weight:300;transition:color .3s">← Region Select</a>
-    <span class="footer-copy">&copy; 2026 &middot; Doha, Qatar</span>
+    <div class="footer-legal">
+      <p class="footer-compliance">For clinical research and therapeutic use only. All protocols require medical consultation prior to commencement.</p>
+      <span class="footer-copy">&copy; 2026 Engineered Adherence &middot; Doha, Qatar</span>
+    </div>
   </div>
 </footer>
 

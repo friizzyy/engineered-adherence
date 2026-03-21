@@ -19,7 +19,6 @@
 <link rel="stylesheet" href="/qa/css/style.css">
 <link rel="stylesheet" href="/qa/css/mobile.css">
 <link rel="stylesheet" href="/us/us.css">
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
   nav{opacity:0;animation:fadeDown .8s ease 2.6s forwards}
   @keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
@@ -28,6 +27,8 @@
   @keyframes ce{from{opacity:0;transform:translate(-50%,-50%) scale(.5)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
   @keyframes vf{0%{opacity:0;transform:translateY(50px) rotate(-1deg)}100%{opacity:1;transform:translateY(0) rotate(0)}}
   @keyframes lp{0%,100%{opacity:var(--liq-opacity)}50%{opacity:calc(var(--liq-opacity) + 0.08)}}
+  @keyframes vialGlow{0%,100%{opacity:0.06}50%{opacity:0.12}}
+  @keyframes countUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
   .us-hero{
     min-height:100vh;display:flex;flex-direction:column;
@@ -54,6 +55,7 @@
   .vial-wrapper{
     display:flex;flex-direction:column;align-items:center;
     opacity:0;transform:translateY(50px);cursor:pointer;
+    position:relative;
   }
   .vial-wrapper:nth-child(1){animation:vf 1.4s cubic-bezier(.16,1,.3,1) .4s forwards}
   .vial-wrapper:nth-child(2){animation:vf 1.4s cubic-bezier(.16,1,.3,1) .55s forwards}
@@ -61,13 +63,25 @@
   .vial-wrapper:nth-child(4){animation:vf 1.4s cubic-bezier(.16,1,.3,1) .85s forwards}
   .vial-wrapper:nth-child(5){animation:vf 1.4s cubic-bezier(.16,1,.3,1) 1s forwards}
 
+  /* Ambient glow beneath each vial */
+  .vial-wrapper::before{
+    content:'';position:absolute;
+    bottom:-8px;left:50%;transform:translateX(-50%);
+    width:60px;height:60px;border-radius:50%;
+    background:var(--p-accent,rgba(255,255,255,0.04));
+    opacity:0.08;filter:blur(20px);
+    transition:opacity .4s ease;
+    animation:vialGlow 4s ease-in-out infinite;
+  }
+  .vial-wrapper:hover::before{opacity:0.15}
+
   .vial-svg{
     width:78px;height:140px;
     filter:var(--shadow-vial);
-    transition:transform .6s cubic-bezier(.16,1,.3,1),filter .6s;
+    transition:transform .4s cubic-bezier(0.22,1,0.36,1),filter .4s;
   }
   .vial-wrapper:hover .vial-svg{
-    transform:translateY(-12px);
+    transform:translateY(-10px) scale(1.02);
     filter:var(--shadow-vial-hover);
   }
 
@@ -87,21 +101,21 @@
   }
   .vial-name{
     margin-top:18px;
-    font-family:'Space Mono',monospace;
-    font-size:12px;font-weight:700;letter-spacing:1px;
+    font-family:var(--font-mono);
+    font-size:12px;font-weight:500;letter-spacing:var(--tracking-mono);
     color:var(--text-heading);text-transform:uppercase;
     opacity:0;animation:fi .6s ease 2.2s forwards;
     transition:color .5s;
   }
   .vial-detail{
-    font-size:9px;color:var(--faint);font-weight:400;
-    letter-spacing:3px;text-transform:uppercase;
-    margin-top:4px;
+    font-size:11px;color:var(--faint);font-weight:400;
+    letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;
+    margin-top:4px;opacity:0.4;
     opacity:0;animation:fi .6s ease 2.4s forwards;
     transition:color .5s;
   }
   .vial-price{
-    font-family:'Playfair Display',serif;
+    font-family:var(--font-display);
     font-size:14px;font-weight:500;color:var(--stat-num);
     margin-top:8px;
     opacity:0;animation:fi .6s ease 2.5s forwards;
@@ -110,7 +124,7 @@
   .vial-wrapper:hover .vial-price{color:var(--text-heading)}
 
   .us-hero-eyebrow{
-    font-size:10px;letter-spacing:6px;text-transform:uppercase;
+    font-size:11px;letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;
     color:var(--faint);font-weight:400;
     opacity:0;animation:fu .8s ease 1.4s forwards;
     display:flex;align-items:center;justify-content:center;gap:16px;
@@ -119,18 +133,19 @@
     content:'';width:32px;height:1px;background:var(--faint);opacity:.4;
   }
   .us-hero-title{
-    font-family:'Playfair Display',serif;
-    font-size:60px;font-weight:500;line-height:1.1;
-    margin-top:20px;letter-spacing:-0.02em;
+    font-family:var(--font-display);
+    font-size:clamp(42px,7vw,80px);font-weight:300;line-height:var(--leading-display);
+    margin-top:20px;letter-spacing:var(--tracking-display);
     opacity:0;animation:fu .8s ease 1.6s forwards;
     color:var(--text-heading);
   }
   .us-hero-title em{font-style:italic;font-weight:400;color:var(--muted)}
   .us-hero-sub{
     font-size:15px;color:var(--muted);font-weight:300;
-    margin-top:24px;max-width:520px;line-height:1.9;
+    margin-top:24px;max-width:520px;line-height:var(--leading-relaxed);
     margin-left:auto;margin-right:auto;text-align:center;
     opacity:0;animation:fu .8s ease 1.9s forwards;
+    max-width:60ch;
   }
   .us-hero-ctas{
     display:flex;gap:16px;margin-top:40px;
@@ -144,12 +159,12 @@
     opacity:0;animation:fu .8s ease 2.3s forwards;
   }
   .ticker-pill{
-    font-family:'Space Mono',monospace;
-    font-size:11px;letter-spacing:1px;
+    font-family:var(--font-mono);
+    font-size:11px;letter-spacing:var(--tracking-mono);
     padding:8px 16px;
     background:var(--bg-card);border:1px solid var(--line);
     color:var(--muted);cursor:pointer;
-    transition:all .3s;
+    transition:all .3s;border-radius:100px;
   }
   .ticker-pill:hover{
     border-color:var(--line-strong);color:var(--text-heading);
@@ -159,6 +174,9 @@
     border-color:var(--p-accent);color:var(--p-accent);
   }
 
+  /* ═══════════════════════════════════════════
+     PHILOSOPHY / STATS — premium stat bar
+     ═══════════════════════════════════════════ */
   .philosophy{
     text-align:center;padding:120px 72px;
     max-width:1140px;margin:0 auto;position:relative;z-index:1;
@@ -169,16 +187,24 @@
   .philosophy .stat-row{
     justify-content:center;
     gap:0;
-    border:1px solid var(--line);
+    border-top:1px solid rgba(255,255,255,0.08);
+    border-bottom:1px solid rgba(255,255,255,0.08);
     margin-top:0;
+  }
+  [data-theme="light"] .philosophy .stat-row{
+    border-color:rgba(0,0,0,0.08);
   }
   .philosophy .stat{
     flex:1;text-align:center;
-    padding:40px 24px;
-    border-right:1px solid var(--line);
+    padding:48px 24px;
     position:relative;
   }
-  .philosophy .stat:last-child{border-right:none}
+  .philosophy .stat+.stat{
+    border-left:1px solid rgba(255,255,255,0.08);
+  }
+  [data-theme="light"] .philosophy .stat+.stat{
+    border-left-color:rgba(0,0,0,0.08);
+  }
   .philosophy .stat::after{
     content:'';position:absolute;bottom:0;left:0;right:0;
     height:2px;background:var(--accent-solid);
@@ -187,17 +213,29 @@
   .philosophy .stat:hover::after{transform:scaleX(1)}
   .philosophy .stat:hover{background:var(--bg-card)}
   .philosophy .stat-num{
-    font-size:36px;letter-spacing:-0.02em;
+    font-family:var(--font-display);
+    font-size:clamp(48px,5vw,80px);font-weight:300;
+    letter-spacing:var(--tracking-display);
     transition:color .3s;
   }
   .philosophy .stat:hover .stat-num{color:var(--text-heading)}
-  .philosophy .stat-label{margin-top:8px}
+  .philosophy .stat-label{
+    margin-top:12px;font-size:10px;
+    letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--faint);font-weight:400;
+  }
 
+  /* ═══════════════════════════════════════════
+     FEATURED COMPOUND CARDS — premium treatment
+     ═══════════════════════════════════════════ */
   .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .compound-card{
-    background:var(--bg-card);border:1px solid var(--line);
+    background:var(--bg-card);border:1px solid rgba(255,255,255,0.06);
     padding:40px 28px;position:relative;overflow:hidden;
-    transition:all .5s cubic-bezier(0.4,0,0.2,1);
+    transition:all .35s cubic-bezier(0.22,1,0.36,1);
+  }
+  [data-theme="light"] .compound-card{
+    border-color:rgba(0,0,0,0.06);
   }
   .compound-card::before{
     content:'';position:absolute;top:0;left:0;right:0;height:1px;
@@ -205,32 +243,49 @@
     transform:scaleX(0);transition:transform .5s;opacity:0.6;
   }
   .compound-card:hover{
-    transform:translateY(-5px);box-shadow:var(--shadow-card-subtle);
-    border-color:var(--line-strong);background:var(--bg-card-hover);
+    transform:translateY(-3px);box-shadow:var(--shadow-card-subtle);
+    border-color:rgba(255,255,255,0.12);background:var(--bg-card-hover);
+  }
+  [data-theme="light"] .compound-card:hover{
+    border-color:rgba(0,0,0,0.12);
   }
   .compound-card:hover::before{transform:scaleX(1)}
   .compound-card .ptag{
-    margin-bottom:16px;
+    margin-bottom:16px;border-radius:100px;
   }
   .compound-card .compound-name{
-    font-family:'Space Mono',monospace;
-    font-size:18px;font-weight:700;
+    font-family:var(--font-mono);
+    font-size:18px;font-weight:500;
     color:var(--text-heading);margin-bottom:8px;
-    letter-spacing:0.5px;
+    letter-spacing:var(--tracking-mono);
   }
   .compound-card .compound-desc{
     font-size:13px;color:var(--muted);line-height:1.75;font-weight:300;
-    margin-bottom:20px;
+    margin-bottom:20px;opacity:0.45;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
   }
   .compound-card .compound-price{
-    font-family:'Playfair Display',serif;
-    font-size:28px;font-weight:500;color:var(--stat-num);
-    margin-bottom:20px;
+    font-family:var(--font-display);
+    font-size:24px;font-weight:400;color:var(--stat-num);
+    margin-bottom:4px;
   }
   .compound-card .compound-price span{
-    font-size:14px;color:var(--faint);font-family:'DM Sans',sans-serif;font-weight:300;
+    font-size:11px;color:var(--faint);font-family:var(--font-mono);font-weight:300;
+    letter-spacing:var(--tracking-mono);opacity:0.3;
+  }
+  .compound-card .compound-stock{
+    height:2px;background:rgba(255,255,255,0.04);
+    margin:16px 0;position:relative;overflow:hidden;
+  }
+  .compound-card .compound-stock-fill{
+    position:absolute;top:0;left:0;height:100%;
+    background:var(--p-accent,var(--accent-solid));
+    transition:width .6s cubic-bezier(0.4,0,0.2,1);
   }
 
+  /* ═══════════════════════════════════════════
+     ADVISOR TEASER
+     ═══════════════════════════════════════════ */
   .advisor-teaser{
     text-align:center;padding:120px 72px;
     position:relative;z-index:1;
@@ -244,28 +299,35 @@
   .advisor-teaser .section-label::before{display:none}
   .advisor-teaser .section-body{max-width:480px;margin:0 auto 40px}
 
+  /* ═══════════════════════════════════════════
+     PROTOCOL PREVIEW CARDS
+     ═══════════════════════════════════════════ */
   .proto-preview{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .proto-card{
-    background:var(--bg-card);border:1px solid var(--line);
-    padding:40px 32px;transition:all .5s cubic-bezier(0.4,0,0.2,1);
+    background:var(--bg-card);border:1px solid rgba(255,255,255,0.06);
+    padding:40px 32px;
+    transition:all .35s cubic-bezier(0.22,1,0.36,1);
     position:relative;overflow:hidden;
   }
+  [data-theme="light"] .proto-card{border-color:rgba(0,0,0,0.06)}
   .proto-card::before{
     content:'';position:absolute;top:0;left:0;right:0;height:1px;
     background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
     transform:scaleX(0);transition:transform .5s;opacity:0.6;
   }
   .proto-card:hover{
-    transform:translateY(-3px);box-shadow:var(--shadow-card-subtle);
-    border-color:var(--line-strong);background:var(--bg-card-hover);
+    transform:translateY(-4px);box-shadow:var(--shadow-card-subtle);
+    border-color:rgba(255,255,255,0.12);background:var(--bg-card-hover);
   }
+  [data-theme="light"] .proto-card:hover{border-color:rgba(0,0,0,0.12)}
   .proto-card:hover::before{transform:scaleX(1)}
   .proto-card .proto-num{
-    font-family:'Playfair Display',serif;font-size:48px;font-weight:600;
-    color:var(--pillar-num);line-height:1;margin-bottom:16px;
+    font-family:var(--font-display);font-size:48px;font-weight:200;
+    color:var(--pillar-num);line-height:1;margin-bottom:16px;opacity:0.15;
+    position:absolute;top:24px;right:24px;
   }
   .proto-card h3{
-    font-family:'Playfair Display',serif;font-size:20px;font-weight:500;
+    font-family:var(--font-display);font-size:20px;font-weight:500;
     color:var(--text-heading);margin-bottom:8px;
   }
   .proto-card .proto-meta{
@@ -275,7 +337,7 @@
   .proto-card p{font-size:13px;color:var(--muted);line-height:1.75;font-weight:300}
 
   /* ═══════════════════════════════════════════
-     FIVE PILLARS — columnar panels
+     FIVE PILLARS — premium columnar panels
      ═══════════════════════════════════════════ */
   .pillars-header{text-align:center;margin-bottom:56px}
   .pillars-header .section-label{justify-content:center}
@@ -283,39 +345,58 @@
 
   .us-pillars{
     display:grid;grid-template-columns:repeat(5,1fr);
-    border:1px solid var(--line);
+    border:1px solid rgba(255,255,255,0.06);
   }
+  [data-theme="light"] .us-pillars{border-color:rgba(0,0,0,0.06)}
   .us-pillar{
     padding:48px 24px;text-align:center;
     position:relative;
-    border-right:1px solid var(--line);
-    transition:background .5s cubic-bezier(0.4,0,0.2,1);
+    border-right:1px solid rgba(255,255,255,0.06);
+    transition:all .35s cubic-bezier(0.22,1,0.36,1);
+    overflow:hidden;
   }
+  [data-theme="light"] .us-pillar{border-right-color:rgba(0,0,0,0.06)}
   .us-pillar:last-child{border-right:none}
+  /* Ambient pillar glow background */
+  .us-pillar::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(circle at 50% 30%,var(--p-accent),transparent 70%);
+    opacity:0.03;transition:opacity .35s cubic-bezier(0.22,1,0.36,1);
+  }
+  .us-pillar:hover::before{opacity:0.06}
   .us-pillar::after{
     content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
     background:var(--p-accent);
     transform:scaleX(0);transition:transform .5s cubic-bezier(0.4,0,0.2,1);
   }
   .us-pillar:hover::after{transform:scaleX(1)}
-  .us-pillar:hover{background:var(--bg-card)}
+  .us-pillar:hover{
+    background:var(--bg-card);
+    border-color:rgba(255,255,255,0.12);
+    transform:translateY(-4px);
+  }
+  [data-theme="light"] .us-pillar:hover{border-color:rgba(0,0,0,0.12)}
   .us-pillar-num{
-    font-family:'Playfair Display',serif;
-    font-size:52px;font-weight:600;
-    color:var(--p-accent);opacity:0.2;
+    font-family:var(--font-display);
+    font-size:48px;font-weight:200;
+    color:var(--p-accent);opacity:0.15;
     line-height:1;margin-bottom:20px;
+    position:absolute;top:16px;right:16px;
     transition:opacity .5s;
   }
-  .us-pillar:hover .us-pillar-num{opacity:0.5}
+  .us-pillar:hover .us-pillar-num{opacity:0.3}
   .us-pillar h3{
-    font-family:'Playfair Display',serif;
-    font-size:18px;font-weight:500;
+    font-size:13px;font-weight:400;
     color:var(--text-heading);margin-bottom:12px;
-    letter-spacing:0.5px;
+    letter-spacing:0.12em;text-transform:uppercase;
+    position:relative;z-index:1;
+    opacity:0.5;transition:opacity .3s;
   }
+  .us-pillar:hover h3{opacity:1}
   .us-pillar p{
-    font-size:13px;color:var(--muted);line-height:1.75;
-    font-weight:300;
+    font-size:15px;color:var(--muted);line-height:1.6;
+    font-weight:300;max-width:36ch;margin:0 auto;
+    position:relative;z-index:1;
   }
 
   /* ═══════════════════════════════════════════
@@ -349,9 +430,11 @@
     /* Philosophy / The Standard */
     .philosophy{padding:64px 24px}
     .philosophy .stat-row{flex-direction:row;flex-wrap:wrap;gap:0}
-    .philosophy .stat{flex:1 1 45%;border-right:none;border-bottom:1px solid var(--line);padding:28px 16px}
-    .philosophy .stat:nth-child(odd){border-right:1px solid var(--line)}
-    .philosophy .stat-num{font-size:28px}
+    .philosophy .stat{flex:1 1 45%;padding:28px 16px}
+    .philosophy .stat+.stat{border-left:none}
+    .philosophy .stat{border-bottom:1px solid rgba(255,255,255,0.08)}
+    .philosophy .stat:nth-child(odd){border-right:1px solid rgba(255,255,255,0.08)}
+    .philosophy .stat-num{font-size:36px}
 
     /* Advisor teaser */
     .advisor-teaser{padding:64px 24px}
@@ -390,9 +473,10 @@
       min-width:200px;flex-shrink:0;
       scroll-snap-align:start;padding:32px 20px;
       border-right:none;
-      border:1px solid var(--line);
+      border:1px solid rgba(255,255,255,0.06);
     }
-    .us-pillar:last-child{border-right:1px solid var(--line)}
+    [data-theme="light"] .us-pillar{border-color:rgba(0,0,0,0.06)}
+    .us-pillar:last-child{border-right:1px solid rgba(255,255,255,0.06)}
     .pillars-header{margin-bottom:32px}
   }
 
@@ -415,8 +499,8 @@
 
     /* Pillars: narrower cards */
     .us-pillar{min-width:170px;padding:28px 16px}
-    .us-pillar-num{font-size:36px}
-    .us-pillar h3{font-size:16px}
+    .us-pillar-num{font-size:32px}
+    .us-pillar h3{font-size:11px}
     .us-pillar p{font-size:12px}
 
     /* Philosophy stats: single column */
@@ -710,30 +794,33 @@
 
     <div class="compound-card" data-pillar="2">
       <div class="p-bar"></div>
-      <span class="ptag">Pillar II · Recovery</span>
-      <div class="compound-name">BPC-157</div>
+      <span class="ptag">Recovery</span>
+      <div class="compound-name copy-trigger" data-copy="BPC-157">BPC-157<svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></div>
       <p class="compound-desc">Tissue repair. Anti-inflammatory. Tendon healing.</p>
       <div class="compound-price">$89 <span>/ 5mg</span></div>
+      <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
       <button class="btn" data-slug="bpc-157" data-name="BPC-157" data-price="89" data-pillar="Recovery">Add to Stack</button>
       <button class="view-details" data-detail="bpc-157">View Details</button>
     </div>
 
     <div class="compound-card" data-pillar="5">
       <div class="p-bar"></div>
-      <span class="ptag">Pillar V · Performance</span>
-      <div class="compound-name">IPAMORELIN</div>
+      <span class="ptag">Performance</span>
+      <div class="compound-name copy-trigger" data-copy="IPAMORELIN">IPAMORELIN<svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></div>
       <p class="compound-desc">Clean GH pulse. Recomposition. Recovery.</p>
       <div class="compound-price">$112 <span>/ 2mg</span></div>
+      <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
       <button class="btn" data-slug="ipamorelin" data-name="IPAMORELIN" data-price="112" data-pillar="Performance">Add to Stack</button>
       <button class="view-details" data-detail="ipamorelin">View Details</button>
     </div>
 
     <div class="compound-card" data-pillar="4">
       <div class="p-bar"></div>
-      <span class="ptag">Pillar IV · Cognitive</span>
-      <div class="compound-name">SEMAX</div>
+      <span class="ptag">Cognitive</span>
+      <div class="compound-name copy-trigger" data-copy="SEMAX">SEMAX<svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></div>
       <p class="compound-desc">BDNF upregulation. Focus. Neuroprotection.</p>
       <div class="compound-price">$97 <span>/ 30mg</span></div>
+      <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
       <button class="btn" data-slug="semax" data-name="SEMAX" data-price="97" data-pillar="Cognitive">Add to Stack</button>
       <button class="view-details" data-detail="semax">View Details</button>
     </div>
@@ -787,20 +874,22 @@
 
 <footer>
   <div class="footer-bar">
-    <a href="/us/" class="logo">Engineered Adherence</a>
+    <div class="footer-logo-col">
+      <a href="/us/" class="logo">Engineered Adherence</a>
+      <p class="footer-tagline">Research-grade peptide compounds for those serious about optimization.</p>
+    </div>
     <nav class="footer-nav" aria-label="Footer">
       <a href="/us/shop.html">Shop</a>
       <a href="/us/protocols.html">Protocols</a>
-      <a href="/us/advisor.html">Advisor</a>
+      <a href="/us/advisor.html">Stack Advisor</a>
       <a href="/us/about.html">About</a>
     </nav>
-    <span class="footer-copy">&copy; 2026 Engineered Adherence &middot; United States</span>
+    <div class="footer-legal">
+      <p class="footer-compliance">For research purposes only. Not intended for human consumption. These products are sold strictly for laboratory and scientific research.</p>
+      <span class="footer-copy">&copy; 2026 Engineered Adherence &middot; United States</span>
+    </div>
   </div>
 </footer>
-
-<div class="us-disclaimer">
-  For research purposes only. Not intended for human consumption. These products are sold strictly for laboratory and scientific research.
-</div>
 
 <script src="/us/cart.js"></script>
 <script src="/us/compounds.js"></script>
@@ -880,6 +969,53 @@ document.querySelectorAll('.view-details').forEach(function(btn) {
   btn.addEventListener('click', function() {
     CompoundModal.open(btn.getAttribute('data-detail'));
   });
+});
+
+/* ═══════ COUNTUP ANIMATION ═══════ */
+(function(){
+  var animated = false;
+  var statSection = document.querySelector('.philosophy');
+  if(!statSection) return;
+
+  function animateValue(el, end, suffix, duration){
+    var start = 0;
+    var startTime = null;
+    var isFloat = end % 1 !== 0;
+    function step(timestamp){
+      if(!startTime) startTime = timestamp;
+      var progress = Math.min((timestamp - startTime) / duration, 1);
+      var eased = 1 - Math.pow(1 - progress, 3);
+      var current = start + (end - start) * eased;
+      el.textContent = isFloat ? current.toFixed(1) + suffix : Math.floor(current) + suffix;
+      if(progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+
+  var statObserver = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting && !animated){
+        animated = true;
+        var stats = statSection.querySelectorAll('.stat-num');
+        stats.forEach(function(stat){
+          var text = stat.textContent.trim();
+          var match = text.match(/^([\d.]+)(.*)$/);
+          if(match){
+            var num = parseFloat(match[1]);
+            var suffix = match[2];
+            stat.textContent = '0' + suffix;
+            animateValue(stat, num, suffix, 1800);
+          }
+        });
+      }
+    });
+  }, {threshold:0.15});
+  statObserver.observe(statSection);
+})();
+
+/* ═══════ SECTION SPACING ═══════ */
+document.querySelectorAll('.section, .philosophy, .advisor-teaser').forEach(function(s){
+  s.style.scrollMarginTop = '72px';
 });
 </script>
 <script src="/qa/js/main.js"></script>
