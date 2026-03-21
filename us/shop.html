@@ -177,9 +177,8 @@
     flex:0 0 42%;padding-right:48px;
     position:relative;z-index:2;
     display:flex;flex-direction:row;
-    align-items:flex-start;gap:40px;
+    align-items:center;gap:32px;
     justify-content:flex-start;
-    padding-top:8px;
   }
   .dossier-vial{
     width:96px;min-width:96px;height:156px;
@@ -190,8 +189,8 @@
   .dossier-vial svg{width:100%;height:100%}
   .dossier-left-text{
     display:flex;flex-direction:column;
-    justify-content:space-between;
-    flex:1;min-height:520px;
+    justify-content:flex-start;
+    gap:8px;flex:1;
   }
   .dossier-compound-name{
     font-family:var(--font-mono);
@@ -807,6 +806,41 @@
     .decode-panel{width:100%;border-left:none;top:auto;height:75vh;transform:translateY(100%)}
     .decode-panel.open{transform:translateY(0)}
   }
+
+
+  /* ═══ SIMPLIFY TOGGLE BUTTON ═══ */
+  .simplify-btn{
+    position:fixed;bottom:32px;right:32px;
+    display:flex;align-items:center;gap:8px;
+    background:rgba(20,20,20,0.96);
+    border:1px solid rgba(255,255,255,0.12);
+    padding:10px 20px 10px 16px;
+    border-radius:32px;cursor:pointer;
+    z-index:8000;
+    backdrop-filter:blur(16px);
+    -webkit-backdrop-filter:blur(16px);
+    transition:border-color .2s,background .2s;
+    color:var(--text);
+  }
+  .simplify-btn:hover{border-color:rgba(255,255,255,0.25);background:rgba(28,28,28,0.98)}
+  .simplify-btn.active{
+    background:rgba(255,255,255,0.06);
+    border-color:rgba(255,255,255,0.2);
+  }
+  .simplify-label{
+    font-family:var(--font-mono);font-size:10px;
+    letter-spacing:2px;text-transform:uppercase;
+    color:var(--text-heading);font-weight:400;
+  }
+  .simplify-icon{width:14px;height:14px;display:flex;align-items:center;opacity:0.5}
+  .simplify-icon svg{width:100%;height:100%}
+
+  /* Plain mode styles */
+  body.plain-mode .dossier-mechanism{
+    font-size:14px;line-height:1.8;opacity:1;color:var(--text);
+  }
+  body.plain-mode .dossier-spec-value{color:var(--text)}
+  @media(max-width:768px){.simplify-btn{bottom:24px;right:16px}}
 
 </style>
 </head>
@@ -1503,34 +1537,7 @@
 
 
 
-<!-- DECODE PANEL — Fixed button + sliding panel -->
-<button class="decode-trigger" id="decodeTrigger" aria-expanded="false" aria-controls="decodePanel">
-  <span class="decode-trigger-label">Decode</span>
-  <span class="decode-trigger-icon">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-      <circle cx="8" cy="8" r="6.5"/>
-      <path d="M8 7v4M8 5.5v.5"/>
-    </svg>
-  </span>
-</button>
 
-<div class="decode-overlay" id="decodeOverlay"></div>
-<div class="decode-panel" id="decodePanel" role="dialog" aria-label="Compound glossary">
-  <div class="decode-header">
-    <span class="decode-title">Decode</span>
-    <button class="decode-close" id="decodeClose" aria-label="Close">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M3 3l10 10M13 3L3 13"/>
-      </svg>
-    </button>
-  </div>
-  <p class="decode-intro">Plain-language explanations for everything on this page.</p>
-  <div class="decode-items">
-
-    <div class="decode-item">
-      <div class="decode-term">Route</div>
-      <div class="decode-plain">How you take it. SubQ means a small injection under the skin. Oral means a capsule or liquid. Intranasal means a nasal spray.</div>
-    </div>
 
     <div class="decode-item">
       <div class="decode-term">Dosing</div>
@@ -1593,35 +1600,69 @@
   </div>
 </div>
 
+
+
+<!-- SIMPLIFY TOGGLE — swaps right column between science and plain language -->
+<button class="simplify-btn" id="simplifyBtn">
+  <span class="simplify-label" id="simplifyLabel">Simplify</span>
+  <span class="simplify-icon">
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M2 4h12M4 8h8M6 12h4"/>
+    </svg>
+  </span>
+</button>
+
 <script>
+var plainData = {"bpc-157": {"mech": "A peptide that mimics your body"s natural healing signals. It speeds up repair in tendons, ligaments, gut lining, and muscles by telling your cells to grow new blood vessels and tissue. Think of it as a repair signal your body already understands.", "specs": {"Route": "Injection or oral capsule", "Dosing": "250-500mcg per dose", "Frequency": "Twice daily", "Half-Life": "Active for about 4 hours", "Onset": "Noticeable in 3-7 days", "Form": "Freeze-dried powder, mixed with water before use", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "tb-500": {"mech": "Promotes whole-body healing by helping cells move to where they are needed. Reduces inflammation, builds new blood vessels, and helps tissue rebuild after injury. It travels through your body more efficiently than most peptides due to its small size.", "specs": {"Route": "Small injection under skin", "Dosing": "2.5mg per dose", "Frequency": "Twice per week", "Half-Life": "Active for about 2 hours", "Onset": "Noticeable in 1-2 weeks", "Form": "Freeze-dried powder, mixed with water", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "ghk-cu": {"mech": "A copper-binding peptide that tells your body to produce more collagen and repair tissue. Naturally found in human plasma, it triggers skin regeneration and wound healing, and gets stronger signals going to damaged areas.", "specs": {"Route": "Injection under skin or applied topically", "Dosing": "1-2mg per dose", "Frequency": "Daily", "Half-Life": "Fast-acting, about 30 minutes", "Onset": "Skin changes in 2-4 weeks", "Form": "Freeze-dried powder", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "ipamorelin": {"mech": "Signals your pituitary gland to release a clean pulse of growth hormone. Unlike some alternatives, it does not spike cortisol or affect appetite. Result: better recovery, improved body composition, deeper sleep.", "specs": {"Route": "Small injection under skin", "Dosing": "200-300mcg per dose", "Frequency": "Daily, often before bed", "Half-Life": "About 2 hours", "Onset": "Sleep improvements in 1-2 weeks, body changes in 4-8 weeks", "Form": "Freeze-dried powder", "Purity": "99%+ pure compound", "Storage": "Standard refrigerator"}}, "semax": {"mech": "A nasal spray that boosts your brain"s growth factors — the proteins that help neurons communicate and form new connections. Used for focus, memory, and brain protection. Derived from a natural brain hormone.", "specs": {"Route": "Nasal spray — no injection needed", "Dosing": "200-600mcg per use", "Frequency": "Daily", "Half-Life": "Minutes active, effects last longer", "Onset": "Mental clarity in 15-30 minutes", "Form": "Nasal solution", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "retatrutide": {"mech": "A weekly injection that acts on three different receptors controlling appetite, blood sugar, and energy use. The most potent metabolic compound in clinical research — trials showed average body weight reduction of 24% at 48 weeks.", "specs": {"Route": "Weekly injection under skin", "Dosing": "Start low, increase over weeks (1-12mg)", "Frequency": "Once per week", "Half-Life": "Stays active for about 6 days", "Onset": "Appetite changes in 1-2 weeks, weight in 4 weeks", "Form": "Freeze-dried powder", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "nad-plus": {"mech": "A coenzyme your cells use for energy production. NAD+ levels naturally decline with age. Supplementing it activates proteins linked to DNA repair and cellular longevity. Think of it as a fuel source for your cells to do their repair work.", "specs": {"Route": "Injection or IV drip", "Dosing": "50-100mg per dose", "Frequency": "2-3 times per week", "Half-Life": "1-2 hours for injections", "Onset": "Energy within days, deeper effects over weeks", "Form": "Freeze-dried powder", "Purity": "99%+ pure compound", "Storage": "Freezer (-20°C)"}}, "mots-c": {"mech": "A peptide produced inside your mitochondria that acts like an exercise signal. It activates the same pathways that fire during physical activity — improving insulin sensitivity, fat burning, and metabolic flexibility without changing your diet.", "specs": {"Route": "Injection under skin", "Dosing": "5-10mg per dose", "Frequency": "3-5 times per week", "Half-Life": "4-6 hours", "Onset": "Metabolic effects in 1-2 weeks", "Form": "Freeze-dried powder", "Purity": "97%+ pure compound", "Storage": "Freezer (-20°C)"}}, "tesamorelin": {"mech": "A synthetic version of your body"s own growth hormone releasing hormone. Produces a sustained, natural-pattern release of growth hormone rather than a spike. Used clinically for body composition and visceral fat reduction.", "specs": {"Route": "Injection under skin", "Dosing": "1-2mg per dose", "Frequency": "Daily", "Half-Life": "About 26 minutes, effects last longer", "Onset": "Body composition changes in 4-8 weeks", "Form": "Freeze-dried powder", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "cjc-1295": {"mech": "A modified version of your natural growth hormone signal that lasts 8+ days instead of minutes. Creates a steady, elevated level of growth hormone production that mimics younger hormonal patterns rather than artificial spikes.", "specs": {"Route": "Injection under skin", "Dosing": "100mcg per dose", "Frequency": "2-3 times per week", "Half-Life": "About 8 days — very long lasting", "Onset": "Results in 1-2 weeks", "Form": "Freeze-dried powder", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}, "selank": {"mech": "A nasal spray that reduces anxiety without sedation. Works on the same brain system as anxiety medications but without dependency or side effects. Also supports immune function and cognitive clarity.", "specs": {"Route": "Nasal spray — no injection needed", "Dosing": "250-500mcg per use", "Frequency": "Daily", "Half-Life": "Minutes, effects persist", "Onset": "Calming in 15-30 minutes", "Form": "Nasal solution", "Purity": "98%+ pure compound", "Storage": "Standard refrigerator"}}};
+
 (function(){
-  var trigger = document.getElementById('decodeTrigger');
-  var panel = document.getElementById('decodePanel');
-  var overlay = document.getElementById('decodeOverlay');
-  var closeBtn = document.getElementById('decodeClose');
-  if(!trigger||!panel) return;
+  var btn = document.getElementById('simplifyBtn');
+  var label = document.getElementById('simplifyLabel');
+  if(!btn) return;
+  var isPlain = false;
 
-  function open(){
-    panel.classList.add('open');
-    overlay.classList.add('open');
-    trigger.setAttribute('aria-expanded','true');
-    document.body.style.overflow='hidden';
-  }
-  function close(){
-    panel.classList.remove('open');
-    overlay.classList.remove('open');
-    trigger.setAttribute('aria-expanded','false');
-    document.body.style.overflow='';
+  function setMode(plain){
+    isPlain = plain;
+    if(plain){
+      btn.classList.add('active');
+      label.textContent = 'Science';
+      document.body.classList.add('plain-mode');
+      // Swap text in all visible dossier sections
+      document.querySelectorAll('.dossier-section:not([data-hidden="true"])').forEach(function(sec){
+        var slug = sec.getAttribute('data-slug');
+        var pd = plainData[slug];
+        if(!pd) return;
+        // Swap mechanism
+        var mechEl = sec.querySelector('.dossier-mechanism');
+        if(mechEl){
+          mechEl.setAttribute('data-science', mechEl.textContent);
+          mechEl.textContent = pd.mech;
+        }
+        // Swap spec values
+        sec.querySelectorAll('.dossier-spec').forEach(function(spec){
+          var lbl = spec.querySelector('.dossier-spec-label');
+          var val = spec.querySelector('.dossier-spec-value');
+          if(!lbl||!val) return;
+          var key = lbl.textContent.trim();
+          if(pd.specs && pd.specs[key]){
+            val.setAttribute('data-science', val.textContent);
+            val.textContent = pd.specs[key];
+          }
+        });
+      });
+    } else {
+      btn.classList.remove('active');
+      label.textContent = 'Simplify';
+      document.body.classList.remove('plain-mode');
+      // Restore science text
+      document.querySelectorAll('[data-science]').forEach(function(el){
+        el.textContent = el.getAttribute('data-science');
+        el.removeAttribute('data-science');
+      });
+    }
   }
 
-  trigger.addEventListener('click', function(){
-    panel.classList.contains('open') ? close() : open();
-  });
-  closeBtn.addEventListener('click', close);
-  overlay.addEventListener('click', close);
-  document.addEventListener('keydown', function(e){
-    if(e.key==='Escape') close();
-  });
+  btn.addEventListener('click', function(){ setMode(!isPlain); });
 })();
 </script>
 </body>
