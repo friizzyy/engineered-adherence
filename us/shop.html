@@ -181,7 +181,7 @@
     justify-content:flex-start;
   }
   .dossier-vial{
-    width:96px;min-width:96px;height:156px;
+    width:74px;min-width:74px;height:120px;
     flex-shrink:0;opacity:0.9;
     transition:opacity 0.3s;
   }
@@ -189,8 +189,7 @@
   .dossier-vial svg{width:100%;height:100%}
   .dossier-left-text{
     display:flex;flex-direction:column;
-    justify-content:flex-start;
-    gap:8px;flex:1;
+    justify-content:center;
   }
   .dossier-compound-name{
     font-family:var(--font-mono);
@@ -262,22 +261,19 @@
     display:grid;grid-template-columns:1fr 1fr;
     gap:0;margin-bottom:20px;max-width:520px;
   }
-  .dossier-spec{padding:10px 0;border-bottom:1px solid var(--line);transition:background .15s}
-  .dossier-spec:hover{background:rgba(255,255,255,0.015);padding-left:6px;transition:background .15s,padding .15s}
+  .dossier-spec{padding:8px 0;border-bottom:1px solid var(--line)}
   .dossier-spec:nth-child(odd){padding-right:16px}
   .dossier-spec:nth-child(even){padding-left:16px;border-left:1px solid var(--line)}
   .dossier-spec-label{
     font-family:var(--font-mono);
-    font-size:8px;letter-spacing:2px;
+    font-size:9px;letter-spacing:1.5px;
     text-transform:uppercase;color:var(--faint);
-    margin-bottom:4px;display:block;opacity:0.5;
+    margin-bottom:2px;display:block;
   }
   .dossier-spec-value{
     font-family:var(--font-body);
-    font-size:15px;font-weight:400;
-    letter-spacing:-0.01em;
-    color:var(--text-heading);display:block;
-    line-height:1.3;
+    font-size:13px;font-weight:500;
+    color:var(--stat-num);display:block;
   }
 
   /* Benefits pills */
@@ -346,16 +342,12 @@
 
   /* Price & CTA */
   .dossier-purchase{
-    display:flex;align-items:center;gap:20px;
-    padding-top:24px;
-    border-top:1px solid rgba(255,255,255,0.06);
-    margin-top:4px;
+    display:flex;align-items:center;gap:20px;padding-top:4px;
   }
   .dossier-price{
-    font-family:var(--font-body);
-    font-size:36px;font-weight:200;
-    color:var(--text-heading);letter-spacing:-0.03em;
-    font-variant-numeric:tabular-nums;
+    font-family:var(--font-display);
+    font-size:32px;font-weight:400;
+    color:var(--text-heading);letter-spacing:-0.5px;
   }
   .dossier-price-currency{
     font-size:18px;font-weight:300;
@@ -565,8 +557,7 @@
     scrollbar-width:none;
     -webkit-overflow-scrolling:touch;
     z-index:90;
-    display:flex;
-    flex-direction:column;
+    display:flex;flex-direction:column;
     justify-content:center;
     padding:40px 0;
   }
@@ -574,39 +565,25 @@
   .sidebar-group-label{
     font-family:var(--font-mono);
     font-size:8px;text-transform:uppercase;
-    color:var(--faint);
-    padding:20px 20px 6px;
-    letter-spacing:2.5px;
-    opacity:0.35;
+    color:var(--faint);padding:20px 20px 6px;
+    letter-spacing:2.5px;opacity:0.35;
     display:flex;align-items:center;gap:8px;
   }
-  .sidebar-group-label::after{
-    content:'';flex:1;height:1px;
-    background:rgba(255,255,255,0.05);
-  }
+  .sidebar-group-label::after{content:'';flex:1;height:1px;background:rgba(255,255,255,0.05)}
   .sidebar-compound{
     font-family:var(--font-mono);
-    font-size:10px;
-    letter-spacing:0.8px;
+    font-size:10px;letter-spacing:0.8px;
     color:var(--faint);
     padding:8px 20px;cursor:pointer;
     display:block;width:100%;
     background:none;border:none;
     border-left:1px solid transparent;
     text-align:left;
-    transition:color 150ms, border-color 150ms, opacity 150ms;
-    opacity:0.5;
-    text-transform:uppercase;
+    transition:color 150ms,border-color 150ms,opacity 150ms;
+    opacity:0.5;text-transform:uppercase;
   }
-  .sidebar-compound:hover{
-    color:var(--text-heading);opacity:0.8;
-    background:none;
-  }
-  .sidebar-compound.active{
-    border-left-color:rgba(255,255,255,0.2);
-    color:var(--text-heading);opacity:1;
-    background:none;
-  }
+  .sidebar-compound:hover{color:var(--text-heading);opacity:0.8;background:none}
+  .sidebar-compound.active{border-left-color:rgba(255,255,255,0.2);color:var(--text-heading);opacity:1;background:none}
 
   /* Desktop: sidebar offset */
   @media(min-width:769px){
@@ -763,7 +740,63 @@
   }
   .cart-badge-bounce{animation:badgeBounce .3s ease}
 
-  
+  /* ═══ DECODE BUTTON + PANEL ═══ */
+  .decode-trigger{
+    position:fixed;
+    bottom:32px;right:32px;
+    display:flex;align-items:center;gap:8px;
+    background:rgba(22,22,22,0.96);
+    border:1px solid rgba(255,255,255,0.14);
+    padding:10px 18px 10px 14px;
+    border-radius:32px;
+    cursor:pointer;
+    z-index:8000;
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    color:var(--text);
+  }
+  .decode-trigger:hover{
+    border-color:rgba(255,255,255,0.28);
+    background:rgba(32,32,32,0.98);
+  }
+  .decode-trigger-label{
+    font-family:var(--font-mono);
+    font-size:10px;letter-spacing:2px;
+    text-transform:uppercase;font-weight:400;
+    color:var(--text-heading);
+  }
+  .decode-trigger-icon{width:16px;height:16px;display:flex;align-items:center;opacity:0.5}
+  .decode-trigger-icon svg{width:100%;height:100%;stroke:currentColor}
+  .decode-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,0.5);
+    z-index:8500;opacity:0;pointer-events:none;transition:opacity .3s ease;
+  }
+  .decode-overlay.open{opacity:1;pointer-events:all}
+  .decode-panel{
+    position:fixed;right:0;top:0;bottom:0;width:400px;max-width:90vw;
+    background:var(--bg-card);border-left:1px solid rgba(255,255,255,0.08);
+    z-index:9000;display:flex;flex-direction:column;
+    transform:translateX(100%);transition:transform .35s cubic-bezier(0.22,1,0.36,1);
+  }
+  .decode-panel.open{transform:translateX(0)}
+  .decode-header{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:24px 28px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;
+  }
+  .decode-title{font-family:var(--font-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text-heading);font-weight:500}
+  .decode-close{width:28px;height:28px;background:none;border:none;cursor:pointer;color:var(--faint);display:flex;align-items:center;justify-content:center;padding:0;transition:color .2s}
+  .decode-close:hover{color:var(--text-heading)}
+  .decode-close svg{width:14px;height:14px}
+  .decode-intro{font-size:12px;color:var(--faint);padding:16px 28px;font-weight:300;line-height:1.6;opacity:0.6;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,0.04)}
+  .decode-items{flex:1;overflow-y:auto;padding:8px 0}
+  .decode-item{padding:18px 28px;border-bottom:1px solid rgba(255,255,255,0.04);transition:background .15s}
+  .decode-item:hover{background:rgba(255,255,255,0.02)}
+  .decode-item:last-child{border-bottom:none}
+  .decode-term{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
+  .decode-plain{font-size:13px;color:var(--text);font-weight:300;line-height:1.7;opacity:0.8}
+  .decode-footer{padding:16px 28px;border-top:1px solid rgba(255,255,255,0.06);font-size:10px;color:var(--faint);opacity:0.35;font-style:italic;flex-shrink:0}
+  @media(max-width:768px){
+    .decode-trigger{bottom:80px;right:20px}
     .decode-panel{width:100%;border-left:none;top:auto;height:75vh;transform:translateY(100%)}
     .decode-panel.open{transform:translateY(0)}
   }
@@ -780,35 +813,17 @@
     z-index:8000;
     backdrop-filter:blur(16px);
     -webkit-backdrop-filter:blur(16px);
-    transition:border-color .2s,background .2s;
     color:var(--text);
   }
   .simplify-btn:hover{border-color:rgba(255,255,255,0.25);background:rgba(28,28,28,0.98)}
-  .simplify-btn.active{
-    background:rgba(255,255,255,0.06);
-    border-color:rgba(255,255,255,0.2);
-  }
-  .simplify-label{
-    font-family:var(--font-mono);font-size:10px;
-    letter-spacing:2px;text-transform:uppercase;
-    color:var(--text-heading);font-weight:400;
-  }
+  .simplify-btn.active{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.2)}
+  .simplify-label{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-heading);font-weight:400}
   .simplify-icon{width:14px;height:14px;display:flex;align-items:center;opacity:0.5}
   .simplify-icon svg{width:100%;height:100%}
-
-  /* Plain mode styles */
   body.plain-mode .dossier-mechanism,
-  body.plain-mode .dossier-spec-value{
-    font-family:var(--font-body) !important;
-    font-weight:300 !important;
-    letter-spacing:inherit;
-  }
-  body.plain-mode .dossier-mechanism{
-    font-size:13px;line-height:1.75;opacity:0.85;color:var(--text);
-  }
-  body.plain-mode .dossier-spec-value{
-    font-size:15px;color:var(--text-heading);
-  }
+  body.plain-mode .dossier-spec-value{font-family:var(--font-body) !important;font-weight:300 !important;letter-spacing:inherit}
+  body.plain-mode .dossier-mechanism{font-size:13px;line-height:1.75;opacity:0.85;color:var(--text)}
+  body.plain-mode .dossier-spec-value{font-size:15px;color:var(--text-heading)}
   @media(max-width:768px){.simplify-btn{bottom:24px;right:16px}}
 
 </style>
@@ -883,7 +898,6 @@
 
 <!-- Compound Sidebar (desktop) -->
 <div class="compound-sidebar" id="compoundSidebar"></div>
-<div class="dot-nav" id="dotNav" role="navigation" aria-label="Compound navigation"></div>
 
 <!-- Mobile Compound Nav -->
 <button class="compound-nav-pill" id="compoundNavPill">
@@ -894,7 +908,7 @@
 <div class="compound-sheet" id="compoundSheet"></div>
 
 <!-- Dot Navigation -->
-
+<div class="dot-nav" id="dotNav" role="navigation" aria-label="Compound navigation"></div>
 
 <!-- Scroll Container -->
 <div class="dossier-scroll" id="scrollContainer">
@@ -1287,7 +1301,7 @@
 
   /* ===== DOT NAVIGATION ===== */
   function renderDotNav() {
-    if(dotNav) dotNav.innerHTML = '';
+    dotNav.innerHTML = '';
 
     var introDot = document.createElement('button');
     introDot.className = 'dot-nav__dot active';
@@ -1298,11 +1312,11 @@
     introDot.addEventListener('click', function() {
       document.getElementById('introSection').scrollIntoView({ behavior: 'smooth' });
     });
-    dotNav.appendChild(introDot); }
+    dotNav.appendChild(introDot);
 
     visibleSections.forEach(function(section) {
       var compound = compounds[parseInt(section.dataset.index)];
-      if(dotNav){ var dot = document.createElement('button');
+      var dot = document.createElement('button');
       dot.className = 'dot-nav__dot';
       dot.dataset.target = section.id;
       dot.dataset.pillar = compound.pillarIndex;
@@ -1311,12 +1325,12 @@
       dot.addEventListener('click', function() {
         section.scrollIntoView({ behavior: 'smooth' });
       });
-      dotNav.appendChild(dot); }
+      dotNav.appendChild(dot);
     });
   }
 
   function updateActiveDot(activeId) {
-    var dots = dotNav ? dotNav.querySelectorAll('.dot-nav__dot') : [];
+    var dots = dotNav.querySelectorAll('.dot-nav__dot');
     dots.forEach(function(dot) {
       var isActive = dot.dataset.target === activeId;
       dot.classList.toggle('active', isActive);
@@ -1506,177 +1520,183 @@
   </div>
 </footer>
 
-  </div>
-  
-</div>
 
 
-
-<!-- SIMPLIFY TOGGLE — swaps right column between science and plain language -->
-<button class="simplify-btn" id="simplifyBtn">
-  <span class="simplify-label" id="simplifyLabel">Simplify</span>
-  <span class="simplify-icon">
+<!-- DECODE PANEL — Fixed button + sliding panel -->
+<button class="decode-trigger" id="decodeTrigger" aria-expanded="false" aria-controls="decodePanel">
+  <span class="decode-trigger-label">Decode</span>
+  <span class="decode-trigger-icon">
     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M2 4h12M4 8h8M6 12h4"/>
+      <circle cx="8" cy="8" r="6.5"/>
+      <path d="M8 7v4M8 5.5v.5"/>
     </svg>
   </span>
 </button>
 
+<div class="decode-overlay" id="decodeOverlay"></div>
+<div class="decode-panel" id="decodePanel" role="dialog" aria-label="Compound glossary">
+  <div class="decode-header">
+    <span class="decode-title">Decode</span>
+    <button class="decode-close" id="decodeClose" aria-label="Close">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M3 3l10 10M13 3L3 13"/>
+      </svg>
+    </button>
+  </div>
+  <p class="decode-intro">Plain-language explanations for everything on this page.</p>
+  <div class="decode-items">
+
+    <div class="decode-item">
+      <div class="decode-term">Route</div>
+      <div class="decode-plain">How you take it. SubQ means a small injection under the skin. Oral means a capsule or liquid. Intranasal means a nasal spray.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Dosing</div>
+      <div class="decode-plain">The amount per single use. These are research reference ranges. Actual use should be guided by a qualified practitioner.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Frequency</div>
+      <div class="decode-plain">How often it is taken. Daily means every day. 2-3x week means two or three times per week. Some compounds are cycled — used for a period, then paused.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Half-Life</div>
+      <div class="decode-plain">How long the compound stays active in the body before half of it is gone. A longer half-life means less frequent dosing. A shorter one means the effect is more immediate but fades faster.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Onset</div>
+      <div class="decode-plain">When you can expect to notice effects. Some compounds work within minutes. Others take weeks of consistent use before changes become measurable.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Form</div>
+      <div class="decode-plain">The physical state of the compound. Lyophilized powder is freeze-dried. It is reconstituted with bacteriostatic water before use. This form has the longest shelf life and highest stability.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Purity</div>
+      <div class="decode-plain">The percentage of the compound that is the actual intended molecule. Everything else is impurities. 99%+ purity is the research standard. Our COA documents this for every batch.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Storage</div>
+      <div class="decode-plain">Where to keep it. 2-8°C means a standard fridge. -20°C means a freezer. Lyophilized powder can tolerate room temperature short-term. Once reconstituted, it must be refrigerated.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">COA</div>
+      <div class="decode-plain">Certificate of Analysis. A document from an independent laboratory confirming what is in the vial, at what purity, from a specific batch. This is the primary quality verification in research peptides.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Stacks With</div>
+      <div class="decode-plain">Compounds that are commonly used together because they work through different pathways that complement each other. Stacking is not required — compounds work individually too.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Mechanism of Action</div>
+      <div class="decode-plain">The biological process by which the compound works. How it interacts with receptors, cells, or signaling pathways. This is the scientific basis for the observed effects.</div>
+    </div>
+
+    <div class="decode-item">
+      <div class="decode-term">Contraindications</div>
+      <div class="decode-plain">Conditions or situations where the compound should not be used, or should be used with extreme caution. Always review with a physician if any of these apply to you.</div>
+    </div>
+
+  </div>
+  <div class="decode-footer">
+    <span>For research purposes only. Not medical advice.</span>
+  </div>
+</div>
+
 <script>
-
-
 (function(){
-  var btn = document.getElementById('simplifyBtn');
-  var label = document.getElementById('simplifyLabel');
-  if(!btn) return;
-  var isPlain = false;
+  var trigger = document.getElementById('decodeTrigger');
+  var panel = document.getElementById('decodePanel');
+  var overlay = document.getElementById('decodeOverlay');
+  var closeBtn = document.getElementById('decodeClose');
+  if(!trigger||!panel) return;
 
-  function setMode(plain){
-    isPlain = plain;
-    if(plain){
-      btn.classList.add('active');
-      label.textContent = 'Science';
-      document.body.classList.add('plain-mode');
-      // Swap text in all visible dossier sections
-      document.querySelectorAll('.dossier-section:not([data-hidden="true"])').forEach(function(sec){
-        var slug = sec.getAttribute('data-slug');
-        var pd = plainData[slug];
-        if(!pd) return;
-        // Swap mechanism
-        var mechEl = sec.querySelector('.dossier-mechanism');
-        if(mechEl){
-          mechEl.setAttribute('data-science', mechEl.textContent);
-          mechEl.textContent = pd.mech;
-        }
-        // Swap spec values
-        sec.querySelectorAll('.dossier-spec').forEach(function(spec){
-          var lbl = spec.querySelector('.dossier-spec-label');
-          var val = spec.querySelector('.dossier-spec-value');
-          if(!lbl||!val) return;
-          var key = lbl.textContent.trim();
-          if(pd.specs && pd.specs[key]){
-            val.setAttribute('data-science', val.textContent);
-            val.textContent = pd.specs[key];
-          }
-        });
-      });
-    } else {
-      btn.classList.remove('active');
-      label.textContent = 'Simplify';
-      document.body.classList.remove('plain-mode');
-      // Restore science text
-      document.querySelectorAll('[data-science]').forEach(function(el){
-        el.textContent = el.getAttribute('data-science');
-        el.removeAttribute('data-science');
-      });
-    }
+  function open(){
+    panel.classList.add('open');
+    overlay.classList.add('open');
+    trigger.setAttribute('aria-expanded','true');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    panel.classList.remove('open');
+    overlay.classList.remove('open');
+    trigger.setAttribute('aria-expanded','false');
+    document.body.style.overflow='';
   }
 
-  btn.addEventListener('click', function(){ setMode(!isPlain); });
+  trigger.addEventListener('click', function(){
+    panel.classList.contains('open') ? close() : open();
+  });
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', close);
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Escape') close();
+  });
 })();
 </script>
+
+<button class="simplify-btn" id="simplifyBtn">
+  <span class="simplify-label" id="simplifyLabel">Simplify</span>
+  <span class="simplify-icon"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 4h12M4 8h8M6 12h4"/></svg></span>
+</button>
 <script>
 var plainData = {
-  "bpc-157": {
-    mech: "A peptide that mimics your body's natural healing signals. It speeds up repair in tendons, ligaments, gut lining, and muscles by triggering new blood vessel growth and tissue repair. Think of it as a repair signal your body already understands.",
-    specs: { Route:"Injection or oral capsule", Dosing:"250 to 500mcg per dose", Frequency:"Twice daily", "Half-Life":"Active for about 4 hours", Onset:"Noticeable in 3 to 7 days", Form:"Freeze-dried powder, mixed with water", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
-  },
-  "tb-500": {
-    mech: "Promotes whole-body healing by helping cells move to where they are needed. Reduces inflammation, builds new blood vessels, and helps tissue rebuild after injury. Its small size lets it travel efficiently through the body.",
-    specs: { Route:"Small injection under the skin", Dosing:"2.5mg per dose", Frequency:"Twice per week", "Half-Life":"Active for about 2 hours", Onset:"Noticeable in 1 to 2 weeks", Form:"Freeze-dried powder, mixed with water", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
-  },
-  "ghk-cu": {
-    mech: "A copper-binding peptide that tells your body to produce more collagen and repair tissue. Naturally found in human plasma, it triggers skin regeneration and wound healing by sending stronger signals to damaged areas.",
-    specs: { Route:"Injection or topical application", Dosing:"1 to 2mg per dose", Frequency:"Daily", "Half-Life":"Fast-acting, about 30 minutes", Onset:"Skin changes visible in 2 to 4 weeks", Form:"Freeze-dried powder", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
-  },
-  "ipamorelin": {
-    mech: "Signals your pituitary gland to release a clean pulse of growth hormone. Does not spike cortisol or affect appetite. Results in better recovery, improved body composition, and deeper sleep.",
-    specs: { Route:"Small injection under the skin", Dosing:"200 to 300mcg per dose", Frequency:"Daily, often before bed", "Half-Life":"About 2 hours", Onset:"Sleep in 1 to 2 weeks, body changes in 4 to 8 weeks", Form:"Freeze-dried powder", Purity:"99%+ pure compound", Storage:"Standard refrigerator" }
-  },
-  "semax": {
-    mech: "A nasal spray that boosts your brain's growth factors, the proteins that help neurons communicate and form new connections. Used for focus, memory, and brain protection. Derived from a natural brain hormone.",
-    specs: { Route:"Nasal spray, no injection needed", Dosing:"200 to 600mcg per use", Frequency:"Daily", "Half-Life":"Minutes active, effects last longer", Onset:"Mental clarity in 15 to 30 minutes", Form:"Nasal solution", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
-  },
-  "retatrutide": {
-    mech: "A weekly injection acting on three receptors that control appetite, blood sugar, and energy use. The most potent metabolic compound in clinical research. Trials showed average body weight reduction of 24% at 48 weeks.",
-    specs: { Route:"Weekly injection under the skin", Dosing:"Start low, increase gradually (1 to 12mg)", Frequency:"Once per week", "Half-Life":"Active for about 6 days", Onset:"Appetite changes in 1 to 2 weeks, weight loss in 4 weeks", Form:"Freeze-dried powder", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
-  },
-  "nad-plus": {
-    mech: "A coenzyme your cells use for energy production. NAD levels decline with age. Supplementing activates proteins linked to DNA repair and cellular longevity. Think of it as fuel for your cells to do their repair work.",
-    specs: { Route:"Injection or IV drip", Dosing:"50 to 100mg per dose", Frequency:"2 to 3 times per week", "Half-Life":"1 to 2 hours for injections", Onset:"Energy within days, deeper effects over weeks", Form:"Freeze-dried powder", Purity:"99%+ pure compound", Storage:"Freezer" }
-  },
-  "mots-c": {
-    mech: "A peptide produced inside your mitochondria that mimics an exercise signal. Activates the same pathways as physical activity, improving insulin sensitivity, fat burning, and metabolic flexibility.",
-    specs: { Route:"Injection under the skin", Dosing:"5 to 10mg per dose", Frequency:"3 to 5 times per week", "Half-Life":"4 to 6 hours", Onset:"Metabolic effects in 1 to 2 weeks", Form:"Freeze-dried powder", Purity:"97%+ pure compound", Storage:"Freezer" }
-  },
-  "tesamorelin": {
-    mech: "A synthetic version of your body's own growth hormone releasing signal. Produces a sustained, natural pattern of growth hormone rather than an artificial spike. Used clinically for body composition and visceral fat reduction.",
-    specs: { Route:"Injection under the skin", Dosing:"1 to 2mg per dose", Frequency:"Daily", "Half-Life":"About 26 minutes, effects last longer", Onset:"Body composition changes in 4 to 8 weeks", Form:"Freeze-dried powder", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
-  },
-  "cjc-1295": {
-    mech: "A modified growth hormone signal that lasts 8 or more days instead of minutes. Creates a steady, elevated level of growth hormone that mimics younger hormonal patterns rather than artificial spikes.",
-    specs: { Route:"Injection under the skin", Dosing:"100mcg per dose", Frequency:"2 to 3 times per week", "Half-Life":"About 8 days, very long lasting", Onset:"Results in 1 to 2 weeks", Form:"Freeze-dried powder", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
-  },
-  "selank": {
-    mech: "A nasal spray that reduces anxiety without sedation or dependency. Works on the same brain pathways as anxiety medications but without side effects. Also supports immune function and cognitive clarity.",
-    specs: { Route:"Nasal spray, no injection needed", Dosing:"250 to 500mcg per use", Frequency:"Daily", "Half-Life":"Minutes, effects persist", Onset:"Calming in 15 to 30 minutes", Form:"Nasal solution", Purity:"98%+ pure compound", Storage:"Standard refrigerator" }
-  }
+  "bpc-157":{mech:"A peptide that mimics your body's natural healing signals. It speeds up repair in tendons, ligaments, gut lining, and muscles by triggering new blood vessel growth and tissue repair.",specs:{Route:"Injection or oral capsule",Dosing:"250 to 500mcg per dose",Frequency:"Twice daily","Half-Life":"Active for about 4 hours",Onset:"Noticeable in 3 to 7 days",Form:"Freeze-dried powder, mixed with water",Purity:"98%+ pure compound",Storage:"Standard refrigerator"}},
+  "tb-500":{mech:"Promotes whole-body healing by helping cells move to where they are needed. Reduces inflammation, builds new blood vessels, and helps tissue rebuild after injury.",specs:{Route:"Small injection under the skin",Dosing:"2.5mg per dose",Frequency:"Twice per week","Half-Life":"Active for about 2 hours",Onset:"Noticeable in 1 to 2 weeks",Form:"Freeze-dried powder, mixed with water",Purity:"98%+ pure compound",Storage:"Standard refrigerator"}},
+  "ghk-cu":{mech:"A copper-binding peptide that tells your body to produce more collagen and repair tissue. Triggers skin regeneration and wound healing by sending stronger repair signals to damaged areas.",specs:{Route:"Injection or topical application",Dosing:"1 to 2mg per dose",Frequency:"Daily","Half-Life":"Fast-acting, about 30 minutes",Onset:"Skin changes in 2 to 4 weeks",Form:"Freeze-dried powder",Purity:"98%+ pure compound",Storage:"Standard refrigerator"}},
+  "ipamorelin":{mech:"Signals your pituitary gland to release a clean pulse of growth hormone. Does not spike cortisol or affect appetite. Results in better recovery, improved body composition, and deeper sleep.",specs:{Route:"Small injection under the skin",Dosing:"200 to 300mcg per dose",Frequency:"Daily, often before bed","Half-Life":"About 2 hours",Onset:"Sleep in 1 to 2 weeks, body changes in 4 to 8 weeks",Form:"Freeze-dried powder",Purity:"99%+ pure compound",Storage:"Standard refrigerator"}},
+  "semax":{mech:"A nasal spray that boosts your brain's growth factors. Used for focus, memory, and brain protection. Derived from a natural brain hormone.",specs:{Route:"Nasal spray, no injection needed",Dosing:"200 to 600mcg per use",Frequency:"Daily","Half-Life":"Minutes active, effects last longer",Onset:"Mental clarity in 15 to 30 minutes",Form:"Nasal solution",Purity:"98%+ pure compound",Storage:"Standard refrigerator"}},
+  "retatrutide":{mech:"A weekly injection acting on three receptors controlling appetite, blood sugar, and energy use. The most potent metabolic compound in clinical research. Trials showed average body weight reduction of 24% at 48 weeks.",specs:{Route:"Weekly injection under the skin",Dosing:"Start low, increase gradually 1 to 12mg",Frequency:"Once per week","Half-Life":"Active for about 6 days",Onset:"Appetite changes in 1 to 2 weeks",Form:"Freeze-dried powder",Purity:"98%+ pure compound",Storage:"Standard refrigerator"}},
+  "nad-plus":{mech:"A coenzyme your cells use for energy production. NAD levels decline with age. Supplementing activates proteins linked to DNA repair and cellular longevity.",specs:{Route:"Injection or IV drip",Dosing:"50 to 100mg per dose",Frequency:"2 to 3 times per week","Half-Life":"1 to 2 hours",Onset:"Energy within days, deeper effects over weeks",Form:"Freeze-dried powder",Purity:"99%+ pure compound",Storage:"Freezer"}},
+  "mots-c":{mech:"A peptide from your mitochondria that mimics an exercise signal. Activates the same pathways as physical activity, improving insulin sensitivity and fat burning.",specs:{Route:"Injection under the skin",Dosing:"5 to 10mg per dose",Frequency:"3 to 5 times per week","Half-Life":"4 to 6 hours",Onset:"Metabolic effects in 1 to 2 weeks",Form:"Freeze-dried powder",Purity:"97%+ pure compound",Storage:"Freezer"}},
+  "tesamorelin":{mech:"A synthetic version of your body's own growth hormone releasing signal. Produces a sustained, natural pattern of growth hormone rather than an artificial spike.",specs:{Route:"Injection under the skin",Dosing:"1 to 2mg per dose",Frequency:"Daily","Half-Life":"About 26 minutes, effects last longer",Onset:"Body composition changes in 4 to 8 weeks",Form:"Freeze-dried powder",Purity:"98%+ pure compound",Storage:"Standard refrigerator"}},
+  "cjc-1295":{mech:"A modified growth hormone signal that lasts 8 or more days instead of minutes. Creates a steady elevated level of growth hormone that mimics younger hormonal patterns.",specs:{Route:"Injection under the skin",Dosing:"100mcg per dose",Frequency:"2 to 3 times per week","Half-Life":"About 8 days, very long lasting",Onset:"Results in 1 to 2 weeks",Form:"Freeze-dried powder",Purity:"98%+ pure compound",Storage:"Standard refrigerator"}},
+  "selank":{mech:"A nasal spray that reduces anxiety without sedation or dependency. Works on the same brain pathways as anxiety medications but without side effects.",specs:{Route:"Nasal spray, no injection needed",Dosing:"250 to 500mcg per use",Frequency:"Daily","Half-Life":"Minutes, effects persist",Onset:"Calming in 15 to 30 minutes",Form:"Nasal solution",Purity:"98%+ pure compound",Storage:"Standard refrigerator"}}
 };
-
-// Simplify toggle — runs after sections are rendered
-document.addEventListener('DOMContentLoaded', function(){
-  // Wait for dynamic render to complete
+document.addEventListener('DOMContentLoaded',function(){
   setTimeout(function(){
-    var btn = document.getElementById('simplifyBtn');
-    var label = document.getElementById('simplifyLabel');
+    var btn=document.getElementById('simplifyBtn');
+    var lbl=document.getElementById('simplifyLabel');
     if(!btn) return;
-    var isPlain = false;
-
+    var isPlain=false;
     function setMode(plain){
-      isPlain = plain;
-      btn.classList.toggle('active', plain);
-      label.textContent = plain ? 'Science' : 'Simplify';
-      document.body.classList.toggle('plain-mode', plain);
-
+      isPlain=plain;
+      btn.classList.toggle('active',plain);
+      lbl.textContent=plain?'Science':'Simplify';
+      document.body.classList.toggle('plain-mode',plain);
       document.querySelectorAll('.dossier-section').forEach(function(sec){
-        if(sec.getAttribute('data-hidden') === 'true') return;
-        var slug = sec.getAttribute('data-slug');
-        var pd = plainData[slug];
+        if(sec.getAttribute('data-hidden')==='true') return;
+        var slug=sec.getAttribute('data-slug');
+        var pd=plainData[slug];
         if(!pd) return;
-
-        // Swap mechanism text
-        var mechEl = sec.querySelector('.dossier-mechanism');
-        if(mechEl){
-          if(plain){
-            if(!mechEl.hasAttribute('data-science')) mechEl.setAttribute('data-science', mechEl.textContent);
-            mechEl.textContent = pd.mech;
-          } else if(mechEl.hasAttribute('data-science')){
-            mechEl.textContent = mechEl.getAttribute('data-science');
-            mechEl.removeAttribute('data-science');
-          }
+        var m=sec.querySelector('.dossier-mechanism');
+        if(m){
+          if(plain){if(!m.hasAttribute('data-sci')) m.setAttribute('data-sci',m.textContent); m.textContent=pd.mech;}
+          else if(m.hasAttribute('data-sci')){m.textContent=m.getAttribute('data-sci');m.removeAttribute('data-sci');}
         }
-
-        // Swap spec values
-        sec.querySelectorAll('.dossier-spec').forEach(function(spec){
-          var lbl = spec.querySelector('.dossier-spec-label');
-          var val = spec.querySelector('.dossier-spec-value');
-          if(!lbl || !val) return;
-          var key = lbl.textContent.trim();
-          if(pd.specs && pd.specs[key] !== undefined){
-            if(plain){
-              if(!val.hasAttribute('data-science')) val.setAttribute('data-science', val.textContent);
-              val.textContent = pd.specs[key];
-            } else if(val.hasAttribute('data-science')){
-              val.textContent = val.getAttribute('data-science');
-              val.removeAttribute('data-science');
-            }
+        sec.querySelectorAll('.dossier-spec').forEach(function(sp){
+          var l=sp.querySelector('.dossier-spec-label');
+          var v=sp.querySelector('.dossier-spec-value');
+          if(!l||!v) return;
+          var k=l.textContent.trim();
+          if(pd.specs&&pd.specs[k]!==undefined){
+            if(plain){if(!v.hasAttribute('data-sci')) v.setAttribute('data-sci',v.textContent); v.textContent=pd.specs[k];}
+            else if(v.hasAttribute('data-sci')){v.textContent=v.getAttribute('data-sci');v.removeAttribute('data-sci');}
           }
         });
       });
     }
-
-    btn.addEventListener('click', function(){ setMode(!isPlain); });
-  }, 800); // wait for dynamic render
+    btn.addEventListener('click',function(){setMode(!isPlain);});
+  },800);
 });
 </script>
 </body>
