@@ -260,14 +260,14 @@
 <nav>
   <a href="/us/" class="logo">Engineered Adherence</a>
   <ul class="nav-center">
-    <li><a href="/us/shop.html">Shop</a></li>
-    <li><a href="/us/protocols.html" class="active">Protocols</a></li>
+    <li><a href="/us/shop.html">Compounds</a></li>
+    <li><a href="/us/protocols.html">Protocols</a></li>
     <li><a href="/us/advisor.html">Stack Advisor</a></li>
     <li><a href="/us/about.html">About</a></li>
   </ul>
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
-    <button class="nav-cart-btn" id="cart-toggle" aria-label="Open cart">Stack <span id="cart-count" style="display:none">0</span></button>
+    <button class="nav-cart-btn" id="cart-toggle" aria-label="View stack">Stack <span id="cart-count" style="display:none">0</span></button>
     <a href="/us/advisor.html" class="nav-cta">Build My Stack</a>
     <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
       <span></span><span></span><span></span>
@@ -278,11 +278,10 @@
 <div class="mobile-nav-overlay" aria-hidden="true"></div>
 <div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
   <ul class="mobile-nav-links">
-    <li><a href="/us/shop.html">Shop</a></li>
+    <li><a href="/us/shop.html">Compounds</a></li>
     <li><a href="/us/protocols.html">Protocols</a></li>
     <li><a href="/us/advisor.html">Stack Advisor</a></li>
     <li><a href="/us/about.html">About</a></li>
-    <li><a href="#" id="mobile-cart-link" class="mobile-cart-link">Cart <span class="mobile-cart-count" id="mobile-cart-count"></span></a></li>
   </ul>
   <a href="/us/advisor.html" class="mobile-nav-cta">Build My Stack</a>
   <div class="mobile-nav-footer">
@@ -298,6 +297,7 @@
       </svg>
     </div>
   </div>
+</div>
 </div>
 
 <div class="cart-overlay" id="cart-overlay"></div>
@@ -673,6 +673,18 @@
   }
   window.addEventListener("scroll", onScroll, {passive:true});
   onScroll();
+})();
+</script>
+<script>
+(function(){
+  var links = document.querySelectorAll(".nav-center a");
+  links.forEach(function(link){
+    link.classList.remove("active");
+    if(link.href === window.location.href || 
+       (link.pathname !== "/" && window.location.pathname.startsWith(link.pathname))) {
+      link.classList.add("active");
+    }
+  });
 })();
 </script>
 </body>
