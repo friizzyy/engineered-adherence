@@ -314,6 +314,99 @@
   .philosophy .stat-bar{display:none}
 
 
+
+  /* ═══ PILLAR UPGRADE ═══ */
+  .pillar-top{
+    display:flex;align-items:center;
+    justify-content:space-between;
+    margin-bottom:24px;
+  }
+  .pillar-eyebrow{
+    font-family:var(--font-mono);font-size:9px;
+    letter-spacing:2px;text-transform:uppercase;
+    color:var(--faint);opacity:0.5;font-weight:400;
+  }
+  .pillar-compounds{
+    margin-top:20px;
+    font-family:var(--font-mono);font-size:9px;
+    letter-spacing:1.5px;color:var(--faint);
+    opacity:0.35;text-transform:uppercase;
+  }
+
+  /* ═══ PROTOCOL CARD UPGRADE ═══ */
+  .proto-card-top{
+    display:flex;align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+  }
+  .proto-eyebrow{
+    font-family:var(--font-mono);font-size:9px;
+    letter-spacing:2px;text-transform:uppercase;
+    color:var(--faint);opacity:0.5;
+  }
+  .proto-duration{
+    font-family:var(--font-mono);font-size:9px;
+    letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--faint);opacity:0.4;
+    border:1px solid rgba(255,255,255,0.08);
+    padding:3px 8px;border-radius:20px;
+  }
+  .proto-card h3{
+    font-size:22px;font-weight:300;
+    letter-spacing:-0.02em;
+    color:var(--text-heading);margin-bottom:6px;
+  }
+  .proto-compounds{
+    margin-top:12px;margin-bottom:16px;
+    font-family:var(--font-mono);font-size:9px;
+    letter-spacing:1.5px;color:var(--faint);
+    opacity:0.4;text-transform:uppercase;
+  }
+
+  /* ═══ ADVISOR TEASER UPGRADE ═══ */
+  .advisor-inner{
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:80px;align-items:center;
+    text-align:left;
+  }
+  .advisor-title{
+    font-size:clamp(36px,4vw,56px);
+    font-weight:200;letter-spacing:-0.03em;
+    color:var(--text-heading);line-height:1.05;
+    margin:16px 0 20px;
+  }
+  .advisor-body{
+    font-size:14px;color:var(--faint);
+    font-weight:300;line-height:1.75;
+    opacity:0.7;max-width:380px;
+  }
+  .advisor-right{
+    display:flex;flex-direction:column;gap:0;
+    border:1px solid rgba(255,255,255,0.06);
+  }
+  .advisor-step{
+    display:flex;align-items:center;gap:20px;
+    padding:18px 24px;
+    border-bottom:1px solid rgba(255,255,255,0.04);
+    transition:background .2s;
+  }
+  .advisor-step:last-child{border-bottom:none}
+  .advisor-step:hover{background:rgba(255,255,255,0.02)}
+  .advisor-step-num{
+    font-family:var(--font-mono);font-size:10px;
+    letter-spacing:1px;color:var(--faint);
+    opacity:0.4;font-weight:400;flex-shrink:0;
+    width:20px;
+  }
+  .advisor-step-text{
+    font-size:13px;color:var(--text);
+    font-weight:300;letter-spacing:0.01em;
+  }
+  @media(max-width:768px){
+    .advisor-inner{grid-template-columns:1fr;gap:40px}
+    .advisor-body{max-width:100%}
+  }
+
   /* ═══ FEATURED SECTION UPGRADE ═══ */
   .featured-header{
     display:flex;align-items:flex-end;
@@ -1094,29 +1187,49 @@
   </div>
   <div class="us-pillars">
     <div class="us-pillar" data-pillar="1">
-      <div class="us-pillar-num">I</div>
+      <div class="pillar-top">
+        <span class="pillar-eyebrow">Pillar</span>
+        <span class="us-pillar-num">I</span>
+      </div>
       <h3>Longevity</h3>
       <p>Telomerase activation, collagen synthesis, and cellular repair for sustained vitality.</p>
+      <div class="pillar-compounds">GHK-Cu · NAD+ · Epithalon</div>
     </div>
     <div class="us-pillar" data-pillar="2">
-      <div class="us-pillar-num">II</div>
+      <div class="pillar-top">
+        <span class="pillar-eyebrow">Pillar</span>
+        <span class="us-pillar-num">II</span>
+      </div>
       <h3>Recovery</h3>
       <p>Tissue repair peptides that reduce recovery time by up to 40% in research models.</p>
+      <div class="pillar-compounds">BPC-157 · TB-500 · KPV</div>
     </div>
     <div class="us-pillar" data-pillar="3">
-      <div class="us-pillar-num">III</div>
+      <div class="pillar-top">
+        <span class="pillar-eyebrow">Pillar</span>
+        <span class="us-pillar-num">III</span>
+      </div>
       <h3>Metabolic</h3>
       <p>Targeted lipolysis and metabolic optimization validated in clinical research.</p>
+      <div class="pillar-compounds">Retatrutide · MOTS-C · AOD-9604</div>
     </div>
     <div class="us-pillar" data-pillar="4">
-      <div class="us-pillar-num">IV</div>
+      <div class="pillar-top">
+        <span class="pillar-eyebrow">Pillar</span>
+        <span class="us-pillar-num">IV</span>
+      </div>
       <h3>Cognitive</h3>
       <p>BDNF upregulation, anxiolytic stabilization, and neuroprotection compounds.</p>
+      <div class="pillar-compounds">Semax · Selank · Dihexa</div>
     </div>
     <div class="us-pillar" data-pillar="5">
-      <div class="us-pillar-num">V</div>
+      <div class="pillar-top">
+        <span class="pillar-eyebrow">Pillar</span>
+        <span class="us-pillar-num">V</span>
+      </div>
       <h3>Performance</h3>
       <p>GH secretagogues supporting lean mass, recovery, and deep restorative sleep.</p>
+      <div class="pillar-compounds">Ipamorelin · CJC-1295 · Tesamorelin</div>
     </div>
   </div>
 </section>
