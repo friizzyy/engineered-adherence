@@ -1,9 +1,9 @@
 /* ═══════════════════════════════════════════
-   ENGINEERED ADHERENCE — COMPOUND DATABASE
+   ENGINEERED ADHERENCE - COMPOUND DATABASE
    Rich data, detail modal, toast system
    ═══════════════════════════════════════════ */
 
-/* Body scroll-lock reference counter —
+/* Body scroll-lock reference counter -
    multiple overlays (cart drawer, compound modal) can request lock;
    class is only removed when every requester has unlocked. */
 let _bodyLockCount = 0;
@@ -301,7 +301,7 @@ const CompoundModal = {
       '<div class="cmodal-stat"><div class="cmodal-stat-label">Dosing</div><div class="cmodal-stat-val">' + c.dosing + '</div></div>' +
       '<div class="cmodal-stat"><div class="cmodal-stat-label">Frequency</div><div class="cmodal-stat-val">' + c.frequency + '</div></div>';
 
-    /* Benefits — built via DOM API to avoid innerHTML */
+    /* Benefits - built via DOM API to avoid innerHTML */
     const benefitsEl = document.getElementById('cm-benefits');
     benefitsEl.textContent = '';
     c.benefits.forEach(function(b) {
@@ -311,7 +311,7 @@ const CompoundModal = {
       benefitsEl.appendChild(span);
     });
 
-    /* Synergies — built via DOM API to avoid innerHTML */
+    /* Synergies - built via DOM API to avoid innerHTML */
     const synEl = document.getElementById('cm-syn');
     synEl.textContent = '';
     c.synergies.forEach(function(s) {
@@ -346,7 +346,7 @@ const CompoundModal = {
 };
 
 /* ═══════════════════════════════════════════
-   ENHANCED CART — Toast on add
+   ENHANCED CART - Toast on add
    ═══════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function() {
   if (typeof Cart !== 'undefined') {

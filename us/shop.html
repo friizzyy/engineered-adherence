@@ -4,11 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Compound Dossiers | Engineered Adherence USA</title>
-<meta name="description" content="25 research-grade compounds across 5 bio-longevity pillars. Full dossier view with mechanisms, dosing protocols, and stacking guidance.">
+<meta name="description" content="11 research-grade compounds across 5 bio-longevity pillars. Full dossier view with mechanisms, dosing protocols, and stacking guidance.">
 <meta property="og:title" content="Compound Dossiers | Engineered Adherence USA">
-<meta property="og:description" content="25 research-grade compounds across 5 bio-longevity pillars. Full dossier view.">
+<meta property="og:description" content="11 research-grade compounds across 5 bio-longevity pillars. Full dossier view.">
 <meta property="og:type" content="website">
-<meta name="twitter:card" content="summary">
+<meta property="og:url" content="https://engineeredadherence.com/us/shop.html">
+<meta property="og:image" content="https://engineeredadherence.com/assets/og-shop.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://engineeredadherence.com/assets/og-shop.png">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <script>
 (function(){
@@ -24,7 +27,7 @@
   body>.site-nav{opacity:0;animation:fadeDown .8s ease .3s forwards}
   @keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
 
-  /* ===== DOSSIER PAGE — body overflow lock ===== */
+  /* ===== DOSSIER PAGE - body overflow lock ===== */
   body.dossier-page{overflow:hidden}
 
   /* ===== VIAL THEME VARIABLES ===== */
@@ -466,7 +469,7 @@
     animation-delay:0.8s;
   }
 
-  /* ===== RESPONSIVE — TABLET (900px) ===== */
+  /* ===== RESPONSIVE - TABLET (900px) ===== */
   @media(max-width:900px){
     .dossier-inner{
       flex-direction:column;padding:48px 32px 80px;
@@ -520,7 +523,7 @@
     .dossier-intro{padding:100px 24px 60px}
   }
 
-  /* ===== RESPONSIVE — SMALL (480px) ===== */
+  /* ===== RESPONSIVE - SMALL (480px) ===== */
   @media(max-width:480px){
     .dossier-inner{padding:40px 20px 80px}
     .dossier-compound-name{font-size:24px;letter-spacing:1px}
@@ -540,10 +543,201 @@
   @media(max-width:768px){
     .nav-cart-btn{display:none}
     .dossier-intro{padding:80px 24px 60px}
-    .pillar-filter{
-      bottom:calc(16px + env(safe-area-inset-bottom));
-    }
   }
+
+  /* ===== HIDE LEGACY PILLAR FILTER ===== */
+  .pillar-filter{display:none}
+
+  /* ===== COMPOUND SIDEBAR (desktop) ===== */
+  .compound-sidebar{
+    position:fixed;left:0;top:84px;
+    width:200px;height:calc(100vh - 84px);
+    background:var(--bg);
+    border-right:1px solid var(--line);
+    overflow-y:auto;
+    scrollbar-width:none;
+    -webkit-overflow-scrolling:touch;
+    z-index:90;
+  }
+  .compound-sidebar::-webkit-scrollbar{display:none}
+  .sidebar-group-label{
+    font-family:var(--font-mono);
+    font-size:10px;text-transform:uppercase;
+    color:var(--faint);padding:16px 16px 6px;
+    letter-spacing:1.5px;
+  }
+  .sidebar-compound{
+    font-family:var(--font-body);
+    font-size:12px;color:var(--muted);
+    padding:7px 16px;cursor:pointer;
+    display:block;width:100%;
+    background:none;border:none;
+    border-left:2px solid transparent;
+    text-align:left;
+    transition:all 200ms;
+  }
+  .sidebar-compound:hover{
+    background:var(--accent);color:var(--text);
+  }
+  .sidebar-compound.active{
+    border-left-color:var(--accent-solid);
+    color:var(--text);background:var(--accent);
+  }
+
+  /* Desktop: sidebar offset */
+  @media(min-width:769px){
+    .dossier-scroll{padding-left:200px}
+  }
+
+  /* ===== MOBILE COMPOUND NAV ===== */
+  .compound-nav-pill{display:none}
+  .compound-sheet-overlay{display:none}
+  .compound-sheet{display:none}
+
+  @media(max-width:768px){
+    .compound-sidebar{display:none}
+    .compound-nav-pill{
+      display:flex;align-items:center;gap:8px;
+      position:fixed;bottom:24px;left:50%;
+      transform:translateX(-50%);
+      background:var(--bg-card);
+      border:1px solid var(--line);
+      padding:10px 20px;border-radius:32px;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      font-family:var(--font-mono);
+      font-size:11px;text-transform:uppercase;
+      letter-spacing:1.5px;color:var(--muted);
+      cursor:pointer;z-index:90;
+    }
+    .compound-nav-pill svg{width:14px;height:14px}
+    .compound-sheet-overlay{
+      display:block;position:fixed;inset:0;
+      background:rgba(0,0,0,0.5);
+      z-index:200;opacity:0;visibility:hidden;
+      transition:opacity .3s,visibility .3s;
+    }
+    .compound-sheet-overlay.open{opacity:1;visibility:visible}
+    .compound-sheet{
+      display:block;position:fixed;bottom:0;left:0;right:0;
+      max-height:65vh;
+      background:var(--bg-card);
+      border-top:1px solid var(--line);
+      border-radius:20px 20px 0 0;
+      z-index:210;
+      transform:translateY(100%);
+      transition:transform .4s cubic-bezier(0.4,0,0.2,1);
+      overflow-y:auto;padding:24px 0;
+    }
+    .compound-sheet.open{transform:translateY(0)}
+  }
+
+  /* ===== BUTTON STATES ===== */
+  .dossier-add-btn.added{
+    border-color:rgba(16,185,129,0.3);
+    background:rgba(16,185,129,0.06);
+    color:rgba(16,185,129,0.9);
+    transition:all 200ms;
+  }
+  .dossier-add-btn.in-stack{
+    color:var(--muted);cursor:default;
+    pointer-events:none;opacity:0.6;
+  }
+
+  /* ===== STACKING CHIPS ===== */
+  .dossier-stacks-label{
+    font-family:var(--font-mono);
+    font-size:10px;text-transform:uppercase;
+    color:var(--faint);letter-spacing:1.5px;
+    margin-top:24px;margin-bottom:10px;
+  }
+  .dossier-stack-chip{
+    font-family:var(--font-mono);
+    font-size:10px;color:var(--muted);
+    padding:4px 12px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    display:inline-block;
+    margin-right:6px;margin-bottom:6px;
+    transition:all 200ms;cursor:pointer;
+    background:none;
+  }
+  .dossier-stack-chip:hover{
+    border-color:var(--line-strong);color:var(--text);
+  }
+  .dossier-stack-chip.inactive{
+    opacity:0.3;cursor:default;
+  }
+  .dossier-stack-chip.inactive:hover{
+    border-color:var(--line);color:var(--muted);
+  }
+
+  /* ===== CART ENHANCEMENTS ===== */
+  .cart-checkout-note{
+    font-size:13px;color:var(--faint);
+    text-align:center;margin-top:16px;
+  }
+  .cart-waitlist{
+    display:flex;gap:8px;margin-top:12px;
+  }
+  .cart-waitlist-input{
+    flex:1;padding:10px 14px;
+    background:var(--input-bg);border:1px solid var(--line);
+    color:var(--text);font-family:var(--font-body);
+    font-size:13px;border-radius:100px;
+  }
+  .cart-waitlist-input::placeholder{color:var(--faint)}
+  .cart-waitlist-input:focus{outline:none;border-color:var(--accent-solid)}
+  .cart-waitlist-btn{
+    padding:10px 20px;
+    background:transparent;border:1px solid var(--btn-border);
+    color:var(--btn-text);font-family:var(--font-mono);
+    font-size:10px;letter-spacing:1.5px;
+    text-transform:uppercase;cursor:pointer;
+    border-radius:100px;transition:all .3s;
+    white-space:nowrap;
+  }
+  .cart-waitlist-btn:hover{
+    background:var(--btn-hover-bg);border-color:var(--btn-hover-border);
+  }
+  .cart-clear-link{
+    display:block;text-align:center;
+    font-size:12px;color:var(--faint);
+    margin-top:12px;cursor:pointer;
+    background:none;border:none;
+    font-family:var(--font-body);
+    text-decoration:none;transition:color .2s;
+  }
+  .cart-clear-link:hover{color:var(--text);text-decoration:underline}
+  .cart-waitlist-confirm{
+    font-size:12px;color:rgba(16,185,129,0.9);
+    text-align:center;margin-top:8px;display:none;
+  }
+  .cart-suggestion{
+    border:1px solid var(--line);
+    border-radius:8px;padding:12px;
+    margin-top:12px;font-size:12px;
+    color:var(--muted);line-height:1.6;
+  }
+  .cart-suggestion-add{
+    display:inline-block;margin-top:8px;
+    font-family:var(--font-mono);
+    font-size:10px;letter-spacing:1px;
+    text-transform:uppercase;
+    color:var(--text);cursor:pointer;
+    background:none;border:1px solid var(--line);
+    padding:6px 14px;border-radius:100px;
+    transition:all .3s;
+  }
+  .cart-suggestion-add:hover{
+    border-color:var(--btn-hover-border);background:var(--accent);
+  }
+  @keyframes badgeBounce{
+    0%{transform:scale(1)}
+    50%{transform:scale(1.3)}
+    100%{transform:scale(1)}
+  }
+  .cart-badge-bounce{animation:badgeBounce .3s ease}
 </style>
 </head>
 <body class="dossier-page">
@@ -604,10 +798,26 @@
     <span class="cart-total-value">$<span id="cart-total">0</span></span>
   </div>
   <a href="mailto:orders@engineeredadherence.com?subject=Stack%20Order%20Request" class="btn btn-lg" style="width:100%;text-align:center;margin-top:24px">Request Order</a>
+  <div id="cart-suggestions"></div>
+  <p class="cart-checkout-note">Compounds ship separately. Expect 3-5 business days.</p>
+  <div class="cart-waitlist" id="cart-waitlist-wrap" style="display:none">
+    <input class="cart-waitlist-input" id="cart-waitlist-email" type="email" placeholder="Email for restock alerts">
+    <button class="cart-waitlist-btn" id="cart-waitlist-btn">Notify Me</button>
+  </div>
+  <p class="cart-waitlist-confirm" id="cart-waitlist-confirm">You're on the list.</p>
+  <button class="cart-clear-link" id="cart-clear-link">Clear Stack</button>
 </div>
 
-<!-- Pillar Filter -->
-<div class="pillar-filter" id="pillarFilter" role="navigation" aria-label="Filter by pillar"></div>
+<!-- Compound Sidebar (desktop) -->
+<div class="compound-sidebar" id="compoundSidebar"></div>
+
+<!-- Mobile Compound Nav -->
+<button class="compound-nav-pill" id="compoundNavPill">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  Compounds
+</button>
+<div class="compound-sheet-overlay" id="compoundSheetOverlay"></div>
+<div class="compound-sheet" id="compoundSheet"></div>
 
 <!-- Dot Navigation -->
 <div class="dot-nav" id="dotNav" role="navigation" aria-label="Compound navigation"></div>
@@ -619,7 +829,7 @@
   <section class="dossier-intro" id="introSection">
     <span class="dossier-intro__label">Engineered Adherence</span>
     <h1 class="dossier-intro__title">Compound Dossiers</h1>
-    <p class="dossier-intro__subtitle">25 Research-Grade Compounds Across 5 Pillars</p>
+    <p class="dossier-intro__subtitle">11 Research-Grade Compounds Across 5 Pillars</p>
     <div class="dossier-intro__pillars">
       <span class="dossier-intro__pillar-chip"><span class="dossier-intro__pillar-dot" style="background:#7A8A98"></span>Longevity</span>
       <span class="dossier-intro__pillar-chip"><span class="dossier-intro__pillar-dot" style="background:#C9B99A"></span>Recovery</span>
@@ -704,6 +914,23 @@
     {slug:'mk-677',name:'MK-677',fullName:'Ibutamoren Mesylate',pillar:'Performance',pillarNum:'V',pillarIndex:5,price:94,size:'10mg',role:'Oral secretagogue',route:'Oral',dosing:'10\u201325mg',freq:'Daily',halfLife:'~24 hours',onset:'1\u20132 weeks (IGF-1 peaks at 2 months)',form:'Capsules / Powder',purity:'\u226599%',storage:'Room temp',origin:'Synthetic',studies:[{text:'Chapman et al. 1996 (JCEM)',url:'https://pubmed.ncbi.nlm.nih.gov/8954023/'},{text:'Nass et al. 2008',url:'https://pubmed.ncbi.nlm.nih.gov/18981485/'}],contraindications:'Diabetes (insulin resistance)',mech:'Non-peptide spiropiperidine that mimics ghrelin signaling at the GHS-R1a receptor, producing sustained IGF-1 elevation for 24+ hours from a single oral dose. The only orally bioavailable GH secretagogue. Increases all phases of sleep, with particular enhancement of REM and slow-wave (stage 3\u20134) sleep architecture.',benefits:['Oral dosing','IGF-1 elevation','Sleep quality','Appetite regulation','Bone density'],stacking:['Ipamorelin','CJC-1295','Tesamorelin']}
   ];
 
+  /* ===== AVAILABILITY FLAGS ===== */
+  var activeSlugs = ['bpc-157','ipamorelin','semax','retatrutide','ghk-cu','tb-500','nad-plus','mots-c','tesamorelin','cjc-1295','selank'];
+  compounds.forEach(function(c) {
+    c.available = activeSlugs.indexOf(c.slug) !== -1;
+  });
+
+  /* ===== STACKING SLUG RESOLVER ===== */
+  var stackSlugOverrides = {
+    'NAD+': 'nad-plus',
+    'Thymosin Alpha-1': 'thymosin-a1',
+    '5-Amino-1MQ': '5-amino-1mq'
+  };
+  function resolveStackSlug(name) {
+    if (stackSlugOverrides[name]) return stackSlugOverrides[name];
+    return name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+  }
+
   var pillarNames = ['All', 'Longevity', 'Recovery', 'Metabolic', 'Cognitive', 'Performance'];
   var pillarColors = {
     1: 'var(--pillar-1)',
@@ -723,10 +950,9 @@
   /* ===== ELEMENTS ===== */
   var scrollContainer = document.getElementById('scrollContainer');
   var dotNav = document.getElementById('dotNav');
-  var pillarFilter = document.getElementById('pillarFilter');
   var scrollArrow = document.getElementById('scrollArrow');
 
-  var activePillar = 0;
+  /* Sidebar replaces pillar filter */
   var visibleSections = [];
   var observer = null;
 
@@ -779,6 +1005,9 @@
       section.id = 'dossier-' + compound.slug;
       section.dataset.pillar = compound.pillarIndex;
       section.dataset.index = index;
+      if (!compound.available) {
+        section.dataset.hidden = 'true';
+      }
 
       var color = pillarColors[compound.pillarIndex];
       var hexColor = pillarHexColors[compound.pillarIndex];
@@ -799,8 +1028,14 @@
         return '<span class="dossier-benefit">' + b + '</span>';
       }).join('');
 
-      var stackingHTML = compound.stacking.map(function(s) {
-        return '<span class="dossier-stack-pill" style="border-color:' + hexColor + ';color:' + hexColor + '">' + s + '</span>';
+      var stackingHTML = compound.stacking.map(function(stackName) {
+        var stackSlug = resolveStackSlug(stackName);
+        var stackCompound = compounds.find(function(c) { return c.slug === stackSlug; });
+        var isActive = stackCompound && stackCompound.available;
+        if (isActive) {
+          return '<button class="dossier-stack-chip" data-slug="' + stackSlug + '">' + stackName + '</button>';
+        }
+        return '<span class="dossier-stack-chip inactive">' + stackName + '</span>';
       }).join('');
 
       section.innerHTML =
@@ -813,7 +1048,7 @@
               '<div class="dossier-scientific-name">' + compound.fullName + '</div>' +
               '<div class="dossier-pillar-tag">' +
                 '<span class="dossier-pillar-dot" style="background:' + color + '"></span>' +
-                'Pillar ' + compound.pillarNum + ' \u2014 ' + compound.pillar +
+                'Pillar ' + compound.pillarNum + ' | ' + compound.pillar +
               '</div>' +
               '<div class="dossier-role">' + compound.role + '</div>' +
               '<div class="dossier-size">' + compound.size + '</div>' +
@@ -828,7 +1063,7 @@
             '<div class="dossier-specs">' + specsHTML + '</div>' +
             '<div class="dossier-benefits-label">Benefits</div>' +
             '<div class="dossier-benefits">' + benefitsHTML + '</div>' +
-            '<div class="dossier-stacking-label">Pairs well with</div>' +
+            '<div class="dossier-stacks-label">Stacks With</div>' +
             '<div class="dossier-stacking">' + stackingHTML + '</div>' +
             '<div class="dossier-footnotes">' +
               '<div class="dossier-footnote">' +
@@ -842,37 +1077,111 @@
             '</div>' +
             '<div class="dossier-purchase">' +
               '<span class="dossier-price"><span class="dossier-price-currency">$</span>' + compound.price + '</span>' +
-              '<button class="dossier-add-btn" data-slug="' + compound.slug + '">Add to Stack</button>' +
+              '<button class="dossier-add-btn' + (typeof Cart !== 'undefined' && Cart.items.find(function(i){return i.slug === compound.slug}) ? ' in-stack' : '') + '" data-slug="' + compound.slug + '">' + (typeof Cart !== 'undefined' && Cart.items.find(function(i){return i.slug === compound.slug}) ? 'In Stack' : 'Add to Stack') + '</button>' +
             '</div>' +
           '</div>' +
         '</div>' +
         '<div class="dossier-scroll-indicator">' + num + '/' + String(total).padStart(2, '0') + '</div>';
 
+      /* Click handler for stacking chips */
+      section.addEventListener('click', function(e) {
+        var chip = e.target.closest('.dossier-stack-chip:not(.inactive)');
+        if (chip) {
+          var chipSlug = chip.getAttribute('data-slug');
+          var target = document.getElementById('dossier-' + chipSlug);
+          if (target && target.dataset.hidden !== 'true') {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        }
+      });
+
       scrollContainer.appendChild(section);
     });
   }
 
-  /* ===== PILLAR FILTER ===== */
-  function renderPillarFilter() {
-    pillarFilter.innerHTML = '';
-    pillarNames.forEach(function(name, i) {
-      var btn = document.createElement('button');
-      btn.className = 'pillar-filter__btn' + (i === activePillar ? ' active' : '');
-      btn.textContent = name;
-      btn.dataset.pillar = i;
-      btn.addEventListener('click', function() {
-        activePillar = i;
-        applyFilter();
-        updatePillarFilterUI();
+  /* ===== COMPOUND SIDEBAR (desktop) ===== */
+  function renderSidebar() {
+    var sidebar = document.getElementById('compoundSidebar');
+    if (!sidebar) return;
+    var groups = {};
+    var pillarOrder = ['Longevity','Recovery','Metabolic','Cognitive','Performance'];
+    compounds.forEach(function(c) {
+      if (!c.available) return;
+      if (!groups[c.pillar]) groups[c.pillar] = [];
+      groups[c.pillar].push(c);
+    });
+    var html = '';
+    pillarOrder.forEach(function(pillar) {
+      if (!groups[pillar]) return;
+      html += '<div class="sidebar-group-label">' + pillar + '</div>';
+      groups[pillar].forEach(function(c) {
+        html += '<button class="sidebar-compound" data-slug="' + c.slug + '">' + c.name + '</button>';
       });
-      pillarFilter.appendChild(btn);
+    });
+    sidebar.innerHTML = html;
+    sidebar.addEventListener('click', function(e) {
+      var btn = e.target.closest('.sidebar-compound');
+      if (!btn) return;
+      var slug = btn.getAttribute('data-slug');
+      var section = document.getElementById('dossier-' + slug);
+      if (section) section.scrollIntoView({ behavior: 'smooth' });
     });
   }
 
-  function updatePillarFilterUI() {
-    var btns = pillarFilter.querySelectorAll('.pillar-filter__btn');
+  function updateSidebarActive(slug) {
+    var sidebar = document.getElementById('compoundSidebar');
+    if (!sidebar) return;
+    var btns = sidebar.querySelectorAll('.sidebar-compound');
     btns.forEach(function(btn) {
-      btn.classList.toggle('active', parseInt(btn.dataset.pillar) === activePillar);
+      btn.classList.toggle('active', btn.getAttribute('data-slug') === slug);
+    });
+  }
+
+  /* ===== MOBILE COMPOUND SHEET ===== */
+  function renderMobileSheet() {
+    var sheet = document.getElementById('compoundSheet');
+    var pill = document.getElementById('compoundNavPill');
+    var overlay = document.getElementById('compoundSheetOverlay');
+    if (!sheet) return;
+    var groups = {};
+    var pillarOrder = ['Longevity','Recovery','Metabolic','Cognitive','Performance'];
+    compounds.forEach(function(c) {
+      if (!c.available) return;
+      if (!groups[c.pillar]) groups[c.pillar] = [];
+      groups[c.pillar].push(c);
+    });
+    var html = '';
+    pillarOrder.forEach(function(pillar) {
+      if (!groups[pillar]) return;
+      html += '<div class="sidebar-group-label">' + pillar + '</div>';
+      groups[pillar].forEach(function(c) {
+        html += '<button class="sidebar-compound" data-slug="' + c.slug + '">' + c.name + '</button>';
+      });
+    });
+    sheet.innerHTML = html;
+
+    if (pill) {
+      pill.addEventListener('click', function() {
+        sheet.classList.add('open');
+        overlay.classList.add('open');
+      });
+    }
+    if (overlay) {
+      overlay.addEventListener('click', function() {
+        sheet.classList.remove('open');
+        overlay.classList.remove('open');
+      });
+    }
+    sheet.addEventListener('click', function(e) {
+      var btn = e.target.closest('.sidebar-compound');
+      if (!btn) return;
+      var slug = btn.getAttribute('data-slug');
+      var section = document.getElementById('dossier-' + slug);
+      if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+        sheet.classList.remove('open');
+        overlay.classList.remove('open');
+      }
     });
   }
 
@@ -881,8 +1190,9 @@
     visibleSections = [];
 
     sections.forEach(function(section) {
-      var sectionPillar = parseInt(section.dataset.pillar);
-      var hidden = activePillar !== 0 && sectionPillar !== activePillar;
+      var idx = parseInt(section.dataset.index);
+      var compound = compounds[idx];
+      var hidden = !compound || !compound.available;
       section.dataset.hidden = hidden ? 'true' : 'false';
       if (!hidden) {
         visibleSections.push(section);
@@ -898,7 +1208,6 @@
 
     renderDotNav();
     setupObserver();
-    scrollContainer.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   /* ===== DOT NAVIGATION ===== */
@@ -963,6 +1272,13 @@
         if (entry.isIntersecting) {
           updateActiveDot(entry.target.id);
           entry.target.classList.add('in-view');
+          var slug = entry.target.id.replace('dossier-', '');
+          updateSidebarActive(slug);
+          if (entry.target.id === 'introSection') {
+            history.replaceState(null, '', window.location.pathname);
+          } else {
+            history.replaceState(null, '', '?compound=' + slug);
+          }
         } else {
           entry.target.classList.remove('in-view');
         }
@@ -1013,10 +1329,10 @@
     }
   });
 
-  /* ===== ADD TO STACK — Cart integration ===== */
+  /* ===== ADD TO STACK - Cart integration + button states ===== */
   scrollContainer.addEventListener('click', function(e) {
     var btn = e.target.closest('.dossier-add-btn');
-    if (!btn) return;
+    if (!btn || btn.classList.contains('in-stack')) return;
 
     var slug = btn.getAttribute('data-slug');
     var compound = compounds.find(function(c) { return c.slug === slug; });
@@ -1028,16 +1344,13 @@
         price: compound.price,
         pillar: compound.pillar
       });
-    } else {
-      /* Fallback visual feedback if cart not available */
-      var originalText = btn.textContent;
-      btn.textContent = 'Added';
-      btn.style.borderColor = 'var(--pillar-3)';
-      btn.style.color = 'var(--pillar-3)';
+      /* "Added" feedback for 1.5s, then "In Stack" */
+      btn.classList.add('added');
+      btn.innerHTML = '&#10003; Added';
       setTimeout(function() {
-        btn.textContent = originalText;
-        btn.style.borderColor = '';
-        btn.style.color = '';
+        btn.classList.remove('added');
+        btn.classList.add('in-stack');
+        btn.textContent = 'In Stack';
       }, 1500);
     }
   });
@@ -1069,39 +1382,30 @@
     }
   }
 
-  /* ===== HASH SUPPORT — deep-link to compound ===== */
-  function checkHash() {
-    var hash = window.location.hash;
-    if (hash && hash.length > 1) {
-      var slug = hash.substring(1);
+  /* ===== URL PARAM - deep-link to compound ===== */
+  function checkUrlParam() {
+    var params = new URLSearchParams(window.location.search);
+    var slug = params.get('compound');
+    if (slug) {
       var section = document.getElementById('dossier-' + slug);
-      if (section) {
-        /* Reset filter to All to ensure section is visible */
-        activePillar = 0;
-        applyFilter();
-        updatePillarFilterUI();
+      if (section && section.dataset.hidden !== 'true') {
         setTimeout(function() {
           section.scrollIntoView({ behavior: 'smooth' });
-        }, 200);
+        }, 300);
       }
     }
   }
 
   /* ===== INITIALIZE ===== */
   renderSections();
-  renderPillarFilter();
-
-  var allSections = scrollContainer.querySelectorAll('.dossier-section');
-  visibleSections = Array.prototype.slice.call(allSections);
-
-  renderDotNav();
-  setupObserver();
+  renderSidebar();
+  renderMobileSheet();
+  applyFilter();
 
   /* Ensure intro section is visible immediately on load */
   document.getElementById('introSection').classList.add('in-view');
 
-  checkHash();
-  window.addEventListener('hashchange', checkHash);
+  checkUrlParam();
 
 })();
 </script>

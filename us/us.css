@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════
-   ENGINEERED ADHERENCE — US SHARED STYLES
+   ENGINEERED ADHERENCE | US SHARED STYLES
    Pillar colors, compound modal, toast, cart
    ═══════════════════════════════════════════ */
 
@@ -81,7 +81,7 @@
 .ea-toast-check{margin-right:8px;color:var(--pillar-2)}
 
 /* ═══════════════════════════════════════════
-   COMPOUND DETAIL MODAL — OVERLAY
+   COMPOUND DETAIL MODAL - OVERLAY
    ═══════════════════════════════════════════ */
 .cmodal-overlay{
   position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:250;
@@ -92,7 +92,7 @@
 .cmodal-overlay.open{opacity:1;visibility:visible}
 
 /* ═══════════════════════════════════════════
-   COMPOUND DETAIL MODAL — PANEL
+   COMPOUND DETAIL MODAL - PANEL
    ═══════════════════════════════════════════ */
 .cmodal{
   position:fixed;bottom:0;left:0;right:0;
@@ -347,7 +347,7 @@
 }
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE — TABLET (1024px)
+   RESPONSIVE - TABLET (1024px)
    ═══════════════════════════════════════════ */
 @media(max-width:1024px){
   .us-disclaimer{padding:24px 40px}
@@ -355,7 +355,7 @@
 }
 
 /* ═══════════════════════════════════════════
-   RESPONSIVE — MOBILE (768px)
+   RESPONSIVE - MOBILE (768px)
    ═══════════════════════════════════════════ */
 @media(max-width:768px){
   /* Toast: align with mobile nav (60px) */
@@ -388,4 +388,76 @@
   .cmodal-mech-text{font-size:12px}
   .cmodal-stat-val{font-size:12px}
   .cmodal-benefit{font-size:10px;padding:6px 12px 6px 20px}
+}
+
+/* ===== LIGHT MODE CONTRAST FIXES ===== */
+[data-theme="light"] .card,
+[data-theme="light"] .protocol-card{
+  border-color:rgba(0,0,0,0.10);
+}
+[data-theme="light"] .dossier-spec-value{
+  color:#1a1c22;
+}
+[data-theme="light"] .dossier-pillar-tag{
+  border-color:rgba(0,0,0,0.15);
+  color:#4a4e58;
+}
+[data-theme="light"] .dossier-mechanism{
+  opacity:0.9;
+}
+[data-theme="light"] .dossier-benefit{
+  border-color:rgba(0,0,0,0.12);
+  color:#3a3e48;
+}
+[data-theme="light"] .dossier-footnote-value{
+  color:#4a4e58;
+}
+[data-theme="light"] .dossier-stack-chip{
+  border-color:rgba(0,0,0,0.12);
+  color:#3a3e48;
+}
+[data-theme="light"] .dossier-stack-chip.inactive{
+  opacity:0.35;
+}
+[data-theme="light"] .sidebar-group-label{
+  color:#5a5e68;
+}
+[data-theme="light"] .sidebar-compound{
+  color:#4a4e58;
+}
+[data-theme="light"] .sidebar-compound.active{
+  color:#1a1c22;
+  background:rgba(0,0,0,0.05);
+  border-left-color:#4a4e58;
+}
+[data-theme="light"] .compound-nav-pill{
+  background:rgba(255,255,255,0.92);
+  border-color:rgba(0,0,0,0.12);
+  color:#4a4e58;
+}
+[data-theme="light"] .compound-sheet{
+  background:rgba(255,255,255,0.98);
+  border-color:rgba(0,0,0,0.08);
+}
+[data-theme="light"] .compound-sidebar{
+  background:#f2f3f5;
+  border-right-color:rgba(0,0,0,0.08);
+}
+[data-theme="light"] .cart-suggestion{
+  border-color:rgba(0,0,0,0.10);
+}
+[data-theme="light"] .dossier-ghost{
+  color:rgba(0,0,0,0.03);
+}
+[data-theme="light"] nav{
+  background:rgba(242,243,245,0.92);
+  border-bottom-color:rgba(0,0,0,0.08);
+}
+[data-theme="light"] .dossier-add-btn{
+  border-color:rgba(0,0,0,0.2);
+  color:#1a1c22;
+}
+[data-theme="light"] .dossier-add-btn:hover{
+  border-color:rgba(0,0,0,0.4);
+  background:rgba(0,0,0,0.04);
 }

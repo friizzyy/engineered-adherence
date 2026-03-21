@@ -11,6 +11,13 @@ const Cart = {
     this.save();
     this.render();
     this.showDrawer();
+    // Badge bounce animation
+    const bounceBadge = document.getElementById('cart-count');
+    if (bounceBadge) {
+      bounceBadge.classList.remove('cart-badge-bounce');
+      void bounceBadge.offsetWidth;
+      bounceBadge.classList.add('cart-badge-bounce');
+    }
   },
 
   remove(slug) {
@@ -73,6 +80,38 @@ const Cart = {
       }
     }
 
+    // Render bundle suggestions
+    const suggestionsEl = document.getElementById('cart-suggestions');
+    if (suggestionsEl) {
+      const suggestionPairs = {
+        'bpc-157': {slug:'tb-500',name:'TB-500',price:134,pillar:'Recovery',reason:'BPC-157 + TB-500 is the most popular recovery stack'},
+        'ipamorelin': {slug:'cjc-1295',name:'CJC-1295',price:108,pillar:'Performance',reason:'CJC-1295 extends Ipamorelin GH pulses to 8+ days'}
+      };
+      const slugsInCart = this.items.map(function(i){return i.slug});
+      let suggestHtml = '';
+      const self = this;
+      Object.keys(suggestionPairs).forEach(function(trigger) {
+        const sug = suggestionPairs[trigger];
+        if (slugsInCart.indexOf(trigger) !== -1 && slugsInCart.indexOf(sug.slug) === -1) {
+          suggestHtml += '<div class="cart-suggestion">' +
+            '<strong>' + sug.reason + '</strong><br>' +
+            '<button class="cart-suggestion-add" data-sug-slug="' + sug.slug + '" data-sug-name="' + sug.name + '" data-sug-price="' + sug.price + '" data-sug-pillar="' + sug.pillar + '">+ Add ' + sug.name + ' ($' + sug.price + ')</button>' +
+          '</div>';
+        }
+      });
+      suggestionsEl.innerHTML = suggestHtml;
+      suggestionsEl.querySelectorAll('.cart-suggestion-add').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          self.add({
+            name: btn.getAttribute('data-sug-name'),
+            slug: btn.getAttribute('data-sug-slug'),
+            price: parseInt(btn.getAttribute('data-sug-price')),
+            pillar: btn.getAttribute('data-sug-pillar')
+          });
+        });
+      });
+    }
+
     // Update total
     const total = document.getElementById('cart-total');
     if (total) total.textContent = this.total();
@@ -124,4 +163,34 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') Cart.hideDrawer();
   });
+
+  // Clear Stack button
+  const clearLink = document.getElementById('cart-clear-link');
+  if (clearLink) {
+    clearLink.addEventListener('click', function() {
+      Cart.items = [];
+      Cart.save();
+      Cart.render();
+    });
+  }
+
+  // Waitlist form
+  const waitlistBtn = document.getElementById('cart-waitlist-btn');
+  if (waitlistBtn) {
+    waitlistBtn.addEventListener('click', function() {
+      const emailInput = document.getElementById('cart-waitlist-email');
+      const confirmEl = document.getElementById('cart-waitlist-confirm');
+      if (!emailInput || !emailInput.value || emailInput.value.indexOf('@') === -1) return;
+      const waitlist = JSON.parse(localStorage.getItem('ea_waitlist') || '[]');
+      if (waitlist.indexOf(emailInput.value) === -1) {
+        waitlist.push(emailInput.value);
+        localStorage.setItem('ea_waitlist', JSON.stringify(waitlist));
+      }
+      emailInput.value = '';
+      if (confirmEl) {
+        confirmEl.style.display = 'block';
+        setTimeout(function() { confirmEl.style.display = 'none'; }, 3000);
+      }
+    });
+  }
 });
