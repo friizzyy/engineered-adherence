@@ -31,10 +31,10 @@
    DARK MODE — VOLCANIC
    ═══════════════════════════════════════════ */
 [data-theme="dark"]{
-  --bg:#111110;
-  --bg-warm:#161614;
-  --bg-card:#1b1b19;
-  --bg-card-hover:#202020;
+  --bg:#0d0d0d;
+  --bg-warm:#121212;
+  --bg-card:#181818;
+  --bg-card-hover:#1e1e1e;
   --text:#e8e4de;
   --text-heading:#f0ece6;
   --muted:#9a9590;
@@ -239,11 +239,17 @@ nav{
   position:fixed;top:0;left:0;right:0;
   display:flex;justify-content:space-between;align-items:center;
   padding:0 72px;height:72px;z-index:100;
-  background:rgba(5,5,5,0.85);
-  backdrop-filter:blur(20px) saturate(180%);
-  -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border-bottom:1px solid rgba(255,255,255,0.06);
-  transition:background .3s ease,border-color .3s ease,opacity .3s ease;
+  background:transparent;
+  backdrop-filter:blur(0px);
+  -webkit-backdrop-filter:blur(0px);
+  border-bottom:1px solid transparent;
+  transition:background .4s ease,border-color .4s ease,backdrop-filter .4s ease,-webkit-backdrop-filter .4s ease;
+}
+nav.scrolled{
+  background:rgba(10,10,10,0.82);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  border-bottom-color:rgba(255,255,255,0.05);
 }
 [data-theme="light"] nav{
   background:rgba(242,243,245,0.88);
@@ -973,12 +979,27 @@ body::after{
   z-index:0;
   pointer-events:none;
   background:radial-gradient(
-    ellipse 80% 60% at 50% 20%,
-    rgba(42,38,32,0.35) 0%,
-    transparent 70%
+    ellipse 70% 50% at 50% 0%,
+    rgba(20,30,45,0.6) 0%,
+    transparent 65%
   );
 }
 
 /* Ensure content sits above pseudo-elements */
 nav,main,footer,.site-nav{position:relative;z-index:1}
 
+
+/* ═══ NAV FADE — content scrolling under nav fades out gracefully ═══ */
+nav::after{
+  content:"";
+  position:absolute;
+  top:100%;left:0;right:0;
+  height:40px;
+  background:linear-gradient(to bottom, rgba(13,13,13,0.4) 0%, transparent 100%);
+  pointer-events:none;
+  opacity:0;
+  transition:opacity .4s ease;
+}
+nav.scrolled::after{
+  opacity:1;
+}
