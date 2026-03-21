@@ -660,21 +660,7 @@
 </script>
 <script src="/qa/js/main.js"></script>
 <script src="/qa/js/mobile.js"></script>
-<script>
-(function(){
-  var nav = document.querySelector("nav") || document.querySelector(".site-nav");
-  if(!nav) return;
-  function onScroll(){
-    if(window.scrollY > 20){
-      nav.classList.add("scrolled");
-    } else {
-      nav.classList.remove("scrolled");
-    }
-  }
-  window.addEventListener("scroll", onScroll, {passive:true});
-  onScroll();
-})();
-</script>
+
 <script>
 (function(){
   var links = document.querySelectorAll(".nav-center a");

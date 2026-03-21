@@ -235,21 +235,17 @@ a{color:inherit;text-decoration:none}
 /* ═══════════════════════════════════════════
    NAVIGATION
    ═══════════════════════════════════════════ */
-nav{
+nav,.site-nav{
   position:fixed;top:0;left:0;right:0;
   display:flex;justify-content:space-between;align-items:center;
-  padding:0 72px;height:72px;z-index:100;
-  background:rgba(22,22,22,0.6);
-  backdrop-filter:blur(16px) saturate(140%);
-  -webkit-backdrop-filter:blur(16px) saturate(140%);
-  border-bottom:1px solid rgba(255,255,255,0.04);
-  transition:background .35s ease,border-color .35s ease,backdrop-filter .35s ease,-webkit-backdrop-filter .35s ease;
-}
-nav.scrolled{
-  background:rgba(18,18,18,0.88);
-  backdrop-filter:blur(28px) saturate(160%);
-  -webkit-backdrop-filter:blur(28px) saturate(160%);
-  border-bottom-color:rgba(255,255,255,0.07);
+  padding:0 72px;height:72px;z-index:9999;
+  background:rgba(20,20,20,0.94);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  opacity:1 !important;
+  visibility:visible !important;
+  transition:none;
 }
 [data-theme="light"] nav{
   background:rgba(242,243,245,0.88);
