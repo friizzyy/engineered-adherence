@@ -978,7 +978,7 @@ body::after{
 }
 
 /* Ensure content sits above pseudo-elements */
-nav,main,footer,.site-nav{position:relative;z-index:1}
+main,footer{position:relative;z-index:1}
 
 
 /* ═══ NAV FADE — content scrolling under nav fades out gracefully ═══ */

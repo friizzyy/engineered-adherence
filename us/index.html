@@ -41,7 +41,82 @@
   }
 
 
-  /* ═══ PHILOSOPHY SECTION REDESIGN ═══ */
+
+  /* ═══ STANDARD SECTION — 2-column asymmetric ═══ */
+  .standard-grid{
+    display:grid;grid-template-columns:1fr 1.4fr;
+    gap:0;align-items:start;
+    border-top:1px solid rgba(255,255,255,0.06);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  .standard-left{
+    padding:80px 64px 80px 0;
+    border-right:1px solid rgba(255,255,255,0.06);
+    position:sticky;top:80px;
+  }
+  .standard-head{
+    font-size:clamp(52px,5.5vw,88px);
+    font-weight:200;letter-spacing:-0.04em;
+    color:var(--text-heading);line-height:1.0;
+    margin:20px 0 28px;
+  }
+  .standard-body{
+    font-size:14px;color:var(--faint);
+    font-weight:300;line-height:1.7;
+    max-width:280px;
+  }
+  .standard-right{
+    display:grid;grid-template-columns:1fr 1fr;
+    border-left:none;
+  }
+  .standard-stat{
+    padding:52px 40px;
+    border-right:1px solid rgba(255,255,255,0.06);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+    transition:background .25s ease;
+  }
+  .standard-stat:nth-child(2),.standard-stat:nth-child(4){border-right:none}
+  .standard-stat:nth-child(3),.standard-stat:nth-child(4){border-bottom:none}
+  .standard-stat:hover{background:rgba(255,255,255,0.02)}
+  .standard-num{
+    font-size:clamp(44px,4.5vw,72px);
+    font-weight:200;letter-spacing:-0.04em;
+    color:var(--text-heading);line-height:1;
+    margin-bottom:12px;font-variant-numeric:tabular-nums;
+  }
+  .standard-num span{
+    font-size:0.5em;font-weight:200;
+    opacity:0.45;letter-spacing:0;
+    vertical-align:super;margin-left:1px;
+  }
+  .standard-label{
+    font-size:9px;letter-spacing:2.5px;
+    text-transform:uppercase;color:var(--faint);
+    font-family:var(--font-mono);margin-bottom:16px;
+  }
+  .standard-rule{
+    width:20px;height:1px;
+    background:rgba(255,255,255,0.15);
+    margin-bottom:16px;
+  }
+  .standard-desc{
+    font-size:12px;color:var(--muted);
+    font-weight:300;line-height:1.65;opacity:0.45;
+  }
+  @media(max-width:1024px){
+    .standard-grid{grid-template-columns:1fr}
+    .standard-left{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06);padding:60px 0 48px;position:static}
+    .standard-body{max-width:100%}
+  }
+  @media(max-width:768px){
+    .standard-right{grid-template-columns:1fr 1fr}
+    .standard-stat{padding:32px 24px}
+    .standard-num{font-size:36px}
+    .standard-left{padding:48px 0 40px}
+    .standard-head{font-size:44px}
+  }
+
+  /* OLD PHILOSOPHY - REPLACED */
   .philosophy-top{
     text-align:center;margin-bottom:80px;
   }
@@ -810,31 +885,37 @@
 
 <!-- 02 - Philosophy -->
 <section class="philosophy reveal">
-  <div class="philosophy-top">
-    <p class="section-label">The Standard</p>
-    <h2 class="philosophy-head">Precision is<br>the variable.</h2>
-    <p class="philosophy-sub">Every compound third-party tested. CoA verified. Dispatched within 48 hours.</p>
-  </div>
-  <div class="stat-row">
-    <div class="stat">
-      <div class="stat-num">99.9<span class="stat-unit">%</span></div>
-      <div class="stat-label">Purity Standard</div>
-      <div class="stat-desc">HPLC verified, batch-specific COA on every order</div>
+  <div class="standard-grid">
+    <div class="standard-left">
+      <p class="section-label">The Standard</p>
+      <h2 class="standard-head">Precision<br>is the<br>variable.</h2>
+      <p class="standard-body">Every compound third-party tested, COA verified, and dispatched within 48 hours.</p>
     </div>
-    <div class="stat">
-      <div class="stat-num">25<span class="stat-unit">+</span></div>
-      <div class="stat-label">Compounds</div>
-      <div class="stat-desc">Across 5 bio-longevity pillars</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">48<span class="stat-unit">hr</span></div>
-      <div class="stat-label">Dispatch</div>
-      <div class="stat-desc">From order confirmation to shipment</div>
-    </div>
-    <div class="stat">
-      <div class="stat-num">100<span class="stat-unit">%</span></div>
-      <div class="stat-label">COA Included</div>
-      <div class="stat-desc">Third-party lab verification on every batch</div>
+    <div class="standard-right">
+      <div class="standard-stat">
+        <div class="standard-num">99.9<span>%</span></div>
+        <div class="standard-label">Purity Standard</div>
+        <div class="standard-rule"></div>
+        <div class="standard-desc">HPLC verified, batch-specific COA on every order</div>
+      </div>
+      <div class="standard-stat">
+        <div class="standard-num">25<span>+</span></div>
+        <div class="standard-label">Compounds</div>
+        <div class="standard-rule"></div>
+        <div class="standard-desc">Across 5 bio-longevity pillars</div>
+      </div>
+      <div class="standard-stat">
+        <div class="standard-num">48<span>hr</span></div>
+        <div class="standard-label">Dispatch</div>
+        <div class="standard-rule"></div>
+        <div class="standard-desc">Order to shipment</div>
+      </div>
+      <div class="standard-stat">
+        <div class="standard-num">100<span>%</span></div>
+        <div class="standard-label">COA Included</div>
+        <div class="standard-rule"></div>
+        <div class="standard-desc">Third-party lab verification</div>
+      </div>
     </div>
   </div>
 </section>
