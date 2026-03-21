@@ -880,6 +880,7 @@
 
 <!-- Compound Sidebar (desktop) -->
 <div class="compound-sidebar" id="compoundSidebar"></div>
+<div class="dot-nav" id="dotNav" role="navigation" aria-label="Compound navigation"></div>
 
 <!-- Mobile Compound Nav -->
 <button class="compound-nav-pill" id="compoundNavPill">
@@ -1019,7 +1020,7 @@
 
   /* ===== ELEMENTS ===== */
   var scrollContainer = document.getElementById('scrollContainer');
-  var dotNav = null; // dot nav removed
+  var dotNav = document.getElementById('dotNav');
   var scrollArrow = document.getElementById('scrollArrow');
 
   /* Sidebar replaces pillar filter */
@@ -1283,7 +1284,7 @@
 
   /* ===== DOT NAVIGATION ===== */
   function renderDotNav() {
-    if(dotNav){ dotNav.innerHTML = '';
+    if(dotNav) dotNav.innerHTML = '';
 
     var introDot = document.createElement('button');
     introDot.className = 'dot-nav__dot active';
