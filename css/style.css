@@ -940,6 +940,13 @@ a, button, [role="button"], .compound-card, .vial-wrapper, .us-pillar, .region-c
   .stat-card .val{font-size:32px}
 }
 
+
+[data-theme="light"] .nav-center a{color:rgba(42,38,32,0.55);}
+[data-theme="light"] .nav-center a:hover,[data-theme="light"] .nav-center a.active{color:#1a1710;opacity:1}
+[data-theme="light"] .logo{color:#1a1710 !important}
+[data-theme="light"] .nav-cta{color:#1a1710;border-color:rgba(40,32,20,0.3)}
+[data-theme="light"] .nav-cart-btn{color:#1a1710}
+
 /* ═══ THIN FOOTER RESPONSIVE ═══ */
 @media(max-width:768px){
   .footer-bar{padding:16px 24px;flex-direction:column;align-items:flex-start;gap:12px}
