@@ -3,15 +3,15 @@
    Modern Minimalist · Premium Edition
    ═══════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500;700&family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap");
 
 /* ═══════════════════════════════════════════
    TYPOGRAPHY SYSTEM
    ═══════════════════════════════════════════ */
 :root{
-  --font-display:'Playfair Display',serif;
-  --font-body:'Inter','DM Sans',sans-serif;
-  --font-mono:'JetBrains Mono','Space Mono',monospace;
+  --font-display:'Inter',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
 
   /* Tracking */
   --tracking-display:-0.03em;
@@ -331,7 +331,7 @@ nav{
 
 .section-title{
   font-family:var(--font-display);
-  font-size:clamp(36px,4.5vw,52px);font-weight:300;
+  font-size:clamp(36px,4.5vw,52px);font-weight:200;
   line-height:var(--leading-display);margin-bottom:24px;
   color:var(--text-heading);transition:color .5s;
   letter-spacing:var(--tracking-display);
@@ -358,7 +358,7 @@ nav{
 .page-hero .section-title{
   font-size:clamp(42px,6vw,72px);margin-bottom:28px;
   letter-spacing:var(--tracking-display);
-  font-weight:300;line-height:var(--leading-display);
+  font-weight:200;line-height:var(--leading-display);
 }
 .page-hero .section-body{
   max-width:600px;font-size:16px;line-height:2;
@@ -410,7 +410,7 @@ nav{
 
 .card h3{
   font-family:var(--font-display);
-  font-size:18px;font-weight:500;
+  font-size:18px;font-weight:200;
   margin-bottom:12px;color:var(--text-heading);
   transition:color .5s;letter-spacing:0.01em;
 }
@@ -441,9 +441,9 @@ nav{
 .stat{text-align:left}
 .stat-num{
   font-family:var(--font-display);
-  font-size:clamp(48px,6vw,80px);font-weight:300;
+  font-size:clamp(48px,6vw,80px);font-weight:200;
   color:var(--stat-num);transition:color .5s;
-  line-height:1;letter-spacing:var(--tracking-display);
+  line-height:1;letter-spacing:-0.04em;font-variant-numeric:tabular-nums;
   white-space:nowrap;
 }
 .stat-label{
@@ -466,7 +466,7 @@ nav{
 }
 .stat-card .val{
   font-family:var(--font-display);
-  font-size:44px;font-weight:500;
+  font-size:44px;font-weight:200;font-variant-numeric:tabular-nums;
   color:var(--stat-num);transition:color .5s;
   line-height:1;letter-spacing:-0.02em;
   white-space:nowrap;
@@ -685,7 +685,7 @@ footer{
 }
 .timeline-title{
   font-family:var(--font-display);
-  font-size:24px;font-weight:500;
+  font-size:24px;font-weight:200;
   color:var(--text-heading);margin-bottom:12px;
   transition:color .5s;letter-spacing:0.01em;
 }
@@ -920,6 +920,8 @@ footer{
 
 /* Prevent body scroll when mobile menu is open */
 body.menu-open{overflow:hidden}
+
+a, button, [role="button"], .compound-card, .vial-wrapper, .us-pillar, .region-card { cursor:pointer; }
 
 @media(max-width:480px){
   .page-hero .section-title{font-size:28px}

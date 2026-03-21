@@ -180,8 +180,10 @@
   /* ═══════════════════════════════════════════
      PHILOSOPHY / STATS - premium stat bar
      ═══════════════════════════════════════════ */
+  .stat-bar { width:24px; height:1px; background:var(--accent-solid); margin:12px auto 10px; opacity:0.4; }
+
   .philosophy{
-    text-align:center;padding:120px 72px;
+    text-align:center;padding:140px 72px;
     max-width:1140px;margin:0 auto;position:relative;z-index:1;
   }
   .philosophy .section-label{justify-content:center}
@@ -190,8 +192,8 @@
   .philosophy .stat-row{
     justify-content:center;
     gap:0;
-    border-top:1px solid rgba(255,255,255,0.08);
-    border-bottom:1px solid rgba(255,255,255,0.08);
+    border-top:1px solid rgba(255,255,255,0.10);
+    border-bottom:1px solid rgba(255,255,255,0.10);
     margin-top:0;
   }
   [data-theme="light"] .philosophy .stat-row{
@@ -203,7 +205,7 @@
     position:relative;
   }
   .philosophy .stat+.stat{
-    border-left:1px solid rgba(255,255,255,0.08);
+    border-left:1px solid rgba(255,255,255,0.10);
   }
   [data-theme="light"] .philosophy .stat+.stat{
     border-left-color:rgba(0,0,0,0.08);
@@ -217,7 +219,7 @@
   .philosophy .stat:hover{background:var(--bg-card)}
   .philosophy .stat-num{
     font-family:var(--font-display);
-    font-size:clamp(48px,5vw,80px);font-weight:300;
+    font-size:clamp(48px,5vw,80px);font-weight:200; font-variant-numeric:tabular-nums;
     letter-spacing:var(--tracking-display);
     transition:color .3s;
   }
@@ -243,7 +245,7 @@
   .compound-card::before{
     content:'';position:absolute;top:0;left:0;right:0;height:1px;
     background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
-    transform:scaleX(0);transition:transform .5s;opacity:0.6;
+    transform:scaleX(0);transition:transform .5s,opacity .3s;opacity:0;
   }
   .compound-card:hover{
     transform:translateY(-3px);box-shadow:var(--shadow-card-subtle);
@@ -252,7 +254,7 @@
   [data-theme="light"] .compound-card:hover{
     border-color:rgba(0,0,0,0.12);
   }
-  .compound-card:hover::before{transform:scaleX(1)}
+  .compound-card:hover::before{transform:scaleX(1);opacity:1}
   .compound-card .ptag{
     margin-bottom:16px;border-radius:100px;
   }
@@ -286,6 +288,9 @@
     transition:width .6s cubic-bezier(0.4,0,0.2,1);
   }
 
+  .compound-stack-hint { font-size:11px; color:var(--faint); margin-top:12px; }
+  .compound-stack-hint span { color:var(--muted); font-family:var(--font-mono); font-size:10px; letter-spacing:1px; }
+
   /* ═══════════════════════════════════════════
      ADVISOR TEASER
      ═══════════════════════════════════════════ */
@@ -300,7 +305,10 @@
   .advisor-teaser>*{position:relative;z-index:1}
   .advisor-teaser .section-label{justify-content:center}
   .advisor-teaser .section-label::before{display:none}
-  .advisor-teaser .section-body{max-width:480px;margin:0 auto 40px}
+  .advisor-teaser::after { content:"AI"; position:absolute; font-size:280px; font-weight:100; letter-spacing:-0.06em; color:var(--text-heading); opacity:0.02; top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; z-index:0; }
+  .advisor-chips { display:flex; gap:8px; justify-content:center; margin-bottom:24px; position:relative; z-index:1; }
+  .advisor-chip { font-family:var(--font-mono); font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--faint); border:1px solid var(--line); border-radius:20px; padding:4px 12px; }
+  .advisor-teaser .section-body{max-width:480px;margin:0 auto 48px}
 
   /* ═══════════════════════════════════════════
      PROTOCOL PREVIEW CARDS
@@ -326,7 +334,7 @@
   .proto-card:hover::before{transform:scaleX(1)}
   .proto-card .proto-num{
     font-family:var(--font-display);font-size:48px;font-weight:200;
-    color:var(--pillar-num);line-height:1;margin-bottom:16px;opacity:0.15;
+    color:var(--pillar-num);line-height:1;margin-bottom:16px;opacity:0.08;
     position:absolute;top:24px;right:24px;
   }
   .proto-card h3{
@@ -338,6 +346,8 @@
     color:var(--faint);margin-bottom:16px;
   }
   .proto-card p{font-size:13px;color:var(--muted);line-height:1.75;font-weight:300}
+  .proto-link { font-size:11px; color:var(--faint); text-decoration:none; letter-spacing:0.5px; margin-top:20px; display:inline-block; transition:color .2s; }
+  .proto-link:hover { color:var(--text); }
 
   /* ═══════════════════════════════════════════
      FIVE PILLARS - premium columnar panels
@@ -370,9 +380,9 @@
   .us-pillar::after{
     content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
     background:var(--p-accent);
-    transform:scaleX(0);transition:transform .5s cubic-bezier(0.4,0,0.2,1);
+    transform:scaleX(0);transition:transform .5s cubic-bezier(0.4,0,0.2,1),opacity .3s; opacity:0;
   }
-  .us-pillar:hover::after{transform:scaleX(1)}
+  .us-pillar:hover::after{transform:scaleX(1);opacity:0.6}
   .us-pillar:hover{
     background:var(--bg-card);
     border-color:rgba(255,255,255,0.12);
@@ -393,9 +403,16 @@
     color:var(--text-heading);margin-bottom:12px;
     letter-spacing:0.12em;text-transform:uppercase;
     position:relative;z-index:1;
-    opacity:0.5;transition:opacity .3s;
+    opacity:0.7;transition:opacity .3s;
   }
   .us-pillar:hover h3{opacity:1}
+  @keyframes pillarIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+  .pillars-visible .us-pillar { animation:pillarIn .6s ease forwards; }
+  .pillars-visible .us-pillar:nth-child(1) { animation-delay:0ms; }
+  .pillars-visible .us-pillar:nth-child(2) { animation-delay:80ms; }
+  .pillars-visible .us-pillar:nth-child(3) { animation-delay:160ms; }
+  .pillars-visible .us-pillar:nth-child(4) { animation-delay:240ms; }
+  .pillars-visible .us-pillar:nth-child(5) { animation-delay:320ms; }
   .us-pillar p{
     font-size:15px;color:var(--muted);line-height:1.6;
     font-weight:300;max-width:36ch;margin:0 auto;
@@ -726,7 +743,7 @@
 
   <div class="hero-text" style="position:relative;z-index:10">
     <p class="us-hero-eyebrow">Research-Grade Peptide Compounds</p>
-    <h1 class="us-hero-title">The science of<br><em>sustained performance.</em></h1>
+    <h1 class="us-hero-title">The science of<br><em>&shy;sustained performance.</em></h1>
     <p class="us-hero-sub">Research-grade peptide compounds for those serious about optimization. Click any vial to explore, or build a complete stack with our AI advisor.</p>
     <div class="us-hero-ctas">
       <a href="/us/shop.html" class="btn">Shop All Compounds</a>
@@ -743,10 +760,10 @@
   <h2 class="section-title">Precision is the variable.</h2>
   <p class="section-body">Every compound is third-party tested, CoA verified, and dispatched within 48 hours. We match research-grade purity with AI-driven protocol design. No guesswork. No filler. No compromise.</p>
   <div class="stat-row">
-    <div class="stat"><div class="stat-num">99.9%</div><div class="stat-label">Purity Standard</div></div>
-    <div class="stat"><div class="stat-num">25+</div><div class="stat-label">Compounds</div></div>
-    <div class="stat"><div class="stat-num">48hr</div><div class="stat-label">Dispatch</div></div>
-    <div class="stat"><div class="stat-num">CoA</div><div class="stat-label">Verified</div></div>
+    <div class="stat"><div class="stat-num">99.9%</div><div class="stat-bar"></div><div class="stat-label">Purity Standard</div></div>
+    <div class="stat"><div class="stat-num">25+</div><div class="stat-bar"></div><div class="stat-label">Compounds</div></div>
+    <div class="stat"><div class="stat-num">48hr</div><div class="stat-bar"></div><div class="stat-label">Dispatch</div></div>
+    <div class="stat"><div class="stat-num">CoA</div><div class="stat-bar"></div><div class="stat-label">Verified</div></div>
   </div>
 </section>
 
@@ -804,6 +821,7 @@
       <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
       <button class="btn" data-slug="bpc-157" data-name="BPC-157" data-price="89" data-pillar="Recovery">Add to Stack</button>
       <button class="view-details" data-detail="bpc-157">View Details</button>
+      <div class="compound-stack-hint">Stacks with: <span>TB-500</span></div>
     </div>
 
     <div class="compound-card" data-pillar="5">
@@ -815,6 +833,7 @@
       <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
       <button class="btn" data-slug="ipamorelin" data-name="IPAMORELIN" data-price="112" data-pillar="Performance">Add to Stack</button>
       <button class="view-details" data-detail="ipamorelin">View Details</button>
+      <div class="compound-stack-hint">Stacks with: <span>CJC-1295</span></div>
     </div>
 
     <div class="compound-card" data-pillar="4">
@@ -826,6 +845,7 @@
       <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
       <button class="btn" data-slug="semax" data-name="SEMAX" data-price="97" data-pillar="Cognitive">Add to Stack</button>
       <button class="view-details" data-detail="semax">View Details</button>
+      <div class="compound-stack-hint">Stacks with: <span>Selank</span></div>
     </div>
 
   </div>
@@ -839,6 +859,11 @@
 <!-- 05 - AI Advisor Teaser -->
 <section class="advisor-teaser reveal">
   <p class="section-label">AI Protocol Advisor</p>
+  <div class="advisor-chips">
+    <span class="advisor-chip">5 questions</span>
+    <span class="advisor-chip">11 compounds</span>
+    <span class="advisor-chip">1 precision stack</span>
+  </div>
   <h2 class="section-title">Your protocol. <em style="font-style:italic;font-weight:400;color:var(--muted)">Engineered.</em></h2>
   <p class="section-body">Answer five questions. Our AI returns a bespoke peptide stack matched to your biology, goals, and timeline.</p>
   <a href="/us/advisor.html" class="btn btn-lg">Begin Assessment →</a>
@@ -857,6 +882,7 @@
       <h3>The Recomposition Protocol</h3>
       <div class="proto-meta">Body Composition · 12 Weeks · Intermediate</div>
       <p>Simultaneous fat loss and lean mass retention through lipolytic, anabolic, and recovery pathway activation.</p>
+      <a href="/us/protocols.html" class="proto-link">View protocol &rarr;</a>
     </div>
     <div class="proto-card" data-pillar="4">
       <div class="p-bar"></div>
@@ -864,6 +890,7 @@
       <h3>The Cognitive Edge</h3>
       <div class="proto-meta">Neurological · 8 Weeks · Beginner Friendly</div>
       <p>BDNF upregulation, anxiolytic stabilization, and neuroprotection for sustained performance under pressure.</p>
+      <a href="/us/protocols.html" class="proto-link">View protocol &rarr;</a>
     </div>
   </div>
   <div style="text-align:center;margin-top:48px">
@@ -1020,6 +1047,21 @@ document.querySelectorAll('.view-details').forEach(function(btn) {
 document.querySelectorAll('.section, .philosophy, .advisor-teaser').forEach(function(s){
   s.style.scrollMarginTop = '72px';
 });
+
+(function(){
+  var pillarsSection = document.querySelector('.us-pillars');
+  if(pillarsSection){
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          pillarsSection.classList.add('pillars-visible');
+          observer.unobserve(pillarsSection);
+        }
+      });
+    },{threshold:0.2});
+    observer.observe(pillarsSection);
+  }
+})();
 </script>
 <script src="/qa/js/main.js"></script>
 <script src="/qa/js/mobile.js"></script>

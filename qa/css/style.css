@@ -3,15 +3,15 @@
    Modern Minimalist · Premium Edition
    ═══════════════════════════════════════════════════════════════ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=JetBrains+Mono:wght@300;400;500;700&family=DM+Sans:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap");
 
 /* ═══════════════════════════════════════════
    TYPOGRAPHY SYSTEM
    ═══════════════════════════════════════════ */
 :root{
-  --font-display:'Playfair Display',serif;
-  --font-body:'Inter','DM Sans',sans-serif;
-  --font-mono:'JetBrains Mono','Space Mono',monospace;
+  --font-display:'Inter',system-ui,sans-serif;
+  --font-body:'Inter',system-ui,sans-serif;
+  --font-mono:'JetBrains Mono',monospace;
 
   /* Tracking */
   --tracking-display:-0.03em;
@@ -920,6 +920,8 @@ footer{
 
 /* Prevent body scroll when mobile menu is open */
 body.menu-open{overflow:hidden}
+
+a, button, [role="button"], .compound-card, .vial-wrapper, .us-pillar, .region-card { cursor:pointer; }
 
 @media(max-width:480px){
   .page-hero .section-title{font-size:28px}

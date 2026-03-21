@@ -162,9 +162,10 @@
 .proto-price{
   font-family:var(--font-display);
   font-size:36px;
-  font-weight:500;
+  font-weight:200;
   color:var(--stat-num);
   letter-spacing:-0.02em;
+  font-variant-numeric:tabular-nums;
 }
 
 .proto-price-unit{
@@ -172,6 +173,7 @@
   color:var(--faint);
   letter-spacing:1px;
   text-transform:uppercase;
+  font-family:var(--font-mono);
 }
 
 .proto-cta{
@@ -361,24 +363,28 @@
     <button class="proto-tab active" data-proto="foundation" role="tab" aria-selected="true" aria-controls="proto-foundation">
       <svg class="proto-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
       <div class="proto-tab-num">01</div>
+      <div style="width:6px;height:6px;border-radius:50%;background:var(--accent-solid);opacity:0.5;margin-bottom:8px"></div>
       <div class="proto-tab-name">Foundation Reset</div>
       <div class="proto-tab-meta">New Clients · 12 Weeks</div>
     </button>
     <button class="proto-tab" data-proto="performance" role="tab" aria-selected="false" aria-controls="proto-performance">
       <svg class="proto-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
       <div class="proto-tab-num">02</div>
+      <div style="width:6px;height:6px;border-radius:50%;background:var(--accent-solid);opacity:0.5;margin-bottom:8px"></div>
       <div class="proto-tab-name">Performance Edge</div>
       <div class="proto-tab-meta">Active Clients · 8 Weeks</div>
     </button>
     <button class="proto-tab" data-proto="longevity" role="tab" aria-selected="false" aria-controls="proto-longevity">
       <svg class="proto-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       <div class="proto-tab-num">03</div>
+      <div style="width:6px;height:6px;border-radius:50%;background:var(--accent-solid);opacity:0.5;margin-bottom:8px"></div>
       <div class="proto-tab-name">Longevity Maintenance</div>
       <div class="proto-tab-meta">Established · Ongoing</div>
     </button>
     <button class="proto-tab" data-proto="injury" role="tab" aria-selected="false" aria-controls="proto-injury">
       <svg class="proto-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
       <div class="proto-tab-num">04</div>
+      <div style="width:6px;height:6px;border-radius:50%;background:var(--accent-solid);opacity:0.5;margin-bottom:8px"></div>
       <div class="proto-tab-name">Injury Return</div>
       <div class="proto-tab-meta">Recovery · 6–8 Weeks</div>
     </button>

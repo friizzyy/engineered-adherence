@@ -30,7 +30,7 @@
   }
   .gate-wordmark{
     font-family:var(--font-body);
-    font-size:14px;font-weight:500;letter-spacing:0.08em;
+    font-size:18px;font-weight:300;letter-spacing:0.12em;
     text-transform:uppercase;
     color:var(--text-heading);
     margin-bottom:12px;
@@ -54,7 +54,7 @@
     flex:1;
     background:var(--bg-card);
     border:1px solid rgba(255,255,255,0.06);
-    padding:56px 32px;
+    padding:72px 40px;
     text-align:center;
     text-decoration:none;
     transition:all .35s cubic-bezier(0.22,1,0.36,1);
@@ -127,6 +127,7 @@
   .region-card:hover .region-cta{
     color:var(--text-heading);
   }
+  .region-ghost{position:absolute;bottom:-16px;right:-8px;font-size:120px;font-weight:100;letter-spacing:-0.04em;color:var(--text-heading);opacity:0.03;pointer-events:none;user-select:none;line-height:1;}
   .gate-footer{
     margin-top:64px;
     font-size:11px;color:var(--faint);
@@ -155,20 +156,13 @@
 
 <div class="gate">
   <div class="gate-wordmark">Engineered Adherence</div>
+  <div style="width:32px;height:1px;background:var(--line-strong);margin:16px auto"></div>
   <p class="gate-tagline">Select your region to continue</p>
 
   <div class="region-cards">
     <a href="/us/" class="region-card">
-      <div class="region-flag">
-        <svg viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1">
-          <rect x="0.5" y="0.5" width="31" height="23" rx="2"/>
-          <line x1="0" y1="4" x2="32" y2="4"/>
-          <line x1="0" y1="8" x2="32" y2="8"/>
-          <line x1="0" y1="12" x2="32" y2="12"/>
-          <line x1="0" y1="16" x2="32" y2="16"/>
-          <line x1="0" y1="20" x2="32" y2="20"/>
-        </svg>
-      </div>
+      <span class="region-ghost">US</span>
+      <div class="region-flag" style="font-family:var(--font-mono);font-size:10px;letter-spacing:3px;color:var(--faint);opacity:0.5">US</div>
       <div class="region-name">United States</div>
       <div class="region-sub">North America</div>
       <div class="region-desc">Research compounds · Shop online · AI protocol advisor</div>
@@ -176,13 +170,8 @@
     </a>
 
     <a href="/qa/" class="region-card">
-      <div class="region-flag">
-        <svg viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="1">
-          <rect x="0.5" y="0.5" width="31" height="23" rx="2"/>
-          <line x1="10" y1="0" x2="10" y2="24"/>
-          <path d="M10 8 L22 12 L10 16"/>
-        </svg>
-      </div>
+      <span class="region-ghost">QA</span>
+      <div class="region-flag" style="font-family:var(--font-mono);font-size:10px;letter-spacing:3px;color:var(--faint);opacity:0.5">QA</div>
       <div class="region-name">Qatar</div>
       <div class="region-sub">Middle East</div>
       <div class="region-desc">Therapeutic protocols · Clinical consultation · Doha</div>

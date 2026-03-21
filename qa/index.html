@@ -218,6 +218,18 @@
     .vials-stage{gap:20px}
     .vial-svg{width:50px;height:95px}
   }
+  .stat-num { font-variant-numeric:tabular-nums; font-weight:200; }
+
+  @keyframes pillarIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+  .pillars-visible .pillar-card { animation:pillarIn .6s ease forwards; opacity:0; }
+  .pillars-visible .pillar-card:nth-child(1) { animation-delay:0ms; }
+  .pillars-visible .pillar-card:nth-child(2) { animation-delay:80ms; }
+  .pillars-visible .pillar-card:nth-child(3) { animation-delay:160ms; }
+  .pillars-visible .pillar-card:nth-child(4) { animation-delay:240ms; }
+  .pillars-visible .pillar-card:nth-child(5) { animation-delay:320ms; }
+
+  .hero-trust { font-size:11px; color:var(--faint); letter-spacing:0.05em; margin-top:16px; }
+
   @media(max-width:480px){
     .pillar-grid{grid-template-columns:1fr}
     .hero-title{font-size:30px}
@@ -400,6 +412,7 @@
     <h1 class="hero-title">The science of<br><em>sustained change</em></h1>
     <p class="hero-sub">Clinically validated peptide protocols engineered for measurable weight loss, accelerated recovery, and long-term therapeutic adherence. Developed in Doha.</p>
     <a href="/qa/protocols.html" class="hero-btn">Explore Protocols</a>
+    <p class="hero-trust">Peer-reviewed protocols. Clinical oversight. Doha.</p>
   </div>
 </section>
 
@@ -515,6 +528,21 @@ function updateVials(theme){
   document.querySelectorAll('.reflect-fill').forEach(el => { el.setAttribute('fill', d?'#787470':'#1C1E24'); el.setAttribute('opacity', d?'.04':'.1'); });
 }
 updateVials(document.documentElement.getAttribute('data-theme')||'dark');
+
+(function(){
+  var pillarsGrid = document.querySelector('.pillar-grid');
+  if(pillarsGrid){
+    var observer = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          pillarsGrid.classList.add('pillars-visible');
+          observer.unobserve(pillarsGrid);
+        }
+      });
+    },{threshold:0.2});
+    observer.observe(pillarsGrid);
+  }
+})();
 
 // Vial click handlers - navigate to Science page with pillar
 document.querySelectorAll('.vial-wrapper[data-pillar]').forEach(vial => {
