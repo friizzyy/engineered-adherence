@@ -313,6 +313,38 @@
   /* Remove old stat-bar */
   .philosophy .stat-bar{display:none}
 
+
+  /* ═══ FEATURED SECTION UPGRADE ═══ */
+  .featured-header{
+    display:flex;align-items:flex-end;
+    justify-content:space-between;
+  }
+  .featured-view-all{
+    font-family:var(--font-mono);font-size:10px;
+    letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--faint);text-decoration:none;
+    transition:color .2s;padding-bottom:4px;
+  }
+  .featured-view-all:hover{color:var(--text)}
+  .compound-card-top{
+    display:flex;align-items:center;
+    justify-content:space-between;
+    margin-bottom:20px;
+  }
+  .compound-pillar-num{
+    font-family:var(--font-body);
+    font-size:11px;font-weight:200;
+    letter-spacing:0.05em;
+    color:var(--faint);opacity:0.4;
+  }
+  .compound-card .compound-name{
+    font-family:var(--font-mono);
+    font-size:22px;font-weight:500;
+    color:var(--text-heading);
+    letter-spacing:0.04em;
+    margin-bottom:12px;
+  }
+
   /* Expanding circles */
   .circle{
     position:absolute;border-radius:50%;
@@ -1093,44 +1125,55 @@
 
 <!-- 04 - Featured Compounds -->
 <section class="section reveal">
-  <p class="section-label">Featured</p>
-  <h2 class="section-title">Core compounds</h2>
-  <div class="featured-grid" style="margin-top:48px">
+  <div class="featured-header">
+    <div>
+      <p class="section-label">Featured</p>
+      <h2 class="section-title">Selected compounds.</h2>
+    </div>
+    <a href="/us/shop.html" class="featured-view-all">View all 11 compounds →</a>
+  </div>
+  <div class="featured-grid" style="margin-top:40px">
+
+    <div class="compound-card" data-pillar="1">
+      <div class="p-bar"></div>
+      <div class="compound-card-top">
+        <span class="ptag">Longevity</span>
+        <span class="compound-pillar-num">I</span>
+      </div>
+      <div class="compound-name">GHK-CU</div>
+      <p class="compound-desc">Collagen synthesis. Skin repair. Anti-inflammatory. Cellular regeneration.</p>
+      <div class="compound-price">$76 <span>/ 50mg</span></div>
+      <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
+      <button class="btn" data-slug="ghk-cu" data-name="GHK-CU" data-price="76" data-pillar="Longevity">Add to Stack</button>
+      <a href="/us/shop.html?compound=ghk-cu" class="view-details">View Details →</a>
+    </div>
+
+    <div class="compound-card" data-pillar="3">
+      <div class="p-bar"></div>
+      <div class="compound-card-top">
+        <span class="ptag">Metabolic</span>
+        <span class="compound-pillar-num">III</span>
+      </div>
+      <div class="compound-name">RETATRUTIDE</div>
+      <p class="compound-desc">Triple receptor agonist. 24% average weight reduction in trials. Weekly dosing.</p>
+      <div class="compound-price">$189 <span>/ 10mg</span></div>
+      <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
+      <button class="btn" data-slug="retatrutide" data-name="RETATRUTIDE" data-price="189" data-pillar="Metabolic">Add to Stack</button>
+      <a href="/us/shop.html?compound=retatrutide" class="view-details">View Details →</a>
+    </div>
 
     <div class="compound-card" data-pillar="2">
       <div class="p-bar"></div>
-      <span class="ptag">Recovery</span>
-      <div class="compound-name copy-trigger" data-copy="BPC-157">BPC-157<svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></div>
-      <p class="compound-desc">Tissue repair. Anti-inflammatory. Tendon healing.</p>
+      <div class="compound-card-top">
+        <span class="ptag">Recovery</span>
+        <span class="compound-pillar-num">II</span>
+      </div>
+      <div class="compound-name">BPC-157</div>
+      <p class="compound-desc">Tissue repair. Tendon healing. Gut recovery. Anti-inflammatory.</p>
       <div class="compound-price">$89 <span>/ 5mg</span></div>
       <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
       <button class="btn" data-slug="bpc-157" data-name="BPC-157" data-price="89" data-pillar="Recovery">Add to Stack</button>
-      <button class="view-details" data-detail="bpc-157">View Details</button>
-      <div class="compound-stack-hint">Stacks with: <span>TB-500</span></div>
-    </div>
-
-    <div class="compound-card" data-pillar="5">
-      <div class="p-bar"></div>
-      <span class="ptag">Performance</span>
-      <div class="compound-name copy-trigger" data-copy="IPAMORELIN">IPAMORELIN<svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></div>
-      <p class="compound-desc">Clean GH pulse. Recomposition. Recovery.</p>
-      <div class="compound-price">$112 <span>/ 2mg</span></div>
-      <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
-      <button class="btn" data-slug="ipamorelin" data-name="IPAMORELIN" data-price="112" data-pillar="Performance">Add to Stack</button>
-      <button class="view-details" data-detail="ipamorelin">View Details</button>
-      <div class="compound-stack-hint">Stacks with: <span>CJC-1295</span></div>
-    </div>
-
-    <div class="compound-card" data-pillar="4">
-      <div class="p-bar"></div>
-      <span class="ptag">Cognitive</span>
-      <div class="compound-name copy-trigger" data-copy="SEMAX">SEMAX<svg class="copy-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg></div>
-      <p class="compound-desc">BDNF upregulation. Focus. Neuroprotection.</p>
-      <div class="compound-price">$97 <span>/ 30mg</span></div>
-      <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
-      <button class="btn" data-slug="semax" data-name="SEMAX" data-price="97" data-pillar="Cognitive">Add to Stack</button>
-      <button class="view-details" data-detail="semax">View Details</button>
-      <div class="compound-stack-hint">Stacks with: <span>Selank</span></div>
+      <a href="/us/shop.html?compound=bpc-157" class="view-details">View Details →</a>
     </div>
 
   </div>
