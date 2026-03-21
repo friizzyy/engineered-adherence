@@ -1201,20 +1201,7 @@
       if (!groups[pillar]) return;
       html += '<div class="sidebar-group-label">' + pillar + '</div>';
       groups[pillar].forEach(function(c) {
-        var sidebarLabel = {
-          'ghk-cu':'GHK',
-          'retatrutide':'Reta',
-          'tesamorelin':'Tesa',
-          'bpc-157':'BPC-157',
-          'ipamorelin':'IPAMORELIN',
-          'nad-plus':'NAD+',
-          'mots-c':'MOTS-C',
-          'cjc-1295':'CJC-1295',
-          'tb-500':'TB-500',
-          'semax':'SEMAX',
-          'selank':'SELANK'
-        }[c.slug] || c.name;
-        html += '<button class="sidebar-compound" data-slug="' + c.slug + '">' + sidebarLabel + '</button>';
+        html += '<button class="sidebar-compound" data-slug="' + c.slug + '">' + c.name + '</button>';
       });
     });
     sidebar.innerHTML = html;
@@ -1254,20 +1241,7 @@
       if (!groups[pillar]) return;
       html += '<div class="sidebar-group-label">' + pillar + '</div>';
       groups[pillar].forEach(function(c) {
-        var sidebarLabel = {
-          'ghk-cu':'GHK',
-          'retatrutide':'Reta',
-          'tesamorelin':'Tesa',
-          'bpc-157':'BPC-157',
-          'ipamorelin':'IPAMORELIN',
-          'nad-plus':'NAD+',
-          'mots-c':'MOTS-C',
-          'cjc-1295':'CJC-1295',
-          'tb-500':'TB-500',
-          'semax':'SEMAX',
-          'selank':'SELANK'
-        }[c.slug] || c.name;
-        html += '<button class="sidebar-compound" data-slug="' + c.slug + '">' + sidebarLabel + '</button>';
+        html += '<button class="sidebar-compound" data-slug="' + c.slug + '">' + c.name + '</button>';
       });
     });
     sheet.innerHTML = html;
