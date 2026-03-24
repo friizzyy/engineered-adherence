@@ -467,6 +467,11 @@
 
   /* ===== RESPONSIVE - TABLET (900px) ===== */
   @media(max-width:900px){
+    /* Use proximity snap on mobile for smoother scrolling */
+    .dossier-scroll{
+      scroll-snap-type:y proximity;
+      -webkit-overflow-scrolling:touch;
+    }
     .dossier-inner{
       flex-direction:column;padding:48px 32px 80px;
       gap:20px;text-align:center;align-items:center;
@@ -525,7 +530,7 @@
     .dossier-compound-name{font-size:24px;letter-spacing:1px}
     .dossier-price{font-size:26px}
     .dossier-ghost{font-size:70px}
-    .dossier-add-btn{width:100%;text-align:center;padding:13px 20px}
+    .dossier-add-btn{width:100%;text-align:center;padding:13px 20px;min-height:44px}
     .dossier-purchase{flex-direction:column;gap:12px;width:100%}
     .dossier-specs{grid-template-columns:1fr}
     .dossier-spec:nth-child(even){padding-left:0;border-left:none}
@@ -572,6 +577,7 @@
     font-size:10px;letter-spacing:0.8px;
     color:var(--faint);
     padding:8px 20px;cursor:pointer;
+    min-height:44px;display:flex;align-items:center;
     display:block;width:100%;
     background:none;border:none;
     border-left:1px solid transparent;
@@ -601,6 +607,7 @@
       background:var(--bg-card);
       border:1px solid var(--line);
       padding:10px 20px;border-radius:32px;
+      min-height:44px;
       backdrop-filter:blur(12px);
       -webkit-backdrop-filter:blur(12px);
       font-family:var(--font-mono);

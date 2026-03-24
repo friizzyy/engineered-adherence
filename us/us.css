@@ -380,6 +380,22 @@
 
   /* Nav cart: hide on mobile, cart accessible via mobile nav */
   .nav-cart-btn{display:none}
+
+  /* Mobile compound modal: full-width add button with 44px tap target */
+  .cmodal-footer .btn {
+    width: 100%;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Cart suggestion button: adequate tap target */
+  .cart-suggestion-add {
+    min-height: 44px;
+    padding: 12px 16px;
+    width: 100%;
+  }
 }
 @media(max-width:480px){
   .cmodal-name{font-size:18px}
