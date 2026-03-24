@@ -526,24 +526,133 @@
 
   /* ===== RESPONSIVE - SMALL (480px) ===== */
   @media(max-width:480px){
-    .dossier-inner{padding:40px 20px 80px}
-    .dossier-compound-name{font-size:24px;letter-spacing:1px}
-    .dossier-price{font-size:26px}
-    .dossier-ghost{font-size:70px}
-    .dossier-add-btn{width:100%;text-align:center;padding:13px 20px;min-height:44px}
+    .dossier-inner{padding:0}
+    .dossier-compound-name{font-size:16px;letter-spacing:0.5px}
+    .dossier-price{font-size:24px}
+    .dossier-add-btn{width:100%;text-align:center;padding:13px 20px;min-height:48px}
     .dossier-purchase{flex-direction:column;gap:12px;width:100%}
     .dossier-specs{grid-template-columns:1fr}
     .dossier-spec:nth-child(even){padding-left:0;border-left:none}
     .dossier-spec:nth-child(odd){padding-right:0}
-    .pillar-filter__btn{font-size:7px;padding:4px 8px;letter-spacing:0.3px}
+    .dossier-section{margin:0 12px 12px;padding:20px}
     .dossier-intro__pillars{gap:8px}
     .dossier-intro__pillar-chip{font-size:7px}
   }
 
-  /* ===== MOBILE NAV COMPAT ===== */
+  /* ===== MOBILE CARD LAYOUT (768px) ===== */
   @media(max-width:768px){
     .nav-cart-btn{display:none}
-    .dossier-intro{padding:80px 24px 60px}
+
+    /* Unlock body scroll on mobile */
+    body.dossier-page{overflow:auto}
+
+    /* Disable snap-scroll */
+    .dossier-scroll{
+      height:auto;
+      scroll-snap-type:none;
+      overflow-y:visible;
+      padding:16px 0 100px;
+      background:var(--bg);
+    }
+
+    /* Intro: compact flowing section */
+    .dossier-intro{
+      height:auto;min-height:auto;
+      scroll-snap-align:unset;
+      padding:80px 24px 32px;
+    }
+    .dossier-intro__line{display:none}
+    .scroll-arrow{display:none}
+
+    /* Each section becomes a card */
+    .dossier-section{
+      height:auto;min-height:auto;
+      scroll-snap-align:unset;
+      display:block;
+      background:var(--bg-card);
+      border:1px solid var(--line);
+      border-radius:12px;
+      padding:24px;
+      margin:0 16px 16px;
+    }
+    .dossier-section:nth-child(odd),
+    .dossier-section:nth-child(even){
+      background:var(--bg-card);
+    }
+
+    /* Hide desktop-only elements */
+    .dossier-ghost{display:none}
+    .dossier-divider{display:none}
+    .dossier-footnotes{display:none}
+    .dossier-stacking,
+    .dossier-stacks-label{display:none}
+    .dossier-scroll-indicator{display:none}
+
+    /* Inner layout: stack vertically, no extra padding */
+    .dossier-inner{
+      flex-direction:column;
+      padding:0;gap:0;
+      text-align:left;align-items:stretch;
+      overflow-y:visible;max-height:none;
+    }
+
+    /* Left column: inline row with vial + name + tag */
+    .dossier-left{
+      flex:none;padding-right:0;width:100%;
+      flex-direction:row;align-items:center;
+      gap:12px;justify-content:flex-start;
+    }
+    .dossier-left-text{
+      align-items:flex-start;text-align:left;
+    }
+    .dossier-vial{
+      width:48px;min-width:48px;height:48px;
+      margin-bottom:0;flex-shrink:0;
+    }
+    .dossier-compound-name{font-size:18px;letter-spacing:1px;margin-bottom:2px}
+    .dossier-scientific-name{display:none}
+    .dossier-pillar-tag{
+      margin-left:0;margin-right:0;margin-bottom:4px;
+      font-size:8px;padding:3px 8px;
+    }
+    .dossier-role{display:none}
+    .dossier-size{display:none}
+
+    /* Right column */
+    .dossier-right{
+      flex:none;padding-left:0;width:100%;
+      max-width:100%;max-height:none;overflow-y:visible;
+    }
+
+    /* Price: prominent, below name area */
+    .dossier-purchase{
+      flex-direction:column;gap:12px;width:100%;
+      justify-content:flex-start;padding-top:0;margin-top:16px;
+    }
+    .dossier-price{font-size:28px}
+    .dossier-add-btn{
+      width:100%;text-align:center;
+      padding:13px 20px;min-height:48px;
+    }
+
+    /* Mechanism: truncated */
+    .dossier-mechanism{
+      max-width:100%;font-size:12px;
+      display:-webkit-box;
+      -webkit-line-clamp:2;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+      margin-bottom:16px;
+    }
+    .dossier-mech-label{display:none}
+
+    /* Specs grid: 2 columns */
+    .dossier-specs{max-width:100%;margin-bottom:12px}
+
+    /* Benefits: wrap */
+    .dossier-benefits{justify-content:flex-start;margin-bottom:0}
+    .dossier-benefits-label{margin-bottom:6px}
+
   }
 
   /* ===== HIDE LEGACY PILLAR FILTER ===== */
@@ -602,7 +711,7 @@
     .compound-sidebar{display:none}
     .compound-nav-pill{
       display:flex;align-items:center;gap:8px;
-      position:fixed;bottom:24px;left:50%;
+      position:fixed;bottom:80px;left:50%;
       transform:translateX(-50%);
       background:var(--bg-card);
       border:1px solid var(--line);
@@ -744,66 +853,6 @@
   }
   .cart-badge-bounce{animation:badgeBounce .3s ease}
 
-  /* ═══ DECODE BUTTON + PANEL ═══ */
-  .decode-trigger{
-    position:fixed;
-    bottom:32px;right:32px;
-    display:flex;align-items:center;gap:8px;
-    background:rgba(22,22,22,0.96);
-    border:1px solid rgba(255,255,255,0.14);
-    padding:10px 18px 10px 14px;
-    border-radius:32px;
-    cursor:pointer;
-    z-index:8000;
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    color:var(--text);
-  }
-  .decode-trigger:hover{
-    border-color:rgba(255,255,255,0.28);
-    background:rgba(32,32,32,0.98);
-  }
-  .decode-trigger-label{
-    font-family:var(--font-mono);
-    font-size:10px;letter-spacing:2px;
-    text-transform:uppercase;font-weight:400;
-    color:var(--text-heading);
-  }
-  .decode-trigger-icon{width:16px;height:16px;display:flex;align-items:center;opacity:0.5}
-  .decode-trigger-icon svg{width:100%;height:100%;stroke:currentColor}
-  .decode-overlay{
-    position:fixed;inset:0;background:rgba(0,0,0,0.5);
-    z-index:8500;opacity:0;pointer-events:none;transition:opacity .3s ease;
-  }
-  .decode-overlay.open{opacity:1;pointer-events:all}
-  .decode-panel{
-    position:fixed;right:0;top:0;bottom:0;width:400px;max-width:90vw;
-    background:var(--bg-card);border-left:1px solid rgba(255,255,255,0.08);
-    z-index:9000;display:flex;flex-direction:column;
-    transform:translateX(100%);transition:transform .35s cubic-bezier(0.22,1,0.36,1);
-  }
-  .decode-panel.open{transform:translateX(0)}
-  .decode-header{
-    display:flex;align-items:center;justify-content:space-between;
-    padding:24px 28px;border-bottom:1px solid rgba(255,255,255,0.06);flex-shrink:0;
-  }
-  .decode-title{font-family:var(--font-mono);font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text-heading);font-weight:500}
-  .decode-close{width:28px;height:28px;background:none;border:none;cursor:pointer;color:var(--faint);display:flex;align-items:center;justify-content:center;padding:0;transition:color .2s}
-  .decode-close:hover{color:var(--text-heading)}
-  .decode-close svg{width:14px;height:14px}
-  .decode-intro{font-size:12px;color:var(--faint);padding:16px 28px;font-weight:300;line-height:1.6;opacity:0.6;flex-shrink:0;border-bottom:1px solid rgba(255,255,255,0.04)}
-  .decode-items{flex:1;overflow-y:auto;padding:8px 0}
-  .decode-item{padding:18px 28px;border-bottom:1px solid rgba(255,255,255,0.04);transition:background .15s}
-  .decode-item:hover{background:rgba(255,255,255,0.02)}
-  .decode-item:last-child{border-bottom:none}
-  .decode-term{font-family:var(--font-mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--faint);margin-bottom:8px}
-  .decode-plain{font-size:13px;color:var(--text);font-weight:300;line-height:1.7;opacity:0.8}
-  .decode-footer{padding:16px 28px;border-top:1px solid rgba(255,255,255,0.06);font-size:10px;color:var(--faint);opacity:0.35;font-style:italic;flex-shrink:0}
-  @media(max-width:768px){
-    .decode-trigger{bottom:80px;right:20px}
-    .decode-panel{width:100%;border-left:none;top:auto;height:75vh;transform:translateY(100%)}
-    .decode-panel.open{transform:translateY(0)}
-  }
 
 
   /* ═══ SIMPLIFY TOGGLE BUTTON ═══ */
@@ -1526,127 +1575,6 @@
 
 
 
-<!-- DECODE PANEL — Fixed button + sliding panel -->
-<button class="decode-trigger" id="decodeTrigger" aria-expanded="false" aria-controls="decodePanel">
-  <span class="decode-trigger-label">Decode</span>
-  <span class="decode-trigger-icon">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-      <circle cx="8" cy="8" r="6.5"/>
-      <path d="M8 7v4M8 5.5v.5"/>
-    </svg>
-  </span>
-</button>
-
-<div class="decode-overlay" id="decodeOverlay"></div>
-<div class="decode-panel" id="decodePanel" role="dialog" aria-label="Compound glossary">
-  <div class="decode-header">
-    <span class="decode-title">Decode</span>
-    <button class="decode-close" id="decodeClose" aria-label="Close">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-        <path d="M3 3l10 10M13 3L3 13"/>
-      </svg>
-    </button>
-  </div>
-  <p class="decode-intro">Plain-language explanations for everything on this page.</p>
-  <div class="decode-items">
-
-    <div class="decode-item">
-      <div class="decode-term">Route</div>
-      <div class="decode-plain">How you take it. SubQ means a small injection under the skin. Oral means a capsule or liquid. Intranasal means a nasal spray.</div>
-    </div>
-
-    <div class="decode-item">
-      <div class="decode-term">Dosing</div>
-      <div class="decode-plain">The amount per single use. These are research reference ranges. Actual use should be guided by a qualified practitioner.</div>
-    </div>
-
-    <div class="decode-item">
-      <div class="decode-term">Frequency</div>
-      <div class="decode-plain">How often it is taken. Daily means every day. 2-3x week means two or three times per week. Some compounds are cycled — used for a period, then paused.</div>
-    </div>
-
-    <div class="decode-item">
-      <div class="decode-term">Half-Life</div>
-      <div class="decode-plain">How long the compound stays active in the body before half of it is gone. A longer half-life means less frequent dosing. A shorter one means the effect is more immediate but fades faster.</div>
-    </div>
-
-    <div class="decode-item">
-      <div class="decode-term">Onset</div>
-      <div class="decode-plain">When you can expect to notice effects. Some compounds work within minutes. Others take weeks of consistent use before changes become measurable.</div>
-    </div>
-
-    <div class="decode-item">
-      <div class="decode-term">Form</div>
-      <div class="decode-plain">The physical state of the compound. Lyophilized powder is freeze-dried. It is reconstituted with bacteriostatic water before use. This form has the longest shelf life and highest stability.</div>
-    </div>
-
-    <div class="decode-item">
-      <div class="decode-term">Purity</div>
-      <div class="decode-plain">The percentage of the compound that is the actual intended molecule. Everything else is impurities. 99%+ purity is the research standard. Our COA documents this for every batch.</div>
-    </div>
-
-    <div class="decode-item">
-      <div class="decode-term">Storage</div>
-      <div class="decode-plain">Where to keep it. 2-8°C means a standard fridge. -20°C means a freezer. Lyophilized powder can tolerate room temperature short-term. Once reconstituted, it must be refrigerated.</div>
-    </div>
-
-    <div class="decode-item">
-      <div class="decode-term">COA</div>
-      <div class="decode-plain">Certificate of Analysis. A document from an independent laboratory confirming what is in the vial, at what purity, from a specific batch. This is the primary quality verification in research peptides.</div>
-    </div>
-
-    <div class="decode-item">
-      <div class="decode-term">Stacks With</div>
-      <div class="decode-plain">Compounds that are commonly used together because they work through different pathways that complement each other. Stacking is not required — compounds work individually too.</div>
-    </div>
-
-    <div class="decode-item">
-      <div class="decode-term">Mechanism of Action</div>
-      <div class="decode-plain">The biological process by which the compound works. How it interacts with receptors, cells, or signaling pathways. This is the scientific basis for the observed effects.</div>
-    </div>
-
-    <div class="decode-item">
-      <div class="decode-term">Contraindications</div>
-      <div class="decode-plain">Conditions or situations where the compound should not be used, or should be used with extreme caution. Always review with a physician if any of these apply to you.</div>
-    </div>
-
-  </div>
-  <div class="decode-footer">
-    <span>For research purposes only. Not medical advice.</span>
-  </div>
-</div>
-
-<script>
-(function(){
-  var trigger = document.getElementById('decodeTrigger');
-  var panel = document.getElementById('decodePanel');
-  var overlay = document.getElementById('decodeOverlay');
-  var closeBtn = document.getElementById('decodeClose');
-  if(!trigger||!panel) return;
-
-  function open(){
-    panel.classList.add('open');
-    overlay.classList.add('open');
-    trigger.setAttribute('aria-expanded','true');
-    document.body.style.overflow='hidden';
-  }
-  function close(){
-    panel.classList.remove('open');
-    overlay.classList.remove('open');
-    trigger.setAttribute('aria-expanded','false');
-    document.body.style.overflow='';
-  }
-
-  trigger.addEventListener('click', function(){
-    panel.classList.contains('open') ? close() : open();
-  });
-  closeBtn.addEventListener('click', close);
-  overlay.addEventListener('click', close);
-  document.addEventListener('keydown', function(e){
-    if(e.key==='Escape') close();
-  });
-})();
-</script>
 
 <button class="simplify-btn" id="simplifyBtn">
   <span class="simplify-label" id="simplifyLabel">Simplify</span>
