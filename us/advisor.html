@@ -13,8 +13,8 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://engineeredadherence.com/assets/og-advisor.png">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
-<!-- Replace YOUR_KEY_HERE with your actual Anthropic API key -->
-<meta name="ea-api-key" content="YOUR_KEY_HERE">
+<!-- READY FOR REVIEW - Stripe Checkout integration pending Julius approval -->
+<!-- AI advisor now uses server-side proxy at /api/advisor (no client-side API key needed) -->
 <script>
 (function(){
   var t = localStorage.getItem('ea-theme') || 'dark';
@@ -838,7 +838,8 @@
     <span class="cart-total-label">Subtotal</span>
     <span class="cart-total-value">$<span id="cart-total">0</span></span>
   </div>
-  <a href="mailto:orders@engineeredadherence.com?subject=Stack%20Order%20Request" class="btn btn-lg" style="width:100%;text-align:center;margin-top:24px">Request Order</a>
+  <button id="cart-checkout-btn" class="btn btn-lg" style="width:100%;text-align:center;margin-top:24px;cursor:pointer;border:none">Checkout</button>
+  <p id="cart-checkout-error" style="display:none;color:#ff5c5c;font-size:13px;text-align:center;margin-top:8px"></p>
 </div>
 
 <main id="main-content">
@@ -1569,42 +1570,23 @@
     var cycle = state.cycle;
     var notes = state.notes;
 
-    /* Get API key from meta tag */
-    var apiKey = document.querySelector('meta[name="ea-api-key"]').content;
-
+    /* Build prompt for the advisor proxy */
     var promptText = 'You are the Engineered Adherence Protocol AI. Design a precise research peptide protocol.\n\nUser profile:\n- Goal: ' + goal + '\n- Experience: ' + experience + '\n- Budget: ' + budget + '/month\n- Cycle: ' + cycle + '\n- Notes: ' + (notes || 'None') + '\n\nReturn ONLY valid JSON, no markdown:\n{\n  "protocolName": "The [X] Protocol",\n  "tagline": "One sentence",\n  "rationale": "2-3 sentences on compound selection logic",\n  "peptides": [\n    {\n      "name": "COMPOUND NAME",\n      "pillar": "Pillar name",\n      "pillarNum": "I/II/III/IV/V",\n      "mechanism": "One sentence mechanism",\n      "dosing": "Xmcg · Xd/week",\n      "timing": "e.g. Morning fasted"\n    }\n  ],\n  "weeklyStructure": "Brief weekly schedule description",\n  "synergyNote": "One sentence on how these compounds interact",\n  "estimatedCost": "$XXX/month"\n}';
 
     try {
-      /* If key is placeholder, use fallback directly */
-      if (!apiKey || apiKey === 'YOUR_KEY_HERE') {
-        throw new Error('No API key configured');
-      }
-
-      var response = await fetch('https://api.anthropic.com/v1/messages', {
+      /* Call server-side proxy — API key stays on the server */
+      var response = await fetch('/api/advisor', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': apiKey,
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-access': 'true'
-        },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          messages: [{
-            role: 'user',
-            content: promptText
-          }]
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: promptText })
       });
 
       if (!response.ok) {
-        throw new Error('API returned ' + response.status);
+        throw new Error('Advisor returned ' + response.status);
       }
 
       var data = await response.json();
-      var text = data.content[0].text;
-      var protocol = JSON.parse(text);
+      var protocol = JSON.parse(data.text);
       displayResult(protocol);
 
     } catch (err) {

@@ -4,5 +4,11 @@
     { "source": "/us", "destination": "/us/index.html" },
     { "source": "/qa", "destination": "/qa/index.html" }
   ],
-  "cleanUrls": true
+  "cleanUrls": true,
+  "functions": {
+    "api/*.js": {
+      "memory": 256,
+      "maxDuration": 15
+    }
+  }
 }

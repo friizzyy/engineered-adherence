@@ -1,0 +1,8 @@
+{
+  "name": "engineered-adherence",
+  "private": true,
+  "description": "Engineered Adherence — research peptide compound e-commerce",
+  "dependencies": {
+    "stripe": "^14.0.0"
+  }
+}

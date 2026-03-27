@@ -938,9 +938,10 @@
     <span class="cart-total-label">Subtotal</span>
     <span class="cart-total-value">$<span id="cart-total">0</span></span>
   </div>
-  <a href="mailto:orders@engineeredadherence.com?subject=Stack%20Order%20Request" class="btn btn-lg" style="width:100%;text-align:center;margin-top:24px">Request Order</a>
+  <button id="cart-checkout-btn" class="btn btn-lg" style="width:100%;text-align:center;margin-top:24px;cursor:pointer;border:none">Checkout</button>
+  <p id="cart-checkout-error" style="display:none;color:#ff5c5c;font-size:13px;text-align:center;margin-top:8px"></p>
   <div id="cart-suggestions"></div>
-  <p class="cart-checkout-note">Compounds ship separately. Expect 3-5 business days.</p>
+  <p class="cart-checkout-note">Secure checkout via Stripe. Compounds ship separately, 3-5 business days.</p>
   <div class="cart-waitlist" id="cart-waitlist-wrap" style="display:none">
     <input class="cart-waitlist-input" id="cart-waitlist-email" type="email" placeholder="Email for restock alerts">
     <button class="cart-waitlist-btn" id="cart-waitlist-btn">Notify Me</button>

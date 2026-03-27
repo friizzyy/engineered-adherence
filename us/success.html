@@ -1,0 +1,61 @@
+<!-- READY FOR REVIEW - Stripe Checkout integration pending Julius approval -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Order Confirmed | Engineered Adherence</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<script>
+(function(){
+  var t = localStorage.getItem('ea-theme') || 'dark';
+  document.documentElement.setAttribute('data-theme', t);
+})();
+</script>
+<link rel="stylesheet" href="/qa/css/style.css">
+<link rel="stylesheet" href="/qa/css/mobile.css">
+<link rel="stylesheet" href="/us/us.css">
+<style>
+  .success-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:40px 20px}
+  .success-card{max-width:520px;width:100%;text-align:center}
+  .success-icon{font-size:64px;margin-bottom:24px;animation:popIn .5s ease}
+  .success-card h1{font-family:var(--display);font-size:32px;margin:0 0 12px;letter-spacing:-.02em}
+  .success-card p{color:var(--faint);font-size:15px;line-height:1.6;margin:0 0 24px}
+  .success-card .order-id{font-family:var(--mono);font-size:13px;color:var(--accent);margin-bottom:24px;display:block}
+  .success-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+  .success-actions a{display:inline-block;padding:12px 24px;border:1px solid var(--border);border-radius:8px;color:var(--text);text-decoration:none;font-size:14px;transition:all .2s}
+  .success-actions a:hover{background:var(--accent);color:var(--bg);border-color:var(--accent)}
+  @keyframes popIn{from{opacity:0;transform:scale(.5)}to{opacity:1;transform:scale(1)}}
+</style>
+</head>
+<body>
+<div class="success-wrap">
+  <div class="success-card">
+    <div class="success-icon">&#10003;</div>
+    <h1>Order Confirmed</h1>
+    <p>Your compounds are being prepared for shipment. You'll receive a confirmation email with tracking details within 24 hours.</p>
+    <span class="order-id" id="order-ref"></span>
+    <p style="font-size:13px">Expect delivery in 3-5 business days. Questions? <a href="mailto:orders@engineeredadherence.com" style="color:var(--accent)">orders@engineeredadherence.com</a></p>
+    <div class="success-actions">
+      <a href="/us/shop.html">Continue Shopping</a>
+      <a href="/us/">Back to Home</a>
+    </div>
+  </div>
+</div>
+<script>
+(function(){
+  // Clear any remaining cart data
+  localStorage.removeItem('ea_cart');
+
+  // Show session ID if available
+  var params = new URLSearchParams(window.location.search);
+  var sessionId = params.get('session_id');
+  var refEl = document.getElementById('order-ref');
+  if (sessionId && refEl) {
+    refEl.textContent = 'Reference: ' + sessionId.slice(0, 20) + '...';
+  }
+})();
+</script>
+</body>
+</html>

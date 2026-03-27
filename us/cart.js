@@ -1,5 +1,7 @@
+// READY FOR REVIEW - Stripe Checkout integration pending Julius approval
 const Cart = {
   items: JSON.parse(localStorage.getItem('ea_cart') || '[]'),
+  _checkoutInProgress: false,
 
   add(compound) {
     const existing = this.items.find(i => i.slug === compound.slug);
@@ -36,6 +38,67 @@ const Cart = {
 
   count() {
     return this.items.reduce((sum, i) => sum + i.qty, 0);
+  },
+
+  /**
+   * Stripe Checkout — sends cart to /api/create-checkout-session
+   * and redirects to Stripe-hosted checkout page.
+   */
+  async checkout() {
+    if (this._checkoutInProgress) return;
+    if (this.items.length === 0) return;
+
+    this._checkoutInProgress = true;
+    const btn = document.getElementById('cart-checkout-btn');
+    if (btn) {
+      btn.textContent = 'Processing...';
+      btn.disabled = true;
+    }
+
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: this.items.map(i => ({
+            name: i.name,
+            slug: i.slug,
+            price: i.price,
+            qty: i.qty,
+            pillar: i.pillar || ''
+          }))
+        })
+      });
+
+      if (!response.ok) {
+        const errData = await response.json().catch(() => ({}));
+        throw new Error(errData.error || 'Checkout failed');
+      }
+
+      const { url } = await response.json();
+      if (url) {
+        // Clear cart before redirect — Stripe has the order now
+        this.items = [];
+        this.save();
+        window.location.href = url;
+      } else {
+        throw new Error('No checkout URL returned');
+      }
+    } catch (err) {
+      console.error('[Cart.checkout]', err);
+      const errorEl = document.getElementById('cart-checkout-error');
+      if (errorEl) {
+        errorEl.textContent = err.message || 'Checkout failed. Please try again.';
+        errorEl.style.display = 'block';
+        setTimeout(() => { errorEl.style.display = 'none'; }, 5000);
+      }
+      if (btn) {
+        btn.textContent = 'Checkout';
+        btn.disabled = false;
+      }
+    } finally {
+      this._checkoutInProgress = false;
+    }
   },
 
   render() {
@@ -115,6 +178,12 @@ const Cart = {
     // Update total
     const total = document.getElementById('cart-total');
     if (total) total.textContent = this.total();
+
+    // Enable/disable checkout button based on cart state
+    const checkoutBtn = document.getElementById('cart-checkout-btn');
+    if (checkoutBtn) {
+      checkoutBtn.disabled = this.items.length === 0;
+    }
   },
 
   showDrawer() {
@@ -163,6 +232,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') Cart.hideDrawer();
   });
+
+  // Checkout button (Stripe Checkout)
+  const checkoutBtn = document.getElementById('cart-checkout-btn');
+  if (checkoutBtn) {
+    checkoutBtn.addEventListener('click', () => Cart.checkout());
+  }
 
   // Clear Stack button
   const clearLink = document.getElementById('cart-clear-link');
