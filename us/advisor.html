@@ -3,18 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Stack Advisor | Engineered Adherence USA</title>
-<meta name="description" content="AI-powered peptide protocol advisor. Five questions, one precision stack matched to your goals.">
-<meta property="og:title" content="Stack Advisor | Engineered Adherence USA">
-<meta property="og:description" content="AI-powered peptide protocol advisor. Five questions, one precision stack.">
+<title>Protocol Guide | Engineered Adherence USA</title>
+<meta name="description" content="Comprehensive peptide protocol guide. Select your goal and get detailed dosing, reconstitution, and administration guidance.">
+<meta property="og:title" content="Protocol Guide | Engineered Adherence USA">
+<meta property="og:description" content="Comprehensive peptide protocol guide. Select your goal, get your protocol.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://engineeredadherence.com/us/advisor.html">
 <meta property="og:image" content="https://engineeredadherence.com/assets/og-advisor.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://engineeredadherence.com/assets/og-advisor.png">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
-<!-- READY FOR REVIEW - Stripe Checkout integration pending Julius approval -->
-<!-- AI advisor now uses server-side proxy at /api/advisor (no client-side API key needed) -->
 <script>
 (function(){
   var t = localStorage.getItem('ea-theme') || 'dark';
@@ -34,15 +32,15 @@
   @keyframes fi{from{opacity:0}to{opacity:1}}
 
   /* ═══════════════════════════════════════════
-     HERO - THE CONSULTATION
+     HERO
      ═══════════════════════════════════════════ */
   .advisor-hero{
-    height:100vh;min-height:700px;
+    min-height:60vh;
     display:flex;flex-direction:column;
     justify-content:center;align-items:center;
     position:relative;z-index:1;
     text-align:center;
-    padding:0 72px;overflow:hidden;
+    padding:120px 72px 80px;overflow:hidden;
   }
 
   /* Decorative background vials */
@@ -88,541 +86,237 @@
     font-style:italic;font-weight:400;color:var(--muted);
   }
   .advisor-hero .section-body{
-    max-width:520px;margin:0 auto 48px;font-size:16px;line-height:2;
+    max-width:560px;margin:0 auto 0;font-size:16px;line-height:2;
     position:relative;z-index:1;
     opacity:0;animation:fu .8s ease .8s forwards;
   }
 
-  .hero-begin-btn{
-    display:inline-block;padding:18px 56px;
-    background:var(--btn-bg);border:1px solid var(--btn-border);
-    color:var(--btn-text);font-size:11px;
-    letter-spacing:2.5px;text-transform:uppercase;font-weight:400;
-    cursor:pointer;position:relative;z-index:1;
-    transition:all .4s cubic-bezier(0.4,0,0.2,1);
-    font-family:var(--font-body);border-radius:100px;
-    opacity:0;animation:fu .8s ease 1s forwards;
-  }
-  .hero-begin-btn:hover{
-    background:var(--btn-hover-bg);
-    border-color:var(--btn-hover-border);
-    transform:translateY(-2px);
-  }
-
-  .hero-scroll-arrow{
-    margin-top:40px;
-    opacity:0;animation:fu .8s ease 1.2s forwards;
-    position:relative;z-index:1;
-  }
-  @keyframes arrowBounce{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(8px)}
-  }
-  .hero-scroll-arrow svg{
-    width:24px;height:24px;color:var(--faint);
-    animation:arrowBounce 2s ease-in-out infinite;
-  }
-
   /* ═══════════════════════════════════════════
-     PROGRESS BAR - ELEVATED STEP INDICATOR
+     RESEARCH DISCLAIMER BANNER
      ═══════════════════════════════════════════ */
-  .progress-bar{
-    display:flex;align-items:center;justify-content:center;
-    gap:0;margin-bottom:64px;
-    position:sticky;top:72px;z-index:50;
-    background:var(--nav-bg);
-    backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);
-    padding:20px 24px;
-    border-bottom:1px solid var(--line);
-    margin-left:-72px;margin-right:-72px;
-  }
-  .progress-step{
-    display:flex;align-items:center;gap:0;
-  }
-  .progress-node{
-    display:flex;align-items:center;gap:10px;
-    padding:6px 12px;
-    transition:all .4s cubic-bezier(0.4,0,0.2,1);
-    position:relative;
-  }
-  .progress-num{
-    width:32px;height:32px;border-radius:50%;
-    display:flex;align-items:center;justify-content:center;
-    font-family:var(--font-body);
-    font-size:12px;font-weight:500;
-    letter-spacing:0.5px;
-    color:var(--faint);
-    border:1px solid var(--line);
-    transition:all .4s cubic-bezier(0.4,0,0.2,1);
-  }
-  .progress-label{
-    font-size:11px;letter-spacing:1.5px;text-transform:uppercase;
-    color:var(--faint);font-weight:400;
-    transition:all .4s cubic-bezier(0.4,0,0.2,1);
-  }
-  .progress-connector{
-    width:32px;height:1px;
-    background:var(--line);
-    transition:background .4s;
-  }
-
-  /* Active state */
-  .progress-node.active .progress-num{
-    border-color:var(--accent-solid);
-    color:var(--text-heading);
+  .research-banner{
+    text-align:center;
+    padding:14px 24px;
     background:var(--accent);
-  }
-  .progress-node.active .progress-label{
-    color:var(--text-heading);
-  }
-
-  /* Done state */
-  .progress-node.done .progress-num{
-    border-color:var(--accent-solid);
-    background:var(--accent-solid);
-    color:var(--bg);
-  }
-  .progress-node.done .progress-label{
-    color:var(--muted);
-  }
-  .progress-connector.done{
-    background:var(--accent-solid);
-  }
-
-  /* Checkmark SVG inside done state */
-  .progress-check{display:none}
-  .progress-node.done .progress-check{display:block}
-  .progress-node.done .progress-num-text{display:none}
-
-  /* ═══════════════════════════════════════════
-     ASSESSMENT CONTAINER
-     ═══════════════════════════════════════════ */
-  .assessment{
-    max-width:900px;margin:0 auto;padding:0 72px 80px;
-    position:relative;z-index:1;
+    border:1px solid var(--line);
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--faint);
+    font-weight:400;
+    margin:0 72px 48px;
   }
 
   /* ═══════════════════════════════════════════
-     STEP CONTAINER - PREMIUM ONBOARDING
+     PROTOCOL SELECTOR - GOAL CARDS
      ═══════════════════════════════════════════ */
-  .step{
-    display:none;
-    position:relative;
-    overflow:hidden;
+  .protocol-selector{
+    max-width:1000px;margin:0 auto;padding:0 72px 48px;
   }
-  .step.active{
-    display:block;
-    animation:stepFadeIn .3s cubic-bezier(0.4,0,0.2,1) forwards;
+  .selector-label{
+    font-size:10px;letter-spacing:3px;text-transform:uppercase;
+    color:var(--faint);margin-bottom:24px;text-align:center;
   }
-  @keyframes stepFadeIn{
-    from{opacity:0;transform:translateY(12px)}
-    to{opacity:1;transform:translateY(0)}
+  .goal-grid{
+    display:grid;grid-template-columns:repeat(5,1fr);gap:16px;
   }
-
-  /* Large faded step numeral behind question */
-  .step-bg-num{
-    position:absolute;
-    top:-20px;right:0;
-    font-family:var(--font-display);
-    font-size:200px;font-weight:600;
-    color:var(--pillar-num);
-    line-height:1;letter-spacing:-0.05em;
-    pointer-events:none;
-    z-index:0;
-    user-select:none;
-  }
-
-  /* Decorative vial per step */
-  .step-deco-vial{
-    position:absolute;
-    right:-20px;top:50%;
-    transform:translateY(-50%) rotate(-6deg);
-    opacity:0.12;
-    pointer-events:none;
-    z-index:0;
-  }
-
-  .step-header{
-    text-align:left;margin-bottom:40px;
-    position:relative;z-index:1;
-  }
-  .step-num{
-    font-family:var(--font-body);font-size:11px;font-weight:500;
-    color:var(--faint);line-height:1;margin-bottom:16px;
-    letter-spacing:3px;text-transform:uppercase;
-  }
-  .step-question{
-    font-family:var(--font-display);font-size:34px;font-weight:500;
-    color:var(--text-heading);margin-bottom:10px;
-    letter-spacing:-0.01em;
-  }
-  .step-hint{
-    font-size:14px;color:var(--faint);font-weight:300;
-    line-height:1.7;
-  }
-
-  /* ═══════════════════════════════════════════
-     OPTION GRID - TACTILE CARDS
-     ═══════════════════════════════════════════ */
-  .option-grid{
-    display:grid;grid-template-columns:1fr 1fr;gap:16px;
-    position:relative;z-index:1;
-  }
-  .option-grid.cols-3{grid-template-columns:repeat(3,1fr)}
-
-  .option-card{
+  .goal-card{
     background:var(--bg-card);
     border:1px solid var(--line);
-    border-left:3px solid transparent;
-    padding:32px 24px;cursor:pointer;text-align:left;
+    padding:28px 20px;cursor:pointer;text-align:center;
     transition:all .4s cubic-bezier(0.4,0,0.2,1);
     position:relative;overflow:hidden;
-    display:flex;align-items:flex-start;gap:16px;
   }
-  .option-card::before{
-    content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  .goal-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:2px;
     background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
     transform:scaleX(0);transition:transform .5s;opacity:0.6;
   }
-  .option-card:hover{
+  .goal-card:hover{
     transform:translateY(-3px);box-shadow:var(--shadow-card-subtle);
     border-color:var(--line-strong);background:var(--bg-card-hover);
-    border-left-color:var(--accent-solid);
   }
-  .option-card:hover::before{transform:scaleX(1)}
-
-  .option-card.selected{
+  .goal-card:hover::before{transform:scaleX(1)}
+  .goal-card.active{
     border-color:var(--accent-solid);background:var(--bg-card-hover);
-    border-left-color:var(--accent-solid);
   }
-  .option-card.selected::before{transform:scaleX(1)}
+  .goal-card.active::before{transform:scaleX(1)}
 
-  /* Checkmark on selected */
-  .option-check{
-    position:absolute;top:12px;right:12px;
-    width:22px;height:22px;
-    border:1px solid var(--line);
-    display:flex;align-items:center;justify-content:center;
-    transition:all .3s;
-    opacity:0;
-  }
-  .option-card.selected .option-check{
-    opacity:1;
-    border-color:var(--accent-solid);
-    background:var(--accent);
-  }
-  .option-check svg{
-    width:12px;height:12px;color:var(--text-heading);
-  }
-
-  /* Option icon */
-  .option-icon{
-    width:36px;height:36px;flex-shrink:0;
+  .goal-icon{
+    width:40px;height:40px;margin:0 auto 16px;
     display:flex;align-items:center;justify-content:center;
     color:var(--faint);
     border:1px solid var(--line);
     transition:all .3s;
   }
-  .option-card:hover .option-icon{
-    border-color:var(--line-strong);
-    color:var(--muted);
-  }
-  .option-card.selected .option-icon{
+  .goal-card:hover .goal-icon,
+  .goal-card.active .goal-icon{
     border-color:var(--accent-solid);
     color:var(--text-heading);
   }
-  .option-icon svg{width:18px;height:18px}
+  .goal-icon svg{width:20px;height:20px}
 
-  .option-content{flex:1}
-
-  .option-card .option-label{
-    font-size:14px;font-weight:500;
+  .goal-title{
+    font-size:12px;font-weight:500;
     color:var(--text-heading);letter-spacing:0.3px;
-    margin-bottom:4px;
+    line-height:1.4;
   }
-  .option-card .option-sub{
-    font-size:12px;color:var(--faint);font-weight:300;
-    line-height:1.5;
-  }
-
-  /* ═══════════════════════════════════════════
-     STEP 05 - TEXTAREA
-     ═══════════════════════════════════════════ */
-  .notes-textarea{
-    width:100%;min-height:160px;padding:24px;
-    background:var(--bg-card);border:1px solid var(--line);
-    color:var(--text-heading);font-family:var(--font-body);
-    font-size:14px;font-weight:300;line-height:1.8;
-    resize:vertical;transition:border-color .3s;
-    position:relative;z-index:1;
-  }
-  .notes-textarea::placeholder{color:var(--faint)}
-  .notes-textarea:focus{
-    outline:none;border-color:var(--accent-solid);
-  }
-  .submit-row{
-    display:flex;justify-content:center;margin-top:40px;
-    position:relative;z-index:1;
-  }
-
-  /* ═══════════════════════════════════════════
-     BACK BUTTON
-     ═══════════════════════════════════════════ */
-  .step-back{
-    display:inline-flex;align-items:center;gap:8px;
-    background:none;border:none;cursor:pointer;
-    font-size:11px;letter-spacing:2px;text-transform:uppercase;
-    color:var(--faint);font-family:var(--font-body);
-    transition:color .3s;margin-bottom:32px;padding:0;
-    position:relative;z-index:1;
-  }
-  .step-back:hover{color:var(--text-heading)}
-  .step-back svg{
-    width:16px;height:16px;
-    transition:transform .3s;
-  }
-  .step-back:hover svg{transform:translateX(-4px)}
-
-  /* ═══════════════════════════════════════════
-     LOADING STATE - DRAMATIC VIAL FILL
-     ═══════════════════════════════════════════ */
-  .loading-state{
-    display:none;text-align:center;padding:80px 0;
-  }
-  .loading-state.active{display:block;animation:fi .4s ease forwards}
-
-  .loading-title{
-    font-family:var(--font-display);
-    font-size:28px;font-weight:500;
+  .goal-card:hover .goal-title,
+  .goal-card.active .goal-title{
     color:var(--text-heading);
-    margin-bottom:12px;letter-spacing:-0.01em;
-  }
-  .loading-subtitle{
-    font-size:14px;color:var(--faint);font-weight:300;
-    margin-bottom:56px;
-  }
-
-  /* Vial row for loading */
-  .loading-vials{
-    display:flex;align-items:flex-end;justify-content:center;
-    gap:24px;margin-bottom:56px;
-  }
-  .loading-vial-wrap{
-    display:flex;flex-direction:column;align-items:center;
-    gap:8px;
-  }
-  .loading-vial-wrap svg{
-    width:48px;height:90px;
-  }
-  .loading-vial-label{
-    font-size:9px;letter-spacing:2px;text-transform:uppercase;
-    color:var(--faint);font-weight:400;
-  }
-
-  /* Liquid fill animation */
-  @keyframes liquidFill{
-    from{height:0}
-    to{height:var(--fill-h, 54px)}
-  }
-  .liq-fill{
-    animation:liquidFill 2s cubic-bezier(0.4,0,0.2,1) forwards;
-    animation-play-state:paused;
-  }
-  .loading-state.active .liq-fill{animation-play-state:running}
-  .loading-vial-wrap:nth-child(1) .liq-fill{animation-delay:.1s}
-  .loading-vial-wrap:nth-child(2) .liq-fill{animation-delay:.4s}
-  .loading-vial-wrap:nth-child(3) .liq-fill{animation-delay:.7s}
-  .loading-vial-wrap:nth-child(4) .liq-fill{animation-delay:1s}
-  .loading-vial-wrap:nth-child(5) .liq-fill{animation-delay:1.3s}
-
-  /* Loading text steps */
-  .loading-steps{max-width:400px;margin:0 auto}
-  .loading-step{
-    display:flex;align-items:center;justify-content:center;gap:16px;
-    opacity:0;transform:translateY(12px);
-    transition:opacity .5s ease,transform .5s ease;
-    margin-bottom:16px;
-  }
-  .loading-step.visible{opacity:1;transform:translateY(0)}
-  .loading-step .loading-num{
-    font-family:var(--font-display);font-size:20px;font-weight:600;
-    color:var(--pillar-num);min-width:32px;text-align:right;
-  }
-  .loading-step .loading-text{
-    font-size:13px;color:var(--muted);font-weight:300;
-    text-align:left;
   }
 
   /* ═══════════════════════════════════════════
-     RESULT DISPLAY - PREMIUM PROTOCOL CARD
+     PROTOCOL DISPLAY
      ═══════════════════════════════════════════ */
-  .result{
-    display:none;max-width:900px;margin:0 auto;
-    padding:0 72px 80px;position:relative;z-index:1;
+  .protocol-display{
+    max-width:900px;margin:0 auto;padding:0 72px 64px;
+    display:none;
   }
-  .result.active{display:block;animation:fu .6s ease forwards}
+  .protocol-display.active{
+    display:block;
+    animation:fu .5s ease forwards;
+  }
 
-  .result-header{text-align:center;margin-bottom:56px;padding-top:40px}
-  .result-eyebrow{
+  .protocol-header{text-align:center;margin-bottom:48px}
+  .protocol-eyebrow{
     font-size:10px;letter-spacing:4px;text-transform:uppercase;
-    color:var(--faint);margin-bottom:20px;
+    color:var(--faint);margin-bottom:16px;
     display:flex;align-items:center;justify-content:center;gap:14px;
   }
-  .result-eyebrow::before,.result-eyebrow::after{
+  .protocol-eyebrow::before,.protocol-eyebrow::after{
     content:'';width:24px;height:1px;background:var(--faint);opacity:.5;
   }
-  .result-name{
-    font-family:var(--font-display);font-size:48px;font-weight:500;
+  .protocol-title{
+    font-family:var(--font-display);font-size:42px;font-weight:500;
     color:var(--text-heading);margin-bottom:12px;letter-spacing:-0.02em;
   }
-  .result-tagline{
-    font-size:15px;color:var(--muted);font-weight:300;
-    font-style:italic;margin-bottom:24px;
-  }
-  .result-rationale{
-    font-size:15px;color:var(--muted);font-weight:300;
-    line-height:1.9;max-width:600px;margin:0 auto;
-  }
 
-  /* Compound list */
-  .result-compounds{margin-bottom:48px}
-  .result-compound{
-    background:var(--bg-card);border:1px solid var(--line);
+  /* Compound cards */
+  .compound-section{margin-bottom:48px}
+  .compound-card{
+    background:var(--bg-card);
+    border:1px solid var(--line);
     border-left:3px solid var(--accent-solid);
     padding:32px 28px;margin-bottom:16px;
     transition:all .4s cubic-bezier(0.4,0,0.2,1);
     position:relative;overflow:hidden;
-    display:flex;gap:20px;align-items:flex-start;
   }
-  .result-compound::before{
+  .compound-card::before{
     content:'';position:absolute;top:0;left:0;right:0;height:1px;
     background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
     transform:scaleX(0);transition:transform .5s;opacity:0.6;
   }
-  .result-compound:hover{
+  .compound-card:hover{
     border-color:var(--line-strong);background:var(--bg-card-hover);
     border-left-color:var(--accent-solid);
   }
-  .result-compound:hover::before{transform:scaleX(1)}
+  .compound-card:hover::before{transform:scaleX(1)}
 
-  /* Small vial beside compound name */
-  .result-compound-vial{flex-shrink:0}
-  .result-compound-vial svg{width:40px;height:72px}
-
-  .result-compound-body{flex:1;min-width:0}
-
-  .result-compound-header{
-    display:flex;align-items:center;gap:16px;margin-bottom:12px;
-    flex-wrap:wrap;
-  }
-  .result-compound-num{
-    font-family:var(--font-display);font-size:36px;font-weight:600;
-    color:var(--pillar-num);line-height:1;letter-spacing:-0.03em;
-  }
-  .result-compound-name{
+  .compound-name{
     font-family:var(--font-mono);font-size:16px;font-weight:700;
     color:var(--text-heading);letter-spacing:0.5px;text-transform:uppercase;
+    margin-bottom:8px;
   }
-  .result-compound-pillar{
-    font-size:9px;letter-spacing:2px;text-transform:uppercase;
-    color:var(--tag-text);padding:5px 12px;
-    background:var(--tag-bg);border:1px solid var(--line);
-    border-radius:100px;
-  }
-  .result-compound-mechanism{
+  .compound-desc{
     font-size:13px;color:var(--muted);font-weight:300;
-    line-height:1.75;margin-bottom:12px;
-  }
-  .result-compound-meta{
-    display:flex;gap:24px;flex-wrap:wrap;
-  }
-  .result-compound-meta span{
-    font-size:11px;letter-spacing:1px;text-transform:uppercase;
-    color:var(--faint);
-  }
-  .result-compound-meta strong{
-    color:var(--text-heading);font-weight:500;
+    line-height:1.75;margin-bottom:16px;
   }
 
-  /* Weekly structure & synergy */
-  .result-notes{
+  .compound-details{
     display:grid;grid-template-columns:1fr 1fr;gap:16px;
-    margin-bottom:48px;
   }
-  .result-note-card{
-    background:var(--bg-card);border:1px solid var(--line);
-    padding:32px 28px;
+  .detail-item{
+    padding:16px;background:var(--bg-warm);
+    border:1px solid var(--line);
   }
-  .result-note-label{
+  .detail-label{
     font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
-    color:var(--faint);margin-bottom:14px;
+    color:var(--faint);margin-bottom:8px;font-weight:500;
   }
-  .result-note-text{
-    font-size:14px;color:var(--muted);font-weight:300;line-height:1.8;
+  .detail-value{
+    font-size:13px;color:var(--text-heading);font-weight:400;
+    line-height:1.7;
   }
 
-  /* Cost callout - prominent */
-  .result-cost{
-    text-align:center;margin-bottom:48px;
-    padding:56px 32px;
+  /* Info cards (stacking, timeline, safety) */
+  .info-grid{
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;
+    margin-top:16px;
+  }
+  .info-card{
     background:var(--bg-card);border:1px solid var(--line);
-    position:relative;overflow:hidden;
+    padding:24px 20px;
   }
-  .result-cost::before{
-    content:'';position:absolute;top:0;left:0;right:0;height:2px;
-    background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
-    opacity:0.6;
+  .info-card-label{
+    font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
+    color:var(--faint);margin-bottom:10px;font-weight:500;
   }
-  .result-cost-label{
-    font-size:10px;letter-spacing:3px;text-transform:uppercase;
-    color:var(--faint);margin-bottom:12px;
-  }
-  .result-cost-value{
-    font-family:var(--font-display);font-size:56px;font-weight:500;
-    color:var(--stat-num);letter-spacing:-0.02em;
-  }
-  .result-cost-value span{
-    font-size:18px;color:var(--faint);font-family:var(--font-body);font-weight:300;
-  }
-
-  /* Result actions */
-  .result-actions{
-    display:flex;gap:16px;justify-content:center;
-    flex-wrap:wrap;margin-bottom:48px;
-  }
-  .result-actions .btn-primary{
-    display:inline-block;padding:18px 56px;
-    background:var(--btn-bg);border:1px solid var(--btn-border);
-    color:var(--btn-text);font-size:11px;
-    letter-spacing:2.5px;text-transform:uppercase;font-weight:400;
-    cursor:pointer;border-radius:100px;
-    transition:all .4s cubic-bezier(0.4,0,0.2,1);
-    font-family:var(--font-body);
-  }
-  .result-actions .btn-primary:hover{
-    background:var(--btn-hover-bg);
-    border-color:var(--btn-hover-border);
-    transform:translateY(-2px);
-  }
-
-  /* Disclaimer inside result */
-  .result-disclaimer{
-    text-align:center;font-size:11px;color:var(--faint);
-    font-weight:300;letter-spacing:0.5px;line-height:1.8;
-    max-width:560px;margin:0 auto;
-    padding-top:32px;border-top:1px solid var(--line);
+  .info-card-text{
+    font-size:13px;color:var(--muted);font-weight:300;line-height:1.8;
   }
 
   /* ═══════════════════════════════════════════
-     ERROR STATE
+     FAQ ACCORDION
      ═══════════════════════════════════════════ */
-  .error-msg{
-    text-align:center;padding:24px;margin-bottom:24px;
-    background:var(--bg-card);border:1px solid var(--line);
-    font-size:13px;color:var(--muted);font-weight:300;
-    display:none;
+  .faq-section{
+    max-width:900px;margin:0 auto;padding:0 72px 80px;
   }
-  .error-msg.active{display:block;animation:fu .4s ease forwards}
+  .faq-title{
+    font-family:var(--font-display);font-size:32px;font-weight:500;
+    color:var(--text-heading);margin-bottom:32px;letter-spacing:-0.01em;
+    text-align:center;
+  }
+  .faq-item{
+    border:1px solid var(--line);
+    margin-bottom:8px;
+    overflow:hidden;
+    transition:border-color .3s;
+  }
+  .faq-item:hover{border-color:var(--line-strong)}
+  .faq-question{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px 24px;cursor:pointer;
+    background:var(--bg-card);
+    transition:background .3s;
+    border:none;width:100%;text-align:left;
+    font-family:var(--font-body);
+    color:var(--text-heading);
+  }
+  .faq-question:hover{background:var(--bg-card-hover)}
+  .faq-question-text{
+    font-size:14px;font-weight:500;letter-spacing:0.2px;
+  }
+  .faq-chevron{
+    width:20px;height:20px;color:var(--faint);
+    transition:transform .3s;flex-shrink:0;margin-left:16px;
+  }
+  .faq-item.open .faq-chevron{transform:rotate(180deg)}
+  .faq-answer{
+    max-height:0;overflow:hidden;
+    transition:max-height .4s cubic-bezier(0.4,0,0.2,1),
+               padding .4s cubic-bezier(0.4,0,0.2,1);
+    padding:0 24px;
+    background:var(--bg-warm);
+  }
+  .faq-item.open .faq-answer{
+    max-height:400px;
+    padding:20px 24px;
+  }
+  .faq-answer-text{
+    font-size:13px;color:var(--muted);font-weight:300;
+    line-height:1.9;
+  }
+
+  /* ═══════════════════════════════════════════
+     BOTTOM DISCLAIMER
+     ═══════════════════════════════════════════ */
+  .guide-disclaimer{
+    text-align:center;font-size:11px;color:var(--faint);
+    font-weight:300;letter-spacing:0.5px;line-height:1.8;
+    max-width:600px;margin:0 auto;
+    padding:0 72px 64px;
+  }
 
   /* ═══════════════════════════════════════════
      SVG GLASS THEME CLASSES (decorative vials)
@@ -641,44 +335,18 @@
   [data-theme="light"] .deco-sheen{fill:rgba(0,0,0,0.02)}
   [data-theme="light"] .deco-highlight{stroke:rgba(0,0,0,0.03)}
 
-  /* Result vials (with labels) */
-  [data-theme="dark"] .rv-glass{fill:rgba(255,255,255,0.06);stroke:rgba(255,255,255,0.08)}
-  [data-theme="dark"] .rv-cap{fill:rgba(255,255,255,0.1)}
-  [data-theme="dark"] .rv-neck{fill:rgba(255,255,255,0.07)}
-  [data-theme="dark"] .rv-sheen{fill:rgba(255,255,255,0.03)}
-  [data-theme="dark"] .rv-label-bg{fill:rgba(28,28,28,0.7);stroke:rgba(212,208,202,0.06)}
-  [data-theme="dark"] .rv-label-text{fill:var(--faint)}
-  [data-theme="dark"] .rv-label-sub{fill:var(--muted)}
-
-  [data-theme="light"] .rv-glass{fill:rgba(0,0,0,0.04);stroke:rgba(0,0,0,0.06)}
-  [data-theme="light"] .rv-cap{fill:rgba(0,0,0,0.08)}
-  [data-theme="light"] .rv-neck{fill:rgba(0,0,0,0.05)}
-  [data-theme="light"] .rv-sheen{fill:rgba(0,0,0,0.02)}
-  [data-theme="light"] .rv-label-bg{fill:rgba(240,240,242,0.9);stroke:rgba(0,0,0,0.08)}
-  [data-theme="light"] .rv-label-text{fill:var(--faint)}
-  [data-theme="light"] .rv-label-sub{fill:var(--muted)}
-
-  /* Loading vial glass */
-  [data-theme="dark"] .lv-glass{fill:rgba(255,255,255,0.06);stroke:rgba(255,255,255,0.08)}
-  [data-theme="dark"] .lv-cap{fill:rgba(255,255,255,0.1)}
-  [data-theme="dark"] .lv-neck{fill:rgba(255,255,255,0.07)}
-  [data-theme="dark"] .lv-sheen{fill:rgba(255,255,255,0.03)}
-
-  [data-theme="light"] .lv-glass{fill:rgba(0,0,0,0.04);stroke:rgba(0,0,0,0.06)}
-  [data-theme="light"] .lv-cap{fill:rgba(0,0,0,0.08)}
-  [data-theme="light"] .lv-neck{fill:rgba(0,0,0,0.05)}
-  [data-theme="light"] .lv-sheen{fill:rgba(0,0,0,0.02)}
-
   /* ═══════════════════════════════════════════
      RESPONSIVE - TABLET
      ═══════════════════════════════════════════ */
   @media(max-width:1024px){
-    .advisor-hero{padding:0 40px;min-height:600px}
+    .advisor-hero{padding:100px 40px 60px}
     .advisor-hero .section-title{font-size:48px}
-    .assessment{padding:0 40px 80px}
-    .result{padding:0 40px 80px}
-    .progress-bar{margin-left:-40px;margin-right:-40px}
-    .step-bg-num{font-size:160px}
+    .research-banner{margin:0 40px 48px}
+    .protocol-selector{padding:0 40px 48px}
+    .protocol-display{padding:0 40px 64px}
+    .faq-section{padding:0 40px 80px}
+    .guide-disclaimer{padding:0 40px 64px}
+    .goal-grid{grid-template-columns:repeat(3,1fr)}
     .hero-deco-vial:nth-child(1){left:5%}
     .hero-deco-vial:nth-child(2){right:3%}
     .hero-deco-vial:nth-child(3){right:8%}
@@ -688,97 +356,40 @@
      RESPONSIVE - MOBILE
      ═══════════════════════════════════════════ */
   @media(max-width:768px){
-    .advisor-hero{padding:0 24px;min-height:560px}
+    .advisor-hero{padding:90px 24px 48px}
     .advisor-hero .section-title{font-size:34px}
-    .advisor-hero .section-body{font-size:14px;line-height:1.8;margin-bottom:36px}
-    .assessment{padding:0 24px 64px}
-    .result{padding:0 24px 64px}
+    .advisor-hero .section-body{font-size:14px;line-height:1.8}
+    .research-banner{margin:0 24px 36px}
+    .protocol-selector{padding:0 24px 36px}
+    .protocol-display{padding:0 24px 48px}
+    .faq-section{padding:0 24px 64px}
+    .guide-disclaimer{padding:0 24px 48px}
 
-    /* Progress bar: numbers only, hide labels */
-    .progress-bar{
-      margin-left:-24px;margin-right:-24px;
-      padding:16px 16px;gap:0;
-      top:60px;
-    }
-    .progress-label{display:none}
-    .progress-num{width:28px;height:28px;font-size:11px}
-    .progress-connector{width:20px}
+    /* Goal grid: 2 columns on mobile */
+    .goal-grid{grid-template-columns:1fr 1fr;gap:12px}
+    .goal-card{padding:20px 16px}
+    .goal-card{min-height:44px}
 
     /* Hide decorative vials on mobile */
     .hero-deco-vial{display:none}
-    .step-deco-vial{display:none}
 
-    /* Option grid single column */
-    .option-grid{grid-template-columns:1fr}
-    .option-grid.cols-3{grid-template-columns:1fr}
+    /* Compound details: single column */
+    .compound-details{grid-template-columns:1fr}
+    .info-grid{grid-template-columns:1fr}
 
-    /* Option cards: 44px min touch target */
-    .option-card{min-height:44px;padding:20px 20px}
-
-    /* Step styling */
-    .step-bg-num{font-size:120px;top:-10px}
-    .step-question{font-size:26px}
-
-    /* Back button: adequate touch target */
-    .step-back{min-height:44px;padding:10px 0;display:inline-flex;align-items:center}
-
-    /* Textarea: 16px font to prevent iOS zoom */
-    .notes-textarea{font-size:16px}
-
-    /* Loading vials smaller */
-    .loading-vials{gap:12px}
-    .loading-vial-wrap svg{width:36px;height:68px}
-    .loading-vial-label{font-size:8px;letter-spacing:1.5px}
-    .loading-title{font-size:22px}
-
-    /* Result display */
-    .result-name{font-size:32px}
-    .result-notes{grid-template-columns:1fr}
-    .result-cost{padding:40px 20px}
-    .result-cost-value{font-size:40px}
-
-    .result-compound{
-      padding:24px 20px;
-      flex-direction:column;gap:16px;
-    }
-    .result-compound-header{gap:10px}
-    .result-compound-num{font-size:28px}
-    .result-compound-name{font-size:14px}
-    .result-compound-vial{display:none}
-
-    /* Compound meta: stack vertically */
-    .result-compound-meta{flex-direction:column;gap:8px}
-
-    .result-actions{flex-direction:column;align-items:center;gap:12px}
-    .result-actions .btn,
-    .result-actions .btn-primary{
-      width:100%;max-width:320px;text-align:center;
-      min-height:44px;display:inline-flex;
-      align-items:center;justify-content:center;
-    }
+    /* Protocol title */
+    .protocol-title{font-size:30px}
 
     .nav-cart-btn{display:none}
 
-    /* Progress bar sticky adjustments */
-    .progress-bar{gap:0;padding:12px 12px}
-
-    /* Result cost card */
-    .result-cost{padding:32px 20px}
-
-    /* Generate button */
-    .submit-row .btn{min-height:44px}
+    .faq-title{font-size:26px}
   }
 
   @media(max-width:480px){
     .advisor-hero .section-title{font-size:28px}
-    .result-name{font-size:26px}
-    .result-cost-value{font-size:32px}
-    .result-compound-name{font-size:12px}
-    .result-compound-pillar{font-size:8px;padding:4px 8px}
-    .step-bg-num{font-size:90px}
-    .step-question{font-size:22px}
-    .loading-vials{gap:8px}
-    .loading-vial-wrap svg{width:28px;height:54px}
+    .goal-grid{grid-template-columns:1fr 1fr}
+    .goal-title{font-size:11px}
+    .protocol-title{font-size:24px}
   }
 </style>
 </head>
@@ -790,13 +401,13 @@
   <ul class="nav-center">
     <li><a href="/us/shop.html">Compounds</a></li>
     <li><a href="/us/protocols.html">Protocols</a></li>
-    <li><a href="/us/advisor.html">Stack Advisor</a></li>
+    <li><a href="/us/advisor.html">Protocol Guide</a></li>
     <li><a href="/us/about.html">About</a></li>
   </ul>
   <div class="nav-right">
     <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"></button>
     <button class="nav-cart-btn" id="cart-toggle" aria-label="View stack">Stack <span id="cart-count" style="display:none">0</span></button>
-    <a href="/us/advisor.html" class="nav-cta">Build My Stack</a>
+    <a href="/us/shop.html" class="nav-cta">Shop Compounds</a>
     <button class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
       <span></span><span></span><span></span>
     </button>
@@ -808,10 +419,10 @@
   <ul class="mobile-nav-links">
     <li><a href="/us/shop.html">Compounds</a></li>
     <li><a href="/us/protocols.html">Protocols</a></li>
-    <li><a href="/us/advisor.html">Stack Advisor</a></li>
+    <li><a href="/us/advisor.html">Protocol Guide</a></li>
     <li><a href="/us/about.html">About</a></li>
   </ul>
-  <a href="/us/advisor.html" class="mobile-nav-cta">Build My Stack</a>
+  <a href="/us/shop.html" class="mobile-nav-cta">Shop Compounds</a>
   <div class="mobile-nav-footer">
     <div class="mobile-theme-switch">
       <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
@@ -844,9 +455,9 @@
 
 <main id="main-content">
 
-<!-- 01 - HERO: The Consultation -->
+<!-- 01 - HERO -->
 <section class="advisor-hero">
-  <!-- Decorative vial 1 - Pillar 1 (Longevity) liquid -->
+  <!-- Decorative vial 1 -->
   <svg class="hero-deco-vial" width="90" height="160" viewBox="0 0 74 140" fill="none" aria-hidden="true">
     <rect x="22" y="2" width="30" height="20" rx="3" class="deco-cap"/>
     <rect x="28" y="22" width="18" height="14" rx="2" class="deco-neck"/>
@@ -855,10 +466,8 @@
     <rect x="15" y="58" width="44" height="74" rx="5" fill="var(--pillar-1)" opacity="0.35"/>
     <rect x="11" y="36" width="52" height="100" rx="7" class="deco-sheen"/>
     <line x1="16" y1="42" x2="16" y2="130" class="deco-highlight" stroke-width="1"/>
-    <ellipse cx="37" cy="58" rx="20" ry="2" fill="var(--pillar-1)" opacity="0.2"/>
   </svg>
-
-  <!-- Decorative vial 2 - Pillar 2 (Recovery) liquid -->
+  <!-- Decorative vial 2 -->
   <svg class="hero-deco-vial" width="80" height="140" viewBox="0 0 74 130" fill="none" aria-hidden="true">
     <rect x="22" y="2" width="30" height="20" rx="3" class="deco-cap"/>
     <rect x="28" y="22" width="18" height="14" rx="2" class="deco-neck"/>
@@ -867,10 +476,8 @@
     <rect x="15" y="52" width="44" height="70" rx="5" fill="var(--pillar-2)" opacity="0.3"/>
     <rect x="11" y="36" width="52" height="90" rx="7" class="deco-sheen"/>
     <line x1="16" y1="42" x2="16" y2="120" class="deco-highlight" stroke-width="1"/>
-    <ellipse cx="37" cy="52" rx="20" ry="2" fill="var(--pillar-2)" opacity="0.2"/>
   </svg>
-
-  <!-- Decorative vial 3 - Pillar 5 (Performance) liquid -->
+  <!-- Decorative vial 3 -->
   <svg class="hero-deco-vial" width="75" height="130" viewBox="0 0 74 130" fill="none" aria-hidden="true">
     <rect x="22" y="2" width="30" height="20" rx="3" class="deco-cap"/>
     <rect x="28" y="22" width="18" height="14" rx="2" class="deco-neck"/>
@@ -879,436 +486,119 @@
     <rect x="15" y="48" width="44" height="74" rx="5" fill="var(--pillar-5)" opacity="0.35"/>
     <rect x="11" y="36" width="52" height="90" rx="7" class="deco-sheen"/>
     <line x1="16" y1="42" x2="16" y2="120" class="deco-highlight" stroke-width="1"/>
-    <ellipse cx="37" cy="48" rx="20" ry="2" fill="var(--pillar-5)" opacity="0.2"/>
   </svg>
 
-  <p class="section-label">AI Protocol Advisor</p>
+  <p class="section-label">Protocol Guide</p>
   <h1 class="section-title">Your protocol. <em>Engineered.</em></h1>
-  <p class="section-body">Five questions. One precision stack. AI-matched to your goals.</p>
-  <button class="hero-begin-btn" id="hero-begin-btn">Begin Assessment</button>
-  <div class="hero-scroll-arrow" aria-hidden="true">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
-    </svg>
-  </div>
+  <p class="section-body">Select your goal below for detailed compound protocols, dosing guidance, reconstitution instructions, and administration timelines.</p>
 </section>
 
 <div class="divider"><div class="divider-line"></div></div>
 
-<!-- 02 - Assessment -->
-<section class="assessment" id="assessment">
+<!-- Research Disclaimer Banner -->
+<div class="research-banner">For research purposes only &mdash; not intended for human consumption</div>
 
-  <!-- Progress Bar - Numbered Step Indicator -->
-  <div class="progress-bar" id="progress-bar">
-    <div class="progress-step">
-      <div class="progress-node active" data-step="1">
-        <div class="progress-num">
-          <span class="progress-num-text">01</span>
-          <svg class="progress-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <span class="progress-label">Goal</span>
+<!-- 02 - Protocol Selector -->
+<section class="protocol-selector">
+  <div class="selector-label">Select Your Goal</div>
+  <div class="goal-grid" id="goal-grid">
+    <button class="goal-card" data-goal="recovery" aria-label="Recovery and Healing protocols">
+      <div class="goal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
       </div>
-      <div class="progress-connector" data-after="1"></div>
-    </div>
-    <div class="progress-step">
-      <div class="progress-node" data-step="2">
-        <div class="progress-num">
-          <span class="progress-num-text">02</span>
-          <svg class="progress-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <span class="progress-label">Experience</span>
-      </div>
-      <div class="progress-connector" data-after="2"></div>
-    </div>
-    <div class="progress-step">
-      <div class="progress-node" data-step="3">
-        <div class="progress-num">
-          <span class="progress-num-text">03</span>
-          <svg class="progress-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <span class="progress-label">Budget</span>
-      </div>
-      <div class="progress-connector" data-after="3"></div>
-    </div>
-    <div class="progress-step">
-      <div class="progress-node" data-step="4">
-        <div class="progress-num">
-          <span class="progress-num-text">04</span>
-          <svg class="progress-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <span class="progress-label">Duration</span>
-      </div>
-      <div class="progress-connector" data-after="4"></div>
-    </div>
-    <div class="progress-step">
-      <div class="progress-node" data-step="5">
-        <div class="progress-num">
-          <span class="progress-num-text">05</span>
-          <svg class="progress-check" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-        </div>
-        <span class="progress-label">Notes</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- Step 01 - Primary Goal -->
-  <div class="step active" id="step-1" data-step="1">
-    <div class="step-bg-num" aria-hidden="true">01</div>
-    <!-- Decorative vial: Pillar 5 (Performance) -->
-    <svg class="step-deco-vial" width="100" height="180" viewBox="0 0 74 140" fill="none" aria-hidden="true">
-      <rect x="22" y="2" width="30" height="20" rx="3" class="deco-cap"/>
-      <rect x="28" y="22" width="18" height="14" rx="2" class="deco-neck"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-glass-fill"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-glass-stroke"/>
-      <rect x="15" y="56" width="44" height="76" rx="5" fill="var(--pillar-5)" opacity="0.35"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-sheen"/>
-      <line x1="16" y1="42" x2="16" y2="130" class="deco-highlight" stroke-width="1"/>
-      <ellipse cx="37" cy="56" rx="20" ry="2" fill="var(--pillar-5)" opacity="0.2"/>
-    </svg>
-    <div class="step-header">
-      <div class="step-num">Step 01</div>
-      <h2 class="step-question">Primary Goal</h2>
-      <p class="step-hint">Select the outcome that matters most to your protocol</p>
-    </div>
-    <div class="option-grid">
-      <button class="option-card" data-value="Fat Loss">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-        <div class="option-content"><div class="option-label">Fat Loss</div></div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-      <button class="option-card" data-value="Muscle & Recomposition">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22V8M5 12l7-4 7 4M5 16l7-4 7 4"/></svg></div>
-        <div class="option-content"><div class="option-label">Muscle &amp; Recomposition</div></div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-      <button class="option-card" data-value="Longevity & Anti-Aging">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
-        <div class="option-content"><div class="option-label">Longevity &amp; Anti-Aging</div></div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-      <button class="option-card" data-value="Cognitive Performance">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"/><line x1="9" y1="22" x2="15" y2="22"/></svg></div>
-        <div class="option-content"><div class="option-label">Cognitive Performance</div></div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-      <button class="option-card" data-value="Injury Recovery">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-        <div class="option-content"><div class="option-label">Injury Recovery</div></div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-      <button class="option-card" data-value="Hormonal Optimization">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></div>
-        <div class="option-content"><div class="option-label">Hormonal Optimization</div></div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-    </div>
-  </div>
-
-  <!-- Step 02 - Experience Level -->
-  <div class="step" id="step-2" data-step="2">
-    <div class="step-bg-num" aria-hidden="true">02</div>
-    <!-- Decorative vial: Pillar 1 (Longevity) -->
-    <svg class="step-deco-vial" width="100" height="180" viewBox="0 0 74 140" fill="none" aria-hidden="true">
-      <rect x="22" y="2" width="30" height="20" rx="3" class="deco-cap"/>
-      <rect x="28" y="22" width="18" height="14" rx="2" class="deco-neck"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-glass-fill"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-glass-stroke"/>
-      <rect x="15" y="60" width="44" height="72" rx="5" fill="var(--pillar-1)" opacity="0.35"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-sheen"/>
-      <line x1="16" y1="42" x2="16" y2="130" class="deco-highlight" stroke-width="1"/>
-      <ellipse cx="37" cy="60" rx="20" ry="2" fill="var(--pillar-1)" opacity="0.2"/>
-    </svg>
-    <div class="step-header">
-      <div class="step-num">Step 02</div>
-      <h2 class="step-question">Experience Level</h2>
-      <p class="step-hint">Your background with peptide protocols</p>
-    </div>
-    <button class="step-back" id="back-2" aria-label="Go back to step 1">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Back
+      <div class="goal-title">Recovery &amp; Healing</div>
     </button>
-    <div class="option-grid">
-      <button class="option-card" data-value="Beginner - First Cycle">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l2 2"/></svg></div>
-        <div class="option-content">
-          <div class="option-label">Beginner</div>
-          <div class="option-sub">First Cycle</div>
-        </div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-      <button class="option-card" data-value="Intermediate - 1-3 Cycles">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <div class="option-content">
-          <div class="option-label">Intermediate</div>
-          <div class="option-sub">1&ndash;3 Cycles</div>
-        </div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-      <button class="option-card" data-value="Advanced - 4+ Cycles">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
-        <div class="option-content">
-          <div class="option-label">Advanced</div>
-          <div class="option-sub">4+ Cycles</div>
-        </div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-      <button class="option-card" data-value="Researcher / Professional">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-        <div class="option-content">
-          <div class="option-label">Researcher / Professional</div>
-        </div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-    </div>
-  </div>
-
-  <!-- Step 03 - Monthly Budget -->
-  <div class="step" id="step-3" data-step="3">
-    <div class="step-bg-num" aria-hidden="true">03</div>
-    <!-- Decorative vial: Pillar 2 (Recovery) -->
-    <svg class="step-deco-vial" width="100" height="180" viewBox="0 0 74 140" fill="none" aria-hidden="true">
-      <rect x="22" y="2" width="30" height="20" rx="3" class="deco-cap"/>
-      <rect x="28" y="22" width="18" height="14" rx="2" class="deco-neck"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-glass-fill"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-glass-stroke"/>
-      <rect x="15" y="54" width="44" height="78" rx="5" fill="var(--pillar-2)" opacity="0.35"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-sheen"/>
-      <line x1="16" y1="42" x2="16" y2="130" class="deco-highlight" stroke-width="1"/>
-      <ellipse cx="37" cy="54" rx="20" ry="2" fill="var(--pillar-2)" opacity="0.2"/>
-    </svg>
-    <div class="step-header">
-      <div class="step-num">Step 03</div>
-      <h2 class="step-question">Monthly Budget</h2>
-      <p class="step-hint">Investment range for your protocol</p>
-    </div>
-    <button class="step-back" id="back-3" aria-label="Go back to step 2">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Back
+    <button class="goal-card" data-goal="growth-hormone" aria-label="Growth Hormone Support protocols">
+      <div class="goal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22V8M5 12l7-4 7 4M5 16l7-4 7 4"/></svg>
+      </div>
+      <div class="goal-title">Growth Hormone Support</div>
     </button>
-    <div class="option-grid cols-3">
-      <button class="option-card" data-value="$100 – $300">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="option-content"><div class="option-label">$100 &ndash; $300</div></div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-      <button class="option-card" data-value="$300 – $600">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="option-content"><div class="option-label">$300 &ndash; $600</div></div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-      <button class="option-card" data-value="$600+">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-        <div class="option-content"><div class="option-label">$600+</div></div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-    </div>
-  </div>
-
-  <!-- Step 04 - Cycle Duration -->
-  <div class="step" id="step-4" data-step="4">
-    <div class="step-bg-num" aria-hidden="true">04</div>
-    <!-- Decorative vial: Pillar 3 (Metabolic) -->
-    <svg class="step-deco-vial" width="100" height="180" viewBox="0 0 74 140" fill="none" aria-hidden="true">
-      <rect x="22" y="2" width="30" height="20" rx="3" class="deco-cap"/>
-      <rect x="28" y="22" width="18" height="14" rx="2" class="deco-neck"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-glass-fill"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-glass-stroke"/>
-      <rect x="15" y="50" width="44" height="82" rx="5" fill="var(--pillar-3)" opacity="0.35"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-sheen"/>
-      <line x1="16" y1="42" x2="16" y2="130" class="deco-highlight" stroke-width="1"/>
-      <ellipse cx="37" cy="50" rx="20" ry="2" fill="var(--pillar-3)" opacity="0.2"/>
-    </svg>
-    <div class="step-header">
-      <div class="step-num">Step 04</div>
-      <h2 class="step-question">Cycle Duration</h2>
-      <p class="step-hint">How long you plan to run this protocol</p>
-    </div>
-    <button class="step-back" id="back-4" aria-label="Go back to step 3">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Back
+    <button class="goal-card" data-goal="cognitive" aria-label="Cognitive Enhancement protocols">
+      <div class="goal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"/><line x1="9" y1="22" x2="15" y2="22"/></svg>
+      </div>
+      <div class="goal-title">Cognitive Enhancement</div>
     </button>
-    <div class="option-grid">
-      <button class="option-card" data-value="4 Weeks">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-        <div class="option-content"><div class="option-label">4 Weeks</div></div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-      <button class="option-card" data-value="8 Weeks">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-        <div class="option-content"><div class="option-label">8 Weeks</div></div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-      <button class="option-card" data-value="12 Weeks">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-        <div class="option-content"><div class="option-label">12 Weeks</div></div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-      <button class="option-card" data-value="Ongoing Maintenance">
-        <div class="option-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg></div>
-        <div class="option-content"><div class="option-label">Ongoing Maintenance</div></div>
-        <div class="option-check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg></div>
-      </button>
-    </div>
-  </div>
-
-  <!-- Step 05 - Health Notes -->
-  <div class="step" id="step-5" data-step="5">
-    <div class="step-bg-num" aria-hidden="true">05</div>
-    <!-- Decorative vial: Pillar 4 (Cognitive) -->
-    <svg class="step-deco-vial" width="100" height="180" viewBox="0 0 74 140" fill="none" aria-hidden="true">
-      <rect x="22" y="2" width="30" height="20" rx="3" class="deco-cap"/>
-      <rect x="28" y="22" width="18" height="14" rx="2" class="deco-neck"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-glass-fill"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-glass-stroke"/>
-      <rect x="15" y="58" width="44" height="74" rx="5" fill="var(--pillar-4)" opacity="0.35"/>
-      <rect x="11" y="36" width="52" height="100" rx="7" class="deco-sheen"/>
-      <line x1="16" y1="42" x2="16" y2="130" class="deco-highlight" stroke-width="1"/>
-      <ellipse cx="37" cy="58" rx="20" ry="2" fill="var(--pillar-4)" opacity="0.2"/>
-    </svg>
-    <div class="step-header">
-      <div class="step-num">Step 05</div>
-      <h2 class="step-question">Health Notes</h2>
-      <p class="step-hint">Optional -- anything the AI should consider when building your protocol</p>
-    </div>
-    <button class="step-back" id="back-5" aria-label="Go back to step 4">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      Back
+    <button class="goal-card" data-goal="metabolic" aria-label="Metabolic Support protocols">
+      <div class="goal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+      </div>
+      <div class="goal-title">Metabolic Support</div>
     </button>
-    <textarea class="notes-textarea" id="health-notes" placeholder="Joint issues, sleep concerns, prior protocols, medications..."></textarea>
-    <div class="submit-row">
-      <button class="btn btn-lg" id="generate-btn">Generate Protocol &rarr;</button>
-    </div>
+    <button class="goal-card" data-goal="anti-aging" aria-label="Anti-Aging protocols">
+      <div class="goal-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      </div>
+      <div class="goal-title">Anti-Aging</div>
+    </button>
   </div>
-
-  <!-- Loading State - Dramatic Vial Fill -->
-  <div class="loading-state" id="loading-state">
-    <div class="loading-title">Formulating your protocol</div>
-    <p class="loading-subtitle">Matching compounds to your profile</p>
-
-    <!-- 5 loading vials, one per pillar -->
-    <div class="loading-vials">
-      <!-- Pillar I - Longevity -->
-      <div class="loading-vial-wrap">
-        <svg viewBox="0 0 48 90" fill="none">
-          <rect x="14" y="1" width="20" height="13" rx="2" class="lv-cap"/>
-          <rect x="18" y="14" width="12" height="9" rx="1.5" class="lv-neck"/>
-          <rect x="7" y="23" width="34" height="64" rx="5" class="lv-glass"/>
-          <clipPath id="lc1"><rect x="9" y="25" width="30" height="60" rx="4"/></clipPath>
-          <rect x="9" y="25" width="30" height="60" rx="4" fill="var(--pillar-1)" opacity="0.4" clip-path="url(#lc1)" class="liq-fill" style="--fill-h:54px;transform-origin:bottom;y:31"/>
-          <rect x="7" y="23" width="34" height="64" rx="5" class="lv-sheen"/>
-        </svg>
-        <span class="loading-vial-label">Longevity</span>
-      </div>
-      <!-- Pillar II - Recovery -->
-      <div class="loading-vial-wrap">
-        <svg viewBox="0 0 48 90" fill="none">
-          <rect x="14" y="1" width="20" height="13" rx="2" class="lv-cap"/>
-          <rect x="18" y="14" width="12" height="9" rx="1.5" class="lv-neck"/>
-          <rect x="7" y="23" width="34" height="64" rx="5" class="lv-glass"/>
-          <clipPath id="lc2"><rect x="9" y="25" width="30" height="60" rx="4"/></clipPath>
-          <rect x="9" y="25" width="30" height="60" rx="4" fill="var(--pillar-2)" opacity="0.4" clip-path="url(#lc2)" class="liq-fill" style="--fill-h:54px;transform-origin:bottom;y:31"/>
-          <rect x="7" y="23" width="34" height="64" rx="5" class="lv-sheen"/>
-        </svg>
-        <span class="loading-vial-label">Recovery</span>
-      </div>
-      <!-- Pillar III - Metabolic -->
-      <div class="loading-vial-wrap">
-        <svg viewBox="0 0 48 90" fill="none">
-          <rect x="14" y="1" width="20" height="13" rx="2" class="lv-cap"/>
-          <rect x="18" y="14" width="12" height="9" rx="1.5" class="lv-neck"/>
-          <rect x="7" y="23" width="34" height="64" rx="5" class="lv-glass"/>
-          <clipPath id="lc3"><rect x="9" y="25" width="30" height="60" rx="4"/></clipPath>
-          <rect x="9" y="25" width="30" height="60" rx="4" fill="var(--pillar-3)" opacity="0.4" clip-path="url(#lc3)" class="liq-fill" style="--fill-h:54px;transform-origin:bottom;y:31"/>
-          <rect x="7" y="23" width="34" height="64" rx="5" class="lv-sheen"/>
-        </svg>
-        <span class="loading-vial-label">Metabolic</span>
-      </div>
-      <!-- Pillar IV - Cognitive -->
-      <div class="loading-vial-wrap">
-        <svg viewBox="0 0 48 90" fill="none">
-          <rect x="14" y="1" width="20" height="13" rx="2" class="lv-cap"/>
-          <rect x="18" y="14" width="12" height="9" rx="1.5" class="lv-neck"/>
-          <rect x="7" y="23" width="34" height="64" rx="5" class="lv-glass"/>
-          <clipPath id="lc4"><rect x="9" y="25" width="30" height="60" rx="4"/></clipPath>
-          <rect x="9" y="25" width="30" height="60" rx="4" fill="var(--pillar-4)" opacity="0.4" clip-path="url(#lc4)" class="liq-fill" style="--fill-h:54px;transform-origin:bottom;y:31"/>
-          <rect x="7" y="23" width="34" height="64" rx="5" class="lv-sheen"/>
-        </svg>
-        <span class="loading-vial-label">Cognitive</span>
-      </div>
-      <!-- Pillar V - Performance -->
-      <div class="loading-vial-wrap">
-        <svg viewBox="0 0 48 90" fill="none">
-          <rect x="14" y="1" width="20" height="13" rx="2" class="lv-cap"/>
-          <rect x="18" y="14" width="12" height="9" rx="1.5" class="lv-neck"/>
-          <rect x="7" y="23" width="34" height="64" rx="5" class="lv-glass"/>
-          <clipPath id="lc5"><rect x="9" y="25" width="30" height="60" rx="4"/></clipPath>
-          <rect x="9" y="25" width="30" height="60" rx="4" fill="var(--pillar-5)" opacity="0.4" clip-path="url(#lc5)" class="liq-fill" style="--fill-h:54px;transform-origin:bottom;y:31"/>
-          <rect x="7" y="23" width="34" height="64" rx="5" class="lv-sheen"/>
-        </svg>
-        <span class="loading-vial-label">Performance</span>
-      </div>
-    </div>
-
-    <div class="loading-steps">
-      <div class="loading-step" id="load-1">
-        <span class="loading-num">01</span>
-        <span class="loading-text">Analyzing parameters...</span>
-      </div>
-      <div class="loading-step" id="load-2">
-        <span class="loading-num">02</span>
-        <span class="loading-text">Matching compounds to profile...</span>
-      </div>
-      <div class="loading-step" id="load-3">
-        <span class="loading-num">03</span>
-        <span class="loading-text">Optimizing stack synergy...</span>
-      </div>
-    </div>
-  </div>
-
 </section>
 
-<!-- 03 - Result Display -->
-<section class="result" id="result-section">
-  <div class="result-header">
-    <div class="result-eyebrow">Your Protocol</div>
-    <h2 class="result-name" id="result-name"></h2>
-    <p class="result-tagline" id="result-tagline"></p>
-    <p class="result-rationale" id="result-rationale"></p>
-  </div>
-
-  <div class="divider" style="margin-bottom:48px"><div class="divider-line"></div></div>
-
-  <div class="result-compounds" id="result-compounds"></div>
-
-  <div class="result-notes" id="result-notes">
-    <div class="result-note-card">
-      <div class="result-note-label">Weekly Structure</div>
-      <p class="result-note-text" id="result-weekly"></p>
-    </div>
-    <div class="result-note-card">
-      <div class="result-note-label">Synergy Note</div>
-      <p class="result-note-text" id="result-synergy"></p>
-    </div>
-  </div>
-
-  <div class="result-cost">
-    <div class="result-cost-label">Estimated Monthly Cost</div>
-    <div class="result-cost-value" id="result-cost"></div>
-  </div>
-
-  <div class="result-actions">
-    <button class="btn-primary" id="shop-protocol-btn">Shop This Protocol</button>
-    <button class="btn" id="start-over-btn">Start Over</button>
-  </div>
-
-  <div class="error-msg" id="error-msg"></div>
-
-  <div class="result-disclaimer">
-    For research purposes only. Not intended for human consumption. AI-generated protocols are informational and do not constitute medical advice. Always consult a qualified healthcare professional.
-  </div>
-</section>
+<!-- 03 - Protocol Display (populated by JS) -->
+<section class="protocol-display" id="protocol-display"></section>
 
 <div class="divider"><div class="divider-line"></div></div>
+
+<!-- 04 - FAQ Accordion -->
+<section class="faq-section">
+  <h2 class="faq-title">Frequently Asked Questions</h2>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      <span class="faq-question-text">How do I reconstitute peptides?</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" role="region">
+      <p class="faq-answer-text">Remove the plastic cap from the peptide vial, wipe the rubber stopper with an alcohol swab, and slowly inject bacteriostatic water (BAC water) along the inside wall of the vial. Do not squirt directly onto the lyophilized powder, as this can damage the peptide. Gently swirl the vial until the powder is fully dissolved. Never shake vigorously. Most peptides use 1-2ml of BAC water per vial, which determines your concentration (e.g., 2ml into a 5mg vial = 2.5mg/ml). Store reconstituted peptides in the refrigerator and use within 30 days.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      <span class="faq-question-text">How do I store peptides?</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" role="region">
+      <p class="faq-answer-text">Unreconstituted (lyophilized) peptides can be stored at room temperature for short periods, but are best kept in a freezer for long-term storage (up to 12+ months). Once reconstituted with bacteriostatic water, always store in the refrigerator (2-8 degrees C / 36-46 degrees F). Keep vials upright, avoid exposure to direct sunlight, and use within 4-6 weeks of reconstitution. Never freeze reconstituted peptides, as ice crystal formation can denature the protein structure.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      <span class="faq-question-text">Can I stack multiple peptides?</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" role="region">
+      <p class="faq-answer-text">Yes, many peptides are designed to work synergistically when stacked. Common stacks include BPC-157 + TB-500 for enhanced healing, and Ipamorelin + CJC-1295 (no DAC) for growth hormone support. When stacking, administer each peptide in a separate injection at different sites, or in the same syringe if specifically noted as compatible. Start with one compound first to assess tolerance before adding a second. Each protocol page above includes specific stacking recommendations.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      <span class="faq-question-text">How long until I see results?</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" role="region">
+      <p class="faq-answer-text">Timeline varies by compound and goal. Recovery peptides like BPC-157 often show noticeable improvements within 1-2 weeks. Growth hormone secretagogues like Ipamorelin may improve sleep within days, with body composition changes over 4-8 weeks. Cognitive peptides like Semax can produce noticeable clarity within the first few days. Metabolic compounds like Retatrutide show appetite changes in the first week, with significant weight-related effects over 8-12 weeks. Anti-aging peptides like GHK-Cu typically take 2-4 weeks for visible skin improvements.</p>
+    </div>
+  </div>
+
+  <div class="faq-item">
+    <button class="faq-question" aria-expanded="false">
+      <span class="faq-question-text">What is the difference between research and clinical grade?</span>
+      <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="faq-answer" role="region">
+      <p class="faq-answer-text">Research grade peptides are manufactured and sold strictly for laboratory and scientific research. They undergo purity testing (typically HPLC analysis) and are accompanied by certificates of analysis (COA). Clinical grade peptides are manufactured under GMP (Good Manufacturing Practice) conditions and are intended for use in clinical trials or medical settings. The key differences are in manufacturing oversight, documentation requirements, and regulatory framework. Always verify purity via third-party COA when sourcing compounds.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Bottom Disclaimer -->
+<div class="guide-disclaimer">
+  For research purposes only. Not intended for human consumption. The information provided is for educational and informational purposes only and does not constitute medical advice. Always consult a qualified healthcare professional before beginning any protocol.
+</div>
 
 </main>
 
@@ -1321,7 +611,7 @@
     <nav class="footer-nav" aria-label="Footer">
       <a href="/us/shop.html">Compounds</a>
       <a href="/us/protocols.html">Protocols</a>
-      <a href="/us/advisor.html">Advisor</a>
+      <a href="/us/advisor.html">Guide</a>
       <a href="/us/about.html">About</a>
       <a href="/">Region Select</a>
     </nav>
@@ -1340,391 +630,227 @@
   'use strict';
 
   /* ═══════════════════════════════════════════
-     STATE
+     PROTOCOL DATA
      ═══════════════════════════════════════════ */
-  const state = {
-    currentStep: 1,
-    goal: '',
-    experience: '',
-    budget: '',
-    cycle: '',
-    notes: ''
-  };
-
-  /* Compound slug lookup for cart integration */
-  const slugMap = {
-    'BPC-157': 'bpc-157',
-    'IPAMORELIN': 'ipamorelin',
-    'SEMAX': 'semax',
-    'EPITHALON': 'epithalon',
-    'TB-500': 'tb-500',
-    'AOD-9604': 'aod-9604',
-    'CJC-1295': 'cjc-1295',
-    'GHK-CU': 'ghk-cu',
-    'SELANK': 'selank',
-    'HEXARELIN': 'hexarelin',
-    'RETATRUTIDE': 'retatrutide',
-    'MK-677': 'mk-677',
-    'NAD+': 'nad-plus',
-    'MOTS-C': 'mots-c',
-    'TESAMORELIN': 'tesamorelin',
-    'TA-1': 'thymosin-a1',
-    'SS-31': 'ss-31',
-    'FOXO4-DRI': 'foxo4-dri',
-    'KPV': 'kpv',
-    'PPS': 'pentosan',
-    'SEMA': 'semaglutide',
-    '5A1MQ': '5-amino-1mq',
-    'PE2228': 'pe-22-28',
-    'NSI-189': 'nsi-189',
-    'TESA': 'tesamorelin'
-  };
-
-  /* Price lookup for cart integration */
-  const priceMap = {
-    'BPC-157': 89,
-    'IPAMORELIN': 112,
-    'SEMAX': 97,
-    'EPITHALON': 145,
-    'TB-500': 134,
-    'AOD-9604': 118,
-    'CJC-1295': 108,
-    'GHK-CU': 76,
-    'SELANK': 88,
-    'HEXARELIN': 129,
-    'RETATRUTIDE': 189,
-    'MK-677': 94,
-    'NAD+': 198,
-    'MOTS-C': 165,
-    'TESAMORELIN': 195,
-    'TA-1': 156,
-    'SS-31': 168,
-    'FOXO4-DRI': 245,
-    'KPV': 72,
-    'PPS': 118,
-    'SEMA': 225,
-    '5A1MQ': 82,
-    'PE2228': 94,
-    'NSI-189': 112,
-    'TESA': 195
-  };
-
-  /* Pillar color map for result vials */
-  var pillarColors = {
-    'I': 'var(--pillar-1)',
-    'II': 'var(--pillar-2)',
-    'III': 'var(--pillar-3)',
-    'IV': 'var(--pillar-4)',
-    'V': 'var(--pillar-5)'
-  };
-
-  /* ═══════════════════════════════════════════
-     DOM REFERENCES
-     ═══════════════════════════════════════════ */
-  const steps = document.querySelectorAll('.step');
-  const dots = document.querySelectorAll('.progress-node');
-  const connectors = document.querySelectorAll('.progress-connector');
-  const loadingState = document.getElementById('loading-state');
-  const assessmentSection = document.getElementById('assessment');
-  const resultSection = document.getElementById('result-section');
-
-  /* ═══════════════════════════════════════════
-     HERO BEGIN BUTTON - smooth scroll
-     ═══════════════════════════════════════════ */
-  var heroBtn = document.getElementById('hero-begin-btn');
-  if (heroBtn) {
-    heroBtn.addEventListener('click', function() {
-      assessmentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  }
-
-  /* ═══════════════════════════════════════════
-     STEP NAVIGATION
-     ═══════════════════════════════════════════ */
-  function goToStep(num) {
-    state.currentStep = num;
-
-    /* Update step visibility */
-    steps.forEach(function(step) {
-      step.classList.remove('active');
-    });
-    var target = document.getElementById('step-' + num);
-    if (target) target.classList.add('active');
-
-    /* Update progress nodes */
-    dots.forEach(function(node) {
-      var nodeStep = parseInt(node.getAttribute('data-step'), 10);
-      node.classList.remove('active', 'done');
-      if (nodeStep === num) {
-        node.classList.add('active');
-      } else if (nodeStep < num) {
-        node.classList.add('done');
-      }
-    });
-
-    /* Update connectors */
-    connectors.forEach(function(conn) {
-      var afterStep = parseInt(conn.getAttribute('data-after'), 10);
-      if (afterStep < num) {
-        conn.classList.add('done');
-      } else {
-        conn.classList.remove('done');
-      }
-    });
-
-    /* Hide loading and result */
-    loadingState.classList.remove('active');
-
-    /* Scroll to assessment top */
-    assessmentSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
-
-  /* ═══════════════════════════════════════════
-     OPTION CARD CLICK HANDLERS (Steps 1-4)
-     ═══════════════════════════════════════════ */
-  var stateKeys = ['', 'goal', 'experience', 'budget', 'cycle'];
-
-  for (var s = 1; s <= 4; s++) {
-    (function(stepNum) {
-      var stepEl = document.getElementById('step-' + stepNum);
-      var cards = stepEl.querySelectorAll('.option-card');
-      cards.forEach(function(card) {
-        card.addEventListener('click', function() {
-          /* Mark selected */
-          cards.forEach(function(c) { c.classList.remove('selected'); });
-          card.classList.add('selected');
-
-          /* Save value */
-          state[stateKeys[stepNum]] = card.getAttribute('data-value');
-
-          /* Advance after short delay for visual feedback */
-          setTimeout(function() {
-            goToStep(stepNum + 1);
-          }, 250);
-        });
-      });
-    })(s);
-  }
-
-  /* ═══════════════════════════════════════════
-     BACK BUTTONS
-     ═══════════════════════════════════════════ */
-  for (var b = 2; b <= 5; b++) {
-    (function(stepNum) {
-      var backBtn = document.getElementById('back-' + stepNum);
-      if (backBtn) {
-        backBtn.addEventListener('click', function() {
-          goToStep(stepNum - 1);
-        });
-      }
-    })(b);
-  }
-
-  /* ═══════════════════════════════════════════
-     GENERATE PROTOCOL
-     ═══════════════════════════════════════════ */
-  var generateBtn = document.getElementById('generate-btn');
-  generateBtn.addEventListener('click', function() {
-    state.notes = document.getElementById('health-notes').value.trim();
-    generateProtocol();
-  });
-
-  /* ═══════════════════════════════════════════
-     FALLBACK PROTOCOL
-     ═══════════════════════════════════════════ */
-  var fallback = {
-    protocolName: 'The Foundation Protocol',
-    tagline: 'A balanced starting point for systematic optimization.',
-    rationale: 'BPC-157 provides systemic recovery support, Ipamorelin delivers clean GH pulsation for recomposition, and TB-500 accelerates tissue repair. Together they create a synergistic foundation across Recovery and Performance pillars.',
-    peptides: [
-      { name: 'BPC-157', pillar: 'Recovery', pillarNum: 'II', mechanism: 'Systemic tissue repair via growth factor modulation', dosing: '250mcg \u00b7 2x/day', timing: 'Morning + evening subcutaneous' },
-      { name: 'IPAMORELIN', pillar: 'Performance', pillarNum: 'V', mechanism: 'Selective GH secretagogue without cortisol or prolactin elevation', dosing: '200mcg \u00b7 1x/day', timing: 'Evening pre-sleep' },
-      { name: 'TB-500', pillar: 'Recovery', pillarNum: 'II', mechanism: 'Thymosin beta-4 analog for accelerated healing and angiogenesis', dosing: '2.5mg \u00b7 2x/week', timing: 'Monday/Thursday subcutaneous' }
-    ],
-    weeklyStructure: 'Daily BPC-157 and Ipamorelin, with TB-500 on Monday and Thursday. Rest days align with reduced injection volume.',
-    synergyNote: 'BPC-157 and TB-500 share overlapping recovery pathways while Ipamorelin supports anabolic conditions for tissue remodeling.',
-    estimatedCost: '$335/month'
-  };
-
-  /* ═══════════════════════════════════════════
-     API CALL
-     ═══════════════════════════════════════════ */
-  async function generateProtocol() {
-    /* Hide steps, show loading */
-    steps.forEach(function(step) { step.classList.remove('active'); });
-    document.querySelector('.progress-bar').style.display = 'none';
-    loadingState.classList.add('active');
-
-    /* Stagger loading step reveals */
-    var loadSteps = loadingState.querySelectorAll('.loading-step');
-    loadSteps.forEach(function(ls, i) {
-      ls.classList.remove('visible');
-      setTimeout(function() {
-        ls.classList.add('visible');
-      }, i * 600);
-    });
-
-    var goal = state.goal;
-    var experience = state.experience;
-    var budget = state.budget;
-    var cycle = state.cycle;
-    var notes = state.notes;
-
-    /* Build prompt for the advisor proxy */
-    var promptText = 'You are the Engineered Adherence Protocol AI. Design a precise research peptide protocol.\n\nUser profile:\n- Goal: ' + goal + '\n- Experience: ' + experience + '\n- Budget: ' + budget + '/month\n- Cycle: ' + cycle + '\n- Notes: ' + (notes || 'None') + '\n\nReturn ONLY valid JSON, no markdown:\n{\n  "protocolName": "The [X] Protocol",\n  "tagline": "One sentence",\n  "rationale": "2-3 sentences on compound selection logic",\n  "peptides": [\n    {\n      "name": "COMPOUND NAME",\n      "pillar": "Pillar name",\n      "pillarNum": "I/II/III/IV/V",\n      "mechanism": "One sentence mechanism",\n      "dosing": "Xmcg · Xd/week",\n      "timing": "e.g. Morning fasted"\n    }\n  ],\n  "weeklyStructure": "Brief weekly schedule description",\n  "synergyNote": "One sentence on how these compounds interact",\n  "estimatedCost": "$XXX/month"\n}';
-
-    try {
-      /* Call server-side proxy — API key stays on the server */
-      var response = await fetch('/api/advisor', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: promptText })
-      });
-
-      if (!response.ok) {
-        throw new Error('Advisor returned ' + response.status);
-      }
-
-      var data = await response.json();
-      var protocol = JSON.parse(data.text);
-      displayResult(protocol);
-
-    } catch (err) {
-      /* Use fallback protocol on any error */
-      displayResult(fallback);
+  var PROTOCOLS = {
+    "recovery": {
+      title: "Recovery & Healing",
+      compounds: [
+        {
+          name: "BPC-157",
+          dose: "250-500mcg daily",
+          cycle: "4-6 weeks",
+          method: "Subcutaneous injection near injury site",
+          reconstitution: "Add 2ml bacteriostatic water to 5mg vial = 2.5mg/ml",
+          stacking: "Pairs well with TB-500 for enhanced healing",
+          timeline: "Improvements typically noticed within 1-2 weeks",
+          notes: "Body Protection Compound-157. Derived from gastric juice proteins."
+        },
+        {
+          name: "TB-500",
+          dose: "2-5mg twice weekly (loading), then 2mg weekly (maintenance)",
+          cycle: "4-8 weeks",
+          method: "Subcutaneous injection",
+          reconstitution: "Add 2ml bacteriostatic water to 5mg vial",
+          stacking: "Commonly stacked with BPC-157",
+          timeline: "Loading phase 4-6 weeks, then maintenance",
+          notes: "Thymosin Beta-4 fragment. Promotes cell migration and wound healing."
+        }
+      ]
+    },
+    "growth-hormone": {
+      title: "Growth Hormone Support",
+      compounds: [
+        {
+          name: "Ipamorelin",
+          dose: "200-300mcg 2-3x daily",
+          cycle: "8-12 weeks",
+          method: "Subcutaneous injection, ideally before bed and morning fasted",
+          reconstitution: "Add 2ml bacteriostatic water to 5mg vial = 2.5mg/ml",
+          stacking: "Best results when stacked with CJC-1295 (no DAC)",
+          timeline: "Sleep improvements within days, body composition changes 4-8 weeks",
+          notes: "Selective GH secretagogue. Minimal cortisol/prolactin increase."
+        },
+        {
+          name: "CJC-1295",
+          dose: "100-200mcg 2-3x daily",
+          cycle: "8-12 weeks",
+          method: "Subcutaneous injection",
+          reconstitution: "Add 2ml bacteriostatic water to 5mg vial",
+          stacking: "Synergistic with Ipamorelin \u2014 the classic GH stack",
+          timeline: "Enhanced GH pulses within first week",
+          notes: "GHRH analog. Extends natural GH pulse duration."
+        }
+      ]
+    },
+    "cognitive": {
+      title: "Cognitive Enhancement",
+      compounds: [
+        {
+          name: "Semax",
+          dose: "200-600mcg daily (intranasal)",
+          cycle: "4-6 weeks, with 2-week breaks",
+          method: "Intranasal spray \u2014 1-2 sprays per nostril",
+          reconstitution: "Usually comes as nasal spray; if vial, add 1ml BAC water",
+          stacking: "Can stack with Selank for combined cognitive/anxiolytic effect",
+          timeline: "Cognitive clarity often noticed within days",
+          notes: "ACTH(4-7) analog. Neuroprotective, enhances BDNF."
+        },
+        {
+          name: "Selank",
+          dose: "250-500mcg daily (intranasal)",
+          cycle: "4-6 weeks, with 2-week breaks",
+          method: "Intranasal spray \u2014 1-2 sprays per nostril",
+          reconstitution: "Usually comes as nasal spray; if vial, add 1ml BAC water",
+          stacking: "Pairs well with Semax for cognitive + anxiolytic synergy",
+          timeline: "Reduced anxiety and improved focus within first week",
+          notes: "Tuftsin analog. Anxiolytic with immunomodulatory properties."
+        }
+      ]
+    },
+    "metabolic": {
+      title: "Metabolic Support",
+      compounds: [
+        {
+          name: "Retatrutide",
+          dose: "Start 0.5mg weekly, titrate up to 4mg weekly over 8 weeks",
+          cycle: "12-24 weeks",
+          method: "Subcutaneous injection, once weekly",
+          reconstitution: "Add 2ml bacteriostatic water to 5mg vial",
+          stacking: "Typically used alone due to potency",
+          timeline: "Appetite reduction within first week, significant weight loss 8-12 weeks",
+          notes: "Triple agonist (GLP-1/GIP/Glucagon). Most potent metabolic peptide available."
+        },
+        {
+          name: "MOTS-c",
+          dose: "5mg 3-5x weekly",
+          cycle: "4-8 weeks",
+          method: "Subcutaneous injection",
+          reconstitution: "Add 2ml bacteriostatic water to 5mg vial",
+          stacking: "Can pair with AOD-9604 for enhanced fat metabolism",
+          timeline: "Improved exercise capacity and metabolic markers within 2-4 weeks",
+          notes: "Mitochondrial-derived peptide. Enhances metabolic homeostasis and exercise capacity."
+        },
+        {
+          name: "AOD-9604",
+          dose: "300mcg daily",
+          cycle: "8-12 weeks",
+          method: "Subcutaneous injection, morning fasted",
+          reconstitution: "Add 2ml bacteriostatic water to 5mg vial",
+          stacking: "Can combine with MOTS-c for comprehensive metabolic support",
+          timeline: "Fat reduction effects typically seen at 4-8 weeks",
+          notes: "Modified fragment of hGH (176-191). Stimulates lipolysis without growth effects."
+        }
+      ]
+    },
+    "anti-aging": {
+      title: "Anti-Aging",
+      compounds: [
+        {
+          name: "GHK-Cu",
+          dose: "1-2mg daily",
+          cycle: "4-8 weeks",
+          method: "Subcutaneous injection or topical",
+          reconstitution: "Add 2ml bacteriostatic water to 5mg vial",
+          stacking: "Can combine with BPC-157 for tissue remodeling",
+          timeline: "Skin improvements 2-4 weeks, hair/wound healing 4-8 weeks",
+          notes: "Copper tripeptide. Stimulates collagen, elastin, and glycosaminoglycan synthesis."
+        },
+        {
+          name: "Tesamorelin",
+          dose: "1-2mg daily",
+          cycle: "8-12 weeks",
+          method: "Subcutaneous injection, evening administration preferred",
+          reconstitution: "Add 2ml bacteriostatic water to 2mg vial",
+          stacking: "Can pair with Ipamorelin for enhanced GH output",
+          timeline: "Visceral fat reduction and improved body composition at 8-12 weeks",
+          notes: "GHRH analog. FDA-approved for lipodystrophy. Supports natural GH production."
+        }
+      ]
     }
+  };
+
+  /* ═══════════════════════════════════════════
+     RENDER PROTOCOL
+     ═══════════════════════════════════════════ */
+  function renderProtocol(key) {
+    var protocol = PROTOCOLS[key];
+    if (!protocol) return;
+
+    var html = '';
+
+    /* Header */
+    html += '<div class="protocol-header">';
+    html += '<div class="protocol-eyebrow">Protocol Guide</div>';
+    html += '<h2 class="protocol-title">' + protocol.title + '</h2>';
+    html += '</div>';
+
+    /* Compounds */
+    html += '<div class="compound-section">';
+    protocol.compounds.forEach(function(c) {
+      html += '<div class="compound-card">';
+      html += '<div class="compound-name">' + c.name + '</div>';
+      html += '<div class="compound-desc">' + c.notes + '</div>';
+      html += '<div class="compound-details">';
+      html += '<div class="detail-item"><div class="detail-label">Standard Dosage</div><div class="detail-value">' + c.dose + '</div></div>';
+      html += '<div class="detail-item"><div class="detail-label">Cycle Length</div><div class="detail-value">' + c.cycle + '</div></div>';
+      html += '<div class="detail-item"><div class="detail-label">Reconstitution</div><div class="detail-value">' + c.reconstitution + '</div></div>';
+      html += '<div class="detail-item"><div class="detail-label">Administration</div><div class="detail-value">' + c.method + '</div></div>';
+      html += '</div>';
+      html += '<div class="info-grid">';
+      html += '<div class="info-card"><div class="info-card-label">Stacking</div><div class="info-card-text">' + c.stacking + '</div></div>';
+      html += '<div class="info-card"><div class="info-card-label">What to Expect</div><div class="info-card-text">' + c.timeline + '</div></div>';
+      html += '<div class="info-card"><div class="info-card-label">Safety Notes</div><div class="info-card-text">Start at the lower end of the dosage range. Assess tolerance for 3-5 days before increasing. Discontinue if adverse effects occur. Store reconstituted vials refrigerated.</div></div>';
+      html += '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+
+    var display = document.getElementById('protocol-display');
+    display.innerHTML = html;
+    display.classList.add('active');
+
+    /* Smooth scroll to protocol */
+    display.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   /* ═══════════════════════════════════════════
-     DISPLAY RESULT
+     GOAL CARD CLICK HANDLERS
      ═══════════════════════════════════════════ */
-  var currentProtocol = null;
+  var goalCards = document.querySelectorAll('.goal-card');
+  goalCards.forEach(function(card) {
+    card.addEventListener('click', function() {
+      /* Update active state */
+      goalCards.forEach(function(c) { c.classList.remove('active'); });
+      card.classList.add('active');
 
-  function displayResult(protocol) {
-    currentProtocol = protocol;
-
-    /* Wait for loading animation to complete */
-    setTimeout(function() {
-      /* Hide loading and assessment */
-      loadingState.classList.remove('active');
-      assessmentSection.style.display = 'none';
-
-      /* Populate result */
-      document.getElementById('result-name').textContent = protocol.protocolName;
-      document.getElementById('result-tagline').textContent = protocol.tagline;
-      document.getElementById('result-rationale').textContent = protocol.rationale;
-
-      /* Render compounds with vial SVGs */
-      var compoundsHtml = protocol.peptides.map(function(p, i) {
-        var numStr = String(i + 1).padStart(2, '0');
-        var liqColor = pillarColors[p.pillarNum] || 'var(--accent-solid)';
-        var vialId = 'rv' + i;
-
-        var vialSvg = '<svg viewBox="0 0 40 72" fill="none">' +
-          '<rect x="12" y="1" width="16" height="11" rx="2" class="rv-cap"/>' +
-          '<rect x="15" y="12" width="10" height="8" rx="1.5" class="rv-neck"/>' +
-          '<rect x="5" y="20" width="30" height="48" rx="4" class="rv-glass"/>' +
-          '<rect x="7" y="32" width="26" height="34" rx="3" fill="' + liqColor + '" opacity="0.4"/>' +
-          '<rect x="5" y="20" width="30" height="48" rx="4" class="rv-sheen"/>' +
-          '<ellipse cx="20" cy="32" rx="12" ry="1.5" fill="' + liqColor + '" opacity="0.2"/>' +
-          '<rect x="9" y="38" width="22" height="18" rx="2" class="rv-label-bg"/>' +
-          '<text x="20" y="49" text-anchor="middle" font-family="DM Sans" font-size="3.5" class="rv-label-text" font-weight="500" letter-spacing="0.5">' + p.name + '</text>' +
-        '</svg>';
-
-        return '<div class="result-compound">' +
-          '<div class="result-compound-vial">' + vialSvg + '</div>' +
-          '<div class="result-compound-body">' +
-            '<div class="result-compound-header">' +
-              '<span class="result-compound-num">' + numStr + '</span>' +
-              '<a href="/us/shop.html?compound=' + (slugMap[p.name.toUpperCase()] || p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-')) + '" class="result-compound-name" style="text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--line-strong)">' + p.name + '</a>' +
-              '<span class="result-compound-pillar">Pillar ' + p.pillarNum + ' \u00b7 ' + p.pillar + '</span>' +
-            '</div>' +
-            '<p class="result-compound-mechanism">' + p.mechanism + '</p>' +
-            '<div class="result-compound-meta">' +
-              '<span>Dosing: <strong>' + p.dosing + '</strong></span>' +
-              '<span>Timing: <strong>' + p.timing + '</strong></span>' +
-            '</div>' +
-          '</div>' +
-        '</div>';
-      }).join('');
-      document.getElementById('result-compounds').innerHTML = compoundsHtml;
-
-      /* Notes */
-      document.getElementById('result-weekly').textContent = protocol.weeklyStructure;
-      document.getElementById('result-synergy').textContent = protocol.synergyNote;
-
-      /* Cost */
-      document.getElementById('result-cost').innerHTML = protocol.estimatedCost.replace('/month', ' <span>/ month</span>');
-
-      /* Show result */
-      resultSection.classList.add('active');
-
-      /* Scroll to result */
-      resultSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 2200);
-  }
-
-  /* ═══════════════════════════════════════════
-     SHOP THIS PROTOCOL
-     ═══════════════════════════════════════════ */
-  document.getElementById('shop-protocol-btn').addEventListener('click', function() {
-    if (!currentProtocol || typeof Cart === 'undefined') return;
-
-    currentProtocol.peptides.forEach(function(p) {
-      var name = p.name.toUpperCase();
-      var slug = slugMap[name] || name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
-      var price = priceMap[name] || 99;
-
-      Cart.add({
-        name: name,
-        slug: slug,
-        price: price,
-        pillar: p.pillar
-      });
+      /* Render protocol */
+      var goal = card.getAttribute('data-goal');
+      renderProtocol(goal);
     });
   });
 
   /* ═══════════════════════════════════════════
-     START OVER
+     FAQ ACCORDION
      ═══════════════════════════════════════════ */
-  document.getElementById('start-over-btn').addEventListener('click', function() {
-    /* Reset state */
-    state.currentStep = 1;
-    state.goal = '';
-    state.experience = '';
-    state.budget = '';
-    state.cycle = '';
-    state.notes = '';
+  var faqItems = document.querySelectorAll('.faq-item');
+  faqItems.forEach(function(item) {
+    var question = item.querySelector('.faq-question');
+    question.addEventListener('click', function() {
+      var isOpen = item.classList.contains('open');
 
-    /* Clear selections */
-    document.querySelectorAll('.option-card').forEach(function(c) {
-      c.classList.remove('selected');
+      /* Close all */
+      faqItems.forEach(function(fi) {
+        fi.classList.remove('open');
+        fi.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+
+      /* Toggle current */
+      if (!isOpen) {
+        item.classList.add('open');
+        question.setAttribute('aria-expanded', 'true');
+      }
     });
-    document.getElementById('health-notes').value = '';
-
-    /* Reset loading steps */
-    document.querySelectorAll('.loading-step').forEach(function(ls) {
-      ls.classList.remove('visible');
-    });
-
-    /* Hide result, show assessment */
-    resultSection.classList.remove('active');
-    assessmentSection.style.display = '';
-    document.querySelector('.progress-bar').style.display = '';
-
-    /* Reset progress nodes and connectors */
-    dots.forEach(function(node) {
-      node.classList.remove('active', 'done');
-    });
-    connectors.forEach(function(conn) {
-      conn.classList.remove('done');
-    });
-
-    /* Go to step 1 */
-    goToStep(1);
-
-    /* Scroll to top of assessment */
-    document.querySelector('.advisor-hero').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
 })();
@@ -1739,7 +865,7 @@
   var links = document.querySelectorAll(".nav-center a");
   links.forEach(function(link){
     link.classList.remove("active");
-    if(link.href === window.location.href || 
+    if(link.href === window.location.href ||
        (link.pathname !== "/" && window.location.pathname.startsWith(link.pathname))) {
       link.classList.add("active");
     }
