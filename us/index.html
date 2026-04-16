@@ -1514,22 +1514,44 @@ function updateVials(theme){
 }
 updateVials(document.documentElement.getAttribute('data-theme')||'dark');
 
-/* Vial click -> open compound modal */
+/* Vial click -> navigate to the compound's dossier section on /us/shop.
+   The shop page reads ?compound=<slug> and auto-scrolls the dossier
+   into view. One path, one destination — no more bottom-sheet modal. */
+function goToCompound(slug){
+  if (!slug) return;
+  window.location.href = '/us/shop.html?compound=' + encodeURIComponent(slug);
+}
+
 document.querySelectorAll('.vial-wrapper[data-slug]').forEach(function(vial) {
-  vial.addEventListener('click', function() {
-    var slug = vial.getAttribute('data-slug');
-    if (typeof CompoundModal !== 'undefined') {
-      CompoundModal.open(slug);
+  vial.setAttribute('role', 'link');
+  vial.setAttribute('tabindex', '0');
+  vial.setAttribute('aria-label', 'View ' + vial.getAttribute('data-slug') + ' dossier');
+  vial.style.cursor = 'pointer';
+  vial.addEventListener('click', function(e) {
+    e.preventDefault();
+    goToCompound(vial.getAttribute('data-slug'));
+  });
+  vial.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      goToCompound(vial.getAttribute('data-slug'));
     }
   });
 });
 
-/* Ticker pill click -> open compound modal */
+/* Ticker pill click -> same dossier navigation */
 document.querySelectorAll('.ticker-pill[data-slug]').forEach(function(pill) {
-  pill.addEventListener('click', function() {
-    var slug = pill.getAttribute('data-slug');
-    if (typeof CompoundModal !== 'undefined') {
-      CompoundModal.open(slug);
+  pill.setAttribute('role', 'link');
+  pill.setAttribute('tabindex', '0');
+  pill.style.cursor = 'pointer';
+  pill.addEventListener('click', function(e) {
+    e.preventDefault();
+    goToCompound(pill.getAttribute('data-slug'));
+  });
+  pill.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      goToCompound(pill.getAttribute('data-slug'));
     }
   });
 });
@@ -1547,11 +1569,8 @@ document.querySelectorAll('.compound-card .btn[data-slug]').forEach(function(btn
     }
   });
 });
-document.querySelectorAll('.view-details').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    CompoundModal.open(btn.getAttribute('data-detail'));
-  });
-});
+/* .view-details links already have href="/us/shop.html?compound=<slug>" —
+   let the native anchor navigation handle it. No modal, no preventDefault. */
 
 /* ═══════ COUNTUP ANIMATION ═══════ */
 (function(){

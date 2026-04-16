@@ -678,10 +678,23 @@
 
   /* ═══════════════════════════════════════════
      COMPOUND PILL DETAIL OPENERS
+     Click any compound-pill inside a protocol -> navigate to the full
+     dossier on /us/shop. Consistent with home-page vial behaviour.
      ═══════════════════════════════════════════ */
   document.querySelectorAll('.protocol-compound-pill[data-detail]').forEach(function(pill) {
-    pill.addEventListener('click', function() {
-      CompoundModal.open(pill.getAttribute('data-detail'));
+    pill.setAttribute('role', 'link');
+    pill.setAttribute('tabindex', '0');
+    pill.style.cursor = 'pointer';
+    pill.addEventListener('click', function(e) {
+      e.preventDefault();
+      var slug = pill.getAttribute('data-detail');
+      if (slug) window.location.href = '/us/shop.html?compound=' + encodeURIComponent(slug);
+    });
+    pill.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        pill.click();
+      }
     });
   });
 
