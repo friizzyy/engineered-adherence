@@ -168,12 +168,15 @@
     padding:0 64px;position:relative;gap:0;
   }
 
-  /* Ghost pillar number */
+  /* Ghost pillar number — giant display, barely visible. Thin weight
+     because decorative display at this scale reads as an ink stain at 700. */
   .dossier-ghost{
     position:absolute;left:40px;top:50%;
     transform:translateY(-50%);
     font-family:var(--font-display);
-    font-size:180px;font-weight:700;
+    font-size:clamp(120px,14vw,180px);
+    font-weight:var(--fw-thin);
+    letter-spacing:var(--tracking-display-tight);
     color:var(--text-heading);opacity:0.025;
     line-height:1;pointer-events:none;user-select:none;
   }
@@ -200,9 +203,11 @@
   .dossier-compound-name{
     font-family:var(--font-mono);
     font-size:clamp(24px,2.8vw,40px);
-    font-weight:700;color:var(--text-heading);
-    letter-spacing:2px;line-height:1.1;
+    font-weight:var(--fw-regular);
+    color:var(--text-heading);
+    letter-spacing:0.08em;line-height:1.1;
     margin-bottom:6px;
+    text-transform:uppercase;
   }
   .dossier-scientific-name{
     font-family:var(--font-body);
@@ -223,10 +228,12 @@
     width:7px;height:7px;border-radius:50%;flex-shrink:0;
   }
   .dossier-role{
-    font-family:var(--font-body);
-    font-size:12px;font-weight:500;
+    font-family:var(--font-mono);
+    font-size:var(--fs-mono-xs);
+    font-weight:var(--fw-regular);
     color:var(--muted);text-transform:uppercase;
-    letter-spacing:1.5px;margin-bottom:6px;
+    letter-spacing:var(--tracking-eyebrow);
+    margin-bottom:6px;
   }
   .dossier-size{
     font-family:var(--font-mono);
@@ -277,9 +284,11 @@
     margin-bottom:2px;display:block;
   }
   .dossier-spec-value{
-    font-family:var(--font-body);
-    font-size:13px;font-weight:500;
+    font-family:var(--font-mono);
+    font-size:var(--fs-sm);
+    font-weight:var(--fw-regular);
     color:var(--stat-num);display:block;
+    letter-spacing:0.02em;
   }
 
   /* Benefits pills */
@@ -1450,21 +1459,19 @@
 <script src="/js/mobile.js"></script>
 
 <footer>
-  <div class="footer-bar">
-    <div class="footer-logo-col">
-      <a href="/us/" class="logo">Engineered Adherence</a>
-      <span class="footer-tagline">United States</span>
-    </div>
+  <div class="footer-inner">
+    <a href="/us/" class="logo">Engineered Adherence</a>
     <nav class="footer-nav" aria-label="Footer">
       <a href="/us/shop.html">Compounds</a>
       <a href="/us/protocols.html">Protocols</a>
       <a href="/us/advisor.html">Advisor</a>
       <a href="/us/about.html">About</a>
-      <a href="/">Region Select</a>
     </nav>
-    <div class="footer-legal">
-      <span class="footer-copy">&copy; 2026 Engineered Adherence &middot; Research use only</span>
-    </div>
+    <p class="footer-legal">
+      <span>&copy; 2026 Engineered Adherence</span>
+      <span class="footer-sep">&middot;</span>
+      <span>For research purposes only</span>
+    </p>
   </div>
 </footer>
 

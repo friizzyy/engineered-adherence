@@ -129,8 +129,13 @@
   }
   .protocol-price{
     font-family:var(--font-display);
-    font-size:28px;font-weight:500;color:var(--stat-num);
+    font-size:clamp(26px,3vw,36px);
+    font-weight:var(--fw-thin);
+    letter-spacing:var(--tracking-display-tight);
+    color:var(--stat-num);
     margin-bottom:24px;
+    font-variant-numeric:tabular-nums;
+    line-height:1;
   }
   .protocol-price span{
     font-size:14px;color:var(--faint);font-family:var(--font-body);font-weight:300;
@@ -176,7 +181,10 @@
   }
   .proto-detail-val{
     font-family:var(--font-mono);
-    font-size:13px;font-weight:700;color:var(--text-heading);
+    font-size:var(--fs-sm);
+    font-weight:var(--fw-regular);
+    color:var(--text-heading);
+    letter-spacing:0.02em;
   }
   .proto-detail-text{
     font-size:13px;color:var(--muted);line-height:1.8;font-weight:300;
@@ -596,21 +604,19 @@
 </main>
 
 <footer>
-  <div class="footer-bar">
-    <div class="footer-logo-col">
-      <a href="/us/" class="logo">Engineered Adherence</a>
-      <span class="footer-tagline">United States</span>
-    </div>
+  <div class="footer-inner">
+    <a href="/us/" class="logo">Engineered Adherence</a>
     <nav class="footer-nav" aria-label="Footer">
       <a href="/us/shop.html">Compounds</a>
       <a href="/us/protocols.html">Protocols</a>
       <a href="/us/advisor.html">Advisor</a>
       <a href="/us/about.html">About</a>
-      <a href="/">Region Select</a>
     </nav>
-    <div class="footer-legal">
-      <span class="footer-copy">&copy; 2026 Engineered Adherence &middot; Research use only</span>
-    </div>
+    <p class="footer-legal">
+      <span>&copy; 2026 Engineered Adherence</span>
+      <span class="footer-sep">&middot;</span>
+      <span>For research purposes only</span>
+    </p>
   </div>
 </footer>
 

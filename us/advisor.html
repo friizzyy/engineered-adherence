@@ -163,8 +163,12 @@
   .goal-icon svg{width:20px;height:20px}
 
   .goal-title{
-    font-size:12px;font-weight:500;
-    color:var(--text-heading);letter-spacing:0.3px;
+    font-family:var(--font-mono);
+    font-size:var(--fs-mono-xs);
+    font-weight:var(--fw-regular);
+    letter-spacing:var(--tracking-eyebrow);
+    text-transform:uppercase;
+    color:var(--text-heading);
     line-height:1.4;
   }
   .goal-card:hover .goal-title,
@@ -194,8 +198,12 @@
     content:'';width:24px;height:1px;background:var(--faint);opacity:.5;
   }
   .protocol-title{
-    font-family:var(--font-display);font-size:42px;font-weight:500;
-    color:var(--text-heading);margin-bottom:12px;letter-spacing:-0.02em;
+    font-family:var(--font-display);
+    font-size:clamp(32px,3.8vw,48px);
+    font-weight:var(--fw-light);
+    letter-spacing:var(--tracking-display-tight);
+    color:var(--text-heading);margin-bottom:12px;
+    line-height:1.1;
   }
 
   /* Compound cards */
@@ -220,8 +228,11 @@
   .compound-card:hover::before{transform:scaleX(1)}
 
   .compound-name{
-    font-family:var(--font-mono);font-size:16px;font-weight:700;
-    color:var(--text-heading);letter-spacing:0.5px;text-transform:uppercase;
+    font-family:var(--font-mono);
+    font-size:var(--fs-md);
+    font-weight:var(--fw-regular);
+    color:var(--text-heading);
+    letter-spacing:0.08em;text-transform:uppercase;
     margin-bottom:8px;
   }
   .compound-desc{
@@ -237,8 +248,11 @@
     border:1px solid var(--line);
   }
   .detail-label{
-    font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
-    color:var(--faint);margin-bottom:8px;font-weight:500;
+    font-family:var(--font-mono);
+    font-size:var(--fs-mono-xs);
+    letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;
+    color:var(--faint);margin-bottom:8px;
+    font-weight:var(--fw-regular);
   }
   .detail-value{
     font-size:13px;color:var(--text-heading);font-weight:400;
@@ -255,8 +269,11 @@
     padding:24px 20px;
   }
   .info-card-label{
-    font-size:9px;letter-spacing:2.5px;text-transform:uppercase;
-    color:var(--faint);margin-bottom:10px;font-weight:500;
+    font-family:var(--font-mono);
+    font-size:var(--fs-mono-xs);
+    letter-spacing:var(--tracking-eyebrow);text-transform:uppercase;
+    color:var(--faint);margin-bottom:10px;
+    font-weight:var(--fw-regular);
   }
   .info-card-text{
     font-size:13px;color:var(--muted);font-weight:300;line-height:1.8;
@@ -269,9 +286,12 @@
     max-width:900px;margin:0 auto;padding:0 72px 80px;
   }
   .faq-title{
-    font-family:var(--font-display);font-size:32px;font-weight:500;
-    color:var(--text-heading);margin-bottom:32px;letter-spacing:-0.01em;
-    text-align:center;
+    font-family:var(--font-display);
+    font-size:clamp(26px,3vw,36px);
+    font-weight:var(--fw-light);
+    letter-spacing:var(--tracking-display-tight);
+    color:var(--text-heading);margin-bottom:32px;
+    text-align:center;line-height:1.1;
   }
   .faq-item{
     border:1px solid var(--line);
@@ -291,7 +311,9 @@
   }
   .faq-question:hover{background:var(--bg-card-hover)}
   .faq-question-text{
-    font-size:14px;font-weight:500;letter-spacing:0.2px;
+    font-size:var(--fs-sm);
+    font-weight:var(--fw-regular);
+    letter-spacing:0.01em;
   }
   .faq-chevron{
     width:20px;height:20px;color:var(--faint);
@@ -626,21 +648,19 @@
 </main>
 
 <footer>
-  <div class="footer-bar">
-    <div class="footer-logo-col">
-      <a href="/us/" class="logo">Engineered Adherence</a>
-      <span class="footer-tagline">United States</span>
-    </div>
+  <div class="footer-inner">
+    <a href="/us/" class="logo">Engineered Adherence</a>
     <nav class="footer-nav" aria-label="Footer">
       <a href="/us/shop.html">Compounds</a>
       <a href="/us/protocols.html">Protocols</a>
-      <a href="/us/advisor.html">Guide</a>
+      <a href="/us/advisor.html">Advisor</a>
       <a href="/us/about.html">About</a>
-      <a href="/">Region Select</a>
     </nav>
-    <div class="footer-legal">
-      <span class="footer-copy">&copy; 2026 Engineered Adherence &middot; Research use only</span>
-    </div>
+    <p class="footer-legal">
+      <span>&copy; 2026 Engineered Adherence</span>
+      <span class="footer-sep">&middot;</span>
+      <span>For research purposes only</span>
+    </p>
   </div>
 </footer>
 

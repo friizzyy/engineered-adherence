@@ -243,7 +243,8 @@
   .data-item:hover{background:rgba(255,255,255,0.02)}
   .data-num{
     font-family:var(--font-mono);
-    font-size:13px;font-weight:500;
+    font-size:var(--fs-sm);
+    font-weight:var(--fw-regular);
     letter-spacing:0.05em;
     color:var(--text-heading);
     font-variant-numeric:tabular-nums;
@@ -433,9 +434,11 @@
   }
   .compound-card .compound-name{
     font-family:var(--font-mono);
-    font-size:22px;font-weight:500;
+    font-size:var(--fs-lg);
+    font-weight:var(--fw-regular);
     color:var(--text-heading);
-    letter-spacing:0.04em;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
     margin-bottom:12px;
   }
 
@@ -504,7 +507,9 @@
   .vial-name{
     margin-top:18px;
     font-family:var(--font-mono);
-    font-size:12px;font-weight:500;letter-spacing:var(--tracking-mono);
+    font-size:var(--fs-xs);
+    font-weight:var(--fw-regular);
+    letter-spacing:var(--tracking-mono);
     color:var(--text-heading);text-transform:uppercase;
     opacity:0;animation:fi .6s ease 2.2s forwards;
     transition:color .5s;
@@ -518,8 +523,12 @@
   }
   .vial-price{
     font-family:var(--font-display);
-    font-size:14px;font-weight:500;color:var(--stat-num);
+    font-size:var(--fs-sm);
+    font-weight:var(--fw-light);
+    color:var(--stat-num);
     margin-top:8px;
+    letter-spacing:0.02em;
+    font-variant-numeric:tabular-nums;
     opacity:0;animation:fi .6s ease 2.5s forwards;
     transition:color .3s;
   }
@@ -664,9 +673,11 @@
   }
   .compound-card .compound-name{
     font-family:var(--font-mono);
-    font-size:18px;font-weight:500;
+    font-size:var(--fs-md);
+    font-weight:var(--fw-regular);
     color:var(--text-heading);margin-bottom:8px;
-    letter-spacing:var(--tracking-mono);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
   }
   .compound-card .compound-desc{
     font-size:13px;color:var(--muted);line-height:1.75;font-weight:300;
@@ -742,8 +753,12 @@
     position:absolute;top:24px;right:24px;
   }
   .proto-card h3{
-    font-family:var(--font-display);font-size:20px;font-weight:500;
+    font-family:var(--font-display);
+    font-size:var(--fs-lg);
+    font-weight:var(--fw-light);
+    letter-spacing:var(--tracking-display-tight);
     color:var(--text-heading);margin-bottom:8px;
+    line-height:1.2;
   }
   .proto-card .proto-meta{
     font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
@@ -1442,21 +1457,19 @@
 </main>
 
 <footer>
-  <div class="footer-bar">
-    <div class="footer-logo-col">
-      <a href="/us/" class="logo">Engineered Adherence</a>
-      <span class="footer-tagline">United States</span>
-    </div>
+  <div class="footer-inner">
+    <a href="/us/" class="logo">Engineered Adherence</a>
     <nav class="footer-nav" aria-label="Footer">
       <a href="/us/shop.html">Compounds</a>
       <a href="/us/protocols.html">Protocols</a>
       <a href="/us/advisor.html">Advisor</a>
       <a href="/us/about.html">About</a>
-      <a href="/">Region Select</a>
     </nav>
-    <div class="footer-legal">
-      <span class="footer-copy">&copy; 2026 Engineered Adherence &middot; Research use only</span>
-    </div>
+    <p class="footer-legal">
+      <span>&copy; 2026 Engineered Adherence</span>
+      <span class="footer-sep">&middot;</span>
+      <span>For research purposes only</span>
+    </p>
   </div>
 </footer>
 
