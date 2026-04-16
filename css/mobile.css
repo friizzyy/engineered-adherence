@@ -749,49 +749,17 @@
 
   /* ═══════════════════════════════════════════
      MOBILE FOOTER
+     New structure is centered-by-default (see css/style.css footer block).
+     Mobile-only tweaks: tighter vertical padding + smaller nav gap.
      ═══════════════════════════════════════════ */
-  body footer{
-    padding:32px 24px;
-    text-align:center;
+  body > footer{
+    padding:48px 24px 40px;
   }
-
-  body .footer-bar{
-    grid-template-columns:1fr;
-    text-align:center;
-    gap:28px;
+  body > footer .footer-inner{
+    gap:24px;
   }
-
-  body .footer-logo-col{
-    text-align:center;
-  }
-
-  body .footer-tagline{
-    max-width:320px;
-    margin:8px auto 0;
-  }
-
-  body .footer-nav{
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:12px 24px;
-  }
-
-  body .footer-nav a{
-    font-size:12px;
-  }
-
-  body .footer-legal{
-    text-align:center;
-  }
-
-  body .footer-compliance{
-    max-width:320px;
-    margin:0 auto;
-  }
-
-  body .footer-copy{
-    font-size:11px;
+  body > footer .footer-nav{
+    gap:14px 24px;
   }
 
   /* ═══════════════════════════════════════════
