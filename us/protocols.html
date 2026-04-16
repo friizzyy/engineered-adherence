@@ -688,7 +688,7 @@
     pill.addEventListener('click', function(e) {
       e.preventDefault();
       var slug = pill.getAttribute('data-detail');
-      if (slug) window.location.href = '/us/shop.html?compound=' + encodeURIComponent(slug);
+      if (slug) window.location.href = '/us/shop.html#dossier-' + encodeURIComponent(slug);
     });
     pill.addEventListener('keydown', function(e) {
       if (e.key === 'Enter' || e.key === ' ') {

@@ -153,6 +153,9 @@
   .dossier-section{
     height:100vh;
     scroll-snap-align:start;
+    /* Leave room above the section for the fixed 72px nav when this
+       section is the scroll target of a #hash deep-link. */
+    scroll-margin-top:72px;
     display:flex;align-items:center;justify-content:center;
     position:relative;
     transition:background 0.5s cubic-bezier(0.4,0,0.2,1);
@@ -1428,19 +1431,41 @@
     }
   }
 
-  /* ===== URL PARAM - deep-link to compound ===== */
-  function checkUrlParam() {
+  /* ===== DEEP-LINK to compound (hash OR legacy query param) =====
+     Hash-based (#dossier-<slug>) is the canonical form because it
+     survives Vercel's cleanUrls redirect. The ?compound= form is
+     still accepted for backwards compatibility with older links. */
+  function resolveTargetSlug() {
+    var hash = (window.location.hash || '').replace(/^#/, '');
+    if (hash.indexOf('dossier-') === 0) return hash.substring('dossier-'.length);
     var params = new URLSearchParams(window.location.search);
-    var slug = params.get('compound');
-    if (slug) {
-      var section = document.getElementById('dossier-' + slug);
-      if (section && section.dataset.hidden !== 'true') {
-        setTimeout(function() {
-          section.scrollIntoView({ behavior: 'smooth' });
-        }, 300);
-      }
-    }
+    return params.get('compound');
   }
+
+  function scrollToCompound(slug, immediate) {
+    if (!slug) return false;
+    var section = document.getElementById('dossier-' + slug);
+    if (!section || section.dataset.hidden === 'true') return false;
+    var doScroll = function() {
+      section.scrollIntoView({
+        behavior: immediate ? 'auto' : 'smooth',
+        block: 'start'
+      });
+    };
+    // Wait 2 rAFs to make sure layout + scroll-snap are settled.
+    requestAnimationFrame(function() {
+      requestAnimationFrame(doScroll);
+    });
+    return true;
+  }
+
+  function checkUrlParam() {
+    scrollToCompound(resolveTargetSlug(), false);
+  }
+
+  // Also respond to in-page hash changes (e.g. user clicks a synergy pill
+  // that uses #dossier-<slug> instead of opening the modal).
+  window.addEventListener('hashchange', checkUrlParam);
 
   /* ===== INITIALIZE ===== */
   renderSections();

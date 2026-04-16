@@ -1371,7 +1371,7 @@
       <div class="compound-price">$76 <span>/ 50mg</span></div>
       <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
       <button class="btn" data-slug="ghk-cu" data-name="GHK-CU" data-price="76" data-pillar="Longevity">Add to Stack</button>
-      <a href="/us/shop.html?compound=ghk-cu" class="view-details">View Details →</a>
+      <a href="/us/shop.html#dossier-ghk-cu" class="view-details">View Details →</a>
     </div>
 
     <div class="compound-card" data-pillar="3">
@@ -1385,7 +1385,7 @@
       <div class="compound-price">$189 <span>/ 10mg</span></div>
       <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
       <button class="btn" data-slug="retatrutide" data-name="RETATRUTIDE" data-price="189" data-pillar="Metabolic">Add to Stack</button>
-      <a href="/us/shop.html?compound=retatrutide" class="view-details">View Details →</a>
+      <a href="/us/shop.html#dossier-retatrutide" class="view-details">View Details →</a>
     </div>
 
     <div class="compound-card" data-pillar="2">
@@ -1399,7 +1399,7 @@
       <div class="compound-price">$89 <span>/ 5mg</span></div>
       <div class="compound-stock"><div class="compound-stock-fill" style="width:100%"></div></div>
       <button class="btn" data-slug="bpc-157" data-name="BPC-157" data-price="89" data-pillar="Recovery">Add to Stack</button>
-      <a href="/us/shop.html?compound=bpc-157" class="view-details">View Details →</a>
+      <a href="/us/shop.html#dossier-bpc-157" class="view-details">View Details →</a>
     </div>
 
   </div>
@@ -1515,11 +1515,12 @@ function updateVials(theme){
 updateVials(document.documentElement.getAttribute('data-theme')||'dark');
 
 /* Vial click -> navigate to the compound's dossier section on /us/shop.
-   The shop page reads ?compound=<slug> and auto-scrolls the dossier
-   into view. One path, one destination — no more bottom-sheet modal. */
+   Using a #hash instead of ?compound= because `cleanUrls: true` redirects
+   /us/shop.html -> /us/shop and strips query strings (but preserves
+   hashes — they never leave the browser). Shop page handles both. */
 function goToCompound(slug){
   if (!slug) return;
-  window.location.href = '/us/shop.html?compound=' + encodeURIComponent(slug);
+  window.location.href = '/us/shop.html#dossier-' + encodeURIComponent(slug);
 }
 
 document.querySelectorAll('.vial-wrapper[data-slug]').forEach(function(vial) {
