@@ -23,9 +23,28 @@ const PRODUCT_CATALOG = {
   'cjc-1295':    { name: 'CJC-1295',      price: 10800, size: '2mg',  pillar: 'Performance' },
 };
 
+// Allow production, www subdomain, any Vercel preview deployment, and local dev.
+// The fetch from the site is same-origin so CORS is not strictly required,
+// but we set these headers defensively for robustness (e.g. if the API is ever
+// called from a preview URL or custom subdomain).
+const CORS_ALLOWLIST = [
+  'https://engineeredadherence.com',
+  'https://www.engineeredadherence.com',
+];
+function resolveAllowedOrigin(origin) {
+  if (!origin) return CORS_ALLOWLIST[0];
+  if (CORS_ALLOWLIST.includes(origin)) return origin;
+  if (/^https:\/\/[a-z0-9-]+\.vercel\.app$/.test(origin)) return origin;
+  if (/^http:\/\/localhost(:\d+)?$/.test(origin)) return origin;
+  if (/^http:\/\/127\.0\.0\.1(:\d+)?$/.test(origin)) return origin;
+  return CORS_ALLOWLIST[0];
+}
+
 module.exports = async function handler(req, res) {
   // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', 'https://engineeredadherence.com');
+  const requestOrigin = req.headers.origin;
+  res.setHeader('Access-Control-Allow-Origin', resolveAllowedOrigin(requestOrigin));
+  res.setHeader('Vary', 'Origin');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
@@ -78,14 +97,41 @@ module.exports = async function handler(req, res) {
       });
     }
 
-    const origin = req.headers.origin || 'https://engineeredadherence.com';
+    const origin = resolveAllowedOrigin(req.headers.origin);
 
+    // NOTE: The Checkout page UI (logo, brand color, font, button shape) is
+    // controlled from the Stripe Dashboard → Settings → Branding.
+    // Set brand color to #161616, accent to #e8e4de, and upload the EA mark
+    // so hosted checkout inherits the site's clinical aesthetic.
+    //
+    // For deeper customization beyond Dashboard branding, switch to
+    // ui_mode: 'embedded' + Stripe Elements. That's a larger refactor
+    // and is not done here.
     const session = await stripe.checkout.sessions.create({
       mode: 'payment',
-      payment_method_types: ['card'],
+      // Omit payment_method_types — Stripe auto-selects Card + Link +
+      // Apple Pay / Google Pay based on the customer's device. Much better UX
+      // than card-only.
       line_items: line_items,
       shipping_address_collection: {
         allowed_countries: ['US'],
+      },
+      phone_number_collection: {
+        enabled: true, // cold-chain courier needs a number for coordination
+      },
+      billing_address_collection: 'auto',
+      custom_text: {
+        submit: {
+          message:
+            'Research use only. Temperature-controlled courier, signed handoff, 3–5 business days.',
+        },
+        shipping_address: {
+          message:
+            'Compounds ship cold. A working phone number is required for the courier.',
+        },
+      },
+      consent_collection: {
+        terms_of_service: 'required',
       },
       metadata: {
         source: 'ea-website',

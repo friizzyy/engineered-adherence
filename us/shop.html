@@ -9,18 +9,24 @@
 <meta property="og:description" content="11 research-grade compounds across 5 bio-longevity pillars. Full dossier view.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://engineeredadherence.com/us/shop.html">
-<meta property="og:image" content="https://engineeredadherence.com/assets/og-shop.png">
+<meta property="og:image" content="https://engineeredadherence.com/og.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://engineeredadherence.com/assets/og-shop.png">
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<meta name="twitter:image" content="https://engineeredadherence.com/og.svg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>
 (function(){
   var t = localStorage.getItem('ea-theme') || 'dark';
   document.documentElement.setAttribute('data-theme', t);
 })();
 </script>
-<link rel="stylesheet" href="/qa/css/style.css">
-<link rel="stylesheet" href="/qa/css/mobile.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap">
+<link rel="canonical" href="https://engineeredadherence.com/us/shop.html">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/mobile.css">
 <link rel="stylesheet" href="/us/us.css">
 <style>
   body>.site-nav{}
@@ -376,36 +382,8 @@
     color:var(--faint);opacity:0.5;
   }
 
-  /* ===== DOT NAVIGATION ===== */
-  .dot-nav{
-    position:fixed;right:16px;top:50%;
-    transform:translateY(-50%);
-    display:none;
-  }
-  .dot-nav:hover{opacity:1}
-  .dot-nav__dot{
-    width:4px;height:4px;border-radius:50%;
-    background:var(--line-strong);cursor:pointer;
-    transition:all 0.35s cubic-bezier(0.4,0,0.2,1);
-    border:none;padding:0;position:relative;
-  }
-  .dot-nav__dot::before{
-    content:'';position:absolute;inset:-4px;border-radius:50%;
-  }
-  .dot-nav__dot:hover{transform:scale(1.8);background:var(--muted)}
-  .dot-nav__dot.active{width:6px;height:6px;transform:scale(1)}
-  .dot-nav__dot[data-tooltip]:hover::after{
-    content:attr(data-tooltip);
-    position:absolute;right:14px;top:50%;
-    transform:translateY(-50%);
-    font-family:var(--font-mono);
-    font-size:9px;letter-spacing:1px;
-    white-space:nowrap;color:var(--text);
-    background:var(--bg-card);
-    border:1px solid var(--line-strong);
-    padding:4px 10px;border-radius:2px;
-    pointer-events:none;
-  }
+  /* Dot-navigation removed (DOM + CSS). Sidebar + mobile sheet are the
+     only compound-nav patterns now. */
 
   /* ===== PILLAR FILTER ===== */
   .pillar-filter{
@@ -512,7 +490,6 @@
     .dossier-purchase{justify-content:center}
     .dossier-pillar-tag{margin-left:auto;margin-right:auto}
     .dossier-intro__pillars{flex-wrap:wrap;justify-content:center;gap:12px}
-    .dot-nav{display:none}
     .pillar-filter{
       top:auto;bottom:16px;
       border-radius:28px;
@@ -786,90 +763,41 @@
     border-color:var(--line);color:var(--muted);
   }
 
-  /* ===== CART ENHANCEMENTS ===== */
-  .cart-checkout-note{
-    font-size:13px;color:var(--faint);
-    text-align:center;margin-top:16px;
-  }
-  .cart-waitlist{
-    display:flex;gap:8px;margin-top:12px;
-  }
-  .cart-waitlist-input{
-    flex:1;padding:10px 14px;
-    background:var(--input-bg);border:1px solid var(--line);
-    color:var(--text);font-family:var(--font-body);
-    font-size:13px;border-radius:100px;
-  }
-  .cart-waitlist-input::placeholder{color:var(--faint)}
-  .cart-waitlist-input:focus{outline:none;border-color:var(--accent-solid)}
-  .cart-waitlist-btn{
-    padding:10px 20px;
-    background:transparent;border:1px solid var(--btn-border);
-    color:var(--btn-text);font-family:var(--font-mono);
-    font-size:10px;letter-spacing:1.5px;
-    text-transform:uppercase;cursor:pointer;
-    border-radius:100px;transition:all .3s;
-    white-space:nowrap;
-  }
-  .cart-waitlist-btn:hover{
-    background:var(--btn-hover-bg);border-color:var(--btn-hover-border);
-  }
-  .cart-clear-link{
-    display:block;text-align:center;
-    font-size:12px;color:var(--faint);
-    margin-top:12px;cursor:pointer;
-    background:none;border:none;
-    font-family:var(--font-body);
-    text-decoration:none;transition:color .2s;
-  }
-  .cart-clear-link:hover{color:var(--text);text-decoration:underline}
-  .cart-waitlist-confirm{
-    font-size:12px;color:rgba(16,185,129,0.9);
-    text-align:center;margin-top:8px;display:none;
-  }
-  .cart-suggestion{
-    border:1px solid var(--line);
-    border-radius:8px;padding:12px;
-    margin-top:12px;font-size:12px;
-    color:var(--muted);line-height:1.6;
-  }
-  .cart-suggestion-add{
-    display:inline-block;margin-top:8px;
-    font-family:var(--font-mono);
-    font-size:10px;letter-spacing:1px;
-    text-transform:uppercase;
-    color:var(--text);cursor:pointer;
-    background:none;border:1px solid var(--line);
-    padding:6px 14px;border-radius:100px;
-    transition:all .3s;
-  }
-  .cart-suggestion-add:hover{
-    border-color:var(--btn-hover-border);background:var(--accent);
-  }
-  @keyframes badgeBounce{
-    0%{transform:scale(1)}
-    50%{transform:scale(1.3)}
-    100%{transform:scale(1)}
-  }
-  .cart-badge-bounce{animation:badgeBounce .3s ease}
+  /* All cart-related styles (items, footer, badge bounce, suggestions, clear link)
+     are defined in /us/us.css. Do not duplicate them here. */
 
-
-
-  /* ═══ SIMPLIFY TOGGLE BUTTON ═══ */
+  /* ═══ SIMPLIFY TOGGLE BUTTON ═══
+     z-index 150: above page cards (vials, dossiers) but below nav (9999),
+     cart overlay (200), and cart drawer (210). Hidden entirely when any
+     drawer/modal is open (body.menu-open) so it cannot sit over checkout. */
   .simplify-btn{
     position:fixed;bottom:32px;right:32px;
     display:flex;align-items:center;gap:8px;
     background:rgba(20,20,20,0.96);
-    border:1px solid rgba(255,255,255,0.12);
+    border:1px solid var(--line-strong);
     padding:10px 20px 10px 16px;
     border-radius:32px;cursor:pointer;
-    z-index:8000;
+    z-index:150;
     backdrop-filter:blur(16px);
     -webkit-backdrop-filter:blur(16px);
     color:var(--text);
+    transition:opacity var(--dur-base) var(--ease-viscous),
+               transform var(--dur-base) var(--ease-viscous),
+               border-color var(--dur-base) var(--ease-viscous),
+               background var(--dur-base) var(--ease-viscous),
+               visibility 0s linear var(--dur-base);
   }
-  .simplify-btn:hover{border-color:rgba(255,255,255,0.25);background:rgba(28,28,28,0.98)}
-  .simplify-btn.active{background:rgba(255,255,255,0.06);border-color:rgba(255,255,255,0.2)}
+  body.menu-open .simplify-btn{
+    opacity:0;
+    transform:translateY(8px);
+    visibility:hidden;
+    pointer-events:none;
+    transition:opacity var(--dur-fast) var(--ease-viscous),
+               transform var(--dur-fast) var(--ease-viscous),
+               visibility 0s linear var(--dur-fast);
+  }
+  .simplify-btn:hover{border-color:var(--btn-hover-border);background:rgba(28,28,28,0.98)}
+  .simplify-btn.active{background:var(--accent);border-color:var(--btn-hover-border)}
   .simplify-label{font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--text-heading);font-weight:400}
   .simplify-icon{width:14px;height:14px;display:flex;align-items:center;opacity:0.5}
   .simplify-icon svg{width:100%;height:100%}
@@ -928,27 +856,36 @@
 </div>
 
 <div class="cart-overlay" id="cart-overlay"></div>
-<div class="cart-drawer" id="cart-drawer">
-  <div class="cart-drawer-header">
-    <div class="cart-drawer-title">Your Stack</div>
-    <button class="cart-close" id="cart-close" aria-label="Close cart">&#10005;</button>
+<aside class="cart-drawer" id="cart-drawer" role="dialog" aria-label="Your stack" aria-modal="true">
+  <header class="cart-drawer-header">
+    <div>
+      <div class="cart-drawer-eyebrow">Your Stack</div>
+      <div class="cart-drawer-count" id="cart-count-label">Empty</div>
+    </div>
+    <button class="cart-close" id="cart-close" aria-label="Close cart" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </header>
+
+  <div class="cart-drawer-body">
+    <div id="cart-items"></div>
+    <div id="cart-suggestions"></div>
   </div>
-  <div id="cart-items"></div>
-  <div class="cart-total">
-    <span class="cart-total-label">Subtotal</span>
-    <span class="cart-total-value">$<span id="cart-total">0</span></span>
-  </div>
-  <button id="cart-checkout-btn" class="btn btn-lg" style="width:100%;text-align:center;margin-top:24px;cursor:pointer;border:none">Checkout</button>
-  <p id="cart-checkout-error" style="display:none;color:#ff5c5c;font-size:13px;text-align:center;margin-top:8px"></p>
-  <div id="cart-suggestions"></div>
-  <p class="cart-checkout-note">Secure checkout via Stripe. Compounds ship separately, 3-5 business days.</p>
-  <div class="cart-waitlist" id="cart-waitlist-wrap" style="display:none">
-    <input class="cart-waitlist-input" id="cart-waitlist-email" type="email" placeholder="Email for restock alerts">
-    <button class="cart-waitlist-btn" id="cart-waitlist-btn">Notify Me</button>
-  </div>
-  <p class="cart-waitlist-confirm" id="cart-waitlist-confirm">You're on the list.</p>
-  <button class="cart-clear-link" id="cart-clear-link">Clear Stack</button>
-</div>
+
+  <footer class="cart-drawer-footer">
+    <div class="cart-total">
+      <span class="cart-total-label">Subtotal</span>
+      <span class="cart-total-value">$<span id="cart-total">0</span></span>
+    </div>
+    <button id="cart-checkout-btn" class="cart-checkout-btn" type="button" disabled>
+      <span class="cart-checkout-btn-text">Checkout</span>
+      <span class="cart-checkout-btn-arrow">&rarr;</span>
+    </button>
+    <p id="cart-checkout-error" class="cart-checkout-error"></p>
+    <p class="cart-footer-note">Stripe secure &middot; Cold-chain ship &middot; 3&ndash;5 days</p>
+    <button class="cart-clear-link" id="cart-clear-link" type="button">Clear stack</button>
+  </footer>
+</aside>
 
 <!-- Compound Sidebar (desktop) -->
 <div class="compound-sidebar" id="compoundSidebar"></div>
@@ -961,8 +898,9 @@
 <div class="compound-sheet-overlay" id="compoundSheetOverlay"></div>
 <div class="compound-sheet" id="compoundSheet"></div>
 
-<!-- Dot Navigation -->
-<div class="dot-nav" id="dotNav" role="navigation" aria-label="Compound navigation"></div>
+<!-- Dot navigation removed: redundant with .compound-sidebar on desktop
+     and .compound-sheet on mobile. Two nav patterns is the limit. -->
+
 
 <!-- Scroll Container -->
 <div class="dossier-scroll" id="scrollContainer">
@@ -973,11 +911,11 @@
     <h1 class="dossier-intro__title">Compound Dossiers</h1>
     <p class="dossier-intro__subtitle">11 Research-Grade Compounds Across 5 Pillars</p>
     <div class="dossier-intro__pillars">
-      <span class="dossier-intro__pillar-chip"><span class="dossier-intro__pillar-dot" style="background:#7A8A98"></span>Longevity</span>
-      <span class="dossier-intro__pillar-chip"><span class="dossier-intro__pillar-dot" style="background:#C9B99A"></span>Recovery</span>
-      <span class="dossier-intro__pillar-chip"><span class="dossier-intro__pillar-dot" style="background:#A8B4A0"></span>Metabolic</span>
-      <span class="dossier-intro__pillar-chip"><span class="dossier-intro__pillar-dot" style="background:#B8A8B8"></span>Cognitive</span>
-      <span class="dossier-intro__pillar-chip"><span class="dossier-intro__pillar-dot" style="background:#c4a962"></span>Performance</span>
+      <span class="dossier-intro__pillar-chip" data-pillar="1"><span class="dossier-intro__pillar-dot" style="background:var(--pillar-1)"></span>Longevity</span>
+      <span class="dossier-intro__pillar-chip" data-pillar="2"><span class="dossier-intro__pillar-dot" style="background:var(--pillar-2)"></span>Recovery</span>
+      <span class="dossier-intro__pillar-chip" data-pillar="3"><span class="dossier-intro__pillar-dot" style="background:var(--pillar-3)"></span>Metabolic</span>
+      <span class="dossier-intro__pillar-chip" data-pillar="4"><span class="dossier-intro__pillar-dot" style="background:var(--pillar-4)"></span>Cognitive</span>
+      <span class="dossier-intro__pillar-chip" data-pillar="5"><span class="dossier-intro__pillar-dot" style="background:var(--pillar-5)"></span>Performance</span>
     </div>
     <div class="dossier-intro__line"></div>
     <div class="scroll-arrow" id="scrollArrow">
@@ -1091,7 +1029,6 @@
 
   /* ===== ELEMENTS ===== */
   var scrollContainer = document.getElementById('scrollContainer');
-  var dotNav = document.getElementById('dotNav');
   var scrollArrow = document.getElementById('scrollArrow');
 
   /* Sidebar replaces pillar filter */
@@ -1349,54 +1286,11 @@
       }
     });
 
-    renderDotNav();
     setupObserver();
   }
 
-  /* ===== DOT NAVIGATION ===== */
-  function renderDotNav() {
-    dotNav.innerHTML = '';
-
-    var introDot = document.createElement('button');
-    introDot.className = 'dot-nav__dot active';
-    introDot.dataset.target = 'introSection';
-    introDot.setAttribute('aria-label', 'Scroll to introduction');
-    introDot.setAttribute('data-tooltip', 'Intro');
-    introDot.style.background = 'var(--muted)';
-    introDot.addEventListener('click', function() {
-      document.getElementById('introSection').scrollIntoView({ behavior: 'smooth' });
-    });
-    dotNav.appendChild(introDot);
-
-    visibleSections.forEach(function(section) {
-      var compound = compounds[parseInt(section.dataset.index)];
-      var dot = document.createElement('button');
-      dot.className = 'dot-nav__dot';
-      dot.dataset.target = section.id;
-      dot.dataset.pillar = compound.pillarIndex;
-      dot.setAttribute('aria-label', 'Scroll to ' + compound.name);
-      dot.setAttribute('data-tooltip', compound.name);
-      dot.addEventListener('click', function() {
-        section.scrollIntoView({ behavior: 'smooth' });
-      });
-      dotNav.appendChild(dot);
-    });
-  }
-
-  function updateActiveDot(activeId) {
-    var dots = dotNav.querySelectorAll('.dot-nav__dot');
-    dots.forEach(function(dot) {
-      var isActive = dot.dataset.target === activeId;
-      dot.classList.toggle('active', isActive);
-      if (isActive && dot.dataset.pillar) {
-        dot.style.background = pillarColors[dot.dataset.pillar];
-      } else if (isActive) {
-        dot.style.background = 'var(--muted)';
-      } else {
-        dot.style.background = 'var(--line-strong)';
-      }
-    });
-  }
+  /* Dot-nav removed. No-op kept so legacy observer callbacks don't throw. */
+  function updateActiveDot(){ /* intentionally empty */ }
 
   /* ===== INTERSECTION OBSERVER ===== */
   var _scrollFallbackBound = null;
@@ -1552,8 +1446,8 @@
 
 })();
 </script>
-<script src="/qa/js/main.js"></script>
-<script src="/qa/js/mobile.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/mobile.js"></script>
 
 <footer>
   <div class="footer-bar">

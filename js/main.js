@@ -79,14 +79,14 @@
     if(window.innerWidth > 768 && mobileNav.classList.contains('active')){
       closeMenu();
     }
-  });
+  }, { passive: true });
 })();
 
 // ═══════ SCROLL REVEAL + STAGGER ═══════
 (function(){
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible') });
-  }, { threshold: 0.12 });
+  }, { threshold: 0.15 });
 
   document.querySelectorAll('.reveal, .stagger-children').forEach(el => observer.observe(el));
 })();
@@ -109,6 +109,52 @@
   }, { threshold: 0.3, rootMargin: '-80px 0px -50% 0px' });
 
   sections.forEach(s => navObserver.observe(s));
+})();
+
+// ═══════ TOAST + COPY-TO-CLIPBOARD ═══════
+(function(){
+  // Create toast element once
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg><span class="toast-text">Copied</span>';
+  document.body.appendChild(toast);
+
+  let toastTimer = null;
+
+  window.showToast = function(msg){
+    toast.querySelector('.toast-text').textContent = msg || 'Copied';
+    toast.classList.add('visible');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ toast.classList.remove('visible'); }, 2000);
+  };
+
+  window.copyToClipboard = function(text){
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(function(){
+        showToast('Copied: ' + text);
+      });
+    } else {
+      // Fallback for older browsers
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('Copied: ' + text);
+    }
+  };
+
+  // Auto-bind any .copy-trigger elements
+  document.addEventListener('click', function(e){
+    const trigger = e.target.closest('.copy-trigger');
+    if(trigger){
+      const text = trigger.getAttribute('data-copy') || trigger.textContent.trim();
+      copyToClipboard(text);
+    }
+  });
 })();
 
 // ═══════ SMOOTH NAV FADE ON LOAD (for pages without hero animation) ═══════

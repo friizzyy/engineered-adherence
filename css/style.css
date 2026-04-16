@@ -3,7 +3,9 @@
    Modern Minimalist · Premium Edition
    ═══════════════════════════════════════════════════════════════ */
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap");
+/* Fonts (Inter, JetBrains Mono) are loaded via <link rel="preconnect"> +
+   <link rel="stylesheet"> in each HTML <head> for non-render-blocking delivery.
+   Do not re-introduce @import here — it stalls the CSSOM and hurts FCP. */
 
 /* ═══════════════════════════════════════════
    TYPOGRAPHY SYSTEM
@@ -13,8 +15,27 @@
   --font-body:'Inter',system-ui,sans-serif;
   --font-mono:'JetBrains Mono',monospace;
 
+  /* ─── LOCKED TYPE SCALE ───
+     Any new type must pick one of these. Do not add raw px sizes. */
+  --fs-mono-xs:10px;   /* mono labels, the smallest permissible text */
+  --fs-xs:11px;        /* eyebrow, metadata */
+  --fs-sm:13px;        /* captions, secondary body */
+  --fs-base:15px;      /* body text baseline */
+  --fs-md:18px;        /* emphasised body / card titles */
+  --fs-lg:22px;        /* section eyebrows, small heads */
+  --fs-xl:clamp(32px,3.5vw,44px);   /* page titles */
+  --fs-2xl:clamp(40px,5vw,64px);    /* large page titles */
+  --fs-display:clamp(52px,5.5vw,84px); /* hero display */
+
+  /* ─── LOCKED WEIGHT SCALE ───
+     Three weights only. 500/600/700 are prohibited site-wide. */
+  --fw-thin:200;
+  --fw-light:300;
+  --fw-regular:400;
+
   /* Tracking */
   --tracking-display:-0.03em;
+  --tracking-display-tight:-0.04em;
   --tracking-body:0em;
   --tracking-mono:0.05em;
   --tracking-eyebrow:0.15em;
@@ -23,6 +44,24 @@
   --leading-display:1.05;
   --leading-body:1.6;
   --leading-relaxed:1.65;
+
+  /* ─── RADIUS SCALE — COMMITTED SHARP ───
+     The brand is squared. Use --r-xs only for chips/inputs if truly needed. */
+  --r-none:0;
+  --r-xs:2px;
+
+  /* ─── SIGNATURE MOTION ───
+     --ease-viscous is the EA motion identity: elements settle
+     like fluid in a vial — slow initial displacement, quick middle, slow arrival.
+     Use this for hover/settle. --ease-snap for dismissals. --ease-liquid for reveals. */
+  --ease-viscous:cubic-bezier(.4,0,.1,1);
+  --ease-snap:cubic-bezier(.22,1,.36,1);
+  --ease-liquid:cubic-bezier(.65,0,.35,1);
+
+  --dur-fast:180ms;
+  --dur-base:350ms;
+  --dur-slow:600ms;
+  --dur-reveal:1200ms;
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
@@ -174,22 +213,39 @@
 .skip-link:focus{top:12px}
 
 /* ═══════════════════════════════════════════
-   FOCUS VISIBLE
+   FOCUS VISIBLE — BRAND RING
+   Thin, on-brand, never the default browser blue.
+   Uses text-heading color for maximum hierarchy coherence.
    ═══════════════════════════════════════════ */
 :focus-visible{
-  outline:2px solid rgba(255,255,255,0.4);
-  outline-offset:2px;
+  outline:1px solid var(--text-heading);
+  outline-offset:3px;
+  transition:outline-offset var(--dur-fast) var(--ease-snap);
 }
-[data-theme="light"] :focus-visible{
-  outline-color:rgba(0,0,0,0.3);
-}
+:focus-visible:hover{outline-offset:4px}
 :focus:not(:focus-visible){outline:none}
 
 /* ═══════════════════════════════════════════
-   MICRO-INTERACTIONS
+   MICRO-INTERACTIONS — VISCOUS DEFAULTS
+   Links drift; buttons settle. Short-duration interactions use snap.
    ═══════════════════════════════════════════ */
-a{transition:opacity .2s ease,color .2s ease}
-button{transition:all .2s ease}
+a{transition:opacity var(--dur-fast) var(--ease-viscous),color var(--dur-fast) var(--ease-viscous)}
+button{transition:background var(--dur-base) var(--ease-viscous),border-color var(--dur-base) var(--ease-viscous),color var(--dur-base) var(--ease-viscous),transform var(--dur-base) var(--ease-viscous)}
+
+/* ═══════════════════════════════════════════
+   UTILITY — CART CHECKOUT ERROR
+   Replaces inline style="color:#ff5c5c..." on cart-checkout-error elements.
+   ═══════════════════════════════════════════ */
+.cart-checkout-error{
+  display:none;
+  color:#ff6b6b;
+  font-size:var(--fs-sm);
+  text-align:center;
+  margin-top:8px;
+  letter-spacing:0.01em;
+  font-weight:var(--fw-regular);
+}
+.cart-checkout-error.visible{display:block}
 
 /* ═══════════════════════════════════════════
    THEME FLASH PREVENTION
@@ -254,17 +310,33 @@ nav,.site-nav{
 
 .logo{
   font-family:var(--font-body);
-  font-size:14px;font-weight:500;letter-spacing:0.08em;
-  color:var(--text-heading);transition:all .3s;
+  font-size:var(--fs-sm);font-weight:var(--fw-regular);letter-spacing:0.08em;
+  color:var(--text-heading);
+  transition:opacity var(--dur-base) var(--ease-viscous),letter-spacing var(--dur-slow) var(--ease-viscous);
   text-transform:uppercase;
+  display:inline-flex;align-items:center;gap:10px;
 }
-.logo:hover{opacity:.7}
+/* Brand mark — inline SVG vial glyph appears before the wordmark.
+   Uses currentColor so it inherits the logo's color and matches in both themes. */
+.logo::before{
+  content:'';
+  display:inline-block;
+  width:14px;height:18px;flex-shrink:0;
+  background-color:currentColor;
+  mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 18' fill='none' stroke='black' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'><path d='M4.5 1 h5 v1.5 h-.7 v11 a1.8 1.8 0 0 1 -1.8 1.8 a1.8 1.8 0 0 1 -1.8 -1.8 v-11 h-.7 z'/><line x1='5.3' y1='10' x2='8.7' y2='10' opacity='0.5'/><rect x='5.3' y='10.5' width='3.4' height='3.5' fill='black' stroke='none' opacity='0.35'/></svg>") no-repeat center / contain;
+  -webkit-mask:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 18' fill='none' stroke='black' stroke-width='1.1' stroke-linecap='round' stroke-linejoin='round'><path d='M4.5 1 h5 v1.5 h-.7 v11 a1.8 1.8 0 0 1 -1.8 1.8 a1.8 1.8 0 0 1 -1.8 -1.8 v-11 h-.7 z'/><line x1='5.3' y1='10' x2='8.7' y2='10' opacity='0.5'/><rect x='5.3' y='10.5' width='3.4' height='3.5' fill='black' stroke='none' opacity='0.35'/></svg>") no-repeat center / contain;
+  opacity:.85;
+  transition:transform var(--dur-slow) var(--ease-viscous),opacity var(--dur-base) var(--ease-viscous);
+}
+.logo:hover{opacity:.85;letter-spacing:0.09em}
+.logo:hover::before{transform:translateY(-1px);opacity:1}
 
 .nav-center{display:flex;gap:48px;list-style:none;align-items:center}
 .nav-center a{
   color:var(--faint);
-  font-size:12px;letter-spacing:0.1em;font-weight:400;
-  text-transform:uppercase;transition:all .3s;
+  font-size:var(--fs-xs);letter-spacing:0.1em;font-weight:var(--fw-regular);
+  text-transform:uppercase;
+  transition:color var(--dur-base) var(--ease-viscous),opacity var(--dur-base) var(--ease-viscous);
   position:relative;padding:4px 0;
   opacity:0.5;
 }
@@ -333,7 +405,7 @@ nav,.site-nav{
 
 .section-title{
   font-family:var(--font-display);
-  font-size:clamp(36px,4.5vw,52px);font-weight:200;
+  font-size:clamp(36px,4.5vw,52px);font-weight:300;
   line-height:var(--leading-display);margin-bottom:24px;
   color:var(--text-heading);transition:color .5s;
   letter-spacing:var(--tracking-display);
@@ -360,7 +432,7 @@ nav,.site-nav{
 .page-hero .section-title{
   font-size:clamp(42px,6vw,72px);margin-bottom:28px;
   letter-spacing:var(--tracking-display);
-  font-weight:200;line-height:var(--leading-display);
+  font-weight:300;line-height:var(--leading-display);
 }
 .page-hero .section-body{
   max-width:600px;font-size:16px;line-height:2;
@@ -412,7 +484,7 @@ nav,.site-nav{
 
 .card h3{
   font-family:var(--font-display);
-  font-size:18px;font-weight:200;
+  font-size:18px;font-weight:500;
   margin-bottom:12px;color:var(--text-heading);
   transition:color .5s;letter-spacing:0.01em;
 }
@@ -443,9 +515,9 @@ nav,.site-nav{
 .stat{text-align:left}
 .stat-num{
   font-family:var(--font-display);
-  font-size:clamp(48px,6vw,80px);font-weight:200;
+  font-size:clamp(48px,6vw,80px);font-weight:300;
   color:var(--stat-num);transition:color .5s;
-  line-height:1;letter-spacing:-0.04em;font-variant-numeric:tabular-nums;
+  line-height:1;letter-spacing:var(--tracking-display);
   white-space:nowrap;
 }
 .stat-label{
@@ -468,7 +540,7 @@ nav,.site-nav{
 }
 .stat-card .val{
   font-family:var(--font-display);
-  font-size:44px;font-weight:200;font-variant-numeric:tabular-nums;
+  font-size:44px;font-weight:500;
   color:var(--stat-num);transition:color .5s;
   line-height:1;letter-spacing:-0.02em;
   white-space:nowrap;
@@ -482,27 +554,48 @@ nav,.site-nav{
 /* ═══════════════════════════════════════════
    BUTTONS
    ═══════════════════════════════════════════ */
+/* ─── BUTTONS ───
+   Committed sharp (no pill radius) to match the clinical-editorial
+   system; lift + subtle brightening on hover via viscous easing. */
 .btn{
-  display:inline-block;padding:16px 52px;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:16px 40px;
   background:var(--btn-bg);border:1px solid var(--btn-border);
-  color:var(--btn-text);font-size:10px;
-  letter-spacing:2.5px;text-transform:uppercase;font-weight:400;
-  transition:all .3s cubic-bezier(0.4,0,0.2,1);
+  color:var(--btn-text);
+  font-size:var(--fs-mono-xs);
+  letter-spacing:2.5px;text-transform:uppercase;
+  font-weight:var(--fw-regular);font-family:var(--font-body);
+  transition:background var(--dur-base) var(--ease-viscous),
+             border-color var(--dur-base) var(--ease-viscous),
+             color var(--dur-base) var(--ease-viscous),
+             transform var(--dur-slow) var(--ease-viscous),
+             letter-spacing var(--dur-slow) var(--ease-viscous);
   cursor:pointer;
-  position:relative;
-  border-radius:100px;
+  position:relative;overflow:hidden;
+  border-radius:var(--r-none);
+  text-decoration:none;
+}
+/* Thin top highlight sweep — the EA "liquid glass" interaction signature */
+.btn::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--text-heading),transparent);
+  transform:scaleX(0);transform-origin:center;
+  transition:transform var(--dur-slow) var(--ease-viscous);
+  opacity:0;
 }
 .btn:hover{
   background:var(--btn-hover-bg);
   border-color:var(--btn-hover-border);
   transform:translateY(-2px);
+  letter-spacing:2.8px;
 }
+.btn:hover::before{transform:scaleX(1);opacity:.5}
 .btn:active{
-  transform:scale(0.97);
-  transition:transform .15s;
+  transform:translateY(0);
+  transition:transform var(--dur-fast) var(--ease-snap);
 }
 
-.btn-lg{padding:18px 56px;font-size:11px}
+.btn-lg{padding:18px 48px;font-size:var(--fs-xs)}
 
 /* Secondary — always ghost outline both modes */
 .btn-ghost{
@@ -691,7 +784,7 @@ footer{
 }
 .timeline-title{
   font-family:var(--font-display);
-  font-size:24px;font-weight:200;
+  font-size:24px;font-weight:500;
   color:var(--text-heading);margin-bottom:12px;
   transition:color .5s;letter-spacing:0.01em;
 }
@@ -1001,4 +1094,26 @@ nav::after{
 }
 nav.scrolled::after{
   opacity:1;
+}
+
+/* ═══════════════════════════════════════════
+   ACCESSIBILITY — REDUCED MOTION
+   Respect OS-level "reduce motion" preference.
+   Kills long transitions, scroll animation, and SVG vial animation
+   while preserving layout-critical transforms.
+   ═══════════════════════════════════════════ */
+@media (prefers-reduced-motion: reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  .reveal,
+  .stagger-children > *{
+    opacity:1 !important;
+    transform:none !important;
+  }
 }

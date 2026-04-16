@@ -9,18 +9,24 @@
 <meta property="og:description" content="Research-grade peptide compounds with clinical precision. AI-matched protocol design and uncompromising purity standards.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://engineeredadherence.com/us/about.html">
-<meta property="og:image" content="https://engineeredadherence.com/assets/og-about.png">
+<meta property="og:image" content="https://engineeredadherence.com/og.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://engineeredadherence.com/assets/og-about.png">
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<meta name="twitter:image" content="https://engineeredadherence.com/og.svg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>
 (function(){
   var t = localStorage.getItem('ea-theme') || 'dark';
   document.documentElement.setAttribute('data-theme', t);
 })();
 </script>
-<link rel="stylesheet" href="/qa/css/style.css">
-<link rel="stylesheet" href="/qa/css/mobile.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap">
+<link rel="canonical" href="https://engineeredadherence.com/us/about.html">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/mobile.css">
 <link rel="stylesheet" href="/us/us.css">
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -347,19 +353,36 @@
 </div>
 
 <div class="cart-overlay" id="cart-overlay"></div>
-<div class="cart-drawer" id="cart-drawer">
-  <div class="cart-drawer-header">
-    <div class="cart-drawer-title">Your Stack</div>
-    <button class="cart-close" id="cart-close" aria-label="Close cart">&#10005;</button>
+<aside class="cart-drawer" id="cart-drawer" role="dialog" aria-label="Your stack" aria-modal="true">
+  <header class="cart-drawer-header">
+    <div>
+      <div class="cart-drawer-eyebrow">Your Stack</div>
+      <div class="cart-drawer-count" id="cart-count-label">Empty</div>
+    </div>
+    <button class="cart-close" id="cart-close" aria-label="Close cart" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </header>
+
+  <div class="cart-drawer-body">
+    <div id="cart-items"></div>
+    <div id="cart-suggestions"></div>
   </div>
-  <div id="cart-items"></div>
-  <div class="cart-total">
-    <span class="cart-total-label">Subtotal</span>
-    <span class="cart-total-value">$<span id="cart-total">0</span></span>
-  </div>
-  <button id="cart-checkout-btn" class="btn btn-lg" style="width:100%;text-align:center;margin-top:24px;cursor:pointer;border:none">Checkout</button>
-  <p id="cart-checkout-error" style="display:none;color:#ff5c5c;font-size:13px;text-align:center;margin-top:8px"></p>
-</div>
+
+  <footer class="cart-drawer-footer">
+    <div class="cart-total">
+      <span class="cart-total-label">Subtotal</span>
+      <span class="cart-total-value">$<span id="cart-total">0</span></span>
+    </div>
+    <button id="cart-checkout-btn" class="cart-checkout-btn" type="button" disabled>
+      <span class="cart-checkout-btn-text">Checkout</span>
+      <span class="cart-checkout-btn-arrow">&rarr;</span>
+    </button>
+    <p id="cart-checkout-error" class="cart-checkout-error"></p>
+    <p class="cart-footer-note">Stripe secure &middot; Cold-chain ship &middot; 3&ndash;5 days</p>
+    <button class="cart-clear-link" id="cart-clear-link" type="button">Clear stack</button>
+  </footer>
+</aside>
 
 <main id="main-content">
 
@@ -528,8 +551,8 @@
   bars.forEach(function(b) { obs.observe(b); });
 })();
 </script>
-<script src="/qa/js/main.js"></script>
-<script src="/qa/js/mobile.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/mobile.js"></script>
 
 <script>
 (function(){

@@ -263,6 +263,6 @@
         initSwipeIndicators();
       }
     }, 250);
-  });
+  }, { passive: true });
 
 })();

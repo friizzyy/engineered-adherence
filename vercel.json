@@ -1,10 +1,40 @@
 {
+  "cleanUrls": true,
   "rewrites": [
     { "source": "/", "destination": "/index.html" },
-    { "source": "/us", "destination": "/us/index.html" },
-    { "source": "/qa", "destination": "/qa/index.html" }
+    { "source": "/us", "destination": "/us/index.html" }
   ],
-  "cleanUrls": true,
+  "redirects": [
+    { "source": "/qa", "destination": "/us/", "permanent": false },
+    { "source": "/qa/", "destination": "/us/", "permanent": false },
+    { "source": "/qa/index.html", "destination": "/us/", "permanent": false },
+    { "source": "/qa/about.html", "destination": "/us/about.html", "permanent": false },
+    { "source": "/qa/science.html", "destination": "/us/", "permanent": false },
+    { "source": "/qa/protocols.html", "destination": "/us/protocols.html", "permanent": false },
+    { "source": "/qa/market.html", "destination": "/us/", "permanent": false },
+    { "source": "/qa/contact.html", "destination": "/us/", "permanent": false },
+    { "source": "/qa/pillars.html", "destination": "/us/", "permanent": false }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)\\.(css|js)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(svg|ico|woff2|woff|png|jpg|jpeg)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=604800, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    }
+  ],
   "functions": {
     "api/*.js": {
       "memory": 256,

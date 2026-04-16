@@ -9,18 +9,24 @@
 <meta property="og:description" content="Research-grade peptide compounds. Precision protocols, clinical purity, delivered to your door.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://engineeredadherence.com/us/">
-<meta property="og:image" content="https://engineeredadherence.com/assets/og-home.png">
+<meta property="og:image" content="https://engineeredadherence.com/og.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://engineeredadherence.com/assets/og-home.png">
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<meta name="twitter:image" content="https://engineeredadherence.com/og.svg">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <script>
 (function(){
   var t = localStorage.getItem('ea-theme') || 'dark';
   document.documentElement.setAttribute('data-theme', t);
 })();
 </script>
-<link rel="stylesheet" href="/qa/css/style.css">
-<link rel="stylesheet" href="/qa/css/mobile.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500;700&display=swap">
+<link rel="canonical" href="https://engineeredadherence.com/us/">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/mobile.css">
 <link rel="stylesheet" href="/us/us.css">
 <style>
   nav{}
@@ -46,12 +52,12 @@
   .standard-grid{
     display:grid;grid-template-columns:1fr 1.4fr;
     gap:0;align-items:start;
-    border-top:1px solid rgba(255,255,255,0.06);
-    border-bottom:1px solid rgba(255,255,255,0.06);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
   }
   .standard-left{
     padding:80px 64px 80px 0;
-    border-right:1px solid rgba(255,255,255,0.06);
+    border-right:1px solid var(--line);
     position:sticky;top:80px;
   }
   .standard-head{
@@ -71,8 +77,8 @@
   }
   .standard-stat{
     padding:52px 40px;
-    border-right:1px solid rgba(255,255,255,0.06);
-    border-bottom:1px solid rgba(255,255,255,0.06);
+    border-right:1px solid var(--line);
+    border-bottom:1px solid var(--line);
     transition:background .25s ease;
   }
   .standard-stat:nth-child(2),.standard-stat:nth-child(4){border-right:none}
@@ -105,7 +111,7 @@
   }
   @media(max-width:1024px){
     .standard-grid{grid-template-columns:1fr}
-    .standard-left{border-right:none;border-bottom:1px solid rgba(255,255,255,0.06);padding:60px 0 48px;position:static}
+    .standard-left{border-right:none;border-bottom:1px solid var(--line);padding:60px 0 48px;position:static}
     .standard-body{max-width:100%}
   }
   @media(max-width:768px){
@@ -120,8 +126,8 @@
   /* ═══ PREMIUM STATS SECTION ═══ */
   .standard-wrap{
     padding:120px 0;
-    border-top:1px solid rgba(255,255,255,0.06);
-    border-bottom:1px solid rgba(255,255,255,0.06);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
   }
   .standard-header{
     display:flex;align-items:baseline;
@@ -139,8 +145,8 @@
   }
   .standard-strip{
     display:flex;align-items:stretch;
-    border-top:1px solid rgba(255,255,255,0.06);
-    border-bottom:1px solid rgba(255,255,255,0.06);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
     margin-bottom:48px;
   }
   .standard-item{
@@ -192,7 +198,7 @@
   }
   .standard-divider{
     width:1px;
-    background:rgba(255,255,255,0.06);
+    background:var(--line);
     flex-shrink:0;
     margin:0;
   }
@@ -206,7 +212,7 @@
     .standard-header{flex-direction:column;gap:12px;margin-bottom:48px}
     .standard-title{text-align:left;font-size:16px;max-width:100%}
     .standard-strip{flex-direction:column;border:none;gap:0}
-    .standard-item{padding:32px 0 !important;border-bottom:1px solid rgba(255,255,255,0.06)}
+    .standard-item{padding:32px 0 !important;border-bottom:1px solid var(--line)}
     .standard-item:last-child{border-bottom:none}
     .standard-divider{display:none}
     .standard-figure{font-size:56px}
@@ -216,8 +222,8 @@
 
   /* ═══ DATA BAND — compact single strip ═══ */
   .data-band{
-    border-top:1px solid rgba(255,255,255,0.06);
-    border-bottom:1px solid rgba(255,255,255,0.06);
+    border-top:1px solid var(--line);
+    border-bottom:1px solid var(--line);
     background:rgba(255,255,255,0.01);
   }
   .data-band-inner{
@@ -249,15 +255,15 @@
   }
   .data-sep{
     width:1px;height:20px;
-    background:rgba(255,255,255,0.08);
+    background:var(--line-strong);
     flex-shrink:0;
   }
   @media(max-width:768px){
     .data-band-inner{flex-wrap:wrap;height:auto;padding:4px 0}
     .data-item{flex:1 1 45%;padding:18px 20px;justify-content:flex-start}
     .data-sep{display:none}
-    .data-item:nth-child(odd){border-right:1px solid rgba(255,255,255,0.06)}
-    .data-item:nth-child(1),.data-item:nth-child(2){border-bottom:1px solid rgba(255,255,255,0.06)}
+    .data-item:nth-child(odd){border-right:1px solid var(--line)}
+    .data-item:nth-child(1),.data-item:nth-child(2){border-bottom:1px solid var(--line)}
   }
 
   /* OLD PHILOSOPHY - REPLACED */
@@ -277,11 +283,11 @@
   .philosophy .stat-row{
     display:grid;grid-template-columns:repeat(4,1fr);
     border:none;gap:0;
-    border-top:1px solid rgba(255,255,255,0.06);
+    border-top:1px solid var(--line);
   }
   .philosophy .stat{
     padding:52px 40px;
-    border-right:1px solid rgba(255,255,255,0.06);
+    border-right:1px solid var(--line);
     position:relative;overflow:hidden;
     transition:background .3s ease;
   }
@@ -343,7 +349,7 @@
     font-family:var(--font-mono);font-size:9px;
     letter-spacing:1.5px;text-transform:uppercase;
     color:var(--faint);opacity:0.4;
-    border:1px solid rgba(255,255,255,0.08);
+    border:1px solid var(--line-strong);
     padding:3px 8px;border-radius:20px;
   }
   .proto-card h3{
@@ -377,7 +383,7 @@
   }
   .advisor-right{
     display:flex;flex-direction:column;gap:0;
-    border:1px solid rgba(255,255,255,0.06);
+    border:1px solid var(--line);
   }
   .advisor-step{
     display:flex;align-items:center;gap:20px;
@@ -528,20 +534,25 @@
   .us-hero-eyebrow::before,.us-hero-eyebrow::after{
     content:'';width:32px;height:1px;background:var(--faint);opacity:.4;
   }
+  /* Hero title + sub use clamp() to handle the full viewport range
+     in a single declaration — no per-breakpoint redefinitions needed. */
   .us-hero-title{
     font-family:var(--font-display);
-    font-size:clamp(42px,7vw,80px);font-weight:300;line-height:var(--leading-display);
-    margin-top:20px;letter-spacing:var(--tracking-display);
+    font-size:clamp(28px,6.5vw,80px);
+    font-weight:var(--fw-light);
+    line-height:var(--leading-display);
+    margin-top:20px;letter-spacing:var(--tracking-display-tight);
     opacity:0;animation:fu .8s ease 1.6s forwards;
     color:var(--text-heading);
   }
-  .us-hero-title em{font-style:italic;font-weight:400;color:var(--muted)}
+  .us-hero-title em{font-style:italic;font-weight:var(--fw-regular);color:var(--muted)}
   .us-hero-sub{
-    font-size:15px;color:var(--muted);font-weight:300;
-    margin-top:24px;max-width:520px;line-height:var(--leading-relaxed);
-    margin-left:auto;margin-right:auto;text-align:center;
+    font-size:clamp(13px,1.3vw,15px);
+    color:var(--muted);font-weight:var(--fw-light);
+    margin:24px auto 0;
+    max-width:60ch;line-height:var(--leading-relaxed);
+    text-align:center;
     opacity:0;animation:fu .8s ease 1.9s forwards;
-    max-width:60ch;
   }
   .us-hero-ctas{
     display:flex;gap:16px;margin-top:40px;
@@ -590,7 +601,7 @@
     margin-top:0;
   }
   [data-theme="light"] .philosophy .stat-row{
-    border-color:rgba(0,0,0,0.08);
+    border-color:var(--line-strong);
   }
   .philosophy .stat{
     flex:1;text-align:center;
@@ -601,7 +612,7 @@
     border-left:1px solid rgba(255,255,255,0.10);
   }
   [data-theme="light"] .philosophy .stat+.stat{
-    border-left-color:rgba(0,0,0,0.08);
+    border-left-color:var(--line-strong);
   }
   .philosophy .stat::after{
     content:'';position:absolute;bottom:0;left:0;right:0;
@@ -628,12 +639,12 @@
      ═══════════════════════════════════════════ */
   .featured-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
   .compound-card{
-    background:var(--bg-card);border:1px solid rgba(255,255,255,0.06);
+    background:var(--bg-card);border:1px solid var(--line);
     padding:40px 28px;position:relative;overflow:hidden;
     transition:all .35s cubic-bezier(0.22,1,0.36,1);
   }
   [data-theme="light"] .compound-card{
-    border-color:rgba(0,0,0,0.06);
+    border-color:var(--line);
   }
   .compound-card::before{
     content:'';position:absolute;top:0;left:0;right:0;height:1px;
@@ -708,12 +719,12 @@
      ═══════════════════════════════════════════ */
   .proto-preview{display:grid;grid-template-columns:1fr 1fr;gap:16px}
   .proto-card{
-    background:var(--bg-card);border:1px solid rgba(255,255,255,0.06);
+    background:var(--bg-card);border:1px solid var(--line);
     padding:40px 32px;
     transition:all .35s cubic-bezier(0.22,1,0.36,1);
     position:relative;overflow:hidden;
   }
-  [data-theme="light"] .proto-card{border-color:rgba(0,0,0,0.06)}
+  [data-theme="light"] .proto-card{border-color:var(--line)}
   .proto-card::before{
     content:'';position:absolute;top:0;left:0;right:0;height:1px;
     background:linear-gradient(90deg,transparent,var(--accent-solid),transparent);
@@ -751,17 +762,17 @@
 
   .us-pillars{
     display:grid;grid-template-columns:repeat(5,1fr);
-    border:1px solid rgba(255,255,255,0.06);
+    border:1px solid var(--line);
   }
-  [data-theme="light"] .us-pillars{border-color:rgba(0,0,0,0.06)}
+  [data-theme="light"] .us-pillars{border-color:var(--line)}
   .us-pillar{
     padding:32px 20px;text-align:center;
     position:relative;
-    border-right:1px solid rgba(255,255,255,0.06);
+    border-right:1px solid var(--line);
     transition:all .35s cubic-bezier(0.22,1,0.36,1);
     overflow:hidden;
   }
-  [data-theme="light"] .us-pillar{border-right-color:rgba(0,0,0,0.06)}
+  [data-theme="light"] .us-pillar{border-right-color:var(--line)}
   .us-pillar:last-child{border-right:none}
   /* Ambient pillar glow background */
   .us-pillar::before{
@@ -829,10 +840,8 @@
   @media(max-width:768px){
     
 
-    /* Hero */
+    /* Hero: container only; type handled by clamp() in the base rule. */
     .us-hero{padding:100px 24px 60px;overflow:hidden}
-    .us-hero-title{font-size:36px}
-    .us-hero-sub{font-size:14px;max-width:360px}
     .us-hero-ctas{flex-direction:column;align-items:center;gap:12px}
     .us-hero-ctas .btn{width:100%;max-width:280px;text-align:center;min-height:44px}
 
@@ -845,8 +854,8 @@
     .philosophy .stat-row{flex-direction:row;flex-wrap:wrap;gap:0}
     .philosophy .stat{flex:1 1 45%;padding:28px 16px}
     .philosophy .stat+.stat{border-left:none}
-    .philosophy .stat{border-bottom:1px solid rgba(255,255,255,0.08)}
-    .philosophy .stat:nth-child(odd){border-right:1px solid rgba(255,255,255,0.08)}
+    .philosophy .stat{border-bottom:1px solid var(--line-strong)}
+    .philosophy .stat:nth-child(odd){border-right:1px solid var(--line-strong)}
     .philosophy .stat-num{font-size:36px}
 
     /* Advisor teaser */
@@ -886,10 +895,10 @@
       min-width:200px;flex-shrink:0;
       scroll-snap-align:start;padding:32px 20px;
       border-right:none;
-      border:1px solid rgba(255,255,255,0.06);
+      border:1px solid var(--line);
     }
-    [data-theme="light"] .us-pillar{border-color:rgba(0,0,0,0.06)}
-    .us-pillar:last-child{border-right:1px solid rgba(255,255,255,0.06)}
+    [data-theme="light"] .us-pillar{border-color:var(--line)}
+    .us-pillar:last-child{border-right:1px solid var(--line)}
     .pillars-header{margin-bottom:32px}
   }
 
@@ -897,8 +906,7 @@
      RESPONSIVE - SMALL MOBILE (480px)
      ═══════════════════════════════════════════ */
   @media(max-width:480px){
-    .us-hero-title{font-size:28px}
-    .us-hero-sub{font-size:13px;max-width:300px}
+    /* Hero type handled by clamp() — no override needed. */
 
     /* Vials: compact */
     body .vials-stage{gap:10px;padding:0 4px}
@@ -933,7 +941,7 @@
      RESPONSIVE - EXTRA SMALL (375px)
      ═══════════════════════════════════════════ */
   @media(max-width:375px){
-    .us-hero-title{font-size:24px}
+    /* Hero type handled by clamp() — no override needed. */
     body .vials-stage{gap:6px;padding:0}
     body .vial-svg{width:36px;height:68px}
     .vial-name{font-size:8px;letter-spacing:0.5px}
@@ -955,13 +963,13 @@
       border-left:none;
     }
     .philosophy .stat+.stat{border-left:none}
-    .philosophy .stat:nth-child(odd){border-right:1px solid rgba(255,255,255,0.06)}
+    .philosophy .stat:nth-child(odd){border-right:1px solid var(--line)}
     .philosophy .stat:nth-child(1),.philosophy .stat:nth-child(2){
-      border-bottom:1px solid rgba(255,255,255,0.06);
+      border-bottom:1px solid var(--line);
     }
-    [data-theme="light"] .philosophy .stat:nth-child(odd){border-right-color:rgba(0,0,0,0.08)}
+    [data-theme="light"] .philosophy .stat:nth-child(odd){border-right-color:var(--line-strong)}
     [data-theme="light"] .philosophy .stat:nth-child(1),
-    [data-theme="light"] .philosophy .stat:nth-child(2){border-bottom-color:rgba(0,0,0,0.08)}
+    [data-theme="light"] .philosophy .stat:nth-child(2){border-bottom-color:var(--line-strong)}
     .philosophy .stat-num{font-size:36px}
 
     /* Featured grid: 1 column on mobile */
@@ -976,11 +984,11 @@
     .us-pillars{grid-template-columns:1fr 1fr;border:none}
     .us-pillar{
       border-right:none;
-      border-bottom:1px solid rgba(255,255,255,0.06);
+      border-bottom:1px solid var(--line);
       padding:24px 16px;
     }
     .us-pillar:last-child{border-bottom:none}
-    [data-theme="light"] .us-pillar{border-bottom-color:rgba(0,0,0,0.06)}
+    [data-theme="light"] .us-pillar{border-bottom-color:var(--line)}
 
     /* Advisor teaser */
     .advisor-teaser{padding:64px 24px}
@@ -994,11 +1002,9 @@
     .vial-detail{font-size:8px}
     .vial-price{font-size:12px}
 
-    /* Hero title responsive */
-    .us-hero-title{font-size:32px}
-    .us-hero-sub{font-size:14px;margin-top:16px}
+    /* Hero type handled by clamp() — only layout overrides here. */
     .us-hero-ctas{flex-direction:column;align-items:center;gap:12px}
-    .us-hero-ctas .btn{width:100%;max-width:280px;text-align:center;min-height:44px;display:inline-flex;align-items:center;justify-content:center}
+    .us-hero-ctas .btn{width:100%;max-width:280px;min-height:44px}
 
     /* Compound ticker: wrap tighter */
     .compound-ticker{margin-top:32px;gap:8px}
@@ -1013,12 +1019,12 @@
     .circle-3{width:520px;height:520px}
   }
   @media(max-width:480px){
-    .us-hero-title{font-size:26px}
+    /* Hero type handled by clamp() — no override needed. */
     .vials-stage{gap:14px}
     .vial-svg{width:44px;height:88px}
     .us-pillars{grid-template-columns:1fr}
     .philosophy .stat-row{grid-template-columns:1fr}
-    .philosophy .stat{border-right:none !important;border-bottom:1px solid rgba(255,255,255,0.06)}
+    .philosophy .stat{border-right:none !important;border-bottom:1px solid var(--line)}
     .philosophy .stat:last-child{border-bottom:none}
   }
 </style>
@@ -1069,27 +1075,45 @@
 </div>
 
 <div class="cart-overlay" id="cart-overlay"></div>
-<div class="cart-drawer" id="cart-drawer">
-  <div class="cart-drawer-header">
-    <div class="cart-drawer-title">Your Stack</div>
-    <button class="cart-close" id="cart-close" aria-label="Close cart">&#10005;</button>
+<aside class="cart-drawer" id="cart-drawer" role="dialog" aria-label="Your stack" aria-modal="true">
+  <header class="cart-drawer-header">
+    <div>
+      <div class="cart-drawer-eyebrow">Your Stack</div>
+      <div class="cart-drawer-count" id="cart-count-label">Empty</div>
+    </div>
+    <button class="cart-close" id="cart-close" aria-label="Close cart" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"><path d="M5 5l14 14M19 5L5 19"/></svg>
+    </button>
+  </header>
+
+  <div class="cart-drawer-body">
+    <div id="cart-items"></div>
+    <div id="cart-suggestions"></div>
   </div>
-  <div id="cart-items"></div>
-  <div class="cart-total">
-    <span class="cart-total-label">Subtotal</span>
-    <span class="cart-total-value">$<span id="cart-total">0</span></span>
-  </div>
-  <button id="cart-checkout-btn" class="btn btn-lg" style="width:100%;text-align:center;margin-top:24px;cursor:pointer;border:none">Checkout</button>
-  <p id="cart-checkout-error" style="display:none;color:#ff5c5c;font-size:13px;text-align:center;margin-top:8px"></p>
-</div>
+
+  <footer class="cart-drawer-footer">
+    <div class="cart-total">
+      <span class="cart-total-label">Subtotal</span>
+      <span class="cart-total-value">$<span id="cart-total">0</span></span>
+    </div>
+    <button id="cart-checkout-btn" class="cart-checkout-btn" type="button" disabled>
+      <span class="cart-checkout-btn-text">Checkout</span>
+      <span class="cart-checkout-btn-arrow">&rarr;</span>
+    </button>
+    <p id="cart-checkout-error" class="cart-checkout-error"></p>
+    <p class="cart-footer-note">Stripe secure &middot; Cold-chain ship &middot; 3&ndash;5 days</p>
+    <button class="cart-clear-link" id="cart-clear-link" type="button">Clear stack</button>
+  </footer>
+</aside>
 
 <main id="main-content">
 
 <!-- 01 - Hero with Vials -->
 <section class="us-hero">
   <div class="circle circle-1"></div>
-  <div class="circle circle-2"></div>
-  <div class="circle circle-3"></div>
+  <!-- circle-2 and circle-3 removed: hero was visually over-populated;
+       vial stack and single concentric circle now carry the composition. -->
+
 
   <div class="vials-stage">
     <!-- Pillar IV - Cognitive (Semax) - Short -->
@@ -1215,8 +1239,8 @@
 
   <div class="hero-text" style="position:relative;z-index:10">
     <p class="us-hero-eyebrow">Research-Grade Peptide Compounds</p>
-    <h1 class="us-hero-title">The science of<br><em>&shy;sustained performance.</em></h1>
-    <p class="us-hero-sub">Research-grade peptide compounds for those serious about optimization. Click any vial to explore, or build a complete stack with our AI advisor.</p>
+    <h1 class="us-hero-title">Peptides, <em>measured.</em></h1>
+    <p class="us-hero-sub">Seventeen research-grade compounds across five pillars of biology. Purity&nbsp;&#8805;&nbsp;98%, provenance documented, protocol matched to intent.</p>
     <div class="us-hero-ctas">
       <a href="/us/shop.html" class="btn">Shop All Compounds</a>
       <a href="/us/advisor.html" class="btn btn-ghost">Build My Stack</a>
@@ -1462,7 +1486,7 @@ function updateVials(theme){
   document.querySelectorAll('.neck-fill').forEach(function(el){ el.setAttribute('fill', d?'#3A3A3A':'#E4E4E8'); el.setAttribute('stroke', d?'#4A4A4A':'#B8B8BE'); el.setAttribute('stroke-width','0.4'); });
   document.querySelectorAll('.glass-stroke').forEach(function(el){ el.setAttribute('stroke', d?'#444':'#B8B8BE'); el.setAttribute('stroke-width','0.6'); });
   document.querySelectorAll('.glass-sheen-fill').forEach(function(el){ el.setAttribute('fill', d?'rgba(255,255,255,0.03)':'rgba(255,255,255,0.12)'); });
-  document.querySelectorAll('.glass-hl').forEach(function(el){ el.setAttribute('stroke', d?'rgba(255,255,255,0.06)':'rgba(255,255,255,0.35)'); });
+  document.querySelectorAll('.glass-hl').forEach(function(el){ el.setAttribute('stroke', d?'var(--line)':'rgba(255,255,255,0.35)'); });
   var neutralMeniscus = d ? 'rgba(160,154,148,0.2)' : 'rgba(42,42,46,0.2)';
   var m = [neutralMeniscus, d ? 'rgba(122,138,152,0.25)' : 'rgba(58,74,90,0.25)', neutralMeniscus, neutralMeniscus, neutralMeniscus];
   document.querySelectorAll('.meniscus-1').forEach(function(el){ el.setAttribute('fill',m[0]); });
@@ -1470,7 +1494,7 @@ function updateVials(theme){
   document.querySelectorAll('.meniscus-3').forEach(function(el){ el.setAttribute('fill',m[2]); });
   document.querySelectorAll('.meniscus-4').forEach(function(el){ el.setAttribute('fill',m[3]); });
   document.querySelectorAll('.meniscus-5').forEach(function(el){ el.setAttribute('fill',m[4]); });
-  document.querySelectorAll('.label-rect').forEach(function(el){ el.setAttribute('fill', d?'rgba(28,28,28,0.7)':'rgba(240,240,242,0.9)'); el.setAttribute('stroke', d?'rgba(212,208,202,0.06)':'rgba(0,0,0,0.08)'); el.setAttribute('stroke-width','0.4'); });
+  document.querySelectorAll('.label-rect').forEach(function(el){ el.setAttribute('fill', d?'rgba(28,28,28,0.7)':'rgba(240,240,242,0.9)'); el.setAttribute('stroke', d?'rgba(212,208,202,0.06)':'var(--line-strong)'); el.setAttribute('stroke-width','0.4'); });
   document.querySelectorAll('.label-title').forEach(function(el){ el.setAttribute('fill', d?'#7A7874':'#5C606A'); });
   document.querySelectorAll('.label-sub-text').forEach(function(el){ el.setAttribute('fill', d?'#9A9690':'#1C1E24'); });
   document.querySelectorAll('.reflect-fill').forEach(function(el){ el.setAttribute('fill', d?'#787470':'#1C1E24'); el.setAttribute('opacity', d?'.04':'.1'); });
@@ -1578,8 +1602,8 @@ document.querySelectorAll('.section, .philosophy, .advisor-teaser').forEach(func
   }
 })();
 </script>
-<script src="/qa/js/main.js"></script>
-<script src="/qa/js/mobile.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/mobile.js"></script>
 
 <script>
 (function(){

@@ -1157,34 +1157,6 @@
       box-shadow:none;
     }
   }
-
-  /* ═══════════════════════════════════════════
-     MOBILE GLOBAL OVERFLOW PREVENTION
-     ═══════════════════════════════════════════ */
-  img, video, svg, canvas {
-    max-width: 100%;
-    height: auto;
-  }
-
-  /* Touch-action for interactive elements */
-  a, button, [role="button"], input, select, textarea {
-    touch-action: manipulation;
-  }
-
-  /* Prevent fixed-width elements from causing overflow */
-  pre, code, table {
-    max-width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  /* ═══════════════════════════════════════════
-     MOBILE FORM ROW FIX
-     ═══════════════════════════════════════════ */
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
 }
 
 /* ═══════════════════════════════════════════

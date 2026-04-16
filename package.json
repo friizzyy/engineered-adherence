@@ -2,6 +2,12 @@
   "name": "engineered-adherence",
   "private": true,
   "description": "Engineered Adherence — research peptide compound e-commerce",
+  "scripts": {
+    "dev": "npx serve . -l 3000",
+    "start": "npx serve . -l 3000",
+    "deploy": "vercel --prod",
+    "preview": "vercel"
+  },
   "dependencies": {
     "stripe": "^14.0.0"
   }

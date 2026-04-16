@@ -21,3 +21,7 @@ Thumbs.db
 nul
 *.log
 .vercel
+
+# Local-only planning docs (not for the public repo)
+EA Growth Plan.html
+Engineered_Adherence_Business_Blueprint.docx
