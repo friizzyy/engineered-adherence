@@ -692,6 +692,22 @@ body > footer{
   opacity:0.4;
 }
 .footer-legal .footer-sep{opacity:0.5}
+/* Fuller research-use-only disclaimer — small grey micro-copy under the
+   copyright line. Replaces the stray .us-disclaimer strip that used to
+   sit below the footer on protocols/advisor/about and broke the layout. */
+.footer-compliance{
+  margin:-16px auto 0;
+  max-width:60ch;
+  font-family:var(--font-mono);
+  font-size:var(--fs-mono-xs);
+  letter-spacing:0.02em;
+  text-transform:none;
+  color:var(--faint);
+  font-weight:var(--fw-regular);
+  opacity:0.35;
+  line-height:1.7;
+  text-align:center;
+}
 
 /* ═══════════════════════════════════════════
    TOAST NOTIFICATION
