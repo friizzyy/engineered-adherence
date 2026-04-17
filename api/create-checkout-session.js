@@ -11,16 +11,32 @@
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// Map of allowed products with their canonical prices (cents) to prevent price tampering
+// ─── PRODUCT CATALOG (server-authoritative) ───
+// Prices in USD cents to prevent client-side tampering.
+// Exactly the 11 canonical compounds live on the site (see shop sidebar).
+// Source of truth: the `compounds` array in /us/shop.html.
+// Any slug in the cart that isn't listed here will 400 at checkout.
 const PRODUCT_CATALOG = {
-  'bpc-157':     { name: 'BPC-157',      price: 8900,  size: '5mg',  pillar: 'Recovery' },
-  'ipamorelin':  { name: 'Ipamorelin',   price: 11200, size: '2mg',  pillar: 'Performance' },
-  'semax':       { name: 'Semax',         price: 9700,  size: '30mg', pillar: 'Cognitive' },
-  'retatrutide': { name: 'Retatrutide',   price: 18900, size: '2mg',  pillar: 'Metabolic' },
-  'ghk-cu':      { name: 'GHK-Cu',        price: 7600,  size: '50mg', pillar: 'Longevity' },
-  // Extended catalog (suggestions)
-  'tb-500':      { name: 'TB-500',        price: 13400, size: '5mg',  pillar: 'Recovery' },
-  'cjc-1295':    { name: 'CJC-1295',      price: 10800, size: '2mg',  pillar: 'Performance' },
+  // Pillar I — Longevity
+  'ghk-cu':      { name: 'GHK-Cu',      price: 7600,  size: '50mg',  pillar: 'Longevity' },
+  'nad-plus':    { name: 'NAD+',        price: 19800, size: '500mg', pillar: 'Longevity' },
+
+  // Pillar II — Recovery
+  'bpc-157':     { name: 'BPC-157',     price: 8900,  size: '5mg',   pillar: 'Recovery' },
+  'tb-500':      { name: 'TB-500',      price: 13400, size: '5mg',   pillar: 'Recovery' },
+
+  // Pillar III — Metabolic
+  'retatrutide': { name: 'Retatrutide', price: 18900, size: '10mg',  pillar: 'Metabolic' },
+  'mots-c':      { name: 'MOTS-C',      price: 16500, size: '5mg',   pillar: 'Metabolic' },
+
+  // Pillar IV — Cognitive
+  'semax':       { name: 'Semax',       price: 9700,  size: '30mg',  pillar: 'Cognitive' },
+  'selank':      { name: 'Selank',      price: 8800,  size: '5mg',   pillar: 'Cognitive' },
+
+  // Pillar V — Performance
+  'ipamorelin':  { name: 'Ipamorelin',  price: 11200, size: '2mg',   pillar: 'Performance' },
+  'cjc-1295':    { name: 'CJC-1295',    price: 10800, size: '2mg',   pillar: 'Performance' },
+  'tesamorelin': { name: 'Tesamorelin', price: 19500, size: '2mg',   pillar: 'Performance' },
 };
 
 // Allow production, www subdomain, any Vercel preview deployment, and local dev.
